@@ -2,8 +2,13 @@ const express=require('express');
 const port=8000;
 const app=express();
 
+app.use(express.static("./assets"));
+
 const expressLayouts=require('express-ejs-layouts');
 app.use(expressLayouts);
+//extract styles and scripts from sub pages to layout
+app.set("layout extractStyles",true);
+app.set("layout extractScripts",true);
 
 //for form and make sure to put it above router
 app.use(express.urlencoded());
