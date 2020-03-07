@@ -1,10 +1,12 @@
 const express=require('express');
+const cookieParser=require('cookie-parser');
 const port=8000;
 
 
 const app=express();
-
-app.use(express.static("./assets"));
+app.use(express.urlencoded());
+app.use(express.static("assets"));
+app.use(cookieParser());
 
 const expressLayouts=require('express-ejs-layouts');
 const db=require('./config/mongoose');
@@ -14,7 +16,7 @@ app.set("layout extractStyles",true);
 app.set("layout extractScripts",true);
 
 //for form and make sure to put it above router
-app.use(express.urlencoded());
+
 //use express router
 app.use("/",require("./routes"));
 
