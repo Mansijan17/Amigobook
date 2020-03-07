@@ -1,10 +1,13 @@
 const express=require('express');
 const port=8000;
+
+
 const app=express();
 
 app.use(express.static("./assets"));
 
 const expressLayouts=require('express-ejs-layouts');
+const db=require('./config/mongoose');
 app.use(expressLayouts);
 //extract styles and scripts from sub pages to layout
 app.set("layout extractStyles",true);
