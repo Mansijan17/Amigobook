@@ -1,14 +1,10 @@
-module.exports.home=function(req,res)
-{
-    
-    res.cookie("user_id",22);
+module.exports.home = function(req, res){
     console.log(req.cookies);
-    return res.render("home",{
-        title:"home",
-        heading:"This is my home"
-    });
-    // return res.end("<h1>Express is up for Codeial</h1>")
+    res.cookie('user_id', 25);
+    return res.render('home', {
+        title: "Home"});
 }
+
 
 // module.exports.userProfile=function(req,res)
 // {
