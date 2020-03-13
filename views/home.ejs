@@ -9,6 +9,22 @@
         <button type="submit">Post</button>
     </form>
 
+    <ul>
+        <div id="posts-list-container">
+            <% if(locals.user) { %> 
+                <% for(let i of posts) {%>
+                    <li style="text-align: left;">
+                        <p>
+                            <%= i.content %>
+                        
+                            <small><%= i.user["name"] %></small>
+                        </p>
+                    </li>
+                <% } %>
+            <% } %>
+        </div>
+    </ul>
+
 </section>
     
 
