@@ -9,6 +9,6 @@ router.get("/",homeController.home);
 //calling "/users/" user controller
 router.use("/users",require("./users"));
 router.use("/posts",require("./postRoutes"));
-
+router.use("/comments",require("./commentRoutes"));
 
 module.exports=router;
