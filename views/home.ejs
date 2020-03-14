@@ -17,6 +17,11 @@
             <div id="posts-list-container">
                     <% for(let i of posts) { %>
                             <li style="text-align: left;">
+                                <% if(locals.user.id==i.user.id) { %>
+                                    <small>
+                                        <a href="/posts/destroy-post/<%= i.id %>">Delete Post</a>
+                                    </small>
+                                <% } %>
                                 <p>
                                     <%= i.content %>
                                     <small><%= i.user["name"] %></small>
