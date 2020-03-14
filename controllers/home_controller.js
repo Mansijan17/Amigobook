@@ -1,4 +1,5 @@
 const Post=require('../models/post');
+const Comment=require('../models/commentSchema');
 
 module.exports.home = function(req, res){
 
@@ -17,8 +18,16 @@ module.exports.home = function(req, res){
     // })
     
 
-    //populating the user of each post
-    Post.find({}).populate("user").exec(function(err,postLists)
+    //populating the user of each post schema
+    Post.find({}).populate("user").populate({
+        //populating the comments of the post schema
+        path:"comments",
+        populate:
+        {
+            //populating users of the comment from the comment schema
+            path:"user"
+        }
+    }).exec(function(err,postLists)
     {
         if(err)
         {
