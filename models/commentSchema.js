@@ -11,7 +11,6 @@ const commentSchema=new mongoose.Schema({
     {
         type:mongoose.Schema.Types.ObjectId,
         ref:"Post"
-
     },
      //comments belongs to the user
     user:

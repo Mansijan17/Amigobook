@@ -25,7 +25,7 @@ module.exports.home = function(req, res){
         populate:
         {
             //populating users of the comment from the comment schema
-            path:"user"
+            path:"user",
         }
     }).exec(function(err,postLists)
     {
@@ -38,7 +38,7 @@ module.exports.home = function(req, res){
         title: "Home",
         posts:postLists});
     })
-    
+   
 }
 
 
