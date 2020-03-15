@@ -10,7 +10,7 @@
             <% if(locals.user) { %>
 
                 <li>
-                    <a href="/users/profile" class="links">
+                    <a href="/users/profile/<%= user.id %>" class="links">
                         <%= user.name %>
                     </a>
                 </li>

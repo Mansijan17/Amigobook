@@ -1,5 +1,6 @@
 const Post=require('../models/post');
 const Comment=require('../models/commentSchema');
+const User=require('../models/userSchema');
 
 module.exports.home = function(req, res){
 
@@ -34,9 +35,17 @@ module.exports.home = function(req, res){
             console.log("Error in fetching data from db");
             return;
         }
-        return res.render('home', {
-        title: "Home",
-        posts:postLists});
+
+        User.find({},function(err,users)
+        {
+            return res.render('home', {
+                title: "Home",
+                posts:postLists,
+                all_users:users});
+            
+        })
+
+        
     })
    
 }
