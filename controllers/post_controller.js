@@ -1,38 +1,74 @@
 const Post=require('../models/post');
 const Comment=require('../models/commentSchema');
 
-module.exports.createPost=function(req,res)
+//not necessary to create async function
+//but we are creating for the sake of practice as there is
+//only one call back error function
+module.exports.createPost= async function(req,res)
 {
-    Post.create({
-        content:req.body.content,
-        user:req.user._id
-    },function(err,newPost)
+    // Post.create({
+    //     content:req.body.content,
+    //     user:req.user._id
+    // },function(err,newPost)
+    // {
+    //     if(err)
+    //     {
+    //         console.log("error in creating a post");
+    //         return;
+    //     }
+    //     return res.redirect("back");
+    // })
+    try
     {
-        if(err)
-        {
-            console.log("error in creating a post");
-            return;
-        }
-        return res.redirect("back");
-    })
+         await Post.create({
+                content:req.body.content,
+                user:req.user._id
+            });
+            return res.redirect("back");
+
+    }
+    catch(err)
+    {
+        console.log("Error: ",err);
+        return;
+    }
 
 }
 
-module.exports.destroyPost=function(req,res)
+module.exports.destroyPost=async function(req,res)
 {
-    Post.findById(req.params.id,function(err,post)
+    // Post.findById(req.params.id,function(err,post)
+    // {
+    //     //.id means converting the object id into string
+    //     if(post.user==req.user.id)
+    //     {
+    //         post.remove();
+    //         Comment.deleteMany({post:req.params.id},function(err){
+    //             return res.redirect("back");
+    //         })
+    //     }
+    //     else
+    //     {
+    //         return res.redirect("back");
+    //     }
+    // })
+    try
     {
-        //.id means converting the object id into string
+        let post=await Post.findById(req.params.id);
         if(post.user==req.user.id)
         {
-            post.remove();
-            Comment.deleteMany({post:req.params.id},function(err){
-                return res.redirect("back");
-            })
+            await post.remove();
+            await Comment.deleteMany({post:req.params.id});
+            return res.redirect("back");
         }
         else
         {
             return res.redirect("back");
         }
-    })
+    }
+    catch(err)
+    {
+        console.log("Error: ",err);
+        return;
+    }
 }

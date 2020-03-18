@@ -1,69 +1,125 @@
 const Comment=require('../models/commentSchema');
 const Post=require('../models/post');
 
-module.exports.createComment=function(req,res)
+module.exports.createComment=async function(req,res)
 {
-    Post.findById(req.body.post,function(err,post)
+    // Post.findById(req.body.post,function(err,post)
+    // {
+    //     if(post)
+    //     {
+    //         Comment.create({
+    //             content:req.body.content,
+    //             post:req.body.post,
+    //             user:req.user._id
+    //         }, function(err,newComment)
+    //         {
+    //             if(err)
+    //             {
+    //                 console.log("Error in creating the comment");
+    //                 return;
+    //             }
+    //             post.comments.push(newComment);
+    //             post.save();
+    //             return res.redirect("/");
+    //         });
+    //     }
+    // });
+
+    try
     {
+        let post=await Post.findById(req.body.post);
         if(post)
         {
-            Comment.create({
-                content:req.body.content,
-                post:req.body.post,
-                user:req.user._id
-            }, function(err,newComment)
-            {
-                if(err)
-                {
-                    console.log("Error in creating the comment");
-                    return;
-                }
-                post.comments.push(newComment);
-                post.save();
-                return res.redirect("/");
-            });
+            let newcoment=await Comment.create({
+                            content:req.body.content,
+                            post:req.body.post,
+                            user:req.user._id
+                        });
+            await post.comments.push(newcoment);
+            await post.save();
+            return res.redirect("/");
         }
-    });
+
+    }
+    catch(err)
+    {
+        console.log("Error: ",err);
+        return;
+    }
 }
 
-module.exports.destroyComment=function(req,res)
+module.exports.destroyComment=async function(req,res)
 {
-    Comment.findById(req.params.id,function(err,comment)
+    // Comment.findById(req.params.id,function(err,comment)
+    // {
+    //     console.log(comment);
+    //     console.log(req.user);
+    //     let postId=comment.post;
+    //     if(comment.user==req.user.id)
+    //     {
+    //         comment.remove();
+    //         Post.findByIdAndUpdate(postId,{
+    //             $pull:{comments:req.params.id}
+    //         },function(err,post)
+    //         {
+    //             return res.redirect("back");
+    //         })
+    //     }
+    //     else
+    //     {
+    //         //deleting comments from the post if the logined user is the one who posted that post
+    //         Post.findById(postId,function(err,post)
+    //         {
+    //             if(post.user==req.user.id)
+    //             {
+    //                 comment.remove();
+    //                 Post.findByIdAndUpdate(postId,{
+    //                         $pull:{comments:req.params.id}
+    //                         },function(err,post)
+    //                         {
+    //                             return res.redirect("back");
+    //                         })
+    //             }
+    //             else
+    //             {
+    //                 return res.redirect("back");
+    //             }
+    //         })
+            
+    //     }
+    // })
+    try
     {
-        console.log(comment);
-        console.log(req.user);
+        let comment=await Comment.findById(req.params.id);
         let postId=comment.post;
         if(comment.user==req.user.id)
         {
-            comment.remove();
-            Post.findByIdAndUpdate(postId,{
-                $pull:{comments:req.params.id}
-            },function(err,post)
-            {
-                return res.redirect("back");
-            })
+            await comment.remove();
+            await Post.findByIdAndUpdate(postId,{
+                            $pull:{comments:req.params.id}
+                        });
+            return res.redirect("back");
         }
         else
         {
-            //deleting comments from the post if the logined user is the one who posted that post
-            Post.findById(postId,function(err,post)
+            let post=await Post.findById(postId);
+            if(post.user==req.user.id)
             {
-                if(post.user==req.user.id)
-                {
-                    comment.remove();
-                    Post.findByIdAndUpdate(postId,{
+               await comment.remove();
+               await Post.findByIdAndUpdate(postId,{
                             $pull:{comments:req.params.id}
-                            },function(err,post)
-                            {
-                                return res.redirect("back");
-                            })
-                }
-                else
-                {
-                    return res.redirect("back");
-                }
-            })
-            
+                            });
+                return res.redirect("back");               
+            }
+            else
+            {
+                return res.redirect("back");  
+            }
         }
-    })
+    }
+    catch(err)
+    {
+        console.log("Error: ",err);
+        return;
+    }
 }
