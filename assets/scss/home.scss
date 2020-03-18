@@ -1,0 +1,19 @@
+.home-container
+{
+    display: flex;
+
+    #feed-posts
+    {
+        width: 70%;
+        height: auto;
+        text-align: center;
+        border-right: 1px solid lightgrey;
+        height: 100%;
+    }
+    #user-friends
+    {
+        width:30%;
+        text-align: center;
+       
+    }
+}

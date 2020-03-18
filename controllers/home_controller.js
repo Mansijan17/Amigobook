@@ -2,7 +2,8 @@ const Post=require('../models/post');
 const Comment=require('../models/commentSchema');
 const User=require('../models/userSchema');
 
-module.exports.home = function(req, res){
+//making function async
+module.exports.home = async function(req, res){
 
     // Post.find({},function(err,postLists)
     // {
@@ -19,34 +20,63 @@ module.exports.home = function(req, res){
     // })
     
 
-    //populating the user of each post schema
-    Post.find({}).populate("user").populate({
-        //populating the comments of the post schema
-        path:"comments",
-        populate:
-        {
-            //populating users of the comment from the comment schema
-            path:"user",
-        }
-    }).exec(function(err,postLists)
-    {
-        if(err)
-        {
-            console.log("Error in fetching data from db");
-            return;
-        }
+    // //populating the user of each post schema
+    // Post.find({}).populate("user").populate({
+    //     //populating the comments of the post schema
+    //     path:"comments",
+    //     populate:
+    //     {
+    //         //populating users of the comment from the comment schema
+    //         path:"user",
+    //     }
+    // }).exec(function(err,postLists)
+    // {
+    //     if(err)
+    //     {
+    //         console.log("Error in fetching data from db");
+    //         return;
+    //     }
 
-        User.find({},function(err,users)
-        {
-            return res.render('home', {
-                title: "Home",
-                posts:postLists,
-                all_users:users});
+    //     User.find({},function(err,users)
+    //     {
+    //         return res.render('home', {
+    //             title: "Home",
+    //             posts:postLists,
+    //             all_users:users});
             
-        })
+    //     })
 
         
-    })
+    // })
+
+    try
+    {
+        let postLists=await Post.find({}).populate("user").populate({
+                //populating the comments of the post schema
+                path:"comments",
+                populate:
+                {
+                    //populating users of the comment from the comment schema
+                    path:"user",
+                }
+            });
+
+        let users=await User.find({});
+
+        return res.render('home', {
+                        title: "Home",
+                        posts:postLists,
+                        all_users:users});
+
+    }
+    catch(err)
+    {
+        console.log("Error ",err);
+        return;
+    }
+    
+                
+            
    
 }
 
