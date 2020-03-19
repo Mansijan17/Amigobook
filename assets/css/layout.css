@@ -1,7 +1,9 @@
 body {
   margin: 0;
   height: auto; }
+  body #notification {
+    margin-top: 75px; }
   body #layout-main {
+    margin-top: 45px;
     margin-bottom: 50px;
-    margin-top: 75px;
     height: 100%; }

@@ -2,10 +2,15 @@ body{
     margin: 0;
     height:auto;
 
+    #notification
+    {
+        margin-top: 75px;
+    }
+
     #layout-main
     {
+        margin-top: 45px;
         margin-bottom: 50px;
-        margin-top: 75px;
         height: 100%;
     }
 }
