@@ -37,14 +37,16 @@ module.exports.createComment=async function(req,res)
                         });
             await post.comments.push(newcoment);
             await post.save();
+            req.flash("success","Comment published!");
             return res.redirect("/");
         }
 
     }
     catch(err)
     {
-        console.log("Error: ",err);
-        return;
+        //console.log("Error: ",err);
+        req.flash("error",err);
+        return res.redirect("/");
     }
 }
 
@@ -98,6 +100,7 @@ module.exports.destroyComment=async function(req,res)
             await Post.findByIdAndUpdate(postId,{
                             $pull:{comments:req.params.id}
                         });
+            req.flash("success","Comment deleted!");
             return res.redirect("back");
         }
         else
@@ -109,17 +112,20 @@ module.exports.destroyComment=async function(req,res)
                await Post.findByIdAndUpdate(postId,{
                             $pull:{comments:req.params.id}
                             });
+                req.flash("success","Comment deleted!");
                 return res.redirect("back");               
             }
             else
             {
+                req.flash("error","You are not associated to delete the comment");
                 return res.redirect("back");  
             }
         }
     }
     catch(err)
     {
-        console.log("Error: ",err);
+        //console.log("Error: ",err);
+        req.flash("error",err);
         return;
     }
 }

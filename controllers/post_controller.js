@@ -24,13 +24,15 @@ module.exports.createPost= async function(req,res)
                 content:req.body.content,
                 user:req.user._id
             });
+            req.flash("success","Post published!");
             return res.redirect("back");
 
     }
     catch(err)
     {
-        console.log("Error: ",err);
-        return;
+        //console.log("Error: ",err);
+        req.flash("error",err);
+        return res.redirect("back");
     }
 
 }
@@ -59,16 +61,19 @@ module.exports.destroyPost=async function(req,res)
         {
             await post.remove();
             await Comment.deleteMany({post:req.params.id});
+            req.flash("success","Post and comments deleted!");
             return res.redirect("back");
         }
         else
         {
+            req.flash("error","You are not associated to delete the post");
             return res.redirect("back");
         }
     }
     catch(err)
     {
-        console.log("Error: ",err);
-        return;
+        //console.log("Error: ",err);
+        req.flash("error",err);
+        return res.redirect("back");
     }
 }
