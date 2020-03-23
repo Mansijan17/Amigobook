@@ -17,6 +17,15 @@
                 {
                     let newPost=newDomPost(data.data.post);
                     $("#posts-list-container>ul").prepend(newPost);
+                    deletePost(" .delete-post-button",newPost);
+                    new Noty({
+                        theme:"relax",
+                        text:"Post published!",
+                        type:"success",
+                        layput:"topRight",
+                        timeout:1500
+                    }).show();
+
                 },
                 error:function(err)
                 {
@@ -35,7 +44,7 @@
         <li style="text-align: left;" id="post-${ i._id}">
            
                 <small>
-                    <a href="/posts/destroy-post/${ i.id }" class="delete-post-button">Delete Post</a>
+                    <a href="/posts/destroy-post/${ i._id }" class="delete-post-button">Delete Post</a>
                 </small>
          
             <p>
@@ -57,5 +66,47 @@
             </div>
         </li>`);
     }
+
+    let deletePost=function(deletelink)
+    {
+        $(deletelink).click(function(e)
+        {
+            e.preventDefault();
+            $.ajax({
+                type:"get",
+                url:$(deletelink).prop("href"),
+                success:function(data)
+                {
+                    $(`#post-${data.data.post_id}`).remove();
+                    new Noty({
+                        theme:"relax",
+                        text:"Post deleted!",
+                        type:"success",
+                        layput:"topRight",
+                        timeout:1500
+                    }).show();
+                },
+                error:function(err)
+                {
+                    console.log(err.responseText);
+                }
+            })
+        })
+    }
     creatPost();
+
+    //convert posts to ajax
+    let postsToAjax=function()
+    {
+        $("#posts-list-container>ul>li").each(function()
+        {
+            let self=$(this);
+            let deleteButton=$(" .delete-post-button",self);
+            deletePost(deleteButton);
+
+            let postId=self.prop("id").split("-")[1];
+            new PostComments(postId)
+        })
+    }
+    postsToAjax();
 }

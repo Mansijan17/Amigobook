@@ -37,6 +37,17 @@ module.exports.createComment=async function(req,res)
                         });
             await post.comments.push(newcoment);
             await post.save();
+            if(req.xhr)
+            {
+                newcoment=await newcoment.populate("user","name").execPopulate();
+                return res.status(200).json({
+                    data:
+                    {
+                        comment:newcoment
+                    },
+                    message:"Comment published!"
+                })
+            }
             req.flash("success","Comment published!");
             return res.redirect("/");
         }
@@ -100,6 +111,16 @@ module.exports.destroyComment=async function(req,res)
             await Post.findByIdAndUpdate(postId,{
                             $pull:{comments:req.params.id}
                         });
+            if(req.xhr)
+            {
+                return res.status(200).json({
+                    data:
+                    {
+                        comment_id:req.params.id
+                    },
+                    message:"Comment deleted"
+                });
+            }
             req.flash("success","Comment deleted!");
             return res.redirect("back");
         }
@@ -113,7 +134,17 @@ module.exports.destroyComment=async function(req,res)
                             $pull:{comments:req.params.id}
                             });
                 req.flash("success","Comment deleted!");
-                return res.redirect("back");               
+                return res.redirect("back");    
+                if(req.xhr)
+                {
+                    return res.status(200).json({
+                        data:
+                        {
+                            comment_id:req.params.id
+                        },
+                        message:"Comment deleted"
+                    });
+                }           
             }
             else
             {
