@@ -3,6 +3,8 @@
     <h1>
         Codeial/User Profile
     </h1>
+
+    
  
     <% if(user.id==profileUser.id) { %> 
         <!-- if the users matches the show the form -->
@@ -14,7 +16,7 @@
         </form>
     <% } else { %>
         <!-- else show only profile info -->
-
+        <img src="<%= profileUser.avatar %>" alt="<%= profileUser.name %>" width="100">
         <p><%= profileUser.name %></p>
         <p><%= profileUser.email %></p>
     <% } %>

@@ -50,6 +50,7 @@ module.exports.update= async function(req,res)
                     user.avatar=User.avatarPath+"/"+req.file.filename;
                 }
                 user.save();
+                req.flash("success","Updated!");
                 return res.redirect("back");
             })
         }
