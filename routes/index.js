@@ -10,5 +10,6 @@ router.get("/",homeController.home);
 router.use("/users",require("./users"));
 router.use("/posts",require("./postRoutes"));
 router.use("/comments",require("./commentRoutes"));
+router.use("/api",require("./api/apiIndex"));
 
 module.exports=router;
