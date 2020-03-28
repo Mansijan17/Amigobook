@@ -9,6 +9,7 @@ const db = require('./config/mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strat');
+const passportJWT=require('./config/passport-jwt');
 const MongoStore=require('connect-mongo')(session);
 const SassMiddleware=require('node-sass-middleware');
 const flash=require('connect-flash');
