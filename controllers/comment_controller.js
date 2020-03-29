@@ -61,6 +61,8 @@ module.exports.createComment=async function(req,res)
     }
 }
 
+var truth=false;
+
 module.exports.destroyComment=async function(req,res)
 {
     // Comment.findById(req.params.id,function(err,comment)
@@ -101,16 +103,46 @@ module.exports.destroyComment=async function(req,res)
             
     //     }
     // })
+
     try
     {
         let comment=await Comment.findById(req.params.id);
-        let postId=comment.post;
+        let postId = comment.post;
         if(comment.user==req.user.id)
         {
+            
             await comment.remove();
             await Post.findByIdAndUpdate(postId,{
                             $pull:{comments:req.params.id}
                         });
+            truth=true;
+            
+        }
+        else
+        {
+            let post=await Post.findById(postId);
+            if(post.user==req.user.id)
+            {
+               await comment.remove();
+               await Post.findByIdAndUpdate(postId,{
+                            $pull:{comments:req.params.id}
+                            });
+                truth=true;
+                       
+            }
+           
+            else
+            {
+                truth=false;
+                
+            }
+            //console.log("else end ",truth);
+        
+        }
+        //console.log(truth);
+        if(truth)
+        {
+            //console.log("it is true!");
             if(req.xhr)
             {
                 return res.status(200).json({
@@ -126,33 +158,10 @@ module.exports.destroyComment=async function(req,res)
         }
         else
         {
-            let post=await Post.findById(postId);
-            if(post.user==req.user.id)
-            {
-               await comment.remove();
-               await Post.findByIdAndUpdate(postId,{
-                            $pull:{comments:req.params.id}
-                            });
-                req.flash("success","Comment deleted!");
-                return res.redirect("back");    
-                if(req.xhr)
-                {
-                    return res.status(200).json({
-                        data:
-                        {
-                            comment_id:req.params.id
-                        },
-                        message:"Comment deleted"
-                    });
-                }           
-            }
-            else
-            {
-                req.flash("error","You are not associated to delete the comment");
-                return res.redirect("back");  
-            }
+            req.flash("error","You are not associated to delete the comment");
+            return res.redirect("back");  
         }
-    }
+}
     catch(err)
     {
         //console.log("Error: ",err);

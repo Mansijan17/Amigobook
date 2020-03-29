@@ -4,7 +4,7 @@ const path = require('path');
 
 //making function async
 module.exports.profile = async function (req, res) {
-
+    console.log(req.params.id);
     User.findById(req.params.id, function (err, user) {
         return res.render('userProfile', {
             title: 'User Profile',
