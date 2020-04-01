@@ -1,5 +1,6 @@
 const Comment=require('../models/commentSchema');
 const Post=require('../models/post');
+const CommentsMailer=require('../mailer/comments_mailer');
 
 module.exports.createComment=async function(req,res)
 {
@@ -37,9 +38,11 @@ module.exports.createComment=async function(req,res)
                         });
             await post.comments.push(newcoment);
             await post.save();
+            newcoment=await newcoment.populate("user","name email").execPopulate();
+            CommentsMailer.newComment(newcoment);
             if(req.xhr)
             {
-                newcoment=await newcoment.populate("user","name").execPopulate();
+                
                 return res.status(200).json({
                     data:
                     {
@@ -142,9 +145,10 @@ module.exports.destroyComment=async function(req,res)
         //console.log(truth);
         if(truth)
         {
-            //console.log("it is true!");
+            console.log("it is true!");
             if(req.xhr)
             {
+                console.log("xhr");
                 return res.status(200).json({
                     data:
                     {

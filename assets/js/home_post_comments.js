@@ -83,6 +83,7 @@ class PostComments{
                 type: 'get',
                 url: $(deleteLink).prop('href'),
                 success: function(data){
+                    console.log("remove");
                     $(`#comment-${data.data.comment_id}`).remove();
 
                     new Noty({
