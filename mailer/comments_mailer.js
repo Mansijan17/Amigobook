@@ -3,7 +3,7 @@ const nodemailer=require('../config/nodemailer');
 // this is another way of exporting method
 
 exports.newComment=(comment)=>{
-    //console.log("inside new comment ",comment);
+    console.log("inside new comment ",comment);
     let htmlString=nodemailer.renderTemplate({comment:comment},"/comments/new_comment.ejs")
 
     nodemailer.transporter.sendMail({
@@ -17,7 +17,7 @@ exports.newComment=(comment)=>{
             console.log("Error in sending mail ",err);
             return;
         }
-        console.log("Email sent ",info);
+       // console.log("Email sent ",info);
         return;
     });
 }
