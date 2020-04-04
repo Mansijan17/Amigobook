@@ -1,6 +1,6 @@
 const Comment=require('../models/commentSchema');
 const Post=require('../models/post');
-const CommentsMailer=require('../mailer/comments_mailer');
+const commentsMailer=require('../mailer/comments_mailer');
 const queue=require('../config/kue');
 const commentEmailWorker=require('../worker/comment_email_worker');
 
@@ -33,16 +33,16 @@ module.exports.createComment=async function(req,res)
         let post=await Post.findById(req.body.post);
         if(post)
         {
-            let newcoment=await Comment.create({
+            let newcomment=await Comment.create({
                             content:req.body.content,
                             post:req.body.post,
                             user:req.user._id
                         });
-            await post.comments.push(newcoment);
-            await post.save();
-            newcoment=await newcoment.populate("user","name email").execPopulate();
+           post.comments.push(newcomment);
+            post.save();
+            newcomment=await newcomment.populate("user","name email").execPopulate();
            /// CommentsMailer.newComment(newcoment);
-           let job=queue.create("emails",comment).save(function(err)
+           let job=queue.create("emails",newcomment).save(function(err)
            {
                if(err)
                {
@@ -58,7 +58,7 @@ module.exports.createComment=async function(req,res)
                 return res.status(200).json({
                     data:
                     {
-                        comment:newcoment
+                        comment:newcomment
                     },
                     message:"Comment published!"
                 })
@@ -76,7 +76,6 @@ module.exports.createComment=async function(req,res)
     }
 }
 
-var truth=false;
 
 module.exports.destroyComment=async function(req,res)
 {
@@ -126,41 +125,14 @@ module.exports.destroyComment=async function(req,res)
         if(comment.user==req.user.id)
         {
             
-            await comment.remove();
-            await Post.findByIdAndUpdate(postId,{
+             comment.remove();
+            Post.findByIdAndUpdate(postId,{
                             $pull:{comments:req.params.id}
                         });
-            truth=true;
-            
-        }
-        else
-        {
-            let post=await Post.findById(postId);
-            if(post.user==req.user.id)
-            {
-               await comment.remove();
-               await Post.findByIdAndUpdate(postId,{
-                            $pull:{comments:req.params.id}
-                            });
-                truth=true;
-                       
-            }
-           
-            else
-            {
-                truth=false;
-                
-            }
-            //console.log("else end ",truth);
-        
-        }
-        //console.log(truth);
-        if(truth)
-        {
-            console.log("it is true!");
+         
             if(req.xhr)
             {
-                console.log("xhr");
+                //console.log("xhr");
                 return res.status(200).json({
                     data:
                     {
@@ -171,6 +143,7 @@ module.exports.destroyComment=async function(req,res)
             }
             req.flash("success","Comment deleted!");
             return res.redirect("back");
+            
         }
         else
         {

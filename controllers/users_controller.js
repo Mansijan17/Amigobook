@@ -1,7 +1,11 @@
 const User = require('../models/userSchema');
 const fs = require('fs');
 const path = require('path');
-
+const ResetPassword=require('../models/resetPasswordSchema');
+const newpasswordMailer=require('../mailer/resetpassword_mailer');
+const queue=require('../config/kue');
+const newpasswordEmailWorker=require('../worker/newpassword_email_worker');
+const crypto=require('crypto');
 //making function async
 module.exports.profile = async function (req, res) {
     console.log(req.params.id);
@@ -145,4 +149,106 @@ module.exports.destroySession = function (req, res) {
     req.logout();
     req.flash("success", "You are logged out");
     return res.redirect("/");
+}
+
+module.exports.forgetPassword=function(req,res)
+{
+    return res.render("forgetPassword",{
+        title:"Forget password"
+    });
+}
+
+module.exports.resetPasswordEmailLink=async function(req,res)
+{
+    try {
+        //console.log(req.body);
+        let userFound = await User.findOne({ email: req.body.email });
+        if (!userFound) {
+            req.flash("error","No email found!");
+            return res.redirect('/users/sign-in');
+        }
+        else {
+            //console.log(userFound);
+            let newpassword=await ResetPassword.create({
+                isvalid:true,
+                user:userFound._id,
+                acessToken:crypto.randomBytes(20).toString("hex"),
+            });
+            newpassword=await newpassword.populate("user","name email").execPopulate();
+            console.log(newpassword);
+            let job=queue.create("password",newpassword).save(function(err)
+            {
+                if(err)
+                {
+                    console.log("error in creating a queue ",err);
+                    return;
+                }
+                console.log("job enqueued ",job.id);
+            });
+            req.flash("success","Reset link send to the email!");
+            return res.redirect("/users/sign-in");
+        }
+    }
+    catch (err) {
+        console.log("Error: ", err);
+        return;
+    }
+}
+
+module.exports.newPassword=function(req,res)
+{
+    var id=req.params.id;
+    //console.log(id);
+    return res.render("new_confirm_password",{
+        title:"New Password",
+        acessToken:id
+    });
+}
+
+module.exports.resetPassword=async function(req,res)
+{
+    try
+    {
+        let acessToken=req.params.id;
+        let resetPasswordSchema=await ResetPassword.findOne({acessToken:acessToken});
+        //console.log(resetPasswordSchema);
+        if(resetPasswordSchema)
+        {
+            let user=await User.findById(resetPasswordSchema.user);
+            //console.log(user);
+            if(resetPasswordSchema.isvalid)
+            {
+                if(req.body.newpassword==req.body.confirmpassword)
+                {
+                    user.password=req.body.newpassword;
+                    user.save();
+                   // console.log(user);
+                    resetPasswordSchema.isvalid=false;
+                    resetPasswordSchema.save();
+                    req.flash("success","Password Updated!");
+                    return res.redirect("/users/sign-in");
+                }
+                else
+                {
+                    resetPasswordSchema.isvalid=false;
+                    resetPasswordSchema.save();
+                    req.flash("error","Passwords dont match!");
+                    return res.redirect("/"); 
+                }
+                
+            }
+            else
+            {
+                req.flash("error","Token expire!");
+                return res.redirect("/");
+            }
+        }
+        
+    }
+    catch(err)
+    {
+        console.log("Error: ", err);
+        return;
+    }
+    
 }

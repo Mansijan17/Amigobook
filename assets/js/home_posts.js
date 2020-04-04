@@ -18,6 +18,10 @@
                     let newPost=newDomPost(data.data.post);
                     $("#posts-list-container>ul").prepend(newPost);
                     deletePost(" .delete-post-button",newPost);
+
+                    //call the create comment class
+                    new PostComments(data.data.post._id);
+
                     new Noty({
                         theme:"relax",
                         text:"Post published!",
@@ -49,10 +53,11 @@
          
             <p>
                 ${ i.content}
+                <br>
                 <small>${ i.user.name }</small>
             </p>
             <div class="post-comments">
-                <form action="/comments/create-comment" method="post">
+                <form action="/comments/create-comment" method="post" id="post-${ i._id }-comments-form">
                     <input type="text" name="content" placeholder="Type here to add comment...." required>
                     <input type="hidden" name="post" value="${ i._id }">
                     <button type="submit">Add comment</button>
@@ -80,7 +85,7 @@
                     $(`#post-${data.data.post_id}`).remove();
                     new Noty({
                         theme:"relax",
-                        text:"Post deleted!",
+                        text:"Post and associated comments are deleted!",
                         type:"success",
                         layput:"topRight",
                         timeout:1500
@@ -93,7 +98,7 @@
             })
         })
     }
-    creatPost();
+   
 
     //convert posts to ajax
     let postsToAjax=function()
@@ -108,5 +113,6 @@
             new PostComments(postId)
         })
     }
+    creatPost();
     postsToAjax();
 }

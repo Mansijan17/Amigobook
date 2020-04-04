@@ -73,7 +73,8 @@ module.exports.destroyPost=async function(req,res)
         let post=await Post.findById(req.params.id);
         if(post.user==req.user.id)
         {
-            await post.remove();
+            console.log("remove post");
+            post.remove();
             await Comment.deleteMany({post:req.params.id});
             if(req.xhr)
             {
@@ -85,7 +86,7 @@ module.exports.destroyPost=async function(req,res)
                     message:"Post deleted"
                 });
             }
-            req.flash("success","Post and comments deleted!");
+            req.flash("success","Post and associated comments deleted!");
             return res.redirect("back");
         }
         else

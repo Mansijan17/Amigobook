@@ -26,12 +26,12 @@ class PostComments{
         this.newCommentForm.submit(function(e){
             e.preventDefault();
             let self = this;
-
             $.ajax({
                 type: 'post',
                 url: '/comments/create-comment',
                 data: $(self).serialize(),
                 success: function(data){
+                    console.log("creating comment ",data.data.comment);
                     let newComment = pSelf.newCommentDom(data.data.comment);
                     $(`#post-comments-${postId}`).prepend(newComment);
                     pSelf.deleteComment($(' .delete-comment-button', newComment));
@@ -78,17 +78,18 @@ class PostComments{
     deleteComment(deleteLink){
         $(deleteLink).click(function(e){
             e.preventDefault();
-
+            console.log("inside delte button ");
             $.ajax({
                 type: 'get',
                 url: $(deleteLink).prop('href'),
                 success: function(data){
-                    console.log("remove");
+                
+                    console.log("remove comment: ",data.data.comment_id);
                     $(`#comment-${data.data.comment_id}`).remove();
 
                     new Noty({
                         theme: 'relax',
-                        text: "Comment Deleted",
+                        text: "Comment Deleted!",
                         type: 'success',
                         layout: 'topRight',
                         timeout: 1500
