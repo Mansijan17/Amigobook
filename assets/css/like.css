@@ -1,0 +1,15 @@
+.like-box {
+  margin-bottom: 10px; }
+  .like-box .count {
+    margin-right: 5px; }
+  .like-box .like-thumbs {
+    color: #15A8CD;
+    cursor: pointer; }
+  .like-box .like-thumbs:hover {
+    color: #0E7088; }
+
+.content {
+  margin-bottom: 20px;
+  margin-left: 40px; }
+  .content .post-comments-list ul {
+    padding-left: 15px; }

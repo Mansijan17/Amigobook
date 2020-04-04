@@ -1,15 +1,23 @@
+
+
 <li id="comment-<%= comment._id %>">
-    <p>
-    <% if(locals.user.id==comment.user.id) { %>
-        <small>
-            <a href="/comments/destroy-comment/<%= comment.id %>" class="delete-comment-button">X</a>
-        </small>
-    <% } %>
-    
-        <%= comment.content %>
-        <br>
-        <small>
-            <%= comment.user["name"] %>
-        </small>
-    </p>
+
+    <div class="like-box">
+        <span class="count" data-value="0"><b>0</b></span><span><i class="fas fa-thumbs-up like-thumbs"></i></span>
+    </div>
+
+    <div class="content">
+        <% if(locals.user.id==comment.user.id) { %>
+            <small>
+                <a href="/comments/destroy-comment/<%= comment.id %>" class="delete-comment-button">X</a>
+            </small>
+        <% } %>
+        <p>
+            <%= comment.content %>
+            <br>
+            <small>
+                <%= comment.user["name"] %>
+            </small>
+        </p>
+    </div>
 </li>

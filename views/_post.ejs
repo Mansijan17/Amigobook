@@ -1,28 +1,36 @@
 
 
 <li style="text-align: left;" id="post-<%= i.id %>">
-    <% if(locals.user.id==i.user.id) { %>
-        <small>
-            <a href="/posts/destroy-post/<%= i.id %>" class="delete-post-button">Delete Post</a>
-        </small>
-    <% } %>
-    <p>
-        <%= i.content %> <br>
-        <small><%= i.user["name"] %></small>
-    </p>
-    <div class="post-comments">
-        <form action="/comments/create-comment" method="post" id="post-<%= i._id %>-comments-form">
-            <input type="text" name="content" placeholder="Type here to add comment...." required>
-            <input type="hidden" name="post" value="<%= i._id %>">
-            <button type="submit">Add comment</button>
-        </form>
+    
+    <div class="like-box">
+        <span class="count" data-value="0"><b>0</b></span><span><i class="fas fa-thumbs-up like-thumbs"></i></span>
     </div>
-    <div class="post-comments-list">
-        <ul id="post-comments-<%= i._id %>">
-            <% for(comment of i.comments) { %>
-               <%- include("_comment") -%>
-            <% } %>
-        </ul>
-
+    <div class="content">
+        <% if(locals.user.id==i.user.id) { %>
+            <small>
+                <a href="/posts/destroy-post/<%= i.id %>" class="delete-post-button">Delete Post</a>
+            </small>
+        <% } %>
+        <p>
+            <%= i.content %> <br>
+            <small><%= i.user["name"] %></small>
+        </p>
+        <div class="post-comments">
+            <form action="/comments/create-comment" method="post" id="post-<%= i._id %>-comments-form">
+                <input type="text" name="content" placeholder="Type here to add comment...." required>
+                <input type="hidden" name="post" value="<%= i._id %>">
+                <button type="submit">Add comment</button>
+            </form>
+        </div>
+        <div class="post-comments-list">
+            <ul id="post-comments-<%= i._id %>">
+                <% for(comment of i.comments) { %>
+                   <%- include("_comment") -%>
+                <% } %>
+            </ul>
+    
+        </div>
     </div>
+    
+   
 </li>
