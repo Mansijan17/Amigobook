@@ -3,7 +3,9 @@
 <li id="comment-<%= comment._id %>">
 
     <div class="like-box">
-        <span class="count" data-value="0"><b>0</b></span><span><i class="fas fa-thumbs-up like-thumbs"></i></span>
+       <a class="toggle-like-button" href="/likes/toggle/?id=<%=comment._id%>&type=Comment" data-likes="<%= comment.likes.length %>">
+        <%= comment.likes.length %> <i class="fas fa-thumbs-up like-thumbs"></i>
+       </a>
     </div>
 
     <div class="content">

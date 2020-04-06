@@ -53,13 +53,17 @@ module.exports.home = async function(req, res){
     {
         let postLists=await Post.find({}).sort("-createdAt").populate("user").populate({
                 //populating the comments of the post schema
+                //Change:: populate the likes of the posts and comments
                 path:"comments",
                 populate:
                 {
                     //populating users of the comment from the comment schema
                     path:"user",
+                },
+                populate:{
+                    path:"likes"
                 }
-            });
+            }).populate("likes");
 
         let users=await User.find({});
 

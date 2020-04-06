@@ -1,5 +1,6 @@
 const Post=require('../models/post');
 const Comment=require('../models/commentSchema');
+const Like=require('../models/like');
 
 //not necessary to create async function
 //but we are creating for the sake of practice as there is
@@ -73,8 +74,14 @@ module.exports.destroyPost=async function(req,res)
         let post=await Post.findById(req.params.id);
         if(post.user==req.user.id)
         {
+            //change::: delete the likes of the post and associated comments
             console.log("remove post");
+
+            await Like.deleteMany({likeable:post,onModel:"Post"});
+            await Like.deleteMany({_id:{$in:post.comments}});
+
             post.remove();
+
             await Comment.deleteMany({post:req.params.id});
             if(req.xhr)
             {

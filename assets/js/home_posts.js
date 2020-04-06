@@ -17,10 +17,11 @@
                 {
                     let newPost=newDomPost(data.data.post);
                     $("#posts-list-container>ul").prepend(newPost);
-                    deletePost(" .delete-post-button",newPost);
+                    deletePost($(" .delete-post-button",newPost));
 
                     //call the create comment class
                     new PostComments(data.data.post._id);
+                    new ToggleLike($(" .toggle-like-button", newPost));
 
                     new Noty({
                         theme:"relax",
@@ -47,9 +48,16 @@
 
         <li style="text-align: left;" id="post-${ i._id}">
            
-                <small>
-                    <a href="/posts/destroy-post/${ i._id }" class="delete-post-button">Delete Post</a>
-                </small>
+        <div class="like-box">
+            <a href="/likes/toggle/?id=${i._id }&type=Post" data-likes="0" class="toggle-like-button">
+                0 <i class="fas fa-thumbs-up like-thumbs"></i>
+            </a>
+        </div>
+
+        <div class="content">
+            <small>
+                <a href="/posts/destroy-post/${ i._id }" class="delete-post-button">Delete Post</a>
+            </small>
          
             <p>
                 ${ i.content}
@@ -69,6 +77,7 @@
                 </ul>
         
             </div>
+        </div>
         </li>`);
     }
 

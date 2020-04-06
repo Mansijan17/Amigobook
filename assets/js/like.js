@@ -1,25 +1,38 @@
-var count=$(".count b");
-var likebutton=$(".like-thumbs");
-
-var toggle=false;
-
-for(let i=0;i<likebutton.length;i++)
-{
-    likebutton[i].addEventListener("click",function()
+class ToggleLike{
+    constructor(toggleElement)
     {
-        let countValue=parseInt(count[i].innerHTML);
-        //console.log(countValue);
-        if(!toggle)
+        this.toggler=toggleElement;
+        this.toggleLike();
+    }
+
+    toggleLike()
+    {
+        $(this.toggler).click(function(e)
         {
-            countValue++;
-            count[i].innerHTML=countValue;
-            toggle=true;
-        }
-        else
-        {
-            countValue--;
-            count[i].innerHTML=countValue;
-            toggle=false;
-        }
-    })
+            e.preventDefault();
+            let self=this;
+
+            $.ajax({
+                type:"post",
+                url:$(self).attr("href"),
+            }).done(function(data)
+            {
+                let likesCount=parseInt($(self).attr("data-likes"));
+                console.log(likesCount);
+                if(data.data.deleted==true)
+                {
+                    likesCount-=1;
+                }
+                else
+                {
+                    likesCount+=1;
+                }
+                $(self).attr("data-likes",likesCount);
+                $(self).html(`${likesCount} <i class="fas fa-thumbs-up like-thumbs"></i>`);
+            }).fail(function(err)
+            {
+                console.log('error in completing the request ',err);
+            });
+        });
+    }
 }
