@@ -9,3 +9,7 @@
   .home-container #user-friends {
     width: 30%;
     text-align: center; }
+    .home-container #user-friends #friends, .home-container #user-friends #all-users {
+      height: auto;
+      border-bottom: 1px solid lightgrey;
+      margin-bottom: 30px; }

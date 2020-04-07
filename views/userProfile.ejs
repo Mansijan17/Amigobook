@@ -19,4 +19,8 @@
        
         <p><%= profileUser.name %></p>
         <p><%= profileUser.email %></p>
+        <p><form action="/users/friends/?from=<%=user._id%>&to=<%=profileUser._id%>" class="add-friend-button" method="post">
+            <button type="submit">Add /Remove Friend</button>
+        </form></p>
     <% } %>
+

@@ -15,7 +15,7 @@
         <% } %>
         <p>
             <%= i.content %> <br>
-            <small><%= i.user["name"] %></small>
+            <small><%= i.user.name %></small>
         </p>
         <div class="post-comments">
             <form action="/comments/create-comment" method="post" id="post-<%= i._id %>-comments-form">

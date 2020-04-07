@@ -28,4 +28,7 @@ router.get("/forget-password",usersController.forgetPassword);
 router.post("/reset-password",usersController.resetPasswordEmailLink);
 router.get("/resetting-password/:id",usersController.newPassword);
 router.post("/resetting-password/:id",usersController.resetPassword);
+
+router.post("/friends",usersController.toggleFriendship);
+
 module.exports = router;

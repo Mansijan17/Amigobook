@@ -14,6 +14,12 @@
     {
         width:30%;
         text-align: center;
-       
+
+       #friends,#all-users
+       {
+           height: auto;
+           border-bottom: 1px solid lightgrey;
+           margin-bottom: 30px;
+       }
     }
 }

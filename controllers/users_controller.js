@@ -6,6 +6,7 @@ const newpasswordMailer=require('../mailer/resetpassword_mailer');
 const queue=require('../config/kue');
 const newpasswordEmailWorker=require('../worker/newpassword_email_worker');
 const crypto=require('crypto');
+const Friendship=require('../models/friendship');
 //making function async
 module.exports.profile = async function (req, res) {
     console.log(req.params.id);
@@ -251,4 +252,72 @@ module.exports.resetPassword=async function(req,res)
         return;
     }
     
+}
+
+module.exports.toggleFriendship=async function(req,res)
+{
+    try
+    {
+        //users/add-friends/?from=user.id&to=friend.id
+        //console.log(req.query);
+        let deleted=false;
+        let existingFriendshipFrom=await Friendship.findOne({
+            fromUser:req.query.from,
+            toUser:req.query.to
+        });
+        let existingFriendshipTo=await Friendship.findOne({
+            fromUser:req.query.to,
+            toUser:req.query.from
+        });
+        let fromUser=await User.findById(req.query.from);
+        let toUser=await User.findById(req.query.to);
+        if(existingFriendshipFrom)
+        {
+            console.log("Exits");
+            existingFriendshipFrom.remove();
+            existingFriendshipTo.remove();
+            fromUser.friendships.pull(existingFriendshipFrom._id);
+            fromUser.save();
+            toUser.friendships.pull(existingFriendshipTo._id);
+            toUser.save();
+            deleted=true;
+        }
+        else
+        {
+            let newFriendshipFrom=await Friendship.create({
+                fromUser:req.query.from,
+                toUser:req.query.to
+            });
+            let newFriendshipTo=await Friendship.create({
+                fromUser:req.query.to,
+                toUser:req.query.from
+            });
+           // console.log(newFriendship);
+            fromUser.friendships.push(newFriendshipFrom);
+            fromUser.save();
+            toUser.friendships.push(newFriendshipTo);
+            toUser.save();
+        }
+
+       console.log("from " ,fromUser);
+       console.log("to " ,toUser);
+       
+        return res.redirect("/");
+        // return res.json(500,{
+        //     message:"Request successfull!",
+        //     data:
+        //     {
+        //         deleted:deleted,
+        //         friendship:fromUser.friendships
+        //     }
+        // })
+    }
+    catch(err)
+    {
+        //console.log(err);
+        // req.flash("error ",err);
+         return res.json(500,{
+             message:"Interval Server Error",
+         });
+    }
 }

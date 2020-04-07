@@ -65,8 +65,9 @@ module.exports.home = async function(req, res){
                 }
             }).populate("likes");
 
+        
         let users=await User.find({});
-
+       // console.log(users);
         return res.render('home', {
                         title: "Home",
                         posts:postLists,
