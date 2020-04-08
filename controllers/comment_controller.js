@@ -39,8 +39,12 @@ module.exports.createComment=async function(req,res)
                             post:req.body.post,
                             user:req.user._id
                         });
+           
+          // console.log(newcomment);
            post.comments.push(newcomment);
+   
             post.save();
+            console.log(post);
             newcomment=await newcomment.populate("user","name email").execPopulate();
            /// CommentsMailer.newComment(newcoment);
            let job=queue.create("emails",newcomment).save(function(err)
@@ -55,7 +59,7 @@ module.exports.createComment=async function(req,res)
            });
             if(req.xhr)
             {
-                
+                console.log("xhr ",newcomment);
                 return res.status(200).json({
                     data:
                     {
@@ -126,7 +130,7 @@ module.exports.destroyComment=async function(req,res)
         if(comment.user==req.user.id)
         {
             
-             comment.remove();
+            comment.remove();
             Post.findByIdAndUpdate(postId,{
                             $pull:{comments:req.params.id}
                         });
@@ -135,7 +139,7 @@ module.exports.destroyComment=async function(req,res)
          
             if(req.xhr)
             {
-                //console.log("xhr");
+                console.log("xhr");
                 return res.status(200).json({
                     data:
                     {

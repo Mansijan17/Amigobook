@@ -60,9 +60,7 @@ module.exports.home = async function(req, res){
                     //populating users of the comment from the comment schema
                     path:"user",
                 },
-                populate:{
-                    path:"likes"
-                }
+                
             }).populate("likes");
 
         

@@ -9,12 +9,14 @@
     </div>
 
     <div class="content">
+       
         <% if(locals.user.id==comment.user.id) { %>
             <small>
-                <a href="/comments/destroy-comment/<%= comment.id %>" class="delete-comment-button">X</a>
+                <a href="/comments/destroy-comment/<%= comment._id %>" class="delete-comment-button">X</a>
             </small>
         <% } %>
         <p>
+           
             <%= comment.content %>
             <br>
             <small>
