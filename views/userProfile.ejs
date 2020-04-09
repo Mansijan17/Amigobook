@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="/css/userProfile.css">
+<link rel="stylesheet" type="text/css" href="/css/chat.css">
 
     <h1>
         Codeial/User Profile
@@ -22,5 +23,15 @@
         <p><form action="/users/friends/?from=<%=user._id%>&to=<%=profileUser._id%>" class="add-friend-button" method="post">
             <button type="submit">Add /Remove Friend</button>
         </form></p>
+        <p><a href="#user-chat-box">Chat with <%= profileUser.name  %></a></p>
+        <%- include("_chat"); %>
     <% } %>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="/js/chat_engine.js"></script>
+
+<script>
+    new ChatEngine('user-chat-box','<%= locals.user.email %>');
+</script>
+
 

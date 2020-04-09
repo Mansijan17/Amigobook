@@ -28,5 +28,33 @@ class ChatEngine{
         {
             console.log("a user joined ",data);
         });
+
+        $("#send-message").click(function () {
+
+            let msg=$("#chat-message-input").val();
+            if(msg!='')
+            {
+                self.socket.emit("send_message",{
+                    message:msg,
+                    user_email:self.userEmail,
+                    chatroom:"codeial",
+                });
+            }
+        
+        });
+
+        self.socket.on("receive_message",function(data)
+        {
+            console.log("message recieved ",data.message);
+            let messageType="other-message";
+            if(data.user_email==self.userEmail)
+            {
+                messageType="self-message";
+            }
+            $("#chat-messages-list").append(`<li class="${messageType}"><p class="user-descrpt">${data.user_email}</p><span>${data.message}</span></li>`);
+        });
+
     }
+
+    
 }

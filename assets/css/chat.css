@@ -1,4 +1,5 @@
 #user-chat-box {
+  visibility: hidden;
   position: fixed;
   bottom: 5.5%;
   right: 5%;
@@ -6,13 +7,15 @@
   width: 300px;
   border: 1px dotted grey;
   background-color: white;
-  padding: 5px;
+  padding-top: 5px;
   box-shadow: 1px 1px 1px 1px lightgray; }
   #user-chat-box #chat-messages-list {
     overflow: auto;
     list-style: none;
     padding: 10px;
-    height: 70%;
+    height: 82%;
+    margin-bottom: 0;
+    margin-top: 0;
     /*li
         {
             position: absolute;
@@ -30,7 +33,15 @@
       #user-chat-box #chat-messages-list .other-message span {
         display: inline-block;
         background-color: #FF8181;
-        padding: 15px; }
+        padding: 15px;
+        width: 150px;
+        overflow-wrap: break-word;
+        border-radius: 20px; }
+      #user-chat-box #chat-messages-list .other-message .user-descrpt {
+        margin-bottom: 0;
+        width: 150px;
+        height: auto;
+        overflow-wrap: break-word; }
     #user-chat-box #chat-messages-list .self-message {
       /*top:30%;
             right:5%;*/
@@ -39,10 +50,21 @@
       #user-chat-box #chat-messages-list .self-message span {
         display: inline-block;
         background-color: #7FBEBE;
-        padding: 15px; }
+        padding: 15px;
+        width: 150px;
+        overflow-wrap: break-word;
+        border-radius: 20px; }
+      #user-chat-box #chat-messages-list .self-message .user-descrpt {
+        margin-bottom: 0;
+        width: 150px;
+        height: auto;
+        overflow-wrap: break-word;
+        margin-left: 117px; }
+  #user-chat-box #chat-messages-list::-webkit-scrollbar {
+    display: none; }
   #user-chat-box #chat-message-input-container {
-    width: 100%;
-    height: 24%;
+    width: 101%;
+    height: 21%;
     font-size: 35px;
     display: flex;
     flex-direction: row; }
