@@ -5,12 +5,14 @@ form {
   align-items: center;
   width: 40%;
   margin: 0px auto 30px;
-  height: auto; }
+  height: auto;
+  /* border: 1px solid black; */ }
 
 form div {
   margin: 10px;
   width: 50%;
   height: auto;
+  /* border: 1px solid black; */
   display: flex;
   justify-content: space-between; }
 
