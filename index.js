@@ -5,7 +5,7 @@ const app = express();
 const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
-
+const dotenv = require('dotenv').config();
 // used for session cookie
 const session = require('express-session');
 const passport = require('passport');
@@ -24,13 +24,16 @@ chatServer.listen(5000);
 console.log("chat server is listening on port 5000");
 
 const path=require('path');
-app.use(SassMiddleware({
-    src:path.join(__dirname,env.asset_path,"/scss"),
-    dest:path.join(__dirname,env.asset_path,"/css"),
-    debug:true,
-    outputStyle:"extended",
-    prefix:"/css"
-}));
+if(env.name=="development")
+{
+    app.use(SassMiddleware({
+        src:path.join(__dirname,env.asset_path,"/scss"),
+        dest:path.join(__dirname,env.asset_path,"/css"),
+        debug:true,
+        outputStyle:"extended",
+        prefix:"/css"
+    }));    
+}
 
 app.use(express.urlencoded());
 

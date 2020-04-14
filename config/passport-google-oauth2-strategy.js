@@ -3,6 +3,7 @@ const googleStrategy=require('passport-google-oauth').OAuth2Strategy;
 const crypto=require('crypto');
 const User=require('../models/userSchema');
 const env=require('./environment')
+console.log(env.google_call_back_url);
 
 //tell passport to use new strategy using google login
 passport.use(new googleStrategy({
