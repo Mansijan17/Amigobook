@@ -1,0 +1,15 @@
+.home-container {
+  display: flex; }
+  .home-container #feed-posts {
+    width: 70%;
+    height: auto;
+    text-align: center;
+    border-right: 1px solid lightgrey;
+    height: 100%; }
+  .home-container #user-friends {
+    width: 30%;
+    text-align: center; }
+    .home-container #user-friends #friends, .home-container #user-friends #all-users {
+      height: auto;
+      border-bottom: 1px solid lightgrey;
+      margin-bottom: 30px; }

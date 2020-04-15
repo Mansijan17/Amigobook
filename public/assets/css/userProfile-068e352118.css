@@ -1,0 +1,6 @@
+body {
+  background-color: lightblue;
+  text-align: left; }
+
+#user-chat-box:target {
+  visibility: visible; }
