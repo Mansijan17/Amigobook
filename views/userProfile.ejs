@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="/css/userProfile.css">
-<link rel="stylesheet"  href="/css/chat.css">
+<link rel="stylesheet" href="<%= assetPath('css/userProfile.css') %>">
+<link rel="stylesheet"  href="<%= assetPath('css/chat.css') %>">
 
     <h1>
         Codeial/User Profile
@@ -27,7 +27,7 @@
         <%- include("_chat"); %>
     <% } %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-    <script src="/js/chat_engine.js"></script>
+    <script src="<%= assetPath('js/chat_engine.js') %>"></script>
     
     <script>
         new ChatEngine('user-chat-box','<%= locals.user.email %>');
