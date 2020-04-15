@@ -6,5 +6,10 @@
   "css/layout.css": "css/layout-0fd9a3c9f0.css",
   "css/like.css": "css/like-a3a37cf1d4.css",
   "css/signUp.css": "css/signUp-dd976d80e3.css",
-  "css/userProfile.css": "css/userProfile-068e352118.css"
+  "css/userProfile.css": "css/userProfile-068e352118.css",
+  "js/chat_engine.js": "js/chat_engine-dc2ce357cf.js",
+  "js/friends.js": "js/friends-6955accdef.js",
+  "js/home_post_comments.js": "js/home_post_comments-04d086f11a.js",
+  "js/home_posts.js": "js/home_posts-1176a66391.js",
+  "js/like.js": "js/like-6208534dbe.js"
 }
