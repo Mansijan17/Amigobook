@@ -1,0 +1,27 @@
+<div class="display-signUp-form">
+    <p><i class="fas fa-sign-in-alt acc-icon"></i> Sign In To Access Socialends</p>
+    <form action="/users/create-session" method="post">
+        <div>
+            <!-- <label for="email">Email:</label> -->
+            <input type="email" id="email" name="email" required placeholder="Enter your email......">
+        </div>
+        <div>
+            <!-- <label for="pwd">Password:</label> -->
+            <input type="password" id="pwd" name="password" required placeholder="Enter your password......">
+        </div>
+        <div class="btn">
+            <button type="submit">Sign In</button>
+        </div>
+    </form>
+    <div class="other-signins">
+        <div class="forget-password">
+            <i class="fas fa-unlock-alt " style="margin-right: 15px;"></i>
+            <a href="/users/forget-password" class="btn">Forget Password</a>
+        </div>
+        <div class="google-signin">
+           <img src="/images/googleicon.png">
+            <a href="/users/auth/google" class="btn">Sign In Using Google</a>
+        </div>
+    </div>
+</div>
+

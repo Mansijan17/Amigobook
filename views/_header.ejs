@@ -22,11 +22,22 @@
 
             <% } else { %>
 
-                <li>
-                    <a href="/users/sign-in" class="links hvr-icon-forward">Sign In
-                        <i class="fas fa-arrow-circle-right hvr-icon"></i>
-                    </a>
-                </li>
+                <% if(title=="Socialends" || title=="Socialends | Sign Up"){%>
+                    <li>
+                        <a href="/users/sign-in" class="links hvr-icon-forward">Sign In
+                            <i class="fas fa-arrow-circle-right hvr-icon"></i>
+                        </a>
+                    </li>
+                <% }else { %>
+                
+                    <li>
+                        <a href="/" class="links hvr-icon-forward">Sign Up
+                            <i class="fas fa-arrow-circle-right hvr-icon"></i>
+                        </a>
+                    </li>
+                <%}%>
+
+                
             
             <% } %>
         </ul>

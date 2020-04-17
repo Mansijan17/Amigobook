@@ -8,7 +8,12 @@
             <img src="/images/displayimage4.jpg">
         </div>
 
-        <%- include("_signup"); %>
-
+        <% if(title=="Socialends" || title=="Socialends | Sign Up"){%>
+            <%- include("_signup"); %>
+        <% }else { %>
+        
+            <%- include("_signin"); %>
+        <%}%>
+ 
     </div>
 </div>
