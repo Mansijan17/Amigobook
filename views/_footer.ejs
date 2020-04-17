@@ -7,17 +7,10 @@
 
         <ul>
             <li>
-                <a href="/">
+                <a href="/" class="hvr-bounce-to-left">
                     Home
                 </a>
             </li>
-            <% if(locals.user) { %> 
-                <li>
-                    <a href="/users/profile/<%= user.id %>">
-                        Profile
-                    </a>
-                </li>
-            <% } %>
         </ul>
     </div>
 </footer>

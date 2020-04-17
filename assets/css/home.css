@@ -13,3 +13,174 @@
       height: auto;
       border-bottom: 1px solid lightgrey;
       margin-bottom: 30px; }
+
+.homepage-without-login {
+  margin-top: 60px;
+  margin-bottom: 70px;
+  height: auto; }
+  .homepage-without-login p {
+    font-size: 1.6rem;
+    text-align: center;
+    margin-bottom: 40px; }
+  .homepage-without-login .display-area {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    width: 98%;
+    height: auto; }
+    .homepage-without-login .display-area > div {
+      width: 49.8%;
+      height: 500px; }
+    .homepage-without-login .display-area .display-images {
+      display: flex;
+      justify-content: space-evenly;
+      position: relative; }
+      .homepage-without-login .display-area .display-images img {
+        width: 32.4%;
+        height: 100%;
+        cursor: pointer;
+        position: absolute; }
+      .homepage-without-login .display-area .display-images img:nth-child(1) {
+        height: inherit;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        box-shadow: 0px 0px 5px 3px #2D3757;
+        animation: RFL 20s linear infinite; }
+      .homepage-without-login .display-area .display-images img:nth-child(2) {
+        height: inherit;
+        top: 0;
+        left: 30%;
+        z-index: 1;
+        box-shadow: 0px 0px 5px 3px #2D3757;
+        animation: LRF 20s linear infinite; }
+      .homepage-without-login .display-area .display-images img:nth-child(3) {
+        height: inherit;
+        top: 0;
+        left: 90%;
+        z-index: 0;
+        box-shadow: 0px 0px 5px 3px #2D3757;
+        animation: FLR 20s linear infinite; }
+
+@keyframes RFL {
+  0% {
+    height: 100%;
+    top: 0px;
+    left: 0;
+    z-index: -1; }
+  33% {
+    height: 100%;
+    top: 0px;
+    left: 68%;
+    z-index: 0; }
+  66% {
+    height: 100%;
+    top: 0;
+    left: 45%;
+    z-index: 1; }
+  100% {
+    height: 100%;
+    top: 0px;
+    left: 0;
+    z-index: -1; } }
+
+@keyframes LRF {
+  0% {
+    height: 100%;
+    top: 0;
+    left: 45%;
+    z-index: 1; }
+  33% {
+    height: 100%;
+    top: 0px;
+    left: 0;
+    z-index: -1; }
+  66% {
+    height: 100%;
+    top: 0px;
+    left: 68%;
+    z-index: 0; }
+  100% {
+    height: 100%;
+    top: 0;
+    left: 45%;
+    z-index: 1; } }
+
+@keyframes FLR {
+  0% {
+    height: 100%;
+    top: 0px;
+    left: 68%;
+    z-index: 0; }
+  33% {
+    height: 100%;
+    top: 0;
+    left: 45%;
+    z-index: 1; }
+  66% {
+    height: 100%;
+    top: 0px;
+    left: 0;
+    z-index: -1; }
+  100% {
+    height: 100%;
+    top: 0px;
+    left: 68%;
+    z-index: 0; } }
+    .homepage-without-login .display-area .display-signUp-form {
+      background: repeating-linear-gradient(90deg, #6BB5B3, #12627D 108px);
+      color: ghostwhite;
+      border-radius: 25px;
+      font-family: serif; }
+      .homepage-without-login .display-area .display-signUp-form p {
+        margin-left: 25px;
+        font-size: 1.75rem;
+        text-decoration: underline; }
+        .homepage-without-login .display-area .display-signUp-form p .acc-icon {
+          margin-right: 10px;
+          font-weight: bolder; }
+      .homepage-without-login .display-area .display-signUp-form form {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        width: 65%;
+        margin: 0px auto 30px;
+        height: auto;
+        /*border: 1px solid black; */ }
+        .homepage-without-login .display-area .display-signUp-form form > div {
+          margin: 10px;
+          width: 95%;
+          height: auto;
+          display: flex;
+          justify-content: space-between; }
+          .homepage-without-login .display-area .display-signUp-form form > div input {
+            background-color: transparent;
+            border: none;
+            height: 35px;
+            border-bottom: 2px solid darkgray;
+            width: 100%;
+            color: ghostwhite; }
+          .homepage-without-login .display-area .display-signUp-form form > div input::placeholder {
+            color: ghostwhite; }
+          .homepage-without-login .display-area .display-signUp-form form > div input:focus {
+            outline: none; }
+        .homepage-without-login .display-area .display-signUp-form form .btn {
+          justify-content: center !important;
+          height: 45px;
+          width: 100px;
+          border-radius: 20px;
+          margin-top: 25px; }
+          .homepage-without-login .display-area .display-signUp-form form .btn button {
+            color: white;
+            border-radius: inherit;
+            background-color: transparent;
+            border: 3px solid lightgrey;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.2rem; }
+          .homepage-without-login .display-area .display-signUp-form form .btn button:hover {
+            background-color: #A7C8BD; }
+
+.bckgd-dark {
+  background-color: #6aa6a1 !important; }
