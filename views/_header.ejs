@@ -22,21 +22,36 @@
 
             <% } else { %>
 
-                <% if(title=="Socialends" || title=="Socialends | Sign Up"){%>
+                <% if(title=="Socialend | Forget Password" ) { %>
+
                     <li>
                         <a href="/users/sign-in" class="links hvr-icon-forward">Sign In
                             <i class="fas fa-arrow-circle-right hvr-icon"></i>
                         </a>
                     </li>
-                <% }else { %>
-                
                     <li>
                         <a href="/" class="links hvr-icon-forward">Sign Up
-                            <i class="fas fa-arrow-circle-right hvr-icon"></i>
+                            <i class="fas fa-sign-in-alt hvr-icon"></i>
                         </a>
                     </li>
-                <%}%>
+                
+                <% } else { %>
 
+                    <% if(title=="Socialends" || title=="Socialends | Sign Up" || title=="Socialend | New Password"){%>
+                        <li>
+                            <a href="/users/sign-in" class="links hvr-icon-forward">Sign In
+                                <i class="fas fa-arrow-circle-right hvr-icon"></i>
+                            </a>
+                        </li>
+                    <% }else { %>
+                    
+                        <li>
+                            <a href="/" class="links hvr-icon-forward">Sign Up
+                                <i class="fas fa-sign-in-alt hvr-icon"></i>
+                            </a>
+                        </li>
+                    <%}%>
+                <% } %>
                 
             
             <% } %>

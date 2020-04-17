@@ -157,13 +157,16 @@
             background-color: transparent;
             border: none;
             height: 35px;
-            border-bottom: 2px solid darkgray;
+            border-bottom: 2px dashed darkgray;
             width: 100%;
             color: ghostwhite; }
           .homepage-without-login .display-area .display-signUp-form form > div input::placeholder {
             color: ghostwhite; }
           .homepage-without-login .display-area .display-signUp-form form > div input:focus {
             outline: none; }
+          .homepage-without-login .display-area .display-signUp-form form > div input:-webkit-autofill {
+            transition: background-color 5000s ease-in-out 0s;
+            -webkit-text-fill-color: ghostwhite; }
         .homepage-without-login .display-area .display-signUp-form form .btn {
           justify-content: center !important;
           height: 45px;
@@ -180,6 +183,8 @@
             font-size: 1.2rem; }
           .homepage-without-login .display-area .display-signUp-form form .btn button:hover {
             background-color: #A7C8BD; }
+          .homepage-without-login .display-area .display-signUp-form form .btn button:focus {
+            outline: none; }
       .homepage-without-login .display-area .display-signUp-form .other-signins {
         margin: 0 auto 30px;
         width: 60%;

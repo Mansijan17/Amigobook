@@ -1,16 +1,25 @@
 <footer id="layout-footer">
-    <div>
-        &copy Socialends Foundation (Initiated by Manjari Jain)
-    </div>
+    <% if(locals.user){%>
+        <div >
+            &copy Socialends Foundation (Initiated by Manjari Jain)
+        </div>
+    <% } else {%>
+        <div style="margin:auto;">
+            &copy Socialends Foundation (Initiated by Manjari Jain)
+        </div>
+    <% } %>
 
-    <div>
-
-        <ul>
-            <li>
-                <a href="/" class="hvr-bounce-to-left">
-                    Home
-                </a>
-            </li>
-        </ul>
-    </div>
+    <% if (locals.user) {%>
+        <div>
+            <ul>
+                <li>
+                    <a href="/" class="hvr-bounce-to-left">
+                        Home
+                    </a>
+                </li>
+                
+            </ul>
+        
+        </div>
+    <% } %>
 </footer>

@@ -156,7 +156,7 @@
                         background-color: transparent;
                         border: none;
                         height: 35px;
-                        border-bottom: 2px solid darkgray;
+                        border-bottom: 2px dashed darkgray;
                         width:100%;
                         color: ghostwhite;
                     }
@@ -168,7 +168,10 @@
                     {
                         outline:none;
                     }
-
+                    input:-webkit-autofill {
+                        transition: background-color 5000s ease-in-out 0s;
+                        -webkit-text-fill-color:ghostwhite;
+                    }
                    
                 }
 
@@ -192,6 +195,10 @@
                     button:hover
                     {
                         background-color: #A7C8BD;
+                    }
+                    button:focus
+                    {
+                        outline: none;
                     }
                 
                 }

@@ -192,7 +192,7 @@ module.exports.destroySession = function (req, res) {
 module.exports.forgetPassword=function(req,res)
 {
     return res.render("forgetPassword",{
-        title:"Forget password"
+        title:"Socialend | Forget Password"
     });
 }
 
@@ -238,7 +238,7 @@ module.exports.newPassword=function(req,res)
     var id=req.params.id;
     //console.log(id);
     return res.render("new_confirm_password",{
-        title:"New Password",
+        title:"Socialend | New Password",
         acessToken:id
     });
 }
