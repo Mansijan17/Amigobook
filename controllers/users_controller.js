@@ -1,4 +1,5 @@
 const User = require('../models/userSchema');
+const Post=require('../models/post');
 const fs = require('fs');
 const path = require('path');
 const ResetPassword=require('../models/resetPasswordSchema');
@@ -9,14 +10,45 @@ const crypto=require('crypto');
 const Friendship=require('../models/friendship');
 //making function async
 module.exports.profile = async function (req, res) {
-    console.log(req.params.id);
-    User.findById(req.params.id, function (err, user) {
+    try
+    {
+       // console.log(req.params.id);
+        let user=await User.findById(req.params.id);
+        let postLists=await Post.find({user:user.id}).sort("-createdAt").populate("user").populate({
+            //populating the comments of the post schema
+            //Change:: populate the likes of the posts and comments
+            path:"comments",
+            populate:
+                {
+                    path:"likes",
+                    populate:{
+                        path:"user"
+                    }
+                  
+                },
+            
+        }).populate({
+            path:"likes",
+            populate:{
+                path:"user"
+            }
+        });
+        //console.log(postLists);
+
+       // console.log("profile user posts ",user.posts);
         return res.render('userProfile', {
             title: 'User Profile',
-            profileUser: user
+            profileUser: user,
+            posts:postLists
         })
-    })
 
+    }
+    catch(err)
+    {
+        console.log("error in rendering profile ",err);
+        return;
+    }
+    
 }
 
 module.exports.update = async function (req, res) {

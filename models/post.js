@@ -6,6 +6,10 @@ const postSchema=new mongoose.Schema({
         type:String,
         required:true
     },
+    displayLikes:
+    {
+        type:Boolean,
+    },
     user:
     {
         type:mongoose.Schema.Types.ObjectId,
@@ -16,19 +20,21 @@ const postSchema=new mongoose.Schema({
     [
         {
             type:mongoose.Schema.Types.ObjectId,
-            ref:"Comment"
+            ref:"Comment",
+           // autopopulate:true
         }
     ],
     likes:[
         {   
             type:mongoose.Schema.Types.ObjectId,
-            ref:"Like"
+            ref:"Like",
+            autopopulate:true
         }
     ]
 },
 {
     timestamps:true
 });
-
+//postSchema.plugin(require('mongoose-autopopulate'));
 const Post=mongoose.model("Post",postSchema);
 module.exports=Post;

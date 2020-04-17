@@ -1,8 +1,9 @@
 #layout-header
 {
+    box-shadow: 0px 0px 10px 0px #94C3DD;
     position: absolute;
-    top:0;
-    background-color: #25B0F3;
+    top: 0;
+    background-color: #29AABD;
     color: white;
     width: 100%;
     height: auto;
@@ -11,6 +12,7 @@
     flex-wrap: wrap;
     padding: 0px 30px;
     box-sizing: border-box;
+
 
     #layout-title
     {

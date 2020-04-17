@@ -1,0 +1,30 @@
+.like-box {
+  position: relative; }
+
+.post-likes {
+  top: 5%;
+  left: 33%;
+  height: 66px;
+  overflow: auto;
+  position: absolute;
+  width: 130px;
+  padding: 0;
+  list-style: none; }
+  .post-likes li p {
+    display: inline-block;
+    margin: 0px; }
+
+.post-likes::-webkit-scrollbar {
+  display: none; }
+
+.post-likes li::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: '\f004';
+  display: inline-block;
+  width: 25px;
+  background-size: contain;
+  background-position: center; }
+
+.post-likes li {
+  margin-bottom: 10px; }

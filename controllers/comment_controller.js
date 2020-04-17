@@ -34,6 +34,9 @@ module.exports.createComment=async function(req,res)
         let post=await Post.findById(req.body.post);
         if(post)
         {
+            //console.log(post);
+            await post.populate("user","name email").execPopulate();
+            //console.log("new ",post);
             let newcomment=await Comment.create({
                             content:req.body.content,
                             post:req.body.post,
@@ -46,20 +49,44 @@ module.exports.createComment=async function(req,res)
             post.save();
             console.log(post);
             newcomment=await newcomment.populate("user","name email").execPopulate();
+            let commentOnPost={
+                name:post.user.name,
+                email:post.user.email,
+                content:post.content,
+                comment:newcomment
+            }
+            let nextComment={
+                comment:newcomment,
+                postContent:post.content
+            }
+           // console.log("new post ",commentOnPost);
            /// CommentsMailer.newComment(newcoment);
-           let job=queue.create("emails",newcomment).save(function(err)
+           let job=queue.create("emails",nextComment).save(function(err)
            {
                if(err)
                {
                    console.log("error in creating a queue ",err);
                    return;
                }
-               console.log("job enqueued " ,job.id);
+               console.log("comment job enqueued " ,job.id);
 
            });
+           if(post.user.id!=newcomment.user.id)
+           {
+                let job2=queue.create("commentOnPosts",commentOnPost).save(function(err)
+                {
+                    if(err)
+                    {
+                        console.log("error in creating a queue ",err);
+                        return;
+                    }
+                    console.log("post job enqueued " ,job2.id);
+    
+                });
+           }
             if(req.xhr)
             {
-                console.log("xhr ",newcomment);
+               // console.log("xhr ",newcomment);
                 return res.status(200).json({
                     data:
                     {
@@ -69,7 +96,7 @@ module.exports.createComment=async function(req,res)
                 })
             }
             req.flash("success","Comment published!");
-            return res.redirect("/");
+            return res.redirect("back");
         }
 
     }

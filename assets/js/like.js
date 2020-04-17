@@ -17,15 +17,28 @@ class ToggleLike{
                 url:$(self).attr("href"),
             }).done(function(data)
             {
+                console.log(data.data);
                 let likesCount=parseInt($(self).attr("data-likes"));
-                console.log(likesCount);
+                //console.log(likesCount);
                 if(data.data.deleted==true)
                 {
                     likesCount-=1;
+                    if(data.data.type=="Post")
+                    {
+                        console.log("post delete like");
+                        $(`#like-${data.data.likeID}`).remove();
+                    }
+                    
+
                 }
                 else
                 {
                     likesCount+=1;
+                    if(data.data.type=="Post")
+                    {
+                        console.log("post accept like");
+                        $(`#post-${data.data.id}-likes`).append(`<li id="like-${data.data.likeID}"><p><a href="/users/profile/${data.data.userID}">${data.data.name}</a></p></li>`)
+                    }
                 }
                 $(self).attr("data-likes",likesCount);
                 $(self).html(`${likesCount} <i class="fas fa-thumbs-up like-thumbs"></i>`);

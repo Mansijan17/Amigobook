@@ -1,6 +1,8 @@
 body{
-    margin: 0;
+    margin: 45px 0px 0px 0px;
     height:auto;
+    color:white;
+    background: #013B50;
 
     #notification
     {
@@ -9,8 +11,20 @@ body{
 
     #layout-main
     {
-        margin-top: 45px;
         margin-bottom: 50px;
         height: 100%;
+
+        .homepage-without-login
+        {
+            height: 100%;
+            p
+            {
+                font-size: 1.6rem;
+                text-align: center;
+                margin-top: 60px;
+            }
+        }
     }
+
+    
 }

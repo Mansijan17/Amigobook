@@ -4,7 +4,6 @@ const commentSchema=new mongoose.Schema({
     content:
     {
         type:String,
-        required:true
     },
     //comments belongs to the post
     post:
@@ -17,7 +16,7 @@ const commentSchema=new mongoose.Schema({
     {
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
-        //autopopulate:true
+        autopopulate:true
     },
     likes:[
         {   
@@ -29,6 +28,6 @@ const commentSchema=new mongoose.Schema({
 },{
     timestamps:true
 });
-// commentSchema.plugin(require('mongoose-autopopulate'));
+commentSchema.plugin(require('mongoose-autopopulate'));
 const Comment=mongoose.model("Comment",commentSchema);
 module.exports=Comment;

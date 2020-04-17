@@ -5,7 +5,13 @@
     <div class="like-box">
        <a class="toggle-like-button" href="/likes/toggle/?id=<%=comment._id%>&type=Comment" data-likes="<%= comment.likes.length %>">
         <%= comment.likes.length %> <i class="fas fa-thumbs-up like-thumbs"></i>
+   
        </a>
+       <% if(comment.likes.length!=0){%>
+           <% for(like of comment.likes){%>
+                <%= like.user.name %>
+            <%}%>
+       <%}%>
     </div>
 
     <div class="content">

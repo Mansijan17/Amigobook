@@ -1,22 +1,16 @@
-<link rel="stylesheet"  href="<%= assetPath('css/home.css') %>">
-<link rel="stylesheet"  href="<%= assetPath('css/chat.css') %>">
-
-<h1> Homepage </h1>
+<link rel="stylesheet"  href="/css/home.css">
+<link rel="stylesheet"  href="/css/chat.css">
 
 
-<div class="home-container">
 
+
+
+   
     <% if(locals.user) { %> 
-        
-        
+        <h1>Welcome <%= locals.user.name %>! </h1>
+        <div class="home-container">
             <section id="feed-posts">
-                <h4>Posts</h4>
-
-                <form id="new-post-form" method="post" action="/posts/create-post">
-                    <textarea name="content" id="new-post-content" required cols="30" rows="3" placeholder="Type here..."></textarea>
-                    <br>
-                    <button type="submit">Post</button>
-                </form>
+                <h2>Home feeds</h2>
                 <div id="posts-list-container">
                     <ul>
                         <% for(i of posts) { %>
@@ -48,37 +42,29 @@
                 </div>
                 <div id="all-users">
                     <h4>All Users</h4>
-                    <% for(u of all_users) { %> 
-                        <p>
-                            <a href="/users/profile/<%= u.id %>">
-                                <%= u.name %>
-                            </a>
-                        </p>
-    
+                    <% for(u of all_users) { %>
+                        <% if(locals.user.id!=u.id ) { %> 
+                            <p>
+                                <a href="/users/profile/<%= u.id %>">
+                                    <%= u.name %>
+                                </a>
+                            </p>
+                        <% } %>
                     <% } %>
                 </div>
             </section>
             <%- include("_chat"); %>
            
-           
+        </div>
       
     <% } else { %>
-        <p style="font-size: 1.3rem;text-align: center;">Welcome to the Socialends. Kindly signup or signup!</p>
+        <div class="homepage-without-login">
+            <p >Welcome to the Socialends. Kindly signup or signup!</p>
+        </div>
     <% } %>
 </div>
 
-<script src="<%= assetPath('js/home_post_comments.js') %>"></script>
-<script src="<%= assetPath('js/home_posts.js') %>"></script>
-<script src="<%= assetPath('js/like.js') %>"></script>
-<script>
-    $('.toggle-like-button').each(function(){
-        let self = this;
-        let toggleLike = new ToggleLike(self);
-    });
 
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-    <script src="<%= assetPath('js/chat_engine.js') %>"></script>
 <% if(locals.user) {%>
     <script>
         new ChatEngine('user-chat-box','<%= locals.user.email %>');

@@ -29,7 +29,7 @@ const userSchema=new mongoose.Schema({
             ref:"Friendship",
             autopopulate:true
         }
-    ]
+    ],
 },{
     timestamps:true
 });

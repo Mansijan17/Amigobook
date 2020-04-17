@@ -1,6 +1,9 @@
 const Post=require('../models/post');
 const Comment=require('../models/commentSchema');
 const Like=require('../models/like');
+const postsMailer=require('../mailer/post_mailer');
+const queue=require('../config/kue');
+const postEmailWorker=require('../worker/post_email_worker');
 
 //not necessary to create async function
 //but we are creating for the sake of practice as there is
@@ -23,14 +26,25 @@ module.exports.createPost= async function(req,res)
     {
          let post =await Post.create({
                 content:req.body.content,
-                user:req.user._id
+                user:req.user._id,
+                displayLikes:true
             });
+            post=await post.populate("user","name email").execPopulate();
+            let job=queue.create("posts",post).save(function(err)
+            {
+                    if(err)
+                    {
+                        console.log("error in creating a queue ",err);
+                        return;
+                    }
+                    console.log("job enqueued " ,job.id);
 
+            });
             if(req.xhr)
             {
                  // if we want to populate just the name of the user 
                  //(we'll not want to send the password in the API)
-                post=await post.populate("user","name").execPopulate();
+                
                 return res.status(200).json({
                     data:
                     {
@@ -81,7 +95,6 @@ module.exports.destroyPost=async function(req,res)
             await Like.deleteMany({_id:{$in:post.comments}});
 
             post.remove();
-
             await Comment.deleteMany({post:req.params.id});
             if(req.xhr)
             {

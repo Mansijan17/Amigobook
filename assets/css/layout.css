@@ -1,9 +1,16 @@
 body {
-  margin: 0;
-  height: auto; }
+  margin: 45px 0px 0px 0px;
+  height: auto;
+  color: white;
+  background: #013B50; }
   body #notification {
     margin-top: 75px; }
   body #layout-main {
-    margin-top: 45px;
     margin-bottom: 50px;
     height: 100%; }
+    body #layout-main .homepage-without-login {
+      height: 100%; }
+      body #layout-main .homepage-without-login p {
+        font-size: 1.6rem;
+        text-align: center;
+        margin-top: 60px; }

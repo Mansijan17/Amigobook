@@ -1,11 +1,11 @@
 <div>
 
     <p>
-        Hi <%= comment.user.name %>!
+        Hi <%= comment.comment.user.name %>!
     </p>
     <br>
     <br>
-    <p>Your comment <strong><%=  comment.content %></strong> just got published on Socialends.</p>
+    <p>Your comment <strong><%= comment.comment.content %></strong> on post <strong><%= comment.postContent %></strong> just got published on Socialends.</p>
     <br>
     <br>
     <p>Thanks!</p>

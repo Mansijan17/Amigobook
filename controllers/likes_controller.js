@@ -1,7 +1,7 @@
 const Like=require('../models/like');
 const Post=require("../models/post");
 const Comment=require('../models/commentSchema');
-
+const User=require('../models/userSchema');
 
 module.exports.toggleLike=async function(req,res)
 {
@@ -25,10 +25,14 @@ module.exports.toggleLike=async function(req,res)
             onModel:req.query.type,
             user:req.user._id
         })
-
+        let user=await User.findById(req.user.id);
+        let userName=user.name;
+        let likeID
+        //console.log("liking user name ",userName);
         // if a like already exists
         if(existingLike)
         {
+            likeID=existingLike._id;
             likeable.likes.pull(existingLike._id);
             likeable.save();
             existingLike.remove();
@@ -42,13 +46,19 @@ module.exports.toggleLike=async function(req,res)
                 onModel:req.query.type,
                 user:req.user._id
             });
+            likeID=newLike._id;
             likeable.likes.push(newLike._id);
             likeable.save();
         }
         return res.json(200,{
             message:"Request successful!",
             data:{
-                deleted:deleted
+                deleted:deleted,
+                name:userName,
+                type:req.query.type,
+                id:req.query.id,
+                likeID:likeID,
+                userID:req.user._id
             }
         })
     }

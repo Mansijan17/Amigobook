@@ -25,3 +25,6 @@ form div {
   cursor: pointer;
   width: 100%;
   font-size: 1.2rem; }
+
+p {
+  margin: auto; }

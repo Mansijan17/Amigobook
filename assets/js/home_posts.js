@@ -52,6 +52,12 @@
             <a href="/likes/toggle/?id=${i._id }&type=Post" data-likes="0" class="toggle-like-button">
                 0 <i class="fas fa-thumbs-up like-thumbs"></i>
             </a>
+           
+            <ul id="post-${i._id}-likes" class="post-likes">
+                       
+                
+            </ul>
+            
         </div>
 
         <div class="content">
@@ -112,6 +118,7 @@
     //convert posts to ajax
     let postsToAjax=function()
     {
+        console.log("converting posts to ajax ");
         $("#posts-list-container>ul>li").each(function()
         {
             let self=$(this);

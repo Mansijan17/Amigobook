@@ -1,12 +1,11 @@
-<link rel="stylesheet" href="<%= assetPath('css/userProfile.css') %>">
-<link rel="stylesheet"  href="<%= assetPath('css/chat.css') %>">
+<link rel="stylesheet" href="/css/userProfile.css">
+<link rel="stylesheet"  href="/css/chat.css">
 
     <h1>
         Socialends/User Profile
     </h1>
 
     <img src="<%= profileUser.avatar %>" alt="<%= profileUser.name %>" width="100">
- 
     <% if(user.id==profileUser.id) { %> 
        
         <form action="/users/update/<%= profileUser.id %>" method="post" enctype="multipart/form-data">
@@ -15,19 +14,61 @@
             <input type="file" name="avatar" placeholder="Profile Picture...">
             <button type="submit">Update</button>
         </form>
-    <% } else { %>
-        
-       
-        <p><%= profileUser.name %></p>
-        <p><%= profileUser.email %></p>
-        <p><form action="/users/friends/?from=<%=user._id%>&to=<%=profileUser._id%>" class="add-friend-button" method="post">
-            <button type="submit">Add /Remove Friend</button>
-        </form></p>
-        <p><a href="#user-chat-box">Chat with <%= profileUser.name  %></a></p>
-        <%- include("_chat"); %>
+        <br>
+        <br><br>
+        <form id="new-post-form" method="post" action="/posts/create-post">
+            <textarea name="content" id="new-post-content" required cols="30" rows="3" placeholder="Type here..."></textarea>
+            <br>
+            <button type="submit">Post</button>
+        </form>
+        <br><br>
+            <% if(posts.length!=0) { %>
+                <h3 style="text-align: center;"> Your feeds</h3>
+                <br>
+                <div id="posts-list-container">
+                    <ul>
+                        <% for(i of posts) { %>
+            
+                            <%- include('_post') -%>
+                                        
+                        <% } %>
+                    </ul>
+                </div>
+            <% } else { %>
+                <h3 style="text-align: center;">No posts published!</h3>
+            <% } %>
+        <% } else { %>
+
+            <p><%= profileUser.name %></p>
+            <p><%= profileUser.email %></p>
+            <p><form action="/users/friends/?from=<%=user._id%>&to=<%=profileUser._id%>" class="add-friend-button" method="post">
+                <button type="submit">Add /Remove Friend</button>
+            </form></p>
+            <p><a href="#user-chat-box">Chat with <%= profileUser.name  %></a></p>
+            <br>
+            <br>
+            <% if(posts.length!=0) { %>
+                <h3 style="text-align: center;"><%= profileUser.name%>'s Posts</h3>
+                <br>
+                <div id="posts-list-container">
+                    <ul>
+                        <% for(i of posts) { %>
+            
+                            <%- include('_post') -%>
+                                        
+                        <% } %>
+                    </ul>
+                </div>
+            <% } else { %>
+                <h3 style="text-align: center;">No posts published!</h3>
+            <% } %>
+            <%- include("_chat"); %>
     <% } %>
+    <br>
+    <br>
+    
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-    <script src="<%= assetPath('js/chat_engine.js') %>"></script>
     
     <script>
         new ChatEngine('user-chat-box','<%= locals.user.email %>');
