@@ -168,8 +168,19 @@ module.exports.create = async function (req, res) {
                 acessToken:crypto.randomBytes(20).toString("hex")
             }
             //console.log(newuser);
-            let newaccountUser=await newAccount.create(newuser);
-            console.log(newaccountUser);
+            let newAccountSchema=await newAccount.findOne({"user.email":req.body.email});
+            //console.log(newAccountSchema);
+            if(!newAccountSchema)
+            {
+                await newAccount.create(newuser);
+            }
+            else
+            {
+                newAccountSchema.acessToken=newuser.acessToken;
+                newAccountSchema.save();
+            }
+            // let newaccountUser=await newAccount.create(newuser);
+            // console.log(newaccountUser);
             let job=queue.create("newAccount",newuser).save(function(err)
             {
                 if(err)
@@ -225,14 +236,25 @@ module.exports.resetPasswordEmailLink=async function(req,res)
         }
         else {
             //console.log(userFound);
-            let newpassword=await ResetPassword.create({
-                isvalid:true,
-                user:userFound._id,
-                acessToken:crypto.randomBytes(20).toString("hex"),
-            });
-            newpassword=await newpassword.populate("user","name email").execPopulate();
-            console.log(newpassword);
-            let job=queue.create("password",newpassword).save(function(err)
+            let resetPasswordSchema=await ResetPassword.findOne({user:userFound._id});
+            if(!resetPasswordSchema)
+            {
+                resetPasswordSchema=await ResetPassword.create({
+                    isvalid:true,
+                    user:userFound._id,
+                    acessToken:crypto.randomBytes(20).toString("hex"),
+                });
+            }
+            else
+            {
+                resetPasswordSchema.isvalid=true;
+                resetPasswordSchema.acessToken=crypto.randomBytes(20).toString("hex");
+                resetPasswordSchema.save();
+            }
+            
+            resetPasswordSchema=await resetPasswordSchema.populate("user","name email").execPopulate();
+            console.log(resetPasswordSchema);
+            let job=queue.create("password",resetPasswordSchema).save(function(err)
             {
                 if(err)
                 {
@@ -385,4 +407,36 @@ module.exports.confirmAccount=function(req,res)
         title:"Socialend | Confirm Account",
         acessToken:id
     });
+}
+
+module.exports.verifyAccount=async function(req,res)
+{
+    try
+    {
+        let acessToken=req.params.id;
+        let account=await newAccount.findOne({acessToken:acessToken});
+        console.log(account);
+        let newuser=await User.findOne({email:account.user.email});
+        if(!newuser)
+        {
+            let job=queue.create("verifyAccount",account.user).save(function(err)
+            {
+                    if(err)
+                    {
+                        console.log("error in creating a queue ",err);
+                        return;
+                    }
+                    console.log("job enqueued ",job.id);
+            });
+            newuser=await User.create(account.user);
+        }
+        req.flash("success","Successfully verified!");
+        return res.redirect("/users/sign-in");
+    }
+    catch(err)
+    {
+        console.log("error in verifying account ",err);
+        return;
+    }
+    
 }

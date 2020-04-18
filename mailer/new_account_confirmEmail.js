@@ -19,3 +19,23 @@ exports.newAccount=(newuser)=>{
         return;
     })
 }
+
+exports.verifyAccount=(newuser)=>{
+    console.log("inside new user ",newuser);
+    let htmlString=nodemailer.renderTemplate({user:newuser},"/new_account/new_account.ejs");
+
+    nodemailer.transporter.sendMail({
+        from:"manjarijain98@gmail.com",
+        to:newuser.email,
+        subject:"Congratulations and Welcome to the Family!",
+        html:htmlString
+    },(err,info)=>{
+        if(err)
+        {
+            console.log("Error in sending mail for new account ",err);
+            return;
+        }
+       // console.log("Email sent: ",info);
+        return;
+    })
+}

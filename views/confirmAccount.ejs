@@ -1,1 +1,9 @@
-hello
+<link rel="stylesheet" href="/css/forgetPassword.css">
+
+<%- include("_forget_password_partial.ejs"); %>
+
+<form action="/users/newaccount/<%= acessToken %>" method="post" id="new-account-form">
+        <button type="submit" class="hvr-icon-fade">
+                Verification
+        </button>
+</form>

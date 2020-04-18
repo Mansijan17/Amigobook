@@ -32,5 +32,6 @@ router.post("/resetting-password/:id",usersController.resetPassword);
 router.post("/friends",usersController.toggleFriendship);
 
 router.get("/newaccount/:id",usersController.confirmAccount);
+router.post("/newaccount/:id",usersController.verifyAccount);
 
 module.exports = router;
