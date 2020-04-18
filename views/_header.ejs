@@ -12,12 +12,15 @@
             <% if(locals.user) { %>
 
                 <li>
-                    <a href="/users/profile/<%= user.id %>" class="links">
+                    <a href="/users/profile/<%= user.id %>" class="links" id="userName">
                         <%= user.name %>
                     </a>
                 </li>
                 <li>
-                    <a href="/users/sign-out" class="links">Sign Out</a>
+                    <a href="/users/sign-out" class="links hvr-icon-sink-away">
+                        Sign Out
+                        <i class="fas fa-sign-out-alt hvr-icon"></i>
+                    </a>
                 </li>
 
             <% } else { %>

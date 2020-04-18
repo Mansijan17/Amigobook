@@ -13,6 +13,49 @@
     padding: 0px 30px;
     box-sizing: border-box;
 
+    @-webkit-keyframes hvr-icon-sink-away {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        -webkit-transform: translateY(1em);
+        transform: translateY(1em);
+      }
+    }
+    @keyframes hvr-icon-sink-away {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        -webkit-transform: translateY(1em);
+        transform: translateY(1em);
+      }
+    }
+
+    .hvr-icon-sink-away {
+      display: inline-block;
+      vertical-align: middle;
+      -webkit-transform: perspective(1px) translateZ(0);
+      transform: perspective(1px) translateZ(0);
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    }
+    .hvr-icon-sink-away .hvr-icon {
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      -webkit-animation-duration: 0.5s;
+      animation-duration: 0.5s;
+      -webkit-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
+    }
+    .hvr-icon-sink-away:hover .hvr-icon, .hvr-icon-sink-away:focus .hvr-icon, .hvr-icon-sink-away:active .hvr-icon {
+      -webkit-animation-name: hvr-icon-sink-away;
+      animation-name: hvr-icon-sink-away;
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+
     .hvr-grow-shadow {
         display: inline-block;
         vertical-align: middle;
@@ -63,7 +106,9 @@
         {
             color: white;
             text-decoration: none;
+            
         }
+        
     }
 
     div
@@ -93,7 +138,16 @@
                 color: white;
 
             }
-            
+
+            #userName
+            {
+              transition: border-bottom,opacity 1s ease-in-out;
+            }
+            #userName:hover
+            {
+              opacity: 0.7;
+            }
+                
         }
         
     }

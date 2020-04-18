@@ -298,8 +298,19 @@ module.exports.resetPassword=async function(req,res)
             {
                 if(req.body.newpassword==req.body.confirmpassword)
                 {
-                    user.password=req.body.newpassword;
-                    user.save();
+                    if(user.password==req.body.newpassword)
+                    {
+                        resetPasswordSchema.isvalid=false;
+                        resetPasswordSchema.save();
+                        req.flash("error","You have used this password recently!");
+                        return res.redirect("/");
+                    }
+                    else
+                    {
+                        user.password=req.body.newpassword;
+                        user.save();
+                    }
+                    
                    // console.log(user);
                     resetPasswordSchema.isvalid=false;
                     resetPasswordSchema.save();
