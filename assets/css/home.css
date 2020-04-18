@@ -1,3 +1,76 @@
+.border-images {
+  display: flex;
+  position: absolute;
+  top: 76px; }
+  .border-images img {
+    height: 25px;
+    width: 25px; }
+
+#right-side {
+  right: 0px; }
+
+h1 {
+  text-align: center;
+  margin: 65px 0px 30px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 1.65rem; }
+  h1 .emoji {
+    display: inline-block;
+    height: 35px;
+    width: 35px;
+    position: relative;
+    border: 2px solid;
+    border-radius: 50%; }
+    h1 .emoji .eyes {
+      border-radius: 50%;
+      height: 6px;
+      width: 6px;
+      background-color: lavender;
+      position: absolute;
+      top: 4px; }
+    h1 .emoji #left-eye {
+      left: 8px; }
+    h1 .emoji #right-eye {
+      right: 8px;
+      animation: wink 2s ease-in-out 1; }
+    h1 .emoji .smile {
+      width: 17px;
+      height: 9px;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+      border: 2px solid lavender;
+      border-top: 0;
+      position: absolute;
+      top: 50%;
+      left: 19%; }
+
+@keyframes wink {
+  0% {
+    top: 4px;
+    border-radius: 50%;
+    height: 6px;
+    width: 6px;
+    opacity: 1; }
+  25% {
+    top: 4px;
+    border-radius: 40%;
+    height: 4px;
+    width: 6px;
+    opacity: 0.6; }
+  50% {
+    top: 5px;
+    border-radius: 25%;
+    width: 6.5px;
+    height: 2px;
+    opacity: 0; }
+  100% {
+    top: 6px;
+    border-radius: 0;
+    width: 7px;
+    height: 0;
+    background-color: none;
+    border-top: 3px solid lavender; } }
+
 .home-container {
   display: flex; }
   .home-container #feed-posts {

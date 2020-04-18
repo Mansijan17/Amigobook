@@ -1,65 +1,15 @@
 
-<link rel="stylesheet"  href="/css/chat.css">
+<link rel="stylesheet"  href="/css/chat.css">   
 
-
-
-
-
-   
-    <% if(locals.user) { %> 
-        <h1>Welcome <%= locals.user.name %>! </h1>
-        <div class="home-container">
-            <section id="feed-posts">
-                <h2>Home feeds</h2>
-                <div id="posts-list-container">
-                    <ul>
-                        <% for(i of posts) { %>
-
-                            <%- include('_post') -%>
-                                        
-                        <% } %>
-                    </ul>
-                </div>
-            </section>
+<% if(locals.user) { %> 
         
-            <section id="user-friends" >
-                <div id="friends">
-                    <h4>Friends</h4>
-                    <div id="user-friends-<%= user._id %>">
-                        <% for(u of user.friendships) { %> 
-                            <p>
-                                
-                                  
-                                        <a href="/users/profile/<%= u.toUser._id %>">
-                                            <%= u.toUser.name %>
-                                        </a>
-                                   
-                                
-                            </p>
-        
-                        <% } %>
-                    </div>
-                </div>
-                <div id="all-users">
-                    <h4>All Users</h4>
-                    <% for(u of all_users) { %>
-                        <% if(locals.user.id!=u.id ) { %> 
-                            <p>
-                                <a href="/users/profile/<%= u.id %>">
-                                    <%= u.name %>
-                                </a>
-                            </p>
-                        <% } %>
-                    <% } %>
-                </div>
-            </section>
-            <%- include("_chat"); %>
-           
-        </div>
-      
-    <% } else { %>
+    <%- include("_userSession"); %>  
+
+<% } else { %>
+
         <%- include("_homeview"); %>
-    <% } %>
+        
+ <% } %>
 </div>
 
 

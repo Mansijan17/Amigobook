@@ -1,6 +1,15 @@
 <link rel="stylesheet" href="/css/forgetPassword.css">
 
-<%- include("_forget_password_partial.ejs"); %>
+<h1 class="heading">S.o.c.i.a.l.e.n.d.s</h1>
+<div id="confirm-account-heading">
+    <% if(title=="Socialend | New Password"){ %>
+        Please enter your new password!
+    <% } else if(title=="Socialend | Forget Password"){%>
+        For resetting your password, please enter the registered Email ID. Thank you!
+    <% } else { %>
+        Click the button and get lost into the excitement!!
+    <% } %>
+</div>
 
 <form action="/users/newaccount/<%= acessToken %>" method="post" id="new-account-form">
         <button type="submit" class="hvr-buzz-out">
