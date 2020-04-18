@@ -215,7 +215,7 @@
                 justify-content: center;
                 align-items: center;
 
-                >div
+                >a
                 {
                     width: 44%;
                     height: 75%;
@@ -230,12 +230,10 @@
                     font-size: 1.1rem;
                     align-items: center;
                     padding: 10px;
+                    color: inherit;
+                    text-decoration: none;
 
-                    a
-                    {
-                        color: inherit;
-                        text-decoration: none;
-                    }
+                   
                 }
 
                 .google-signin

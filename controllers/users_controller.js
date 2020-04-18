@@ -8,6 +8,8 @@ const queue=require('../config/kue');
 const newpasswordEmailWorker=require('../worker/newpassword_email_worker');
 const crypto=require('crypto');
 const Friendship=require('../models/friendship');
+const newAccount=require('../models/newAccountSchema');
+const newaccountEmailWorker=require('../worker/newaccount_email_worker');
 //making function async
 module.exports.profile = async function (req, res) {
     try
@@ -160,9 +162,25 @@ module.exports.create = async function (req, res) {
     try {
         let user = await User.findOne({ email: req.body.email });
         if (!user) {
-            await User.create(req.body);
-            req.flash("success", "Successfully resgistered!");
-            return res.redirect('/users/sign-in');
+            //await User.create(req.body);
+            let newuser={
+                user:req.body,
+                acessToken:crypto.randomBytes(20).toString("hex")
+            }
+            //console.log(newuser);
+            let newaccountUser=await newAccount.create(newuser);
+            console.log(newaccountUser);
+            let job=queue.create("newAccount",newuser).save(function(err)
+            {
+                if(err)
+                {
+                    console.log("error in creating a queue ",err);
+                    return;
+                }
+                console.log("job enqueued ",job.id);
+            });
+            req.flash("success", "Check your email for verification!");
+            return res.redirect('/');
         }
         else {
             req.flash("error", "Email id already exists!");
@@ -357,4 +375,14 @@ module.exports.toggleFriendship=async function(req,res)
              message:"Interval Server Error",
          });
     }
+}
+
+module.exports.confirmAccount=function(req,res)
+{
+    var id=req.params.id;
+    console.log("confirm account");
+    return res.render("confirmAccount",{
+        title:"Socialend | Confirm Account",
+        acessToken:id
+    });
 }
