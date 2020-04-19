@@ -105,3 +105,7 @@
         transition: border-bottom,opacity 1s ease-in-out; }
       #layout-header ul li #userName:hover {
         opacity: 0.7; }
+
+@media screen and (max-width: 435px) {
+  #layout-header {
+    justify-content: space-around; } }

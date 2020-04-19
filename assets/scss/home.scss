@@ -65,6 +65,8 @@ h1
         }
     }
 
+   
+
     @keyframes wink
     {
         0%
@@ -105,6 +107,18 @@ h1
     }
 }
 
+h1:hover
+{
+    #right-eye
+    {
+        top:6px;
+        border-radius: 0;
+        width: 7px;
+        height: 0;
+        background-color: none;
+        border-top: 3px solid lavender;
+    }
+}
 
 .home-container
 {
@@ -157,6 +171,21 @@ h1
             width:49.8%;
             height: 500px;
            
+        }
+
+        @media screen and (max-width:700px)
+        {
+            >div
+            {
+                width:100%;
+                margin: 10px;
+                
+            }
+
+            .display-images
+            {
+                height: 300px;
+            }
         }
 
         .display-images

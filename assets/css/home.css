@@ -71,6 +71,14 @@ h1 {
     background-color: none;
     border-top: 3px solid lavender; } }
 
+h1:hover #right-eye {
+  top: 6px;
+  border-radius: 0;
+  width: 7px;
+  height: 0;
+  background-color: none;
+  border-top: 3px solid lavender; }
+
 .home-container {
   display: flex; }
   .home-container #feed-posts {
@@ -104,6 +112,12 @@ h1 {
     .homepage-without-login .display-area > div {
       width: 49.8%;
       height: 500px; }
+    @media screen and (max-width: 700px) {
+      .homepage-without-login .display-area > div {
+        width: 100%;
+        margin: 10px; }
+      .homepage-without-login .display-area .display-images {
+        height: 300px; } }
     .homepage-without-login .display-area .display-images {
       display: flex;
       justify-content: space-evenly;
