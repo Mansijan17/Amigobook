@@ -46,14 +46,16 @@
     {
         return $(`
 
-        <li style="text-align: left;" id="post-${ i._id}">
+        <li class="post-list animated-box in" id="post-${ i._id}">
            
-        <div class="like-box">
-            <a href="/likes/toggle/?id=${i._id }&type=Post" data-likes="0" class="toggle-like-button">
-                0 <i class="fas fa-thumbs-up like-thumbs"></i>
-            </a>
+        <div class="post-like-box">
+            <div class="post-likes-number>
+                <a href="/likes/toggle/?id=${i._id }&type=Post" data-likes="0" class="toggle-like-button">
+                    0 <i class="fas fa-thumbs-up like-thumbs"></i>
+                </a>
+            </div>
            
-            <ul id="post-${i._id}-likes" class="post-likes">
+            <ul id="post-${i._id}-likes" class="post-like-username-list">
                        
                 
             </ul>

@@ -27,6 +27,7 @@ class ToggleLike{
                     {
                         console.log("post delete like");
                         $(`#like-${data.data.likeID}`).remove();
+
                     }
                     
 
@@ -37,11 +38,19 @@ class ToggleLike{
                     if(data.data.type=="Post")
                     {
                         console.log("post accept like");
-                        $(`#post-${data.data.id}-likes`).append(`<li id="like-${data.data.likeID}"><p><a href="/users/profile/${data.data.userID}">${data.data.name}</a></p></li>`)
+                        $(`#post-${data.data.id}-likes`).append(`<li id="like-${data.data.likeID}"><a href="/users/profile/${data.data.userID}">${data.data.name}</a></li>`)
                     }
                 }
                 $(self).attr("data-likes",likesCount);
-                $(self).html(`${likesCount} <i class="fas fa-thumbs-up like-thumbs"></i>`);
+                // if(data.data.type=="Post")
+                // {
+                //     $(`#post-${data.data.id} .post-like-box .post-likes-number`).remove();
+                //     $(`#post-${data.data.id} .post-like-box`).prepend(`<div class="post-likes-number"> ${likesCount}
+                //     <a class="toggle-like-button" href="/likes/toggle/?id=${data.data.id}&type=Post" data-likes="${likesCount}">
+                //         <i class="fas fa-thumbs-up like-thumbs"></i>
+                //     </a></div>`)
+                // }
+                $(self).html(`${likesCount} <i class="fas fa-thumbs-up like-thumbs"></i>`)
             }).fail(function(err)
             {
                 console.log('error in completing the request ',err);

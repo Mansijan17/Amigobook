@@ -1,17 +1,20 @@
 <link rel="stylesheet" href="/css/post-likes.css">
 
-<li style="text-align: left;" id="post-<%= i.id %>">
-    <div class="like-box">
-        <a class="toggle-like-button" href="/likes/toggle/?id=<%=i._id%>&type=Post" data-likes="<%= i.likes.length %>">
-            <%= i.likes.length %> <i class="fas fa-thumbs-up like-thumbs"></i>
-        </a>
+<li  id="post-<%= i.id %>" class="post-list animated-box in">
+    <div class="post-like-box">
+        <div class="post-likes-number">
+            
+            <a class="toggle-like-button" href="/likes/toggle/?id=<%=i._id%>&type=Post" data-likes="<%= i.likes.length %>">
+                <%= i.likes.length %> <i class="fas fa-thumbs-up like-thumbs"></i>
+            </a>
+        </div>
         
-            <ul id="post-<%= i.id %>-likes" class="post-likes">
+            <ul id="post-<%= i.id %>-likes" class="post-like-username-list" >
                     <% for(like of i.likes) {%>
                         <li id="like-<%= like._id %>">
-                            <p>
-                                <a href="/users/profile/<%= like.user._id %>"><%= like.user.name %></a>
-                            </p>
+                            
+                            <a href="/users/profile/<%= like.user._id %>"><%= like.user.name %></a>
+                            
                         </li>
                     <% } %>
             

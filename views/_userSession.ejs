@@ -29,14 +29,16 @@
 </div>
 <div class="home-container">
     <section id="feed-posts">
-        <h2>Home feeds</h2>
+        <h2>Latest Home feeds</h2>
         <div id="posts-list-container">
             <ul>
+             
                 <% for(i of posts) { %>
 
                     <%- include('_post') -%>
                                 
                 <% } %>
+
             </ul>
         </div>
     </section>

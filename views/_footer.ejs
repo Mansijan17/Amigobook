@@ -1,4 +1,8 @@
+<% if(locals.user) { %>
+    <footer id="layout-footer" style="justify-content: space-between;padding:0px 20px;">
+<% } else { %>
 <footer id="layout-footer">
+<% } %>
     <% if(locals.user){%>
         <div >
             &copy Socialends Foundation (Initiated by Manjari Jain)

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:200");
 .border-images {
   display: flex;
   position: absolute;
@@ -71,22 +72,119 @@ h1 {
     background-color: none;
     border-top: 3px solid lavender; } }
 
-h1:hover #right-eye {
-  top: 6px;
-  border-radius: 0;
-  width: 7px;
-  height: 0;
-  background-color: none;
-  border-top: 3px solid lavender; }
+h1:hover {
+  cursor: pointer; }
+  h1:hover #right-eye {
+    top: 6px;
+    border-radius: 0;
+    width: 7px;
+    height: 0;
+    background-color: none;
+    border-top: 3px solid lavender; }
 
 .home-container {
   display: flex; }
+  .home-container h2 {
+    margin-bottom: 30px; }
   .home-container #feed-posts {
     width: 70%;
-    height: auto;
     text-align: center;
-    border-right: 1px solid lightgrey;
+    /*border-right: 1px solid lightgrey;*/
     height: 100%; }
+    .home-container #feed-posts #posts-list-container {
+      height: auto;
+      margin-bottom: 50px; }
+      .home-container #feed-posts #posts-list-container > ul {
+        height: auto;
+        padding: 20px 60px;
+        margin: 0;
+        box-sizing: border-box;
+        list-style: none;
+        /* motion */ }
+        .home-container #feed-posts #posts-list-container > ul .post-list {
+          margin: 20px;
+          height: auto;
+          min-height: 200px;
+          padding: 20px 0px;
+          background-image: radial-gradient(circle farthest-corner at 10% 20%, #005d85 0%, #00b595 90%); }
+          .home-container #feed-posts #posts-list-container > ul .post-list a {
+            color: #e3debf;
+            text-decoration: none; }
+          .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%; }
+            .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-likes-number {
+              top: 5px;
+              position: absolute;
+              right: 10px;
+              font-size: 1.4rem;
+              transition: all 1s ease-in-out; }
+            .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-likes-number:hover {
+              opacity: 0.5; }
+            .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list {
+              min-height: 0;
+              max-height: 105px;
+              overflow: auto;
+              padding: 0;
+              width: 150px;
+              position: absolute;
+              top: 35px;
+              right: 7px; }
+              .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list li {
+                min-height: 30px;
+                display: flex;
+                border: 1px solid darkcyan;
+                justify-content: space-between;
+                text-align: right;
+                align-items: center;
+                margin: 1px; }
+              .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list li::before {
+                content: '\f21e';
+                font-weight: 900;
+                font-family: "Font Awesome 5 Free";
+                display: inline-block;
+                color: #BF0A30; }
+            .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list::-webkit-scrollbar {
+              display: none; }
+          .home-container #feed-posts #posts-list-container > ul .post-list .content {
+            text-align: left; }
+        .home-container #feed-posts #posts-list-container > ul .animated-box {
+          position: relative; }
+        .home-container #feed-posts #posts-list-container > ul .animated-box:after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          border-radius: 4px;
+          background: linear-gradient(120deg, #00F260, #0575E6, #00F260);
+          background-size: 300% 300%;
+          clip-path: polygon(0% 100%, 3px 100%, 3px 3px, calc(100% - 3px) 3px, calc(100% - 3px) calc(100% - 3px), 3px calc(100% - 3px), 3px 100%, 100% 100%, 100% 0%, 0% 0%); }
+        .home-container #feed-posts #posts-list-container > ul .animated-box.in:after {
+          animation: frame-enter 1s forwards ease-in-out reverse, gradient-animation 4s ease-in-out infinite; }
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 15% 0%; }
+  50% {
+    background-position: 85% 100%; }
+  100% {
+    background-position: 15% 0%; } }
+
+@keyframes frame-enter {
+  0% {
+    clip-path: polygon(0% 100%, 3px 100%, 3px 3px, calc(100% - 3px) 3px, calc(100% - 3px) calc(100% - 3px), 3px calc(100% - 3px), 3px 100%, 100% 100%, 100% 0%, 0% 0%); }
+  25% {
+    clip-path: polygon(0% 100%, 3px 100%, 3px 3px, calc(100% - 3px) 3px, calc(100% - 3px) calc(100% - 3px), calc(100% - 3px) calc(100% - 3px), calc(100% - 3px) 100%, 100% 100%, 100% 0%, 0% 0%); }
+  50% {
+    clip-path: polygon(0% 100%, 3px 100%, 3px 3px, calc(100% - 3px) 3px, calc(100% - 3px) 3px, calc(100% - 3px) 3px, calc(100% - 3px) 3px, calc(100% - 3px) 3px, 100% 0%, 0% 0%); }
+  75% {
+    -webkit-clip-path: polygon(0% 100%, 3px 100%, 3px 3px, 3px 3px, 3px 3px, 3px 3px, 3px 3px, 3px 3px, 3px 0%, 0% 0%); }
+  100% {
+    -webkit-clip-path: polygon(0% 100%, 3px 100%, 3px 100%, 3px 100%, 3px 100%, 3px 100%, 3px 100%, 3px 100%, 3px 100%, 0% 100%); } }
   .home-container #user-friends {
     width: 30%;
     text-align: center; }
