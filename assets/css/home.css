@@ -178,7 +178,21 @@ h1:hover {
             margin-top: 50px;
             margin-left: 50px;
             width: 65%;
-            border: 1px solid; }
+            border: 1px solid;
+            overflow-wrap: break-word; }
+            .home-container #feed-posts #posts-list-container > ul .post-list .content .post-comments form {
+              text-align: right;
+              margin: 20px 0px; }
+              .home-container #feed-posts #posts-list-container > ul .post-list .content .post-comments form input {
+                width: 50%;
+                border: none;
+                background: transparent;
+                border-bottom: 1.5px solid #060C45;
+                color: #5B3B58; }
+              .home-container #feed-posts #posts-list-container > ul .post-list .content .post-comments form input::placeholder {
+                color: #5B3B58; }
+              .home-container #feed-posts #posts-list-container > ul .post-list .content .post-comments form input:focus {
+                outline: none; }
         .home-container #feed-posts #posts-list-container > ul .animated-box {
           position: relative; }
         .home-container #feed-posts #posts-list-container > ul .animated-box:after {

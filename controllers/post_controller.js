@@ -27,9 +27,8 @@ module.exports.createPost= async function(req,res)
          let post =await Post.create({
                 content:req.body.content,
                 user:req.user._id,
-                displayLikes:true
             });
-            post=await post.populate("user","name email").execPopulate();
+            post=await post.populate("user","name email avatar").execPopulate();
             let job=queue.create("posts",post).save(function(err)
             {
                     if(err)
@@ -86,10 +85,11 @@ module.exports.destroyPost=async function(req,res)
     try
     {
         let post=await Post.findById(req.params.id);
+        //console.log(post);
         if(post.user==req.user.id)
         {
             //change::: delete the likes of the post and associated comments
-            console.log("remove post");
+            console.log("remove post ",post);
 
             await Like.deleteMany({likeable:post,onModel:"Post"});
             await Like.deleteMany({_id:{$in:post.comments}});
@@ -98,6 +98,7 @@ module.exports.destroyPost=async function(req,res)
             await Comment.deleteMany({post:req.params.id});
             if(req.xhr)
             {
+                console.log("post id ",req.params.id);
                 return res.status(200).json({
                     data:
                     {

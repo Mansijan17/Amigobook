@@ -272,6 +272,33 @@ h1:hover
                         margin-left: 50px;
                         width: 65%;
                         border: 1px solid;
+                        overflow-wrap: break-word;
+
+                        .post-comments
+                        {
+                            form
+                            {
+                                text-align: right;
+                                margin: 20px 0px;
+
+                                input
+                                {
+                                    width: 50%;
+                                    border: none;
+                                    background: transparent;
+                                    border-bottom: 1.5px solid #060C45;
+                                    color:#5B3B58;
+                                }
+                                input::placeholder
+                                {
+                                    color:#5B3B58;
+                                }
+                                input:focus
+                                {
+                                    outline: none;
+                                }
+                            }
+                        }
                     }
                 }
                 .animated-box {

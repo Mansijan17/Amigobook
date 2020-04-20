@@ -15,6 +15,7 @@
                 data:newPostForm.serialize(),
                 success:function(data)
                 {
+                    //console.log(data.data.post);
                     let newPost=newDomPost(data.data.post);
                     $("#posts-list-container>ul").prepend(newPost);
                     deletePost($(" .delete-post-button",newPost));
@@ -61,16 +62,20 @@
             </ul>
             
         </div>
+        <small> 
+        <a href="/posts/destroy-post/${ i._id }" class="delete-post-button">
+            <i class="fas fa-trash-alt"></i>
+        </a>
+        </small>
+        <small class="author-post-name">
+            <img src="${ i.user.avatar}"> 
+            <a href="/users/profile/${i.user._id}">${i.user.name }</a>
+        </small>
 
         <div class="content">
-            <small>
-                <a href="/posts/destroy-post/${ i._id }" class="delete-post-button">Delete Post</a>
-            </small>
          
             <p>
                 ${ i.content}
-                <br>
-                <small>${ i.user.name }</small>
             </p>
             <div class="post-comments">
                 <form action="/comments/create-comment" method="post" id="post-${ i._id }-comments-form">
@@ -99,6 +104,7 @@
                 url:$(deletelink).prop("href"),
                 success:function(data)
                 {
+                    console.log(data.data);
                     $(`#post-${data.data.post_id}`).remove();
                     new Noty({
                         theme:"relax",

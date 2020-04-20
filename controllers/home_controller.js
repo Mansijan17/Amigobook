@@ -73,7 +73,7 @@ module.exports.home = async function(req, res){
                 }
             });
 
-        
+        //console.log(postLists.length);
         let users=await User.find({});
        // console.log(users);
         return res.render('home', {

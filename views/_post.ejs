@@ -29,8 +29,12 @@
         </small>
     <% } %>
     <small class="author-post-name">
-       <img src="<%= i.user.avatar %>"> 
-       <a href="/users/profile/<%= i.user._id %>"><%= i.user.name %></a>
+       <% if(i.user.avatar) {%>
+            <img src="<%= i.user.avatar %>"> 
+            <a href="/users/profile/<%= i.user._id %>"><%= i.user.name %></a>
+       <% } else { %>
+            <a href="/users/profile/<%= i.user._id %>" style="top:3px;"><%= i.user.name %></a>
+       <% } %>
     </small>
     <div class="content">
         

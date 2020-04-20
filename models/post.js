@@ -6,10 +6,6 @@ const postSchema=new mongoose.Schema({
         type:String,
         required:true
     },
-    displayLikes:
-    {
-        type:Boolean,
-    },
     user:
     {
         type:mongoose.Schema.Types.ObjectId,

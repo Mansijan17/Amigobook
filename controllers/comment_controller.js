@@ -152,15 +152,21 @@ module.exports.destroyComment=async function(req,res)
 
     try
     {
+        //console.log("comment controller delete");
         let comment=await Comment.findById(req.params.id);
         let postId = comment.post;
-        if(comment.user==req.user.id)
+        //console.log(comment.post);
+        if(comment.user.id==req.user.id)
         {
-            
+            //console.log("comment controller delete");
             comment.remove();
             Post.findByIdAndUpdate(postId,{
                             $pull:{comments:req.params.id}
                         });
+            let post=await Post.findById(postId);
+            post.comments.pull(comment);
+            post.save();
+            console.log(post);
             //CHANGE:: delete the likes of the comments
             await Like.deleteMany({likeable:comment._id,onModel:"Comment"});
          
