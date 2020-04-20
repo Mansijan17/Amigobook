@@ -90,7 +90,7 @@ module.exports.createComment=async function(req,res)
                 return res.status(200).json({
                     data:
                     {
-                        comment:newcomment
+                        comment:newcomment,
                     },
                     message:"Comment published!"
                 })
@@ -176,7 +176,8 @@ module.exports.destroyComment=async function(req,res)
                 return res.status(200).json({
                     data:
                     {
-                        comment_id:req.params.id
+                        comment_id:req.params.id,
+                        postID:postId
                     },
                     message:"Comment deleted"
                 });

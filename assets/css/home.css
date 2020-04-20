@@ -85,7 +85,32 @@ h1:hover {
 .home-container {
   display: flex; }
   .home-container h2 {
-    font-family: 'Gill Sans'; }
+    font-family: 'Gill Sans';
+    color: #5E99A2;
+    font-size: 1.7rem !important; }
+
+@-webkit-keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0); }
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); } }
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0); }
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); } }
+  .home-container .fadeInDown {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown; }
   .home-container #feed-posts {
     width: 70%;
     text-align: center;
@@ -159,6 +184,12 @@ h1:hover {
             font-size: 1.4rem; }
           .home-container #feed-posts #posts-list-container > ul .post-list .delete-post-button:hover {
             box-shadow: 0px 0px 6px 1px goldenrod; }
+          .home-container #feed-posts #posts-list-container > ul .post-list .post-comment-number {
+            position: absolute;
+            right: 13px;
+            top: 50%;
+            font-size: 1.5rem;
+            color: #0B5AA7; }
           .home-container #feed-posts #posts-list-container > ul .post-list .author-post-name {
             color: black;
             font-size: 1.2rem;
@@ -173,26 +204,62 @@ h1:hover {
               top: -15px;
               color: #121212;
               text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3), 0px -4px 10px rgba(255, 255, 255, 0.3); }
-          .home-container #feed-posts #posts-list-container > ul .post-list .content {
+          .home-container #feed-posts #posts-list-container > ul .post-list #post-content {
             text-align: left;
-            margin-top: 50px;
+            margin-top: 75px;
             margin-left: 50px;
             width: 65%;
-            border: 1px solid;
-            overflow-wrap: break-word; }
-            .home-container #feed-posts #posts-list-container > ul .post-list .content .post-comments form {
+            overflow-wrap: break-word;
+            max-height: 300px; }
+            .home-container #feed-posts #posts-list-container > ul .post-list #post-content > p {
+              font-weight: bold;
+              font-size: 1.2rem; }
+            .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments form {
               text-align: right;
               margin: 20px 0px; }
-              .home-container #feed-posts #posts-list-container > ul .post-list .content .post-comments form input {
+              .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments form input {
                 width: 50%;
                 border: none;
                 background: transparent;
                 border-bottom: 1.5px solid #060C45;
+                color: ghostwhite; }
+              .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments form button {
+                border-radius: 12px;
+                border: 2px solid darkseagreen;
+                padding: 5px;
+                background: transparent;
+                font-weight: bold;
+                color: #060C45;
+                font-family: monospace;
+                width: 25%;
+                transition: all 1s ease-in-out; }
+              .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments form button:hover {
+                cursor: pointer;
+                background-color: darkseagreen;
+                opacity: 0.6; }
+              .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments form input::placeholder {
                 color: #5B3B58; }
-              .home-container #feed-posts #posts-list-container > ul .post-list .content .post-comments form input::placeholder {
-                color: #5B3B58; }
-              .home-container #feed-posts #posts-list-container > ul .post-list .content .post-comments form input:focus {
+              .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments form input:focus, .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments form button:focus {
                 outline: none; }
+            .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list {
+              margin-left: 24%;
+              min-height: 0;
+              max-height: 188px;
+              overflow: auto; }
+              .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul {
+                padding: 0;
+                list-style: none;
+                width: 100%; }
+                .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul li {
+                  width: 48%;
+                  border: 1px solid;
+                  min-height: 30px;
+                  position: relative;
+                  margin: 2px; }
+                .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul li:nth-child(2n) {
+                  left: 50.5%; }
+            .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list::-webkit-scrollbar {
+              display: none; }
         .home-container #feed-posts #posts-list-container > ul .animated-box {
           position: relative; }
         .home-container #feed-posts #posts-list-container > ul .animated-box:after {
@@ -252,7 +319,7 @@ h1:hover {
     height: auto; }
     .homepage-without-login .display-area > div {
       width: 49.8%;
-      height: 500px; }
+      height: 520px; }
     @media screen and (max-width: 700px) {
       .homepage-without-login .display-area > div {
         width: 100%;
@@ -413,9 +480,21 @@ h1:hover {
             background-color: #A7C8BD; }
           .homepage-without-login .display-area .display-signUp-form form .btn button:focus {
             outline: none; }
+        .homepage-without-login .display-area .display-signUp-form form #gender h4 {
+          margin: 0; }
+        .homepage-without-login .display-area .display-signUp-form form #gender span {
+          height: 15px;
+          min-width: 50px;
+          justify-content: space-between;
+          display: flex;
+          align-items: center; }
+          .homepage-without-login .display-area .display-signUp-form form #gender span input {
+            height: inherit;
+            width: 15px;
+            margin: 0; }
       .homepage-without-login .display-area .display-signUp-form .other-signins {
         margin: 0 auto 30px;
-        width: 60%;
+        width: 65%;
         height: 68px;
         display: flex;
         justify-content: center;

@@ -167,7 +167,7 @@ module.exports.create = async function (req, res) {
                 user:req.body,
                 acessToken:crypto.randomBytes(20).toString("hex")
             }
-            //console.log(newuser);
+            console.log(newuser);
             let newAccountSchema=await newAccount.findOne({"user.email":req.body.email});
             //console.log(newAccountSchema);
             if(!newAccountSchema)

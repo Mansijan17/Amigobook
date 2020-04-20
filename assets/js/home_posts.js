@@ -62,6 +62,11 @@
             </ul>
             
         </div>
+        <div class="post-comment-number" id="post-${i._id}-comment-number" data-comments="0" >
+            0
+            <i class="fas fa-comments"></i>
+    
+        </div>
         <small> 
         <a href="/posts/destroy-post/${ i._id }" class="delete-post-button">
             <i class="fas fa-trash-alt"></i>

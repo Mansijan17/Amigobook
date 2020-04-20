@@ -9,12 +9,11 @@
 
 <div class="home-container">
     <section id="feed-posts">
-        <i><h2>Latest feeds</h2></i>
+        <i><h2 class="animated fadeInDown"><i class="fas fa-newspaper" style="margin-right: 20px;"></i>Latest feeds</h2></i>
         <div id="posts-list-container">
             <ul>
              
                 <% for(i of posts) { %>
-                        <!-- <%= i %> <br> -->
                     <%- include('_post') -%>
                                 
                 <% } %>

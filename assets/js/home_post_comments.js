@@ -34,6 +34,10 @@ class PostComments{
                     console.log("creating comment ",data.data.comment);
                     let newComment = pSelf.newCommentDom(data.data.comment);
                     $(`#post-comments-${postId}`).prepend(newComment);
+                    let commentsCount=parseInt($(`#post-${postId}-comment-number`).attr("data-comments"));
+                    commentsCount+=1;
+                    $(`#post-${postId}-comment-number`).attr("data-comments",commentsCount);
+                    $(`#post-${postId}-comment-number`).html(`${commentsCount} <i class="fas fa-comments"></i>`);
                     pSelf.deleteComment($(' .delete-comment-button', newComment));
                     new ToggleLike($(" .toggle-like-button", newComment));
                     new Noty({
@@ -91,7 +95,11 @@ class PostComments{
                 
                     console.log("remove comment: ",data);
                     $(`#comment-${data.data.comment_id}`).remove();
-
+                    let commentsCount=parseInt($(`#post-${data.data.postID}-comment-number`).attr("data-comments"));
+                    console.log(commentsCount);
+                    commentsCount-=1;
+                    $(`#post-${data.data.postID}-comment-number`).attr("data-comments",commentsCount);
+                    $(`#post-${data.data.postID}-comment-number`).html(`${commentsCount} <i class="fas fa-comments"></i>`);
                     new Noty({
                         theme: 'relax',
                         text: "Comment Deleted!",

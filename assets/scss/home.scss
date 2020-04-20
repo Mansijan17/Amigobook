@@ -129,7 +129,43 @@ h1:hover
     h2
     {
         font-family: 'Gill Sans';
+        color:#5E99A2;
+        font-size: 1.7rem !important;
     }
+
+    @-webkit-keyframes fadeInDown {
+        from {
+          opacity: 0;
+          -webkit-transform: translate3d(0, -100%, 0);
+          transform: translate3d(0, -100%, 0);
+        }
+      
+        to {
+          opacity: 1;
+          -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+        }
+      }
+      
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          -webkit-transform: translate3d(0, -100%, 0);
+          transform: translate3d(0, -100%, 0);
+        }
+      
+        to {
+          opacity: 1;
+          -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+        }
+      }
+      
+      .fadeInDown {
+        -webkit-animation-name: fadeInDown;
+        animation-name: fadeInDown;
+      }
+      
 
     #feed-posts
     {
@@ -242,6 +278,14 @@ h1:hover
                     {
                         box-shadow: 0px 0px 6px 1px goldenrod;
                     }
+                    .post-comment-number
+                    {
+                        position: absolute;
+                        right: 13px;
+                        top: 50%;
+                        font-size: 1.5rem;
+                        color: #0B5AA7;
+                    }
 
                     .author-post-name
                     {
@@ -265,14 +309,19 @@ h1:hover
                         }
                     }
 
-                    .content
+                    #post-content
                     {
                         text-align: left;
-                        margin-top: 50px;
+                        margin-top: 75px;
                         margin-left: 50px;
                         width: 65%;
-                        border: 1px solid;
                         overflow-wrap: break-word;
+                        max-height: 300px;
+
+                        >p{
+                            font-weight: bold;
+                            font-size: 1.2rem;
+                        }
 
                         .post-comments
                         {
@@ -287,17 +336,70 @@ h1:hover
                                     border: none;
                                     background: transparent;
                                     border-bottom: 1.5px solid #060C45;
-                                    color:#5B3B58;
+                                    color:ghostwhite;
                                 }
+                                button
+                                {
+                                    border-radius: 12px;
+                                    border: 2px solid darkseagreen;
+                                    padding: 5px;
+                                    background: transparent;
+                                    font-weight: bold;
+                                    color: #060C45;
+                                    font-family: monospace;
+                                    width: 25%;
+                                    transition: all 1s ease-in-out;
+                                }
+                                button:hover
+                                {
+                                    cursor: pointer;
+                                    background-color: darkseagreen;
+                                    opacity: 0.6;
+                                }
+                                
                                 input::placeholder
                                 {
                                     color:#5B3B58;
                                 }
-                                input:focus
+                                input:focus,button:focus
                                 {
                                     outline: none;
                                 }
+                              
                             }
+                        }
+                        .post-comments-list
+                        {
+                            margin-left: 24%;
+                            min-height: 0;
+                            max-height: 188px;
+                            overflow: auto;
+                          
+
+                            ul
+                            {
+                                padding: 0;
+                                list-style: none;
+                                width: 100%;
+
+                                li{
+                                    width: 48%;
+                                    border:1px solid;
+                                    min-height: 30px;
+                                    position: relative;
+                                    margin: 2px;
+                                }
+
+                                li:nth-child(2n)
+                                {
+                                    
+                                    left:50.5%;
+                                }
+                            }
+                           
+                        }
+                        .post-comments-list::-webkit-scrollbar {
+                            display: none;
                         }
                     }
                 }
@@ -394,7 +496,7 @@ h1:hover
         > div
         {
             width:49.8%;
-            height: 500px;
+            height: 520px;
            
         }
 
@@ -565,13 +667,35 @@ h1:hover
                 
                 }
 
+                #gender
+                {
+                    h4{
+                        margin: 0;
+                    }
+                    span
+                    {
+                        height: 15px;
+                        min-width: 50px;
+                        justify-content: space-between;
+                        display: flex;
+                        align-items: center;
+                        input
+                        {
+                            height: inherit;
+                            width: 15px;
+                            margin: 0;
+                        }
+                    }
+                   
+                }
+
                
             }  
             
             .other-signins
             {
                 margin:0 auto 30px;
-                width: 60%;
+                width: 65%;
                 height: 68px;
                 display: flex;
                 justify-content: center;

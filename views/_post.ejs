@@ -21,6 +21,11 @@
             </ul>
     
     </div>
+    <div class="post-comment-number" id="post-<%= i._id%>-comment-number" data-comments="<%= i.comments.length %>" >
+           <%= i.comments.length %> 
+           <i class="fas fa-comments"></i>
+       
+    </div>
     <% if(locals.user.id==i.user.id) { %>
         <small> 
             <a href="/posts/destroy-post/<%= i.id %>" class="delete-post-button">
@@ -31,12 +36,14 @@
     <small class="author-post-name">
        <% if(i.user.avatar) {%>
             <img src="<%= i.user.avatar %>"> 
-            <a href="/users/profile/<%= i.user._id %>"><%= i.user.name %></a>
-       <% } else { %>
-            <a href="/users/profile/<%= i.user._id %>" style="top:3px;"><%= i.user.name %></a>
-       <% } %>
+       <% } else if (i.user.gender=="male"){%>
+                <img src="https://i.stack.imgur.com/HQwHI.jpg" width="100" height="100">
+       <% }  else {%>
+                <img src="/images/femaleProfile.png" width="100" height="100">
+        <% } %>
+        <a href="/users/profile/<%= i.user._id %>"><%= i.user.name %></a>
     </small>
-    <div class="content">
+    <div id="post-content">
         
         <p>
             <%= i.content %>
