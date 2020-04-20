@@ -97,7 +97,15 @@
     #layout-header ul li {
       display: inline-block;
       list-style: none;
-      margin-right: 20px; }
+      margin-right: 20px;
+      position: relative; }
+      #layout-header ul li img {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        position: absolute;
+        left: -30px;
+        top: -4px; }
       #layout-header ul li a {
         text-decoration: none;
         color: white; }

@@ -12,6 +12,9 @@
             <% if(locals.user) { %>
 
                 <li>
+                    <% if(user.avatar) {%>
+                        <img src="<%=user.avatar %>"> 
+                    <% } %>
                     <a href="/users/profile/<%= user.id %>" class="links" id="userName">
                         <%= user.name %>
                     </a>

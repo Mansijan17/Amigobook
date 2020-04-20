@@ -131,6 +131,16 @@
             display: inline-block;
             list-style: none;
             margin-right: 20px;
+            position: relative;
+
+            img{
+              width: 25px;
+              height: 25px;
+              border-radius: 50%;
+              position: absolute;
+              left: -30px;
+              top: -4px;
+            }
 
             a
             {

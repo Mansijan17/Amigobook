@@ -128,7 +128,7 @@ h1:hover
 
     h2
     {
-        margin-bottom: 30px;
+        font-family: 'Gill Sans';
     }
 
     #feed-posts
@@ -146,7 +146,8 @@ h1:hover
            > ul
             {
                 height: auto;
-                padding: 20px 60px;
+                padding: 20px 0px;
+                padding-left: 30px;
                 margin: 0;
                 box-sizing: border-box;
                 list-style: none;
@@ -175,15 +176,19 @@ h1:hover
 
                         .post-likes-number
                         {
-                            top: 5px;
+                            top: 13px;
                             position: absolute;
-                            right: 10px;
+                            right: 13px;
                             font-size: 1.4rem;
                             transition: all 1s ease-in-out;
+
+                            a{
+                                color:#006881;
+                            }
                             
                         }
 
-                        .post-likes-number:hover
+                        .like-thumbs:hover
                         {
                             opacity: 0.5;
                         }
@@ -196,14 +201,14 @@ h1:hover
                             padding: 0;
                             width: 150px;
                             position: absolute;
-                            top:35px;
-                            right: 7px;
+                            top:40px;
+                            right: 12px;
 
                             li
                             {
                                 min-height: 30px;
                                 display: flex;
-                                border: 1px solid darkcyan;
+                                border: 1px solid #006881;
                                 justify-content: space-between;
                                 text-align: right;
                                 align-items: center;
@@ -224,9 +229,49 @@ h1:hover
                         }
                     }
 
+                    
+                    .delete-post-button
+                    {
+                        position: absolute;
+                        top: 13px;
+                        left: 13px;
+                        color: #C9A687;
+                        font-size: 1.4rem;
+                    }
+                    .delete-post-button:hover
+                    {
+                        box-shadow: 0px 0px 6px 1px goldenrod;
+                    }
+
+                    .author-post-name
+                    {
+                        color: black;
+                        font-size: 1.2rem;
+                        position: absolute;
+                        top: 10px;
+                        left: 37%;
+                        img
+                        {
+                            width:50px;
+                            height:50px;
+                        }
+                        a
+                        {
+                            position: relative;
+                            top: -15px;
+                            color: #121212;
+                            text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 0px -4px 10px rgba(255,255,255,0.3);
+
+                        }
+                    }
+
                     .content
                     {
                         text-align: left;
+                        margin-top: 50px;
+                        margin-left: 50px;
+                        width: 65%;
+                        border: 1px solid;
                     }
                 }
                 .animated-box {
@@ -507,8 +552,8 @@ h1:hover
 
                 >a
                 {
-                    width: 44%;
-                    height: 75%;
+                    width: 50%;
+                    height: 100%;
                     margin: 10px;
                     border: 3px solid lightgray;
                     border-radius: 20px;
