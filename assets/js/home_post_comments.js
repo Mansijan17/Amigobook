@@ -31,8 +31,39 @@ class PostComments{
                 url: '/comments/create-comment',
                 data: $(self).serialize(),
                 success: function(data){
-                    console.log("creating comment ",data.data.comment);
-                    let newComment = pSelf.newCommentDom(data.data.comment);
+                    //console.log("creating comment ",data.data);
+                    let commentData=data.data.comment;
+                    if(!data.data.comment.user.avatar)
+                    {
+                        if(data.data.comment.user.gender=="male")
+                        {
+                            //console.log("m");
+                            commentData.imageURL="https://i.stack.imgur.com/HQwHI.jpg";
+                        }
+                        else
+                        {
+                            commentData.imageURL="/images/femaleProfile.png";
+                        }
+                    }
+                    else
+                    {
+                        commentData.imageURL=data.data.comment.user.avatar;
+                    }
+                    //console.log(data.data.comment.user._id,data.data.post.user._id);
+                    if(data.data.comment.user._id==data.data.post.user._id)
+                    {
+                        //console.log("match");
+                        commentData.authorTag="author-tag";
+                        commentData.author="Author"
+                    }
+                    else
+                    {
+                        //console.log("unmatch");
+                        commentData.authorTag="";
+                        commentData.author="";
+                    }
+                    console.log(commentData);
+                    let newComment = pSelf.newCommentDom(commentData);
                     $(`#post-comments-${postId}`).prepend(newComment);
                     let commentsCount=parseInt($(`#post-${postId}-comment-number`).attr("data-comments"));
                     commentsCount+=1;
@@ -66,16 +97,21 @@ class PostComments{
                     <div class="like-box">
                         <a href="/likes/toggle/?id=${comment._id }&type=Comment" data-likes="0" class="toggle-like-button">0 <i class="fas fa-thumbs-up like-thumbs"></i></a>
                     </div>
+
+                    <small class="comment-deletion">
+                        <a class="delete-comment-button" href="/comments/destroy-comment/${comment._id}">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    </small>
                         
                     <div class="content">    
-                            <small>
-                                <a class="delete-comment-button" href="/comments/destroy-comment/${comment._id}">X</a>
-                            </small>
+                           
                         <p>    
                             ${comment.content}
                             <br>
-                            <small>
-                                ${comment.user.name}
+                            <small class="author-comment-name">
+                                <img src="${comment.imageURL}">
+                                ${comment.user.name}<span class="${comment.authorTag}"> ${comment.author}</span>
                             </small>
                         </p> 
                     </div>   

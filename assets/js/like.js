@@ -19,7 +19,7 @@ class ToggleLike{
             {
                 console.log(data.data);
                 let likesCount=parseInt($(self).attr("data-likes"));
-                //console.log(likesCount);
+                console.log(likesCount);
                 if(data.data.deleted==true)
                 {
                     likesCount-=1;
@@ -42,14 +42,14 @@ class ToggleLike{
                     }
                 }
                 $(self).attr("data-likes",likesCount);
-                // if(data.data.type=="Post")
-                // {
-                //     $(`#post-${data.data.id} .post-like-box .post-likes-number`).remove();
-                //     $(`#post-${data.data.id} .post-like-box`).prepend(`<div class="post-likes-number"> ${likesCount}
-                //     <a class="toggle-like-button" href="/likes/toggle/?id=${data.data.id}&type=Post" data-likes="${likesCount}">
-                //         <i class="fas fa-thumbs-up like-thumbs"></i>
-                //     </a></div>`)
-                // }
+                if(data.data.type=="Post")
+                {
+                   // $(`#post-${data.data.id}-likes-number`).remove();
+                    // $(`#post-${data.data.id}-likes-number`).html(`${likesCount}
+                    // <a class="toggle-like-button" href="/likes/toggle/?id=${data.data.id}&type=Post" data-likes="${likesCount}">
+                    //     <i class="fas fa-thumbs-up like-thumbs"></i>
+                    // </a></div>`)
+                }
                 $(self).html(`${likesCount} <i class="fas fa-thumbs-up like-thumbs"></i>`)
             }).fail(function(err)
             {

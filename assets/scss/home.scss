@@ -20,9 +20,9 @@
 h1
 {
     text-align: center;
-    margin: 65px 0px 30px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 1.65rem;
+    margin: 65px 0px 30px !important;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif !important;
+    font-size: 26.4px !important;
 
     .emoji
     {
@@ -62,7 +62,7 @@ h1
             border-top: 0;
             position: absolute;
             top: 50%;
-            left: 19%;
+            left: 22%;
         }
     }
 
@@ -130,7 +130,7 @@ h1:hover
     {
         font-family: 'Gill Sans';
         color:#5E99A2;
-        font-size: 1.7rem !important;
+        font-size: 27.2px !important;
     }
 
     @-webkit-keyframes fadeInDown {
@@ -162,7 +162,7 @@ h1:hover
       }
       
       .fadeInDown {
-        -webkit-animation-name: fadeInDown;
+        -webkit-animation-name: fadeInDown !important;
         animation-name: fadeInDown;
       }
       
@@ -215,7 +215,7 @@ h1:hover
                             top: 13px;
                             position: absolute;
                             right: 13px;
-                            font-size: 1.4rem;
+                            font-size: 22.4px;
                             transition: all 1s ease-in-out;
 
                             a{
@@ -224,9 +224,29 @@ h1:hover
                             
                         }
 
+                        .post-view-likes
+                        {
+                            position: absolute;
+                            top: 19px;
+                            right: 70px;
+                            cursor: pointer;
+                        }
+
                         .like-thumbs:hover
                         {
                             opacity: 0.5;
+                        }
+
+                        .post-view-likes{
+                            transition: all 0.2s ease-in;
+                        }
+
+                        .post-view-likes:hover
+                        {
+                            
+                            border:1px solid darkgreen;
+                            border-radius: 10px;
+                            padding: 1px;
                         }
 
                         .post-like-username-list
@@ -237,8 +257,10 @@ h1:hover
                             padding: 0;
                             width: 150px;
                             position: absolute;
-                            top:40px;
+                            top:60px;
                             right: 12px;
+                            z-index: 10;
+                            background-color: #00AB93;
 
                             li
                             {
@@ -272,25 +294,29 @@ h1:hover
                         top: 13px;
                         left: 13px;
                         color: #C9A687;
-                        font-size: 1.4rem;
+                        font-size: 22.4px;
                     }
                     .delete-post-button:hover
                     {
-                        box-shadow: 0px 0px 6px 1px goldenrod;
+                        i
+                        {
+                            box-shadow: 0px 0px 6px 1px goldenrod;
+                        }
+                        
                     }
                     .post-comment-number
                     {
                         position: absolute;
                         right: 13px;
                         top: 50%;
-                        font-size: 1.5rem;
+                        font-size: 24px;
                         color: #0B5AA7;
                     }
 
                     .author-post-name
                     {
                         color: black;
-                        font-size: 1.2rem;
+                        font-size: 19.2px;
                         position: absolute;
                         top: 10px;
                         left: 37%;
@@ -302,7 +328,7 @@ h1:hover
                         a
                         {
                             position: relative;
-                            top: -15px;
+                            top: 0px;
                             color: #121212;
                             text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 0px -4px 10px rgba(255,255,255,0.3);
 
@@ -320,7 +346,7 @@ h1:hover
 
                         >p{
                             font-weight: bold;
-                            font-size: 1.2rem;
+                            font-size: 19.2px;
                         }
 
                         .post-comments
@@ -337,6 +363,10 @@ h1:hover
                                     background: transparent;
                                     border-bottom: 1.5px solid #060C45;
                                     color:ghostwhite;
+                                }
+                                input:-webkit-autofill {
+                                    transition: background-color 5000s ease-in-out 0s;
+                                    -webkit-text-fill-color:ghostwhite;
                                 }
                                 button
                                 {
@@ -381,13 +411,80 @@ h1:hover
                                 padding: 0;
                                 list-style: none;
                                 width: 100%;
+                                overflow: hidden;
 
                                 li{
-                                    width: 48%;
-                                    border:1px solid;
-                                    min-height: 30px;
                                     position: relative;
-                                    margin: 2px;
+                                    width: 48%;
+                                    min-height: 30px;
+                                    margin:2px;
+                                    border: 1px solid lightgrey;
+                                    overflow-wrap:break-word;
+                                    padding:5px;
+                                    border-radius: 15px;
+                                    box-sizing:border-box;
+
+                                    .like-box
+                                    {
+                                        top: 3px;
+                                        left: 86%;
+                                        position: relative;
+                                        margin-bottom: 15px;
+                                      
+                                    }
+
+                                    .comment-deletion
+                                    {
+                                        position: absolute;
+                                        left: 9px;
+                                        top: 7px;
+
+                                        a{
+                                            font-weight: bolder;
+                                            font-size: 15px;
+                                            translate: all 0.4s ease-in;
+                                        }
+
+                                        a:hover
+                                        {
+                                            color:#E81123;
+                                        }
+                                    }
+
+                                    .content
+                                    {
+                                        margin-bottom: 20px;
+                                        text-align: center;
+                                        margin-left: 0;
+
+                                        p
+                                        {
+                                            span
+                                            {
+                                                margin-bottom: 5px;
+                                                display: inline-block;
+
+                                            }
+
+                                            .author-comment-name
+                                            {
+                                                color:#043726;
+                                                font-weight: bolder;
+                                                img{
+                                                    height: 20px;
+                                                    width: 20px;
+                                                    border-radius: 50%;
+                                                }
+                                                .author-tag
+                                                {
+                                                    background-color: lightseagreen;
+                                                    margin-left: 5px;
+                                                    padding: 2px;
+                                                    color: white;
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
 
                                 li:nth-child(2n)
@@ -395,6 +492,44 @@ h1:hover
                                     
                                     left:50.5%;
                                 }
+                                li:after, li:before {
+                                    content: '';
+                                    position: absolute;
+                                    width: 0;
+                                    height: 0;
+                                    bottom: -9px;
+                                    left: 20px;
+                                    border-top: 10px solid #007C8B;
+                                    border-left: 2px solid #007C8B;
+                                    border-right: 10px solid transparent;
+                                  }
+                                  li:before {
+                                    bottom: -15px;
+                                    right: 16px;
+                                    border-top: 14px solid lightgrey;
+                                    border-left: 4px solid lightgrey;
+                                    border-right: 14px solid transparent;
+                                  }
+                                  li:nth-child(2n):after,li:nth-child(2n):before
+                                  {
+                                    content: '';
+                                    position: absolute;
+                                    width: 0;
+                                    height: 0;
+                                    bottom: -9px;
+                                    left: 74%;
+                                    border-top: 10px solid #00A091;
+                                    border-right: 2px solid #00A091;
+                                    border-left: 10px solid transparent;
+                                  }
+                               
+                                  li:nth-child(2n):before {
+                                    bottom: -15px;
+                                    right: 16px;
+                                    border-top: 14px solid lightgrey;
+                                    border-right: 4px solid lightgrey;
+                                    border-left: 14px solid transparent;
+                                  }
                             }
                            
                         }
@@ -480,9 +615,16 @@ h1:hover
     height: auto;
     p
     {
-        font-size: 1.6rem;
+        font-size: 25.6px;
         text-align: center;
         margin-bottom: 40px;
+    }
+
+    @media screen and (max-width:411px)
+    {
+        p{
+            margin-top: 85px !important;
+        }
     }
 
     .display-area
@@ -579,6 +721,14 @@ h1:hover
             
         }
 
+        @media screen and (max-width:411px)
+        {
+            .display-images
+            {
+                height: 320px !important;
+            }
+        }
+
         .display-signUp-form
         {
             background: repeating-linear-gradient(90deg, #6BB5B3,#12627D 108px);
@@ -588,8 +738,9 @@ h1:hover
             p
             {
                 margin-left: 25px;
-                font-size: 1.75rem;
+                font-size: 28px;
                 text-decoration: underline;
+                margin-top: 20px;
 
                 .acc-icon
                 {
@@ -623,6 +774,7 @@ h1:hover
                         border-bottom: 2px dashed darkgray;
                         width:100%;
                         color: ghostwhite;
+                        font-size: 16.5px;
                     }
                     input::placeholder
                     {
@@ -642,8 +794,8 @@ h1:hover
                 .btn
                 {
                     justify-content: center !important;
-                    height: 45px;
-                    width: 100px;
+                    height: 65px;
+                    width: 125px;
                     border-radius: 20px;
                     margin-top: 25px;
                     button
@@ -654,7 +806,7 @@ h1:hover
                         border:3px solid lightgrey;
                         cursor: pointer;
                         width: 100%;
-                        font-size: 1.2rem;
+                        font-size: 19.2px;
                     }
                     button:hover
                     {
@@ -666,6 +818,8 @@ h1:hover
                     }
                 
                 }
+
+
 
                 #gender
                 {
@@ -713,7 +867,7 @@ h1:hover
                     box-sizing: border-box;
                     display: flex;
                     justify-content: center;
-                    font-size: 1.1rem;
+                    font-size: 17.6px;
                     align-items: center;
                     padding: 10px;
                     color: inherit;
@@ -746,8 +900,30 @@ h1:hover
                 }
             }
 
+            @media screen and (max-width:1100px)
+            {
+                .other-signins
+                {
+                    flex-direction: column;
+                }
+            }
+
        
 
+        }
+
+        @media screen and (max-width:411px)
+        {
+            .display-signUp-form
+            {
+                height: auto !important;
+                margin-bottom: 80px !important;
+
+                form
+                {
+                    width: 90%;
+                }
+            }
         }
 
         

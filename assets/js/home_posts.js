@@ -55,8 +55,10 @@
                     0 <i class="fas fa-thumbs-up like-thumbs"></i>
                 </a>
             </div>
-           
-            <ul id="post-${i._id}-likes" class="post-like-username-list">
+            <div class="post-view-likes"   data-target="#post-${ i.id }-likes" data-toggle="collapse">
+                View Likes
+            </div>
+            <ul id="post-${i._id}-likes" class="post-like-username-list collapse">
                        
                 
             </ul>

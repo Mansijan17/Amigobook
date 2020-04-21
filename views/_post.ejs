@@ -2,14 +2,18 @@
 
 <li  id="post-<%= i.id %>" class="post-list animated-box in">
     <div class="post-like-box">
-        <div class="post-likes-number">
+        <div class="post-likes-number" id="post-<%= i._id %>-likes-number">
             
             <a class="toggle-like-button" href="/likes/toggle/?id=<%=i._id%>&type=Post" data-likes="<%= i.likes.length %>">
-                <%= i.likes.length %> <i class="fas fa-thumbs-up like-thumbs"></i>
+                <%= i.likes.length %> 
+                <i class="fas fa-thumbs-up like-thumbs"></i>
             </a>
         </div>
+        <div class="post-view-likes"   data-target="#post-<%= i.id %>-likes" data-toggle="collapse">
+            View Likes
+        </div>
         
-            <ul id="post-<%= i.id %>-likes" class="post-like-username-list" >
+            <ul id="post-<%= i.id %>-likes" class="post-like-username-list collapse" >
                     <% for(like of i.likes) {%>
                         <li id="like-<%= like._id %>">
                             

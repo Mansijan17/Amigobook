@@ -48,7 +48,7 @@ module.exports.createComment=async function(req,res)
    
             post.save();
             console.log(post);
-            newcomment=await newcomment.populate("user","name email").execPopulate();
+            newcomment=await newcomment.populate("user","name email avatar gender").execPopulate();
             let commentOnPost={
                 name:post.user.name,
                 email:post.user.email,
@@ -91,6 +91,7 @@ module.exports.createComment=async function(req,res)
                     data:
                     {
                         comment:newcomment,
+                        post:post
                     },
                     message:"Comment published!"
                 })
