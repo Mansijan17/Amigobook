@@ -267,7 +267,7 @@ h1:hover {
                 list-style: none;
                 width: 100%;
                 overflow: hidden; }
-                .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul li {
+                .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list {
                   position: relative;
                   width: 48%;
                   min-height: 30px;
@@ -277,43 +277,93 @@ h1:hover {
                   padding: 5px;
                   border-radius: 15px;
                   box-sizing: border-box; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul li .like-box {
+                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .like-box {
                     top: 3px;
                     left: 86%;
                     position: relative;
                     margin-bottom: 15px; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul li .comment-deletion {
+                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-view-likes {
+                    position: absolute;
+                    top: 0px;
+                    right: 105%;
+                    cursor: pointer;
+                    font-size: 12px;
+                    width: 65px; }
+                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .like-thumbs:hover {
+                    opacity: 0.5; }
+                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-view-likes {
+                    transition: all 0.2s ease-in; }
+                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-view-likes:hover {
+                    border: 1px solid darkgreen;
+                    border-radius: 10px;
+                    padding: 1px; }
+                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-username-list {
+                    min-height: 0;
+                    max-height: 55px;
+                    overflow: auto;
+                    padding: 0;
+                    width: 150px;
+                    position: absolute;
+                    top: 23px;
+                    right: -50px;
+                    z-index: 10;
+                    background-color: #00AB93;
+                    font-size: 11px; }
+                    .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-username-list li {
+                      min-height: 10px;
+                      display: flex;
+                      border: 1px solid #006881;
+                      justify-content: space-between;
+                      text-align: right;
+                      align-items: center;
+                      margin: 1px; }
+                    .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-username-list li::before {
+                      content: '\f21e';
+                      font-weight: 900;
+                      font-family: "Font Awesome 5 Free";
+                      display: inline-block;
+                      color: #BF0A30; }
+                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-username-list::-webkit-scrollbar {
+                    display: none; }
+                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-deletion {
                     position: absolute;
                     left: 9px;
                     top: 7px; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul li .comment-deletion a {
+                    .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-deletion a {
                       font-weight: bolder;
                       font-size: 15px;
                       translate: all 0.4s ease-in; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul li .comment-deletion a:hover {
+                    .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-deletion a:hover {
                       color: #E81123; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul li .content {
+                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .content {
                     margin-bottom: 20px;
                     text-align: center;
                     margin-left: 0; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul li .content p span {
+                    .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .content p span {
                       margin-bottom: 5px;
                       display: inline-block; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul li .content p .author-comment-name {
+                    .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .content p .author-comment-name {
                       color: #043726;
                       font-weight: bolder; }
-                      .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul li .content p .author-comment-name img {
+                      .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .content p .author-comment-name img {
                         height: 20px;
                         width: 20px;
                         border-radius: 50%; }
-                      .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul li .content p .author-comment-name .author-tag {
+                      .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .content p .author-comment-name .author-tag {
                         background-color: lightseagreen;
                         margin-left: 5px;
                         padding: 2px;
                         color: white; }
-                .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul li:nth-child(2n) {
+                .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list:nth-child(2n) {
                   left: 50.5%; }
-                .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul li:after, .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul li:before {
+                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list:nth-child(2n) .comment-view-likes {
+                    left: -37%;
+                    width: 65px;
+                    right: 0; }
+                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list:nth-child(2n) .comment-like-username-list {
+                    right: 215%;
+                    position: absolute; }
+                .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list:after, .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list:before {
                   content: '';
                   position: absolute;
                   width: 0;
@@ -323,13 +373,13 @@ h1:hover {
                   border-top: 10px solid #007C8B;
                   border-left: 2px solid #007C8B;
                   border-right: 10px solid transparent; }
-                .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul li:before {
+                .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list:before {
                   bottom: -15px;
                   right: 16px;
                   border-top: 14px solid lightgrey;
                   border-left: 4px solid lightgrey;
                   border-right: 14px solid transparent; }
-                .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul li:nth-child(2n):after, .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul li:nth-child(2n):before {
+                .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list:nth-child(2n):after, .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list:nth-child(2n):before {
                   content: '';
                   position: absolute;
                   width: 0;
@@ -339,7 +389,7 @@ h1:hover {
                   border-top: 10px solid #00A091;
                   border-right: 2px solid #00A091;
                   border-left: 10px solid transparent; }
-                .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul li:nth-child(2n):before {
+                .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list:nth-child(2n):before {
                   bottom: -15px;
                   right: 16px;
                   border-top: 14px solid lightgrey;
@@ -347,6 +397,9 @@ h1:hover {
                   border-left: 14px solid transparent; }
             .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list::-webkit-scrollbar {
               display: none; }
+          .home-container #feed-posts #posts-list-container > ul .post-list .post-timestamps {
+            margin-top: 20px;
+            margin-bottom: -10px; }
         .home-container #feed-posts #posts-list-container > ul .animated-box {
           position: relative; }
         .home-container #feed-posts #posts-list-container > ul .animated-box:after {

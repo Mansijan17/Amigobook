@@ -29,6 +29,10 @@ class ToggleLike{
                         $(`#like-${data.data.likeID}`).remove();
 
                     }
+                    else
+                    {
+                        $(`#like-${data.data.likeID}`).remove();
+                    }
                     
 
                 }
@@ -38,7 +42,11 @@ class ToggleLike{
                     if(data.data.type=="Post")
                     {
                         console.log("post accept like");
-                        $(`#post-${data.data.id}-likes`).append(`<li id="like-${data.data.likeID}"><a href="/users/profile/${data.data.userID}">${data.data.name}</a></li>`)
+                        $(`#post-${data.data.id}-likes`).prepend(`<li id="like-${data.data.likeID}"><a href="/users/profile/${data.data.userID}">${data.data.name}</a></li>`)
+                    }
+                    else
+                    {
+                        $(`#comment-${data.data.id}-likes`).prepend(`<li id="like-${data.data.likeID}" class="comment-username-li"><a href="/users/profile/${data.data.userID}">${data.data.name}</a></li>`)
                     }
                 }
                 $(self).attr("data-likes",likesCount);

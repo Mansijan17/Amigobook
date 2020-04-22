@@ -413,7 +413,7 @@ h1:hover
                                 width: 100%;
                                 overflow: hidden;
 
-                                li{
+                                 .comment-list{
                                     position: relative;
                                     width: 48%;
                                     min-height: 30px;
@@ -431,6 +431,73 @@ h1:hover
                                         position: relative;
                                         margin-bottom: 15px;
                                       
+                                    }
+
+                                    .comment-view-likes
+                                    {
+                                        position: absolute;
+                                        top: 0px;
+                                        right: 105%;
+                                        cursor: pointer;
+                                        font-size: 12px;
+                                        width: 65px;
+                                    }
+            
+                                    .like-thumbs:hover
+                                    {
+                                        opacity: 0.5;
+                                    }
+            
+                                    .comment-view-likes{
+                                        transition: all 0.2s ease-in;
+                                    }
+            
+                                    .comment-view-likes:hover
+                                    {
+                                        
+                                        border:1px solid darkgreen;
+                                        border-radius: 10px;
+                                        padding: 1px;
+                                    }
+                                 
+
+                                                
+                                    .comment-like-username-list
+                                    {
+                                        min-height: 0;
+                                        max-height:55px;
+                                        overflow: auto;
+                                        padding: 0;
+                                        width: 150px;
+                                        position: absolute;
+                                        top: 23px;
+                                        right: -50px;
+                                        z-index: 10;
+                                        background-color: #00AB93;
+                                        font-size: 11px;
+
+                                        li
+                                        {
+                                            min-height: 10px;
+                                            display: flex;
+                                            border: 1px solid #006881;
+                                            justify-content: space-between;
+                                            text-align: right;
+                                            align-items: center;
+                                            margin: 1px;
+                                        }
+
+                                        li::before
+                                        {
+                                            content: '\f21e';
+                                            font-weight: 900;
+                                            font-family: "Font Awesome 5 Free";
+                                            display: inline-block;
+                                            color:#BF0A30;
+                                        }
+                                    }
+                                    .comment-like-username-list::-webkit-scrollbar {
+                                        display: none;
                                     }
 
                                     .comment-deletion
@@ -487,12 +554,23 @@ h1:hover
                                     }
                                 }
 
-                                li:nth-child(2n)
+                                .comment-list:nth-child(2n)
                                 {
                                     
                                     left:50.5%;
+                                    .comment-view-likes
+                                    {
+                                        left: -37%;
+                                        width: 65px;
+                                        right: 0;
+                                    }
+                                    .comment-like-username-list
+                                    {
+                                        right: 215%;
+                                        position: absolute;
+                                    }
                                 }
-                                li:after, li:before {
+                                .comment-list:after, .comment-list:before {
                                     content: '';
                                     position: absolute;
                                     width: 0;
@@ -503,14 +581,14 @@ h1:hover
                                     border-left: 2px solid #007C8B;
                                     border-right: 10px solid transparent;
                                   }
-                                  li:before {
+                                  .comment-list:before {
                                     bottom: -15px;
                                     right: 16px;
                                     border-top: 14px solid lightgrey;
                                     border-left: 4px solid lightgrey;
                                     border-right: 14px solid transparent;
                                   }
-                                  li:nth-child(2n):after,li:nth-child(2n):before
+                                 .comment-list:nth-child(2n):after,.comment-list:nth-child(2n):before
                                   {
                                     content: '';
                                     position: absolute;
@@ -523,7 +601,7 @@ h1:hover
                                     border-left: 10px solid transparent;
                                   }
                                
-                                  li:nth-child(2n):before {
+                                  .comment-list:nth-child(2n):before {
                                     bottom: -15px;
                                     right: 16px;
                                     border-top: 14px solid lightgrey;
@@ -536,6 +614,13 @@ h1:hover
                         .post-comments-list::-webkit-scrollbar {
                             display: none;
                         }
+
+                        
+                    }
+                    .post-timestamps
+                    {
+                            margin-top: 20px;
+                            margin-bottom: -10px;
                     }
                 }
                 .animated-box {

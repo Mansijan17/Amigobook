@@ -1,17 +1,26 @@
 
 
-<li id="comment-<%= comment._id %>" >
+<li id="comment-<%= comment._id %>" class="comment-list">
 
     <div class="like-box">
        <a class="toggle-like-button" href="/likes/toggle/?id=<%=comment._id%>&type=Comment" data-likes="<%= comment.likes.length %>">
         <%= comment.likes.length %> <i class="fas fa-thumbs-up like-thumbs"></i>
    
        </a>
-       <% if(comment.likes.length!=0){%>
-           <% for(like of comment.likes){%>
-                <%= like.user.name %>
-            <%}%>
-       <%}%>
+       <div class="comment-view-likes"   data-target="#comment-<%= comment._id %>-likes" data-toggle="collapse">
+        View Likes
+        </div>
+    
+        <ul id="comment-<%= comment._id %>-likes" class="comment-like-username-list collapse" >
+                <% for(like of comment.likes) {%>
+                    <li id="like-<%= like._id %>" class="comment-username-li">
+                        
+                        <a href="/users/profile/<%= like.user._id %>"><%= like.user.name %></a>
+                        
+                    </li>
+                <% } %>
+        
+        </ul>
     </div>
     <% if(locals.user.id==comment.user.id) { %>
         <small class="comment-deletion">

@@ -62,13 +62,14 @@ class PostComments{
                         commentData.authorTag="";
                         commentData.author="";
                     }
-                    console.log(commentData);
+                 
                     let newComment = pSelf.newCommentDom(commentData);
                     $(`#post-comments-${postId}`).prepend(newComment);
                     let commentsCount=parseInt($(`#post-${postId}-comment-number`).attr("data-comments"));
                     commentsCount+=1;
                     $(`#post-${postId}-comment-number`).attr("data-comments",commentsCount);
                     $(`#post-${postId}-comment-number`).html(`${commentsCount} <i class="fas fa-comments"></i>`);
+                  
                     pSelf.deleteComment($(' .delete-comment-button', newComment));
                     new ToggleLike($(" .toggle-like-button", newComment));
                     new Noty({
@@ -92,11 +93,20 @@ class PostComments{
 
     newCommentDom(comment){
         // I've added a class 'delete-comment-button' to the delete comment link and also id to the comment's li
-        return $(`<li id="comment-${ comment._id }">
+        return $(`<li id="comment-${ comment._id }" class="comment-list">
 
                     <div class="like-box">
                         <a href="/likes/toggle/?id=${comment._id }&type=Comment" data-likes="0" class="toggle-like-button">0 <i class="fas fa-thumbs-up like-thumbs"></i></a>
                     </div>
+
+                    <div class="comment-view-likes"   data-target="#comment-${comment._id }-likes" data-toggle="collapse" style="right:17%;"
+                    >
+                        View Likes
+                    </div>
+                    
+                        <ul id="comment-${ comment._id }-likes" class="comment-like-username-list collapse" >
+                                
+                        </ul>
 
                     <small class="comment-deletion">
                         <a class="delete-comment-button" href="/comments/destroy-comment/${comment._id}">

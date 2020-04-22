@@ -55,25 +55,36 @@ module.exports.home = async function(req, res){
                 //populating the comments of the post schema
                 //Change:: populate the likes of the posts and comments
                 path:"comments",
+                options:{
+                    sort:"-createdAt"
+                },
                 
                 populate:
-                {
+                ({
                     path:"likes",
+                    options:{
+                        sort:"-createdAt"
+                    },
                     populate:{
                         path:"user"
-                    }
+                    },
+                   
                   
-                },
+                }),
               
                 
             }).populate({
                 path:"likes",
+                options:{
+                    sort:"-createdAt"
+                },
                 populate:{
                     path:"user"
                 }
             });
-
-        console.log(postLists);
+       // await Comment.find({}).sort("-createdAt");
+      // console.log(postLists.comments);
+     
         let users=await User.find({});
        // console.log(users);
         return res.render('home', {
