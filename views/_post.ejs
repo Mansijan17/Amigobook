@@ -38,14 +38,16 @@
         </small>
     <% } %>
     <small class="author-post-name">
-       <% if(i.user.avatar) {%>
-            <img src="<%= i.user.avatar %>"> 
-       <% } else if (i.user.gender=="male"){%>
-                <img src="https://i.stack.imgur.com/HQwHI.jpg" width="100" height="100">
-       <% }  else {%>
-                <img src="/images/femaleProfile.png" width="100" height="100">
-        <% } %>
-        <a href="/users/profile/<%= i.user._id %>"><%= i.user.name %></a>
+        <a href="/users/profile/<%= i.user._id %>">
+            <% if(i.user.avatar) {%>
+                    <img src="<%= i.user.avatar %>"> 
+            <% } else if (i.user.gender=="male"){%>
+                        <img src="https://i.stack.imgur.com/HQwHI.jpg" width="100" height="100">
+            <% }  else {%>
+                        <img src="/images/femaleProfile.png" width="100" height="100">
+                <% } %>
+            <span><%= i.user.name %></span>
+        </a>
     </small>
     <div id="post-content">
         
@@ -71,6 +73,11 @@
 
     <div class="post-timestamps">
         <%= i.createdAt.toLocaleString() %> 
+    </div>
+
+    <div class="post-share">
+        <a href="/posts/share-post"><%= i.shares.length%>
+        </a>
     </div>
     
    

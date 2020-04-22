@@ -62,7 +62,9 @@ class PostComments{
                         commentData.authorTag="";
                         commentData.author="";
                     }
-                 
+                    var ts=new Date(data.data.comment.createdAt);
+                    commentData.createdAt=ts.toLocaleString();
+                    //console.log(commentData);
                     let newComment = pSelf.newCommentDom(commentData);
                     $(`#post-comments-${postId}`).prepend(newComment);
                     let commentsCount=parseInt($(`#post-${postId}-comment-number`).attr("data-comments"));
@@ -120,9 +122,15 @@ class PostComments{
                             ${comment.content}
                             <br>
                             <small class="author-comment-name">
-                                <img src="${comment.imageURL}">
-                                ${comment.user.name}<span class="${comment.authorTag}"> ${comment.author}</span>
+                                <a href="/users/profile/${comment.user._id }">
+                                    <img src="${comment.imageURL}">
+                                    ${comment.user.name}<span class="${comment.authorTag}" style="width:45px;"> ${comment.author}</span>
+                                </a>
                             </small>
+                            <br>
+                            <span class="comment-timestamps">
+                                ${ comment.createdAt }
+                            </span>
                         </p> 
                     </div>   
 

@@ -3,7 +3,7 @@ const mongoose=require('mongoose');
 const postSchema=new mongoose.Schema({
     content:
     {
-        type:String,
+        type:Object,
         required:true
     },
     user:
@@ -25,6 +25,12 @@ const postSchema=new mongoose.Schema({
             type:mongoose.Schema.Types.ObjectId,
             ref:"Like",
             autopopulate:true
+        }
+    ],
+    shares:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"User"
         }
     ]
 },

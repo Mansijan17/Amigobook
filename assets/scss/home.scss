@@ -315,30 +315,35 @@ h1:hover
 
                     .author-post-name
                     {
-                        color: black;
-                        font-size: 19.2px;
-                        position: absolute;
-                        top: 10px;
-                        left: 37%;
-                        img
-                        {
-                            width:50px;
-                            height:50px;
-                        }
-                        a
-                        {
-                            position: relative;
-                            top: 0px;
+                        a{
+                            
                             color: #121212;
                             text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 0px -4px 10px rgba(255,255,255,0.3);
-
+                            font-size: 19.2px;
+                            span
+                            {
+                                transition: all 0.4s ease-in;
+                            }
+                            img
+                            {
+                                width:75px;
+                                height:75px;
+                            }
+                            img:hover
+                            {
+                                box-shadow: 0px 0px 5px 2px cadetblue;
+                            }
+                        }
+                        span:hover
+                        {
+                            letter-spacing: 1.5px;
                         }
                     }
 
                     #post-content
                     {
                         text-align: left;
-                        margin-top: 75px;
+                        margin-top: 40px;
                         margin-left: 50px;
                         width: 65%;
                         overflow-wrap: break-word;
@@ -441,11 +446,14 @@ h1:hover
                                         cursor: pointer;
                                         font-size: 12px;
                                         width: 65px;
+                                        color: aquamarine;
+                                        font-family: monospace;
+                                        word-spacing: -1px;
                                     }
             
                                     .like-thumbs:hover
                                     {
-                                        opacity: 0.5;
+                                        color:#4D2E42;
                                     }
             
                                     .comment-view-likes{
@@ -455,9 +463,8 @@ h1:hover
                                     .comment-view-likes:hover
                                     {
                                         
-                                        border:1px solid darkgreen;
-                                        border-radius: 10px;
-                                        padding: 1px;
+                                        border-bottom:1px solid darkgreen;
+                                        
                                     }
                                  
 
@@ -526,30 +533,48 @@ h1:hover
 
                                         p
                                         {
+                                            overflow-wrap: break-word;
                                             span
                                             {
                                                 margin-bottom: 5px;
                                                 display: inline-block;
+                                                overflow-wrap: break-word;
+                                                width: 100%;
 
                                             }
 
                                             .author-comment-name
                                             {
-                                                color:#043726;
-                                                font-weight: bolder;
-                                                img{
-                                                    height: 20px;
-                                                    width: 20px;
-                                                    border-radius: 50%;
-                                                }
-                                                .author-tag
+                                                a
                                                 {
-                                                    background-color: lightseagreen;
-                                                    margin-left: 5px;
-                                                    padding: 2px;
-                                                    color: white;
+                                                    color:#043726;
+                                                    font-weight: bolder;
+                                                    
+                                                    img{
+                                                        height: 20px;
+                                                        width: 20px;
+                                                        border-radius: 50%;
+                                                    }
+                                                    .author-tag
+                                                    {
+                                                        background-color: lightseagreen;
+                                                        margin-left: 5px;
+                                                        padding: 2px;
+                                                        color: white;
+                                                    }
                                                 }
                                             }
+
+                                            .comment-timestamps
+                                            {
+                                                font-size: 10px;
+                                                background-color: darkgray;
+                                                padding-top: 2px;
+                                                width: 110px;
+                                                margin: auto;
+
+                                            }
+                                            
                                         }
                                     }
                                 }
@@ -619,8 +644,11 @@ h1:hover
                     }
                     .post-timestamps
                     {
-                            margin-top: 20px;
-                            margin-bottom: -10px;
+                        color: #0d4d38;
+                        margin: 20px auto 0px;
+                        width: 155px;
+                        padding: 3px;
+                        box-sizing: border-box;
                     }
                 }
                 .animated-box {

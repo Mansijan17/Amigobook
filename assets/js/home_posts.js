@@ -75,8 +75,10 @@
         </a>
         </small>
         <small class="author-post-name">
-            <img src="${ i.user.avatar}"> 
-            <a href="/users/profile/${i.user._id}">${i.user.name }</a>
+            <a href="/users/profile/${i.user._id}">
+                <img src="${ i.user.avatar}"> 
+                <span>${i.user.name }</span>
+            </a>
         </small>
 
         <div class="content">
@@ -98,6 +100,9 @@
         
             </div>
         </div>
+            <div class="post-timestamps">
+                 ${ i.createdAt.toLocaleString() }
+            </div>
         </li>`);
     }
 

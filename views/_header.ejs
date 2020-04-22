@@ -12,15 +12,16 @@
             <% if(locals.user) { %>
 
                 <li>
-                    <% if(user.avatar) {%>
-                        <img src="<%=user.avatar %>"> 
-                    <% } else if (user.gender=="male"){%>
-                            <img src="https://i.stack.imgur.com/HQwHI.jpg" width="100" height="100">
-                    <% } else {%>
-                            <img src="/images/femaleProfile.png" width="100" height="100">
-                    <% } %>
-                    <a href="/users/profile/<%= user.id %>" class="links" id="userName">
-                        <%= user.name %>
+                    <a href="/users/profile/<%= user.id %>" class="links" >
+                        <% if(user.avatar) {%>
+                            <img src="<%=user.avatar %>"> 
+                        <% } else if (user.gender=="male"){%>
+                                <img src="https://i.stack.imgur.com/HQwHI.jpg" width="100" height="100">
+                        <% } else {%>
+                                <img src="/images/femaleProfile.png" width="100" height="100">
+                        <% } %>
+                        
+                           <span id="userName"> <%= user.name %> </span>
                     </a>
                 </li>
                 <li>
