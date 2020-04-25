@@ -3,8 +3,8 @@
 <li  id="post-<%= i.id %>" class="post-list animated-box in">
     <div class="post-like-box">
         <div class="post-likes-number" id="post-<%= i._id %>-likes-number">
-            <span data-target="#post-<%= i.id %>-likes" data-toggle="modal"><%= i.likes.length %> </span>
-            <a class="toggle-like-button" href="/likes/toggle/?id=<%=i._id%>&type=Post" data-likes="<%= i.likes.length %>">
+            <span data-target="#post-<%= i.id %>-likes" data-toggle="modal" ><%= i.likes.length %> </span>
+            <a class="toggle-like-button " href="/likes/toggle/?id=<%=i._id%>&type=Post" data-likes="<%= i.likes.length %>">
                 <i class="fas fa-thumbs-up like-thumbs"></i>
             </a>
         </div>
@@ -23,7 +23,7 @@
                         <% for(like of i.likes) {%>
                             <li id="like-<%= like._id %>">
                                 
-                                <a href="/users/profile/<%= like.user._id %>"><%= like.user.name %></a>
+                                <%- include("_likeDisplay"); %>
                                 
                             </li>
                         <% } %>
@@ -38,11 +38,7 @@
    
     
     </div>
-    <div class="post-comment-number" id="post-<%= i._id%>-comment-number" data-comments="<%= i.comments.length %>" >
-           <%= i.comments.length %> 
-           <i class="fas fa-comments"></i>
-       
-    </div>
+    
     <% if(locals.user.id==i.user.id) { %>
         <small> 
             <a href="/posts/destroy-post/<%= i.id %>" class="delete-post-button">
@@ -58,7 +54,7 @@
                         <img src="https://i.stack.imgur.com/HQwHI.jpg" width="100" height="100">
             <% }  else {%>
                         <img src="/images/femaleProfile.png" width="100" height="100">
-                <% } %>
+            <% } %>
             <span><%= i.user.name %></span>
         </a>
     </small>
@@ -73,8 +69,14 @@
                 <input type="hidden" name="post" value="<%= i._id %>">
                 <button type="submit">Add comment</button>
             </form>
+            <div class="post-comment-number" id="post-<%= i._id%>-comment-number" data-comments="<%= i.comments.length %>" data-target="#post-comments-<%= i._id %>-list" data-toggle="collapse" >
+                <span >
+                    <%= i.comments.length %> 
+                </span>
+                <i class="fas fa-comments"></i>
+            </div>
         </div>
-        <div class="post-comments-list">
+        <div class="post-comments-list collapse" id="post-comments-<%= i._id %>-list">
             <ul id="post-comments-<%= i._id %>">
                 <% for(comment of i.comments) { %>
                    <%- include("_comment") -%>

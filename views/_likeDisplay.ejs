@@ -1,0 +1,11 @@
+<a href="/users/profile/<%= like.user._id %>">
+    <% if(like.user.avatar) {%>
+        <img src="<%= like.user.avatar %>"> 
+    <% } else if (i.user.gender=="male"){%>
+        <img src="https://i.stack.imgur.com/HQwHI.jpg" width="100" height="100">
+    <% }  else {%>
+        <img src="/images/femaleProfile.png" width="100" height="100">
+    <% } %>
+
+    <span><%= like.user.name %></span>
+</a>

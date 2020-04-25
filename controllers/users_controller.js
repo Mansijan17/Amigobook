@@ -35,11 +35,9 @@ module.exports.profile = async function (req, res) {
                 path:"user"
             }
         });
-        //console.log(postLists);
 
-       // console.log("profile user posts ",user.posts);
         return res.render('userProfile', {
-            title: 'User Profile',
+            title: `${user.name} | Socialends`,
             profileUser: user,
             posts:postLists
         })
@@ -163,15 +161,26 @@ module.exports.create = async function (req, res) {
         let user = await User.findOne({ email: req.body.email });
         if (!user) {
             //await User.create(req.body);
+            let name=req.body.name;
+            let name2=[];
+            name=name.split(" ");
+            for (let word of name) {
+                word=word.charAt(0).toUpperCase() + word.slice(1);
+                name2+=word+" ";
+            }
+            name2=name2.trim();
+            console.log(name2);
+            req.body.name=name2;
             let newuser={
                 user:req.body,
                 acessToken:crypto.randomBytes(20).toString("hex")
             }
-            console.log(newuser);
+          //console.log(newuser);
             let newAccountSchema=await newAccount.findOne({"user.email":req.body.email});
             //console.log(newAccountSchema);
             if(!newAccountSchema)
             {
+                console.log(newuser);
                 await newAccount.create(newuser);
             }
             else
@@ -439,6 +448,8 @@ module.exports.verifyAccount=async function(req,res)
                     }
                     console.log("job enqueued ",job.id);
             });
+            
+            //console.log(account.user.name);
             newuser=await User.create(account.user);
         }
         req.flash("success","Successfully verified!");

@@ -45,13 +45,19 @@ class ToggleLike{
                     if(data.data.type=="Post")
                     {
                         console.log("post accept like");
-                        $(`#post-${ data.data.id }-likes-list`).prepend(`<li id="like-${data.data.likeID}"><a href="/users/profile/${data.data.userID}">${data.data.name}</a></li>`)
+                        $(`#post-${ data.data.id }-likes-list`).prepend(`<li id="like-${data.data.likeID}"><a href="/users/profile/${data.data.userID}">
+                            <img src=${data.data.userImage}>
+                            <span>${data.data.name}</span>
+                        </a></li>`)
                        
                     }
                     else
                     {
                         console.log("comment delete like");
-                        $(`#comment-${ data.data.id}-likes-list`).prepend(`<li id="like-${data.data.likeID}" class="comment-username-li"><a href="/users/profile/${data.data.userID}">${data.data.name}</a></li>`)
+                        $(`#comment-${ data.data.id}-likes-list`).prepend(`<li id="like-${data.data.likeID}" class="comment-username-li"><a href="/users/profile/${data.data.userID}">
+                            <img src=${data.data.userImage}>
+                            <span>${data.data.name}</span>
+                        </a></li>`)
                         
                     }
                 }
@@ -66,7 +72,6 @@ class ToggleLike{
                     $(`#comment-${ data.data.id}-likes-number span`).html(`${likesCount}`)
                 }
 
-                //$(self).html(`${likesCount} <i class="fas fa-thumbs-up like-thumbs"></i>`)
             }).fail(function(err)
             {
                 console.log('error in completing the request ',err);

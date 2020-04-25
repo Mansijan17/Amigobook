@@ -27,6 +27,18 @@ module.exports.toggleLike=async function(req,res)
         })
         let user=await User.findById(req.user.id);
         let userName=user.name;
+        let userImage=user.avatar;
+        if(!userImage)
+        {
+            if(user.gender=="male")
+            {
+                userImage="https://i.stack.imgur.com/HQwHI.jpg";
+            }
+            else
+            {
+                userImage="/images/femaleProfile.png"
+            }
+        }
         let likeID
         //console.log("liking user name ",userName);
         // if a like already exists
@@ -58,7 +70,8 @@ module.exports.toggleLike=async function(req,res)
                 type:req.query.type,
                 id:req.query.id,
                 likeID:likeID,
-                userID:req.user._id
+                userID:req.user._id,
+                userImage:userImage
             }
         })
     }

@@ -24,9 +24,9 @@
                     <ul  class="comment-like-username-list " id="comment-<%= comment._id %>-likes-list">
                             <% for(like of comment.likes) {%>
                                 <li id="like-<%= like._id %>" class="comment-username-li">
-                                    
-                                    <a href="/users/profile/<%= like.user._id %>"><%= like.user.name %></a>
-                                    
+                                   
+                                    <%- include("_likeDisplay"); %>
+                                   
                                 </li>
                             <% } %>
                     </ul>
@@ -37,10 +37,6 @@
               
             </div>
         </div>
-       
-    
-       
-    
     </div>
     <% if(locals.user.id==comment.user.id) { %>
         <small class="comment-deletion">

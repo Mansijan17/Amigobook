@@ -97,61 +97,62 @@ class PostComments{
         // I've added a class 'delete-comment-button' to the delete comment link and also id to the comment's li
         return $(`<li id="comment-${ comment._id }" class="comment-list">
 
-        <div class="like-box">
-            <a class="toggle-like-button" href="/likes/toggle/?id=${comment._id}&type=Comment" data-likes="0">
-                0 <i class="fas fa-thumbs-up like-thumbs"></i>
-            </a>
-            <div class="comment-view-likes"   data-target="#comment-${ comment._id }-likes" data-toggle="modal">
-                View Likes
-            </div>
-            <div class="modal fade" id="comment-${ comment._id}>-likes" role="dialog">
-                <div class="modal-dialog">
-                
-                <!-- Modal content-->
+        <div class="comment-like-box">
+                <div class="comment-likes-number" id="comment-${comment._id }-likes-number">
+                    <span data-target="#comment-${ comment._id }-likes" data-toggle="modal">0</span>
+                    <a class="toggle-like-button" href="/likes/toggle/?id=${comment._id}&type=Comment" data-likes="0">
+                        <i class="fas fa-thumbs-up like-thumbs"></i>
+                    </a>
+                </div>
+
+                <div class="modal fade" id="comment-${ comment._id}-likes" role="dialog">
+                    <div class="modal-dialog">
+                    
+                    <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
                         <h4 class="modal-title">Comment Reactions  
-                            <br></h4>
+                            <br></i></h4>
                         </div>
                         <div class="modal-body">
                             
-                            <ul  class="comment-like-username-list " id="comment-${ comment._id }-likes-list">
+                            <ul  class="comment-like-username-list " id="comment-${comment._id }-likes-list">
                                     
                             </ul>
                         
                         </div>
-                        
+                    
                     </div>
-                
-                </div>
+                    
+                    </div>
             </div>
+
+                    
         </div>
-
-                    <small class="comment-deletion">
-                        <a class="delete-comment-button" href="/comments/destroy-comment/${comment._id}">
-                            <i class="fas fa-times"></i>
-                        </a>
-                    </small>
-                        
-                    <div class="content">    
+        <small class="comment-deletion">
+            <a class="delete-comment-button" href="/comments/destroy-comment/${comment._id}">
+                <i class="fas fa-times"></i>
+            </a>
+        </small>
+        <div class="content">    
                            
-                        <p>    
-                            ${comment.content}
-                            <br>
-                            <small class="author-comment-name">
-                                <a href="/users/profile/${comment.user._id }">
-                                    <img src="${comment.imageURL}">
-                                    ${comment.user.name}<span class="${comment.authorTag}" style="width:45px;"> ${comment.author}</span>
-                                </a>
-                            </small>
-                            <br>
-                            <span class="comment-timestamps">
-                                ${ comment.createdAt }
-                            </span>
-                        </p> 
-                    </div>   
+            <p>    
+                ${comment.content}
+                <br>
+                <small class="author-comment-name">
+                <a href="/users/profile/${comment.user._id }">
+                    <img src="${comment.imageURL}">
+                    ${comment.user.name}<span class="${comment.authorTag}" style="width:45px;"> ${comment.author}</span>
+                </a>
+                </small>
+                <br>
+                <span class="comment-timestamps">
+                        ${ comment.createdAt }
+                </span>
+            </p> 
+        </div>   
 
-                </li>`);
+    </li>`);
     }
 
 

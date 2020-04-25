@@ -51,14 +51,10 @@
            
         <div class="post-like-box">
             <div class="post-likes-number" id="post-${ i._id }-likes-number">
-                
+                <span data-target="#post-${i._id }-likes" data-toggle="modal">0</span>
                 <a class="toggle-like-button" href="/likes/toggle/?id=${i._id}&type=Post" data-likes="0">
-                    0
                     <i class="fas fa-thumbs-up like-thumbs"></i>
                 </a>
-            </div>
-            <div class="post-view-likes"   data-target="#post-${i.id }-likes" data-toggle="modal">
-                View Likes
             </div>
             <div class="modal fade" id="post-${ i.id }-likes" role="dialog">
                 <div class="modal-dialog">
@@ -83,11 +79,7 @@
    
     
         </div>
-        <div class="post-comment-number" id="post-${i._id}-comment-number" data-comments="0" >
-            0
-            <i class="fas fa-comments"></i>
-    
-        </div>
+        
         <small> 
         <a href="/posts/destroy-post/${ i._id }" class="delete-post-button">
             <i class="fas fa-trash-alt"></i>
@@ -111,8 +103,14 @@
                     <input type="hidden" name="post" value="${ i._id }">
                     <button type="submit">Add comment</button>
                 </form>
+                <div class="post-comment-number" id="post-${ i._id}-comment-number" data-comments="0" data-target="#post-comments-${i._id}-list" data-toggle="collapse" >
+                <span >
+                    <%= i.comments.length %> 
+                </span>
+                <i class="fas fa-comments"></i>
             </div>
-            <div class="post-comments-list">
+            </div>
+            <div class="post-comments-list collapse">
                 <ul id="post-comments-${i._id}">
                    
                 </ul>
