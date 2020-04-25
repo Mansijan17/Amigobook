@@ -2,6 +2,8 @@ const Like=require('../models/like');
 const Post=require("../models/post");
 const Comment=require('../models/commentSchema');
 const User=require('../models/userSchema');
+const queue=require('../config/kue');
+const likeEmailWorker=require('../worker/like_email_worker');
 
 module.exports.toggleLike=async function(req,res)
 {
@@ -12,13 +14,13 @@ module.exports.toggleLike=async function(req,res)
         let deleted=false;
         if(req.query.type=="Post")
         {
-            likeable=await Post.findById(req.query.id).populate("likes");
+            likeable=await Post.findById(req.query.id).populate("likes").populate("user","name email");
         }
         else
         {
-            likeable=await Comment.findById(req.query.id).populate("likes");
+            likeable=await Comment.findById(req.query.id).populate("likes").populate("user","name email");
         }
-
+        //console.log(likeable);
         //check if a like already exists
         let existingLike=await Like.findOne({
             likeable:req.query.id,
@@ -39,7 +41,7 @@ module.exports.toggleLike=async function(req,res)
                 userImage="/images/femaleProfile.png"
             }
         }
-        let likeID
+        
         //console.log("liking user name ",userName);
         // if a like already exists
         if(existingLike)
@@ -61,6 +63,29 @@ module.exports.toggleLike=async function(req,res)
             likeID=newLike._id;
             likeable.likes.push(newLike._id);
             likeable.save();
+            //if(req.query.type=="Post")
+            //{
+                let likeOnPostandComments={
+                    name:likeable.user.name,
+                    email:likeable.user.email,
+                    content:likeable.content,
+                    likedUser:user,
+                    type:req.query.type
+                }
+                if(likeable.user.id!=user.id)
+                {
+                    let job=queue.create("likeOnPostsandComments",likeOnPostandComments).save(function(err)
+                    {
+                        if(err)
+                        {
+                            console.log("error in creating a queue ",err);
+                            return;
+                        }
+                        console.log("post job enqueued " ,job.id);
+        
+                    });
+                }
+           // }
         }
         return res.json(200,{
             message:"Request successful!",

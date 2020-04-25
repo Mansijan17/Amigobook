@@ -30,7 +30,7 @@ exports.newCommentOnPost=(post)=>{
     nodemailer.transporter.sendMail({
         from:"manjarijain1998@gmail.com",
         to:post.email,
-        subject:"New comment on your post "+post.content+"!",
+        subject:`${post.comment.user.name} posted new comment on your post ${post.content}!`,
         html:htmlString
     }, (err,info)=>{
         if(err)

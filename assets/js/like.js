@@ -17,60 +17,26 @@ class ToggleLike{
                 url:$(self).attr("href"),
             }).done(function(data)
             {
-                console.log(data.data);
+                //console.log(data.data);
                 let likesCount=parseInt($(self).attr("data-likes"));
-                console.log(likesCount);
+               // console.log(likesCount);
+                data.data.type=data.data.type.toLowerCase();
                 if(data.data.deleted==true)
                 {
                     likesCount-=1;
-                    if(data.data.type=="Post")
-                    {
-                        console.log("post delete like");
-                        $(`#like-${data.data.likeID}`).remove();
-                        
-
-                    }
-                    else
-                    {
-                        console.log("comment delete like");
-                        $(`#like-${data.data.likeID}`).remove();
-                      
-                    }
-                    
-
+                    $(`#like-${data.data.likeID}`).remove();
                 }
                 else
                 {
                     likesCount+=1;
-                    if(data.data.type=="Post")
-                    {
-                        console.log("post accept like");
-                        $(`#post-${ data.data.id }-likes-list`).prepend(`<li id="like-${data.data.likeID}"><a href="/users/profile/${data.data.userID}">
+                    $(`#${data.data.type}-${ data.data.id }-likes-list`).prepend(`<li id="like-${data.data.likeID}"><a href="/users/profile/${data.data.userID}">
                             <img src=${data.data.userImage}>
                             <span>${data.data.name}</span>
-                        </a></li>`)
-                       
-                    }
-                    else
-                    {
-                        console.log("comment delete like");
-                        $(`#comment-${ data.data.id}-likes-list`).prepend(`<li id="like-${data.data.likeID}" class="comment-username-li"><a href="/users/profile/${data.data.userID}">
-                            <img src=${data.data.userImage}>
-                            <span>${data.data.name}</span>
-                        </a></li>`)
-                        
-                    }
+                            </a></li>`)  
                 }
                 $(self).attr("data-likes",likesCount);
-                if(data.data.type=="Post")
-                {
-                    //console.log($(`#post-${data.data.id}-likes-number span`))
-                   $(`#post-${ data.data.id}-likes-number span`).html(`${likesCount}`)
-                }
-                else
-                {
-                    $(`#comment-${ data.data.id}-likes-number span`).html(`${likesCount}`)
-                }
+                $(`#${data.data.type}-${ data.data.id}-likes-number span`).html(`${likesCount}`)
+                
 
             }).fail(function(err)
             {
