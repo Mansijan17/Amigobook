@@ -50,19 +50,38 @@
         <li class="post-list animated-box in" id="post-${ i._id}">
            
         <div class="post-like-box">
-            <div class="post-likes-number>
-                <a href="/likes/toggle/?id=${i._id }&type=Post" data-likes="0" class="toggle-like-button">
-                    0 <i class="fas fa-thumbs-up like-thumbs"></i>
+            <div class="post-likes-number" id="post-${ i._id }-likes-number">
+                
+                <a class="toggle-like-button" href="/likes/toggle/?id=${i._id}&type=Post" data-likes="0">
+                    0
+                    <i class="fas fa-thumbs-up like-thumbs"></i>
                 </a>
             </div>
-            <div class="post-view-likes"   data-target="#post-${ i.id }-likes" data-toggle="collapse">
+            <div class="post-view-likes"   data-target="#post-${i.id }-likes" data-toggle="modal">
                 View Likes
             </div>
-            <ul id="post-${i._id}-likes" class="post-like-username-list collapse">
-                       
+            <div class="modal fade" id="post-${ i.id }-likes" role="dialog">
+                <div class="modal-dialog">
                 
-            </ul>
-            
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h4 class="modal-title" id="#post-${i._id}-title">Post Reactions  
+                        <br></i></h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul  class="post-like-username-list" id="post-${ i._id }-likes-list">
+                            
+                    
+                        </ul>
+                    </div>
+                
+                </div>
+                
+                </div>
+          </div>
+   
+    
         </div>
         <div class="post-comment-number" id="post-${i._id}-comment-number" data-comments="0" >
             0

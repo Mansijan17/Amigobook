@@ -141,6 +141,9 @@ h1:hover {
             top: 0;
             right: 0;
             width: 40%; }
+            .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box span {
+              color: #006881;
+              cursor: pointer; }
             .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-likes-number {
               top: 13px;
               position: absolute;
@@ -162,33 +165,45 @@ h1:hover {
               border: 1px solid darkgreen;
               border-radius: 10px;
               padding: 1px; }
+            .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .modal {
+              color: black;
+              padding-right: 16px; }
+              .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .modal .modal-dialog {
+                width: 500px; }
+                .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .modal .modal-dialog .modal-content {
+                  width: 100%; }
+                  .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .modal .modal-dialog .modal-content .modal-title .like-thumbs:hover {
+                    opacity: 1 !important; }
+                  .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .modal .modal-dialog .modal-content .modal-body {
+                    height: auto;
+                    display: flex;
+                    justify-content: center;
+                    width: 100%; }
             .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list {
-              min-height: 0;
-              max-height: 105px;
-              overflow: auto;
-              padding: 0;
-              width: 150px;
-              position: absolute;
-              top: 60px;
-              right: 12px;
-              z-index: 10;
-              background-color: #00AB93; }
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              width: 50%;
+              padding-left: 0;
+              max-height: 300px;
+              overflow: auto; }
               .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list li {
                 min-height: 30px;
+                width: 100%;
                 display: flex;
-                border: 1px solid #006881;
                 justify-content: space-between;
                 text-align: right;
                 align-items: center;
                 margin: 1px; }
-              .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list li::before {
+                .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list li a {
+                  color: #006881; }
+              .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list li::after {
                 content: '\f21e';
                 font-weight: 900;
                 font-family: "Font Awesome 5 Free";
                 display: inline-block;
                 color: #BF0A30; }
-            .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list::-webkit-scrollbar {
-              display: none; }
           .home-container #feed-posts #posts-list-container > ul .post-list .delete-post-button {
             position: absolute;
             top: 13px;
@@ -276,55 +291,77 @@ h1:hover {
                   padding: 5px;
                   border-radius: 15px;
                   box-sizing: border-box; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .like-box {
+                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-box {
                     top: 3px;
                     left: 86%;
                     position: relative;
                     margin-bottom: 15px; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-view-likes {
-                    position: absolute;
-                    top: 0px;
-                    right: 105%;
-                    cursor: pointer;
-                    font-size: 12px;
-                    width: 65px;
-                    color: aquamarine;
-                    font-family: monospace;
-                    word-spacing: -1px; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .like-thumbs:hover {
-                    color: #4D2E42; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-view-likes {
-                    transition: all 0.2s ease-in; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-view-likes:hover {
-                    border-bottom: 1px solid darkgreen; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-username-list {
-                    min-height: 0;
-                    max-height: 55px;
-                    overflow: auto;
-                    padding: 0;
-                    width: 150px;
-                    position: absolute;
-                    top: 23px;
-                    right: -50px;
-                    z-index: 10;
-                    background-color: #00AB93;
-                    font-size: 11px; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-username-list li {
-                      min-height: 10px;
+                    .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-box .comment-likes-number span {
+                      color: darkmagenta;
+                      cursor: pointer; }
+                    .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-box .comment-likes-number a {
+                      color: #145556; }
+                    .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-box .comment-view-likes {
+                      position: absolute;
+                      top: 0px;
+                      right: 105%;
+                      cursor: pointer;
+                      font-size: 12px;
+                      width: 65px;
+                      color: aquamarine;
+                      font-family: monospace;
+                      word-spacing: -1px; }
+                    .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-box .like-thumbs:hover {
+                      color: #4D2E42; }
+                    .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-box .comment-view-likes {
+                      transition: all 0.2s ease-in; }
+                    .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-box .comment-view-likes:hover {
+                      border-bottom: 1px solid darkgreen; }
+                    .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-box .modal {
+                      color: black;
+                      padding-right: 16px; }
+                      .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-box .modal .modal-dialog {
+                        width: 500px; }
+                        .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-box .modal .modal-dialog .modal-content {
+                          width: 100%; }
+                          .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-box .modal .modal-dialog .modal-content .modal-title {
+                            text-align: center; }
+                            .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-box .modal .modal-dialog .modal-content .modal-title i {
+                              color: black; }
+                            .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-box .modal .modal-dialog .modal-content .modal-title .like-thumbs:hover {
+                              opacity: 1 !important; }
+                          .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-box .modal .modal-dialog .modal-content .modal-body {
+                            height: auto;
+                            display: flex;
+                            justify-content: center;
+                            width: 100%; }
+                    .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-box .comment-like-username-list {
                       display: flex;
-                      border: 1px solid #006881;
-                      justify-content: space-between;
-                      text-align: right;
+                      flex-direction: column;
+                      justify-content: center;
                       align-items: center;
-                      margin: 1px; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-username-list li::before {
-                      content: '\f21e';
-                      font-weight: 900;
-                      font-family: "Font Awesome 5 Free";
-                      display: inline-block;
-                      color: #BF0A30; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-username-list::-webkit-scrollbar {
-                    display: none; }
+                      width: 50%;
+                      padding-left: 0;
+                      max-height: 300px;
+                      overflow: auto; }
+                      .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-box .comment-like-username-list li {
+                        min-height: 30px;
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        text-align: right;
+                        align-items: center;
+                        margin: 1px; }
+                        .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-box .comment-like-username-list li a {
+                          color: #006881; }
+                      .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-box .comment-like-username-list li::after {
+                        content: '\f21e';
+                        font-weight: 900;
+                        font-family: "Font Awesome 5 Free";
+                        display: inline-block;
+                        color: #BF0A30; }
+                    .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-like-box .comment-like-username-list::-webkit-scrollbar {
+                      display: none; }
                   .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list .comment-deletion {
                     position: absolute;
                     left: 9px;
@@ -370,9 +407,6 @@ h1:hover {
                     left: -37%;
                     width: 65px;
                     right: 0; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list:nth-child(2n) .comment-like-username-list {
-                    right: 215%;
-                    position: absolute; }
                 .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list:after, .home-container #feed-posts #posts-list-container > ul .post-list #post-content .post-comments-list ul .comment-list:before {
                   content: '';
                   position: absolute;

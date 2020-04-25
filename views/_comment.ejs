@@ -2,25 +2,45 @@
 
 <li id="comment-<%= comment._id %>" class="comment-list">
 
-    <div class="like-box">
-       <a class="toggle-like-button" href="/likes/toggle/?id=<%=comment._id%>&type=Comment" data-likes="<%= comment.likes.length %>">
-        <%= comment.likes.length %> <i class="fas fa-thumbs-up like-thumbs"></i>
-   
-       </a>
-       <div class="comment-view-likes"   data-target="#comment-<%= comment._id %>-likes" data-toggle="collapse">
-        View Likes
+    <div class="comment-like-box">
+        <div class="comment-likes-number" id="comment-<%= comment._id %>-likes-number">
+            <span data-target="#comment-<%= comment._id %>-likes" data-toggle="modal"><%= comment.likes.length %></span>
+            <a class="toggle-like-button" href="/likes/toggle/?id=<%=comment._id%>&type=Comment" data-likes="<%= comment.likes.length %>">
+                <i class="fas fa-thumbs-up like-thumbs"></i>
+            </a>
         </div>
+
+        <div class="modal fade" id="comment-<%= comment._id %>-likes" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Comment Reactions  
+                      <br></i></h4>
+                </div>
+                <div class="modal-body">
+                    
+                    <ul  class="comment-like-username-list " id="comment-<%= comment._id %>-likes-list">
+                            <% for(like of comment.likes) {%>
+                                <li id="like-<%= like._id %>" class="comment-username-li">
+                                    
+                                    <a href="/users/profile/<%= like.user._id %>"><%= like.user.name %></a>
+                                    
+                                </li>
+                            <% } %>
+                    </ul>
+                
+                </div>
+               
+              </div>
+              
+            </div>
+        </div>
+       
     
-        <ul id="comment-<%= comment._id %>-likes" class="comment-like-username-list collapse" >
-                <% for(like of comment.likes) {%>
-                    <li id="like-<%= like._id %>" class="comment-username-li">
-                        
-                        <a href="/users/profile/<%= like.user._id %>"><%= like.user.name %></a>
-                        
-                    </li>
-                <% } %>
-        
-        </ul>
+       
+    
     </div>
     <% if(locals.user.id==comment.user.id) { %>
         <small class="comment-deletion">

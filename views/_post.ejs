@@ -3,26 +3,39 @@
 <li  id="post-<%= i.id %>" class="post-list animated-box in">
     <div class="post-like-box">
         <div class="post-likes-number" id="post-<%= i._id %>-likes-number">
-            
+            <span data-target="#post-<%= i.id %>-likes" data-toggle="modal"><%= i.likes.length %> </span>
             <a class="toggle-like-button" href="/likes/toggle/?id=<%=i._id%>&type=Post" data-likes="<%= i.likes.length %>">
-                <%= i.likes.length %> 
                 <i class="fas fa-thumbs-up like-thumbs"></i>
             </a>
         </div>
-        <div class="post-view-likes"   data-target="#post-<%= i.id %>-likes" data-toggle="collapse">
-            View Likes
-        </div>
         
-            <ul id="post-<%= i.id %>-likes" class="post-like-username-list collapse" >
-                    <% for(like of i.likes) {%>
-                        <li id="like-<%= like._id %>">
-                            
-                            <a href="/users/profile/<%= like.user._id %>"><%= like.user.name %></a>
-                            
-                        </li>
-                    <% } %>
+        <div class="modal fade" id="post-<%= i.id %>-likes" role="dialog">
+            <div class="modal-dialog">
             
-            </ul>
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="#post-<%=i._id%>-title">Post Reactions  
+                      <br></h4>
+                </div>
+                <div class="modal-body">
+                    <ul  class="post-like-username-list" id="post-<%= i._id %>-likes-list">
+                        <% for(like of i.likes) {%>
+                            <li id="like-<%= like._id %>">
+                                
+                                <a href="/users/profile/<%= like.user._id %>"><%= like.user.name %></a>
+                                
+                            </li>
+                        <% } %>
+                
+                </ul>
+                </div>
+               
+              </div>
+              
+            </div>
+          </div>
+   
     
     </div>
     <div class="post-comment-number" id="post-<%= i._id%>-comment-number" data-comments="<%= i.comments.length %>" >

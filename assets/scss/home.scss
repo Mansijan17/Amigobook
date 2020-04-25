@@ -210,6 +210,12 @@ h1:hover
                         right: 0;
                         width: 40%;
 
+                        span
+                        {
+                            color:#006881;
+                            cursor: pointer;
+                        }
+
                         .post-likes-number
                         {
                             top: 13px;
@@ -249,31 +255,65 @@ h1:hover
                             padding: 1px;
                         }
 
+                        .modal
+                        {
+                            
+                            color: black;
+                            padding-right: 16px;
+
+                            .modal-dialog
+                            {
+                                width: 500px;
+                                .modal-content
+                                {
+                                    width: 100%;
+                                    .modal-title
+                                    {
+                                        .like-thumbs:hover
+                                        {
+                                            opacity: 1 !important;
+                                        }
+                                    }
+                                    .modal-body
+                                    {
+                                        height: auto;
+                                        display: flex;
+                                        justify-content: center;
+                                        width: 100%;
+                                       
+                                    }
+                                }
+
+                            }
+                        }
+
                         .post-like-username-list
                         {
-                            min-height: 0;
-                            max-height: 105px;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                            width: 50%;
+                            padding-left: 0;
+                            max-height: 300px;
                             overflow: auto;
-                            padding: 0;
-                            width: 150px;
-                            position: absolute;
-                            top:60px;
-                            right: 12px;
-                            z-index: 10;
-                            background-color: #00AB93;
 
                             li
                             {
                                 min-height: 30px;
+                                width: 100%;
                                 display: flex;
-                                border: 1px solid #006881;
                                 justify-content: space-between;
                                 text-align: right;
                                 align-items: center;
                                 margin: 1px;
+
+                                a{
+                                    color: #006881;
+                                }
                             }
 
-                            li::before
+                            li::after
                             {
                                 content: '\f21e';
                                 font-weight: 900;
@@ -282,9 +322,7 @@ h1:hover
                                 color:#BF0A30;
                             }
                         }
-                        .post-like-username-list::-webkit-scrollbar {
-                            display: none;
-                        }
+                     
                     }
 
                     
@@ -403,13 +441,15 @@ h1:hover
                               
                             }
                         }
+                        
                         .post-comments-list
                         {
                             margin-left: 24%;
                             min-height: 0;
                             max-height: 188px;
                             overflow: auto;
-                          
+                            
+                            
 
                             ul
                             {
@@ -429,72 +469,120 @@ h1:hover
                                     border-radius: 15px;
                                     box-sizing:border-box;
 
-                                    .like-box
+                                    .comment-like-box
                                     {
                                         top: 3px;
                                         left: 86%;
                                         position: relative;
                                         margin-bottom: 15px;
                                       
-                                    }
-
-                                    .comment-view-likes
-                                    {
-                                        position: absolute;
-                                        top: 0px;
-                                        right: 105%;
-                                        cursor: pointer;
-                                        font-size: 12px;
-                                        width: 65px;
-                                        color: aquamarine;
-                                        font-family: monospace;
-                                        word-spacing: -1px;
-                                    }
-            
-                                    .like-thumbs:hover
-                                    {
-                                        color:#4D2E42;
-                                    }
-            
-                                    .comment-view-likes{
-                                        transition: all 0.2s ease-in;
-                                    }
-            
-                                    .comment-view-likes:hover
-                                    {
-                                        
-                                        border-bottom:1px solid darkgreen;
-                                        
-                                    }
-                                 
-
-                                                
-                                    .comment-like-username-list
-                                    {
-                                        min-height: 0;
-                                        max-height:55px;
-                                        overflow: auto;
-                                        padding: 0;
-                                        width: 150px;
-                                        position: absolute;
-                                        top: 23px;
-                                        right: -50px;
-                                        z-index: 10;
-                                        background-color: #00AB93;
-                                        font-size: 11px;
-
-                                        li
+                                        .comment-likes-number
                                         {
-                                            min-height: 10px;
-                                            display: flex;
-                                            border: 1px solid #006881;
-                                            justify-content: space-between;
-                                            text-align: right;
-                                            align-items: center;
-                                            margin: 1px;
+                                            span
+                                            {
+                                                color:darkmagenta;
+                                                cursor: pointer;
+                                            }
+                                            a{
+                                                
+                                                color:#145556;
+                                            }
                                         }
 
-                                        li::before
+                                        .comment-view-likes
+                                        {
+                                            position: absolute;
+                                            top: 0px;
+                                            right: 105%;
+                                            cursor: pointer;
+                                            font-size: 12px;
+                                            width: 65px;
+                                            color: aquamarine;
+                                            font-family: monospace;
+                                            word-spacing: -1px;
+                                        }
+                
+                                        .like-thumbs:hover
+                                        {
+                                            color:#4D2E42;
+                                        }
+                
+                                        .comment-view-likes{
+                                            transition: all 0.2s ease-in;
+                                        }
+                
+                                        .comment-view-likes:hover
+                                        {
+                                            
+                                            border-bottom:1px solid darkgreen;
+                                            
+                                        }
+                                    
+                                        .modal
+                                        {
+                                            
+                                            color: black;
+                                            padding-right: 16px;
+
+                                            .modal-dialog
+                                            {
+                                                width: 500px;
+                                                .modal-content
+                                                {
+                                                    width: 100%;
+                                                    .modal-title
+                                                    {
+                                                        text-align: center;
+                                                        i
+                                                        {
+                                                            color: black;
+                                                        }
+                                                        .like-thumbs:hover
+                                                        {
+                                                            opacity: 1 !important;
+                                                        }
+                                                    }
+                                                    .modal-body
+                                                    {
+                                                        height: auto;
+                                                        display: flex;
+                                                        justify-content: center;
+                                                        width: 100%;
+                                                    
+                                                    }
+                                                }
+
+                                            }
+                                        }
+
+                                                    
+                                        .comment-like-username-list
+                                        {
+                                            display: flex;
+                                            flex-direction: column;
+                                            justify-content: center;
+                                            align-items: center;
+                                            width: 50%;
+                                            padding-left: 0;
+                                            max-height: 300px;
+                                            overflow: auto;
+
+                                            li
+                                            {
+                                                min-height: 30px;
+                                                width: 100%;
+                                                display: flex;
+                                                justify-content: space-between;
+                                                text-align: right;
+                                                align-items: center;
+                                                margin: 1px;
+
+                                                a{
+                                                    color: #006881;
+                                                }
+                                        }
+
+                                        li::after
                                         {
                                             content: '\f21e';
                                             font-weight: 900;
@@ -506,6 +594,7 @@ h1:hover
                                     .comment-like-username-list::-webkit-scrollbar {
                                         display: none;
                                     }
+                                }
 
                                     .comment-deletion
                                     {
@@ -589,11 +678,7 @@ h1:hover
                                         width: 65px;
                                         right: 0;
                                     }
-                                    .comment-like-username-list
-                                    {
-                                        right: 215%;
-                                        position: absolute;
-                                    }
+                                    
                                 }
                                 .comment-list:after, .comment-list:before {
                                     content: '';

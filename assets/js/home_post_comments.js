@@ -97,18 +97,35 @@ class PostComments{
         // I've added a class 'delete-comment-button' to the delete comment link and also id to the comment's li
         return $(`<li id="comment-${ comment._id }" class="comment-list">
 
-                    <div class="like-box">
-                        <a href="/likes/toggle/?id=${comment._id }&type=Comment" data-likes="0" class="toggle-like-button">0 <i class="fas fa-thumbs-up like-thumbs"></i></a>
+        <div class="like-box">
+            <a class="toggle-like-button" href="/likes/toggle/?id=${comment._id}&type=Comment" data-likes="0">
+                0 <i class="fas fa-thumbs-up like-thumbs"></i>
+            </a>
+            <div class="comment-view-likes"   data-target="#comment-${ comment._id }-likes" data-toggle="modal">
+                View Likes
+            </div>
+            <div class="modal fade" id="comment-${ comment._id}>-likes" role="dialog">
+                <div class="modal-dialog">
+                
+                <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h4 class="modal-title">Comment Reactions  
+                            <br></h4>
+                        </div>
+                        <div class="modal-body">
+                            
+                            <ul  class="comment-like-username-list " id="comment-${ comment._id }-likes-list">
+                                    
+                            </ul>
+                        
+                        </div>
+                        
                     </div>
-
-                    <div class="comment-view-likes"   data-target="#comment-${comment._id }-likes" data-toggle="collapse" style="right:17%;"
-                    >
-                        View Likes
-                    </div>
-                    
-                        <ul id="comment-${ comment._id }-likes" class="comment-like-username-list collapse" >
-                                
-                        </ul>
+                
+                </div>
+            </div>
+        </div>
 
                     <small class="comment-deletion">
                         <a class="delete-comment-button" href="/comments/destroy-comment/${comment._id}">
