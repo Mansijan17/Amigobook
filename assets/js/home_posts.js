@@ -15,11 +15,11 @@
                 data:newPostForm.serialize(),
                 success:function(data)
                 {
-                    //console.log(data.data.post);
+                    console.log(data.data.post);
                     let newPost=newDomPost(data.data.post);
                     $("#posts-list-container>ul").prepend(newPost);
                     deletePost($(" .delete-post-button",newPost));
-
+                    updatePost($(" .update-post-button",newPost));
                     //call the create comment class
                     new PostComments(data.data.post._id);
                     new ToggleLike($(" .toggle-like-button", newPost));
@@ -85,6 +85,11 @@
             <i class="fas fa-trash-alt"></i>
         </a>
         </small>
+        <small> 
+            <a href="/posts/update-post/${i._id }" class="update-post-button">
+                <i class="fas fa-pen-fancy"></i>
+            </a>
+        </small>
         <small class="author-post-name">
             <a href="/users/profile/${i.user._id}">
                 <img src="${ i.user.avatar}"> 
@@ -92,11 +97,11 @@
             </a>
         </small>
 
-        <div class="content">
+        <div class="post-content" id="post-${i._id}-content">
          
-            <p>
-                ${ i.content}
-            </p>
+            <div class="post-text">
+               <span> ${ i.content}</span>
+            </div>
             <div class="post-comments">
                 <form action="/comments/create-comment" method="post" id="post-${ i._id }-comments-form">
                     <input type="text" name="content" placeholder="Type here to add comment...." required>
@@ -150,6 +155,67 @@
             })
         })
     }
+
+    
+    let updatePost=function(updateLink)
+    {
+        $(updateLink).click(function(e)
+        {
+            e.preventDefault();
+            $.ajax({
+                type:"post",
+                url:$(updateLink).prop("href"),
+                success:function(data)
+                {
+                    //console.log(data.data);
+                   // $(`#post-${data.data.postId}-content .post-text`).html(`hhh`);
+                    $(`#post-${data.data.postID}-content .post-text span`).remove();
+                    $(`#post-${data.data.postID}-content .post-text`).append(`<form action="/posts/update-post-p2" method="post" class="post-update-form">
+                    <textarea required  name="content" >${data.data.content}</textarea>
+                    <input type="hidden" name="post" value="${data.data.postID}">
+                    <button type="submit">Update</button>
+                    </form>`);
+                    upadePostContent();
+
+                },
+                error:function(err)
+                {
+                    console.log(err.responseText);
+                }
+            })
+        })
+    }
+
+    let upadePostContent=function()
+    {
+        $(".post-update-form").submit(function(e)
+        {
+            e.preventDefault();
+            $.ajax({
+                type:"post",
+                url:"/posts/update-post-p2",
+                data:$(".post-update-form").serialize(),
+                success:function(data)
+                {
+                    console.log(data.data);
+                    $(`#post-${data.data.postID}-content .post-text form`).remove();
+                    $(`#post-${data.data.postID}-content .post-text`).append(`<span>${data.data.content}</span>`);
+                    new Noty({
+                        theme:"relax",
+                        text:"Post updated successfully!",
+                        type:"success",
+                        layput:"topRight",
+                        timeout:1500
+                    }).show();
+                },
+                error:function(err)
+                {
+                    console.log(err.responseText);
+                    return;
+                }
+            })
+        })
+    }
    
 
     //convert posts to ajax
@@ -160,6 +226,8 @@
         {
             let self=$(this);
             let deleteButton=$(" .delete-post-button",self);
+            let updateButton=$(" .update-post-button",self);
+            updatePost(updateButton);
             deletePost(deleteButton);
 
             let postId=self.prop("id").split("-")[1];
@@ -168,4 +236,5 @@
     }
     creatPost();
     postsToAjax();
+
 }

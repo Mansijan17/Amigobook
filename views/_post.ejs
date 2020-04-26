@@ -45,6 +45,11 @@
                 <i class="fas fa-trash-alt"></i>
             </a>
         </small>
+        <small> 
+            <a href="/posts/update-post/<%= i.id %>" class="update-post-button">
+                <i class="fas fa-pen-fancy"></i>
+            </a>
+        </small>
     <% } %>
     <small class="author-post-name">
         <a href="/users/profile/<%= i.user._id %>">
@@ -58,11 +63,24 @@
             <span><%= i.user.name %></span>
         </a>
     </small>
-    <div id="post-content">
+    <div class="post-content" id="post-<%= i._id%>-content">
+       
+        <div class="post-text">
+            <% if(!i.update) {%>
         
-        <p>
-            <%= i.content %>
-        </p>
+                <span> <%= i.content %> </span>
+                
+            <% } else { %>
+                
+                    <form action="/posts/update-post-p2" method="post" class="post-update-form">
+                        <textarea required  name="content" ><%= i.content%></textarea>
+                        <input type="hidden" name="post" value="<%= i._id%>">
+                        <button type="submit">Update</button>
+                    </form>
+                
+            <% } %>
+        </div>
+        
         <div class="post-comments">
             <form action="/comments/create-comment" method="post" id="post-<%= i._id %>-comments-form">
                 <input type="text" name="content" placeholder="Type here to add comment...." required>

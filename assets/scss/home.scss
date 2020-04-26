@@ -336,14 +336,21 @@ h1:hover
                         color: #C9A687;
                         font-size: 22.4px;
                     }
-                    .delete-post-button:hover
+                    .delete-post-button:hover,.update-post-button:hover
                     {
                         i
                         {
                             box-shadow: 0px 0px 6px 1px goldenrod;
                         }
-                        
                     }
+                    .update-post-button
+                    {
+                        position: absolute;
+                        left: 5%;
+                        font-size: 21px;
+                        top: 15px;
+                    }
+
                     .post-comment-number
                     {
                         font-size: 25px;
@@ -383,18 +390,75 @@ h1:hover
                         }
                     }
 
-                    #post-content
+                    .post-content
                     {
                         text-align: left;
                         margin-top: 40px;
                         margin-left: 50px;
-                        width: 65%;
+                        width: 80%;
                         overflow-wrap: break-word;
-                        max-height: 300px;
+                        max-height: 400px;
 
-                        >p{
+                        .post-text span{
+                            display: inline-block;
                             font-weight: bold;
                             font-size: 19.2px;
+                            border-radius: 10px;
+                            border: 1.5px dashed darkgreen;
+                            width: 80%;
+                            height: 100%;
+                            background: #2e7682;
+                            color: lightblue;
+                            max-height: 100px;
+                            padding: 9px;
+                            overflow: auto;
+                        }
+                        .post-text span::-webkit-scrollbar {
+                            display: none;
+                        }
+                        .post-update-form
+                        {
+                            color: black;
+                            height:auto;
+                            display: flex;
+                            justify-content: space-between;
+                            textarea
+                            {
+                                border-radius: 10px;
+                                border: 1.5px dashed darkgreen;
+                                width: 80%;
+                                max-height: 100px;
+                                background: #2e7682;
+                                color: lightblue;
+                                font-size: 21px;
+                                overflow-wrap: break-word;
+                                padding: 9px;
+                                resize: none;
+                            
+                            }
+                            button{
+                                width: 14%;
+                                height: 50%;
+                                align-self: center;
+                                font-style: italic;
+                                background: transparent;
+                                padding: 10px;
+                                border: none;
+                                border-radius: 14px;
+                                font-size: 17px;
+                                transition: all 0.4s ease-in-out;
+                            }
+                            button:hover
+                            {
+                                box-shadow: 0px 0px 10px 0px teal;
+                            }
+                            textarea:focus,button:focus
+                            {
+                                outline: none;
+                            }
+                            textarea::-webkit-scrollbar {
+                                display: none;
+                            }
                         }
 
                         .post-comments

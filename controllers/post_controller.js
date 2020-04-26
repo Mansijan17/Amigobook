@@ -27,6 +27,7 @@ module.exports.createPost= async function(req,res)
          let post =await Post.create({
                 content:req.body.content,
                 user:req.user._id,
+                update:false,
             });
             post=await post.populate("user","name email avatar").execPopulate();
             let job=queue.create("posts",post).save(function(err)
@@ -121,5 +122,79 @@ module.exports.destroyPost=async function(req,res)
         //console.log("Error: ",err);
         req.flash("error",err);
         return res.redirect("back");
+    }
+}
+
+module.exports.updatePost=async function(req,res)
+{
+    try
+    {
+        let id=req.params.id;
+        let post=await Post.findById(id);
+        if(post.user==req.user.id)
+        {
+            post.update=true;
+            post.save();
+            if(req.xhr)
+            {
+                return res.json(200,{
+                    data:
+                    {
+                        postID:id,
+                        content:post.content
+                    },
+                    message:"Form Put"
+                })
+            }
+            return res.redirect("back");
+        }
+        else
+        {
+            req.flash("error","You are not associated to update the post");
+            return res.redirect("back");
+        }
+    }
+    catch(err)
+    {
+        console.log("error ",err);
+        return;
+    }
+}
+
+module.exports.updatePost2=async function(req,res)
+{
+    try
+    {
+        let id=req.body.post;
+        let post=await Post.findById(id);
+        if(post.user==req.user.id)
+        {
+            post.content=req.body.content;
+            post.update=false;
+            post.save();
+            if(req.xhr)
+            {
+                return res.json(200,{
+                    data:
+                    {
+                        postID:id,
+                        content:req.body.content
+                    },
+                    message:"Post Updated Successfully"
+                });
+            }
+            req.flash("success","Successfully updated post!");
+            return res.redirect("back");
+        }
+        else
+        {
+            req.flash("error","You are not associated to update the post");
+            return res.redirect("back");
+        }
+    }
+    catch(err)
+    {
+        console.log("error ",err);
+        return;
     }
 }
