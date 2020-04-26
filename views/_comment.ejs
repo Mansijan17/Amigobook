@@ -38,7 +38,7 @@
             </div>
         </div>
     </div>
-    <% if(locals.user.id==comment.user.id) { %>
+    <% if(locals.user.id==comment.user.id || locals.user.id==i.user.id) { %>
         <small class="comment-deletion">
             <a href="/comments/destroy-comment/<%= comment._id %>" class="delete-comment-button">
                 <i class="fas fa-times"></i></a>
