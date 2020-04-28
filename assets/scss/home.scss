@@ -702,21 +702,66 @@ h1:hover
                                         }
                                     }
 
-                                    .content
+                                    .update-comment-button
+                                    {
+                                        position: absolute;
+                                        top: 8px;
+                                        left: 12%;
+                                        color: #1a4766;
+                                        font-size: 15px;
+                                    }
+
+                                    .comment-content
                                     {
                                         margin-bottom: 20px;
                                         text-align: center;
                                         margin-left: 0;
 
-                                        p
+                                        >div
                                         {
                                             overflow-wrap: break-word;
-                                            span
+                                            .comment-text
                                             {
                                                 margin-bottom: 5px;
                                                 display: inline-block;
                                                 overflow-wrap: break-word;
                                                 width: 100%;
+
+                                                .comment-update-form
+                                                {
+                                                    display: flex;
+                                                    justify-content: space-around;
+
+                                                    textarea
+                                                    {
+                                                        max-height: 40px;
+                                                        background: none;
+                                                        resize: none;
+                                                        border: 1.5px solid darkgreen;
+                                                        border-radius: 10px;
+                                                        overflow: auto;
+                                                    }
+                                                    textarea:focus,button:focus
+                                                    {
+                                                        outline: none;
+                                                    }
+                                                    textarea::-webkit-scrollbar {
+                                                        display: none;
+                                                    }
+                                                    button{
+                                                        height: 50%;
+                                                        align-self: center;
+                                                        background: lightseagreen;
+                                                        border: none;
+                                                        cursor: pointer;
+                                                        transition: all 0.5s ease-in-out;
+                                                        padding-top: 3px;
+                                                    }
+                                                    button:hover
+                                                    {
+                                                        border-radius: 10px;
+                                                    }
+                                                }
 
                                             }
 

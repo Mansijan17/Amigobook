@@ -17,6 +17,11 @@ class PostComments{
         // call for all the existing comments
         $(' .delete-comment-button', this.postContainer).each(function(){
             self.deleteComment($(this));
+            console.log("del comments");
+        });
+        $(' .update-comment-button', this.postContainer).each(function(){
+            self.updateComment($(this));
+            console.log("updating comments");
         });
     }
 
@@ -73,6 +78,7 @@ class PostComments{
                     $(`#post-${postId}-comment-number`).html(`${commentsCount} <i class="fas fa-comments"></i>`);
                   
                     pSelf.deleteComment($(' .delete-comment-button', newComment));
+                    pSelf.updateComment($(' .update-comment-button', newComment));
                     new ToggleLike($(" .toggle-like-button", newComment));
                     new Noty({
                         theme: 'relax',
@@ -134,10 +140,15 @@ class PostComments{
                 <i class="fas fa-times"></i>
             </a>
         </small>
-        <div class="content">    
+        <small> 
+            <a href="/comments/update-comment/${comment._id }" class="update-comment-button" >
+                <i class="fas fa-marker"></i>
+            </a>
+        </small>
+        <div class="comment-content" id="comment-${comment._id}-content">    
                            
-            <p>    
-                ${comment.content}
+            <div>    
+                <span>${comment.content}</span>
                 <br>
                 <small class="author-comment-name">
                 <a href="/users/profile/${comment.user._id }">
@@ -149,7 +160,7 @@ class PostComments{
                 <span class="comment-timestamps">
                         ${ comment.createdAt }
                 </span>
-            </p> 
+            </div> 
         </div>   
 
     </li>`);
@@ -165,7 +176,7 @@ class PostComments{
                 url: $(deleteLink).prop('href'),
                 success: function(data){
                 
-                    console.log("remove comment: ",data);
+                    console.log("remove comment: ",data.data);
                     $(`#comment-${data.data.comment_id}`).remove();
                     let commentsCount=parseInt($(`#post-${data.data.postID}-comment-number`).attr("data-comments"));
                     console.log(commentsCount);
@@ -186,5 +197,25 @@ class PostComments{
             });
 
         });
+    }
+
+    updateComment(updateLink)
+    {
+        $(updateLink).submit(function(e)
+        {
+            e.preventDefault();
+            $.ajax({
+                type:"get",
+                url:$(updateLink).prop("href"),
+                success:function(data)
+                {
+                    console.log(data.data);
+                },
+                error:function(err)
+                {
+                    console.log("error ",err.responseText);
+                }
+            })
+        })
     }
 }

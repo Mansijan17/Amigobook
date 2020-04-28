@@ -5,6 +5,8 @@ const commentsMailer=require('../mailer/comments_mailer');
 const queue=require('../config/kue');
 const commentEmailWorker=require('../worker/comment_email_worker');
 
+
+
 module.exports.createComment=async function(req,res)
 {
     // Post.findById(req.body.post,function(err,post)
@@ -40,7 +42,8 @@ module.exports.createComment=async function(req,res)
             let newcomment=await Comment.create({
                             content:req.body.content,
                             post:req.body.post,
-                            user:req.user._id
+                            user:req.user._id,
+                            update:false
                         });
            
           // console.log(newcomment);
@@ -157,15 +160,16 @@ module.exports.destroyComment=async function(req,res)
         let comment=await Comment.findById(req.params.id);
         let postId = comment.post;
         let post=await Post.findById(postId);
+        console.log("yessssssss");
         if(comment.user.id==req.user.id || post.user==req.user.id)
         {
-            //console.log("comment controller delete");
+            console.log("comment controller delete");
             comment.remove();
             post.comments.pull(comment);
             post.save();
             //CHANGE:: delete the likes of the comments
             await Like.deleteMany({likeable:comment._id,onModel:"Comment"});
-         
+            console.log(req);
             if(req.xhr)
             {
                 console.log("xhr");
@@ -191,6 +195,85 @@ module.exports.destroyComment=async function(req,res)
     catch(err)
     {
         console.log("Error: ",err);
+        return;
+    }
+}
+module.exports.updateComment=async function(req,res)
+{
+    try
+    {
+        let id=req.params.id;
+        let comment=await Comment.findById(id);
+        //console.log(comment);
+        if(comment.user.id==req.user.id)
+        {
+            comment.update=true;
+            comment.save();
+            //req.headers['x-requested-with'] ="XMLHttpRequest";
+            //console.log(req.headers['x-requested-with']);
+            console.log(req.xhr);
+            if(req.xhr)
+            {
+                console.log("xhr");
+                return res.status(200).json({
+                    data:
+                    {
+                        commentID:id,
+                        content:comment.content
+                    },
+                    message:"Form Put"
+                })
+            }
+            return res.redirect("back");
+        }
+        else
+        {
+            req.flash("Error","You are not authorised to update this comment!");
+            return res.redirect("back");
+        }
+    }
+    catch(err)
+    {
+        console.log("error in updating comment ",err);
+        return;
+    }
+}
+
+module.exports.updateComment2=async function(req,res)
+{
+    try
+    {
+        let id=req.body.comment;
+        let comment=await Comment.findById(id);
+        if(comment.user.id==req.user.id)
+        {
+            comment.content=req.body.content;
+            comment.update=false;
+            comment.save();
+            console.log(req.xhr);
+            if(req.xhr)
+            {
+                return res.json(200,{
+                    data:
+                    {
+                        commentID:id,
+                        content:req.body.content
+                    },
+                    message:"Comment Updated Successfully"
+                });
+            }
+            req.flash("success","Successfully updated comment!");
+            return res.redirect("back");
+        }
+        else
+        {
+            req.flash("error","You are not associated to update the comment");
+            return res.redirect("back");
+        }
+    }
+    catch(err)
+    {
+        console.log("error ",err);
         return;
     }
 }

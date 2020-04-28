@@ -43,13 +43,35 @@
             <a href="/comments/destroy-comment/<%= comment._id %>" class="delete-comment-button">
                 <i class="fas fa-times"></i></a>
         </small>
+      
     <% } %>
-    <div class="content">
+    <% if(locals.user.id==comment.user.id) {%>
+        <small> 
+            <a href="/comments/update-comment/<%= comment._id %>" class="update-comment-button" >
+                <i class="fas fa-marker"></i>
+            </a>
+        </small>
+    <% } %>
+    <div class="comment-content" id="comment-<%= comment._id%>-content">
        
        
-        <p>
-           
-            <span><%= comment.content %></span>
+        <div>
+           <span class="comment-text">
+            <% if( comment.user.id!=locals.user.id) {%>
+                <span><%= comment.content %></span>
+            <% } else  {%>
+                <% if(comment.update) {%>
+                    <form action="/comments/update-comment-c2" method="post" class="comment-update-form">
+                        <textarea required  name="content" ><%= comment.content%></textarea>
+                        <input type="hidden" name="comment" value="<%= comment._id%>">
+                        <button type="submit">U</button>
+                    </form>
+                <% } else { %>
+                    <span><%= comment.content %></span>
+                <% } %>
+            <% } %>
+               
+           </span>
             <br>
             <small class="author-comment-name">
                 <a href="/users/profile/<%= comment.user._id %>">
@@ -74,6 +96,8 @@
             <span class="comment-timestamps">
                 <%= comment.createdAt.toLocaleString() %> 
             </span>
-        </p>
+        </div>
     </div>
+
+    
 </li>

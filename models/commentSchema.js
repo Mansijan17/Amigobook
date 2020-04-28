@@ -23,7 +23,12 @@ const commentSchema=new mongoose.Schema({
             type:mongoose.Schema.Types.ObjectId,
             ref:"Like"
         }
-    ]
+    ],
+    update:
+    {
+        type:Boolean,
+        required:true
+    }
 
 },{
     timestamps:true
