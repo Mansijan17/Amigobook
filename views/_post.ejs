@@ -66,19 +66,39 @@
     <div class="post-content" id="post-<%= i._id%>-content">
        
         <div class="post-text">
-            <% if(!i.update) {%>
-        
-                <span> <%= i.content %> </span>
+                <% if(!i.sharedFromPost) {%>
+                    <% if(!i.update) {%>
+                        <span> <%= i.content %> </span>
+                    <% } else { %>
+                        <form action="/posts/update-post-p2" method="post" class="post-update-form">
+                            <textarea required  name="content" ><%= i.content%></textarea>
+                            <input type="hidden" name="post" value="<%= i._id%>">
+                            <button type="submit">Update</button>
+                        </form>
+                        
+                    <% } %>
+                <% } else { %>
+                    <% if(!i.update) {%>
+                        <span> <%= i.content.newContent %> </span>
+                    <% } else { %>
+                        <form action="/posts/update-post-p2" method="post" class="post-update-form">
+                            <textarea required  name="content" ><%= i.content.newContent%></textarea>
+                            <input type="hidden" name="post" value="<%= i._id%>">
+                            <button type="submit">Update</button>
+                        </form>
+                    <% } %>
+                    <div class="copiedPost">
+                        <div class="copiedAuthIntro">
+                            <a href="/users/profile/<%= i.content.prevAuthID%>">
+                                <span><%= i.content.prevAuthName%></span>
+                                <img  src="<%= i.content.prevAuthImage %>">
+                            </a>
+                        </div>
+                        <p><%= i.content.prevAuthContent%></p>
+                    </div>
+                <% } %>
                 
-            <% } else { %>
-                
-                    <form action="/posts/update-post-p2" method="post" class="post-update-form">
-                        <textarea required  name="content" ><%= i.content%></textarea>
-                        <input type="hidden" name="post" value="<%= i._id%>">
-                        <button type="submit">Update</button>
-                    </form>
-                
-            <% } %>
+            
         </div>
         
         <div class="post-comments">
@@ -108,10 +128,62 @@
         <%= i.createdAt.toLocaleString() %> 
     </div>
 
-    <div class="post-share">
-        <a href="/posts/share-post"><%= i.shares.length%>
-        </a>
-    </div>
+    <div class="post-share-box">
+      
+        <div class="post-shares-number" id="post-<%= i._id %>-shares-number">
+            <span class="post-shares-no-display" data-target="#post-<%= i.id %>-shares" data-toggle="modal" ><%= i.shares.length %> </span>
+            <span data-toggle="modal" data-target="#post-<%= i._id%>-share-modal">
+                <i class="fas fa-share"></i>
+        </span>
+        </div>
+        
+        <div class="modal fade" id="post-<%= i.id %>-shares" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="#post-<%=i._id%>-title">Post Shares 
+                      <br></h4>
+                </div>
+                <div class="modal-body">
+                    <ul  class="post-share-username-list" id="post-<%= i._id %>-shares-list">
+                        <% for(share of i.shares) {%>
+                            <li id="share-<%= share._id %>">
+                                
+                                <%- include("_shareDisplay"); %>
+                                
+                            </li>
+                        <% } %>
+                
+                </ul>
+                </div>
+               
+              </div>
+              
+            </div>
+          </div>
+
+        <div class="modal post-share-modal fade" id="post-<%= i._id%>-share-modal" role="dialog" >
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="#post-<%=i._id%>-title">Share this Post?
+                      <br></h4>
+                </div>
+                <div class=" modal-body"  >
+                    <%- include("_sharePostForm"); %>
+                    
+                </div>
+              
+            </div>
+          </div>
+   
+    
+        </div>
+
     
    
 </li>

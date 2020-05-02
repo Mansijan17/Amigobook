@@ -48,7 +48,7 @@ submitsingup.on("click",function()
     confirmpwdID.removeClass("bckgd-dark");
 })
 
-var textarea = document.querySelector('textarea');
+var textarea = document.querySelector('.modal textarea');
 
 textarea.addEventListener('keydown', autosize);
              
@@ -60,4 +60,12 @@ function autosize(){
     // el.style.cssText = '-moz-box-sizing:content-box';
     el.style.cssText = 'height:' + el.scrollHeight + 'px';
   },0);
+}
+
+
+function submitForm(x)
+{
+    console.log(x);
+    let postID=x["name"];
+     $(`#post-${postID}-share-form`).submit();
 }

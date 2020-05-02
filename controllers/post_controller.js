@@ -1,6 +1,8 @@
 const Post=require('../models/post');
 const Comment=require('../models/commentSchema');
 const Like=require('../models/like');
+const User=require('../models/userSchema');
+const Share=require('../models/share');
 const postsMailer=require('../mailer/post_mailer');
 const queue=require('../config/kue');
 const postEmailWorker=require('../worker/post_email_worker');
@@ -28,6 +30,7 @@ module.exports.createPost= async function(req,res)
                 content:req.body.content,
                 user:req.user._id,
                 update:false,
+                sharedFromPost:false
             });
             post=await post.populate("user","name email avatar").execPopulate();
             let job=queue.create("posts",post).save(function(err)
@@ -91,23 +94,35 @@ module.exports.destroyPost=async function(req,res)
         {
             //change::: delete the likes of the post and associated comments
             console.log("remove post ",post);
-
             await Like.deleteMany({likeable:post,onModel:"Post"});
             await Like.deleteMany({_id:{$in:post.comments}});
-
             post.remove();
             await Comment.deleteMany({post:req.params.id});
+            let shareID;
+            if(post.sharedFromPost)
+            {
+               
+               let share=await Share.findOne({createdPost:req.params.id});
+               shareID=share._id;
+               let originalPost=await Post.findById(post.content.prevPostId);
+               originalPost.shares.pull(share);
+               originalPost.save();
+               share.remove();
+            }
+             
             if(req.xhr)
             {
                 console.log("post id ",req.params.id);
                 return res.status(200).json({
                     data:
                     {
-                        post_id:req.params.id
+                        post_id:req.params.id,
+                        shareID:shareID
                     },
                     message:"Post deleted"
                 });
             }
+            
             req.flash("success","Post and associated comments deleted!");
             return res.redirect("back");
         }
@@ -199,3 +214,82 @@ module.exports.updatePost2=async function(req,res)
     }
 }
 
+module.exports.sharePost=async function(req,res)
+{
+    try{
+
+        console.log("share controller called");
+        console.log(req.body);
+        let post=await Post.findById(req.body.post).populate("user","name email gender avatar").populate("shares");
+        let user=await User.findById(req.user.id);
+        //console.log(post);
+        let userName=user.name;
+        let userImage=user.avatar;
+        if(!userImage)
+        {
+            if(user.gender=="male")
+            {
+                userImage="https://i.stack.imgur.com/HQwHI.jpg";
+            }
+            else
+            {
+                userImage="/images/femaleProfile.png"
+            }
+        }
+        let originalPostAuthImage=post.user.avatar;
+        if(!originalPostAuthImage)
+        {
+            if(post.user.gender=="male")
+            {
+                originalPostAuthImage="https://i.stack.imgur.com/HQwHI.jpg";
+            }
+            else
+            {
+                originalPostAuthImage="/images/femaleProfile.png"
+            }
+        }
+        let newcreatedPost=await Post.create({
+                content:{
+                    prevAuthName:post.user.name,
+                    prevAuthID:post.user.id,
+                    prevAuthImage:originalPostAuthImage,
+                    prevAuthContent:post.content,
+                    prevPostId:req.body.post,
+                    newContent:req.body.content,
+                },
+                user:req.user._id,
+                update:false,
+                sharedFromPost:true,
+        })
+       // console.log(newcreatedPost);
+        let newShare=await Share.create({
+                post:req.body.post,
+                user:req.user._id,
+                createdPost:newcreatedPost._id
+        });
+        //console.log(newShare);
+        shareID=newShare._id;
+        post.shares.push(newShare._id);
+        post.save();
+        return res.json(200,{
+            message:"Request successful!",
+            data:{
+                newPostID:newcreatedPost._id,
+                name:userName,
+                originalPostID:req.body.post,
+                shareID:shareID,
+                userID:req.user._id,
+                userImage:userImage,
+                newContent:req.body.content,
+                prevContent:post.content
+            }
+        })
+        // req.flash("success","Post shared successfully!");
+        // return res.redirect("back");
+    }
+    catch(err)
+    {
+        console.log("error in sharing post ",err);
+        return;
+    }
+}

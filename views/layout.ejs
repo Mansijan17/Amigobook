@@ -62,15 +62,20 @@
     <script src="/js/home_posts.js"></script>
     <script src="/js/like.js"></script>
     <script src="/js/home.js"></script>
+    <script src="/js/share.js"></script>
     <script src="/js/chat_engine.js"></script>
     <script>
         $('.toggle-like-button').each(function(){
             let self = this;
-            console.log("changing present toggle");
             let toggleLike = new ToggleLike(self);
+        });
+        $('.toggle-share-button').each(function(){
+            let self = this;
+            let postShare = new SharePost(self);
         });
 
     </script>
+    
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 
 

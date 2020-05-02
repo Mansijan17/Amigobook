@@ -1,0 +1,26 @@
+<form action="/posts/share-post/" method="post" class="toggle-share-button" data-shares="<%= i.shares.length %>" id="post-<%= i._id %>-share-form">
+    <input type="text" name="content" required value="Add some thoughts to it!!!">
+    <input type="hidden" name="post" value="<%= i._id%>">
+    
+
+    <div class="shared-post-form">
+        <p>
+            <a href="/users/profile/<%= i.user._id %>">
+                <% if(i.user.avatar) {%>
+                    <img src="<%= i.user.avatar %>"> 
+                <% } else if (i.user.gender=="male"){%>
+                    <img src="https://i.stack.imgur.com/HQwHI.jpg" width="100" height="100">
+                <% }  else {%>
+                    <img src="/images/femaleProfile.png" width="100" height="100">
+                <% } %>
+                    <span><%= i.user.name %></span>
+            </a>
+        </p>
+        <p class="share-content">
+            <%= i.content%>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button onclick="submitForm(this)" class="btn btn-secondary" data-dismiss="modal" name="<%= i._id %>">Submit</button>
+    </div>
+</form>

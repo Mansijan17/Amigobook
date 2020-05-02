@@ -23,7 +23,7 @@
                     //call the create comment class
                     new PostComments(data.data.post._id);
                     new ToggleLike($(" .toggle-like-button", newPost));
-
+                    new ToggleShare($(" .toggle-share-button", newPost));
                     new Noty({
                         theme:"relax",
                         text:"Post published!",
@@ -231,7 +231,7 @@
             deletePost(deleteButton);
 
             let postId=self.prop("id").split("-")[1];
-            new PostComments(postId)
+            new PostComments(postId);
         })
     }
     creatPost();

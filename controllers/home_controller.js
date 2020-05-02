@@ -81,6 +81,14 @@ module.exports.home = async function(req, res){
                 populate:{
                     path:"user"
                 }
+            }).populate({
+                path:"shares",
+                options:{
+                    sort:"-createdAt"
+                },
+                populate:{
+                    path:"user"
+                }
             });
        // await Comment.find({}).sort("-createdAt");
       // console.log(postLists.comments);

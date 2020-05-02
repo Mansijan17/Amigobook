@@ -34,7 +34,15 @@ module.exports.profile = async function (req, res) {
             populate:{
                 path:"user"
             }
-        });
+        }).populate({
+            path:"shares",
+            options:{
+                sort:"-createdAt"
+            },
+            populate:{
+                path:"user"
+            }
+        });;
 
         return res.render('userProfile', {
             title: `${user.name} | Socialends`,

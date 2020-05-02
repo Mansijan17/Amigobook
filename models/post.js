@@ -9,7 +9,8 @@ const postSchema=new mongoose.Schema({
     user:
     {
         type:mongoose.Schema.Types.ObjectId,
-        ref:"User"
+        ref:"User",
+        required:true
     },
     //including the array of ids of all comments in this post itself
     comments:
@@ -30,10 +31,14 @@ const postSchema=new mongoose.Schema({
     shares:[
         {
             type:mongoose.Schema.Types.ObjectId,
-            ref:"User"
+            ref:"Share"
         }
     ],
     update:{
+        type:Boolean,
+        required:true
+    },
+    sharedFromPost:{
         type:Boolean,
         required:true
     }
