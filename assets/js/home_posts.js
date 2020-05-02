@@ -248,23 +248,26 @@
                 {
                     console.log(data.data);
                    // $(`#post-${data.data.postId}-content .post-text`).html(`hhh`);
-                   $(`#post-${data.data.postID}-content .post-text span`).remove();
-                   if(!data.data.shared)
-                   {
-                        $(`#post-${data.data.postID}-content .post-text`).prepend(`<form action="/posts/update-post-p2" method="post" class="post-update-form">
-                        <textarea required  name="content" >${data.data.content}</textarea>
-                        <input type="hidden" name="post" value="${data.data.postID}">
-                        <button type="submit">Update</button>
-                        </form>`);
-                   }
-                   else
-                   {
-                        $(`#post-${data.data.postID}-content .post-text`).prepend(`<form action="/posts/update-post-p2" method="post" class="post-update-form">
-                        <textarea required  name="content" >${data.data.content.newContent}</textarea>
-                        <input type="hidden" name="post" value="${data.data.postID}">
-                        <button type="submit">Update</button>
-                        </form>`);
-                   }
+                   $(`#post-${data.data.postID}-content .post-text > span`).remove();
+                   
+                        if(!data.data.shared)
+                        {
+                                $(`#post-${data.data.postID}-content .post-text`).prepend(`<form action="/posts/update-post-p2" method="post" class="post-update-form">
+                                <textarea required  name="content" >${data.data.content}</textarea>
+                                <input type="hidden" name="post" value="${data.data.postID}">
+                                <button type="submit">Update</button>
+                                </form>`);
+                        }
+                        else
+                        {
+                                $(`#post-${data.data.postID}-content .post-text`).prepend(`<form action="/posts/update-post-p2" method="post" class="post-update-form">
+                                <textarea required  name="content" >${data.data.content.newContent}</textarea>
+                                <input type="hidden" name="post" value="${data.data.postID}">
+                                <button type="submit">Update</button>
+                                </form>`);
+                               
+
+                        }
                     
                     upadePostContent();
 

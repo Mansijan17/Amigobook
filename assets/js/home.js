@@ -67,5 +67,6 @@ function submitForm(x)
 {
     console.log(x);
     let postID=x["name"];
+    console.log(postID);
      $(`#post-${postID}-share-form`).submit();
 }

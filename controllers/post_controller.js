@@ -147,21 +147,25 @@ module.exports.updatePost=async function(req,res)
         let post=await Post.findById(id);
         if(post.user==req.user.id)
         {
-            post.update=true;
-            post.save();
-            if(req.xhr)
+            if(!post.update)
             {
-                return res.json(200,{
-                    data:
-                    {
-                        postID:id,
-                        content:post.content,
-                        shared:post.sharedFromPost
-                    },
-                    message:"Form Put"
-                })
+                post.update=true;
+                post.save();
+                if(req.xhr)
+                {
+                    return res.json(200,{
+                        data:
+                        {
+                            postID:id,
+                            content:post.content,
+                            shared:post.sharedFromPost,
+                        },
+                        message:"Form Put"
+                    })
+                }
+                return res.redirect("back");
             }
-            return res.redirect("back");
+            
         }
         else
         {
@@ -191,7 +195,8 @@ module.exports.updatePost2=async function(req,res)
             }
             else
             {
-                post.content.newContent=req.body.content;
+                //post.content["newContent"]=req.body.content;
+                await Post.findByIdAndUpdate(id,{$set:{"content.newContent":req.body.content}});
                 
             }
             post.save();
@@ -266,6 +271,7 @@ module.exports.sharePost=async function(req,res)
                     prevAuthContent:post.content,
                     prevPostId:req.body.post,
                     newContent:req.body.content,
+                    prevPostShares:post.shares.length+1,
                 },
                 user:req.user._id,
                 update:false,

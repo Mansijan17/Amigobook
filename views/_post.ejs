@@ -131,7 +131,9 @@
     <div class="post-share-box">
       
         <div class="post-shares-number" id="post-<%= i._id %>-shares-number">
-            <span class="post-shares-no-display" data-target="#post-<%= i.id %>-shares" data-toggle="modal" ><%= i.shares.length %> </span>
+            <% if(!i.sharedFromPost) {%>
+                <span class="post-shares-no-display" data-target="#post-<%= i.id %>-shares" data-toggle="modal" ><%= i.shares.length %> </span>
+            <% } %>
             <span data-toggle="modal" data-target="#post-<%= i._id%>-share-modal">
                 <i class="fas fa-share"></i>
             </span>
@@ -163,7 +165,7 @@
               
             </div>
           </div>
-
+          
         <div class="modal post-share-modal fade" id="post-<%= i._id%>-share-modal" role="dialog" >
             <div class="modal-dialog">
             
