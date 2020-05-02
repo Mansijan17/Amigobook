@@ -110,21 +110,20 @@ module.exports.destroyPost=async function(req,res)
                share.remove();
             }
              
-            if(req.xhr)
-            {
-                console.log("post id ",req.params.id);
-                return res.status(200).json({
-                    data:
-                    {
-                        post_id:req.params.id,
+            if(req.xhr){
+                console.log("post id ",req.params.id,shareID,post.content.prevPostId);
+                return res.json(200,{
+                    data:{
+                        originalPostID:post.content.prevPostId,
+                        postID:req.params.id,
                         shareID:shareID
                     },
-                    message:"Post deleted"
+                    message:"Post deleted successfully!"
                 });
-            }
             
-            req.flash("success","Post and associated comments deleted!");
-            return res.redirect("back");
+            }
+            // req.flash("success","Post and associated comments deleted!");
+            // return res.redirect("back");
         }
         else
         {
@@ -156,7 +155,8 @@ module.exports.updatePost=async function(req,res)
                     data:
                     {
                         postID:id,
-                        content:post.content
+                        content:post.content,
+                        shared:post.sharedFromPost
                     },
                     message:"Form Put"
                 })
@@ -184,9 +184,18 @@ module.exports.updatePost2=async function(req,res)
         let post=await Post.findById(id);
         if(post.user==req.user.id)
         {
-            post.content=req.body.content;
             post.update=false;
+            if(!post.sharedFromPost)
+            {
+                post.content=req.body.content;
+            }
+            else
+            {
+                post.content.newContent=req.body.content;
+                
+            }
             post.save();
+            console.log(post);
             if(req.xhr)
             {
                 return res.json(200,{
@@ -222,6 +231,7 @@ module.exports.sharePost=async function(req,res)
         console.log(req.body);
         let post=await Post.findById(req.body.post).populate("user","name email gender avatar").populate("shares");
         let user=await User.findById(req.user.id);
+        //let postUser=post.user;
         //console.log(post);
         let userName=user.name;
         let userImage=user.avatar;
@@ -260,8 +270,9 @@ module.exports.sharePost=async function(req,res)
                 user:req.user._id,
                 update:false,
                 sharedFromPost:true,
-        })
-       // console.log(newcreatedPost);
+        });
+        newcreatedPost.populate("user").execPopulate();
+       console.log(newcreatedPost.user);
         let newShare=await Share.create({
                 post:req.body.post,
                 user:req.user._id,
@@ -275,13 +286,13 @@ module.exports.sharePost=async function(req,res)
             message:"Request successful!",
             data:{
                 newPostID:newcreatedPost._id,
-                name:userName,
-                originalPostID:req.body.post,
+                newUserName:userName,
+                newUserID:req.user._id,
+                newUserImage:userImage,
+                newUserContent:req.body.content,
+                newWholePost:newcreatedPost,
                 shareID:shareID,
-                userID:req.user._id,
-                userImage:userImage,
-                newContent:req.body.content,
-                prevContent:post.content
+                originalPostID:req.body.post,
             }
         })
         // req.flash("success","Post shared successfully!");

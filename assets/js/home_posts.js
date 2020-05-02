@@ -23,7 +23,7 @@
                     //call the create comment class
                     new PostComments(data.data.post._id);
                     new ToggleLike($(" .toggle-like-button", newPost));
-                    new ToggleShare($(" .toggle-share-button", newPost));
+                    new SharePost($(" .toggle-share-button", newPost));
                     new Noty({
                         theme:"relax",
                         text:"Post published!",
@@ -56,7 +56,7 @@
                     <i class="fas fa-thumbs-up like-thumbs"></i>
                 </a>
             </div>
-            <div class="modal fade" id="post-${ i.id }-likes" role="dialog">
+            <div class="modal fade" id="post-${ i._id }-likes" role="dialog">
                 <div class="modal-dialog">
                 
                 <!-- Modal content-->
@@ -110,21 +110,91 @@
                 </form>
                 <div class="post-comment-number" id="post-${ i._id}-comment-number" data-comments="0" data-target="#post-comments-${i._id}-list" data-toggle="collapse" >
                 <span >
-                    <%= i.comments.length %> 
+                    0
                 </span>
                 <i class="fas fa-comments"></i>
             </div>
             </div>
-            <div class="post-comments-list collapse">
+            <div class="post-comments-list collapse" id="post-comments-${i._id }-list">
                 <ul id="post-comments-${i._id}">
                    
                 </ul>
         
             </div>
         </div>
-            <div class="post-timestamps">
-                 ${ i.createdAt.toLocaleString() }
+        <div class="post-timestamps">
+            ${ i.createdAt.toLocaleString() }
+        </div>
+        <div class="post-share-box">
+      
+        <div class="post-shares-number" id="post- ${i._id }-shares-number">
+            <span class="post-shares-no-display" data-target="#post-${i.id}-shares" data-toggle="modal" >0 </span>
+            <span data-toggle="modal" data-target="#post-${i._id}-share-modal">
+                <i class="fas fa-share"></i>
+            </span>
+        </div>
+        
+        <div class="modal fade" id="post-${i._id}-shares" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="#post-${i._id}-title">Post Shares 
+                      <br></h4>
+                </div>
+                <div class="modal-body">
+                    <ul  class="post-share-username-list" id="post-${i._id}-shares-list">
+                       
+                
+                    </ul>
+                </div>
+               
+              </div>
+              
             </div>
+          </div>
+
+        <div class="modal post-share-modal fade" id="post-${i._id}-share-modal" role="dialog" >
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="#post-${i._id}-title">Share this Post?
+                      <br></h4>
+                </div>
+                <div class=" modal-body"  >
+                <form action="/posts/share-post/" method="post" class="toggle-share-button" data-shares="0" id="post-${i._id }-share-form">
+                <input type="text" name="content" required value="Add some thoughts to it!!!">
+                <input type="hidden" name="post" value="${i._id}">
+                
+            
+                <div class="shared-post-form">
+                    <p>
+                        <a href="/users/profile/${i.user._id}">
+                            
+                                <img src="${ i.user.avatar}"> 
+                                <span>${i.user.name}</span>
+                        </a>
+                    </p>
+                    <p class="share-content">
+                        ${i.content}
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="submitForm(this)" class="btn btn-secondary" data-dismiss="modal" name="${ i._id}">Submit</button>
+                </div>
+            </form>
+            
+                    
+                </div>
+              
+            </div>
+          </div>
+   
+    
+        </div>
         </li>`);
     }
 
@@ -138,8 +208,17 @@
                 url:$(deletelink).prop("href"),
                 success:function(data)
                 {
-                    console.log(data.data);
-                    $(`#post-${data.data.post_id}`).remove();
+                    console.log(data);
+                    $(`#post-${data.data.postID}`).remove();
+                    if(data.data.shareID)
+                    {
+                        let shareCounts=parseInt($(`#post-${data.data.originalPostID}-share-form`).attr("data-shares"));
+                        shareCounts-=1;
+                        $(`#post-${data.data.originalPostID}-share-form`).attr("data-shares",shareCounts);
+                        $(`#post-${data.data.originalPostID}-shares-number .post-shares-no-display`).html(`${shareCounts}`);
+                        $(`#share-${data.data.shareID}`).remove();
+
+                    }
                     new Noty({
                         theme:"relax",
                         text:"Post and associated comments are deleted!",
@@ -167,14 +246,26 @@
                 url:$(updateLink).prop("href"),
                 success:function(data)
                 {
-                    //console.log(data.data);
+                    console.log(data.data);
                    // $(`#post-${data.data.postId}-content .post-text`).html(`hhh`);
-                    $(`#post-${data.data.postID}-content .post-text span`).remove();
-                    $(`#post-${data.data.postID}-content .post-text`).append(`<form action="/posts/update-post-p2" method="post" class="post-update-form">
-                    <textarea required  name="content" >${data.data.content}</textarea>
-                    <input type="hidden" name="post" value="${data.data.postID}">
-                    <button type="submit">Update</button>
-                    </form>`);
+                   $(`#post-${data.data.postID}-content .post-text span`).remove();
+                   if(!data.data.shared)
+                   {
+                        $(`#post-${data.data.postID}-content .post-text`).prepend(`<form action="/posts/update-post-p2" method="post" class="post-update-form">
+                        <textarea required  name="content" >${data.data.content}</textarea>
+                        <input type="hidden" name="post" value="${data.data.postID}">
+                        <button type="submit">Update</button>
+                        </form>`);
+                   }
+                   else
+                   {
+                        $(`#post-${data.data.postID}-content .post-text`).prepend(`<form action="/posts/update-post-p2" method="post" class="post-update-form">
+                        <textarea required  name="content" >${data.data.content.newContent}</textarea>
+                        <input type="hidden" name="post" value="${data.data.postID}">
+                        <button type="submit">Update</button>
+                        </form>`);
+                   }
+                    
                     upadePostContent();
 
                 },
@@ -199,7 +290,7 @@
                 {
                     console.log(data.data);
                     $(`#post-${data.data.postID}-content .post-text form`).remove();
-                    $(`#post-${data.data.postID}-content .post-text`).append(`<span>${data.data.content}</span>`);
+                    $(`#post-${data.data.postID}-content .post-text`).prepend(`<span>${data.data.content}</span>`);
                     new Noty({
                         theme:"relax",
                         text:"Post updated successfully!",

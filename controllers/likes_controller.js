@@ -12,6 +12,7 @@ module.exports.toggleLike=async function(req,res)
         //  likes/toggle/?id=abc123&type=Post
         let likeable;
         let deleted=false;
+        console.log("like controller ",req.query);
         if(req.query.type=="Post")
         {
             likeable=await Post.findById(req.query.id).populate("likes").populate("user","name email");
@@ -20,7 +21,7 @@ module.exports.toggleLike=async function(req,res)
         {
             likeable=await Comment.findById(req.query.id).populate("likes").populate("user","name email");
         }
-        //console.log(likeable);
+         console.log(likeable.likes);
         //check if a like already exists
         let existingLike=await Like.findOne({
             likeable:req.query.id,
