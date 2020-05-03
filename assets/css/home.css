@@ -227,6 +227,14 @@ h1:hover {
             width: 50px;
             font-weight: 600;
             cursor: pointer; }
+          .home-container #feed-posts #posts-list-container > ul .post-list .post-comment-number:hover {
+            filter: contrast(1.2); }
+          .home-container #feed-posts #posts-list-container > ul .post-list .post-editedTag {
+            position: absolute;
+            top: 20px;
+            left: 10%;
+            font-size: 15.5px;
+            color: #072433; }
           .home-container #feed-posts #posts-list-container > ul .post-list .author-post-name a {
             color: #121212;
             text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3), 0px -4px 10px rgba(255, 255, 255, 0.3);

@@ -264,6 +264,9 @@ class SharePost{
                                 success:function(data)
                                 {
                                     console.log(data.data);
+                                    $(`#post-${data.data.postID}`).prepend(`<small class="post-editedTag">
+                                        Edited
+                                        </small>`);
                                     $(`#post-${data.data.postID}-content .post-text form`).remove();
                                     $(`#post-${data.data.postID}-content .post-text`).prepend(`<span>${data.data.content}</span>`);
                                     new Noty({

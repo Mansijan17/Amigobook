@@ -364,9 +364,20 @@ h1:hover
                         width: 50px;
                         font-weight: 600;
                         cursor: pointer;
-
-                      
                         
+                    }
+                    .post-comment-number:hover
+                    {
+                        filter: contrast(1.2);
+                    }
+
+                    .post-editedTag
+                    {
+                        position: absolute;
+                        top: 20px;
+                        left: 10%;
+                        font-size: 15.5px;
+                        color: #072433;
                     }
 
                     .author-post-name

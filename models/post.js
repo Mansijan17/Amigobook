@@ -41,6 +41,10 @@ const postSchema=new mongoose.Schema({
     sharedFromPost:{
         type:Boolean,
         required:true
+    },
+    edited:{
+        type:Boolean,
+        required:true
     }
 },
 {

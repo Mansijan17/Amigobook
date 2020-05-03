@@ -51,6 +51,11 @@
             </a>
         </small>
     <% } %>
+    <% if(i.edited) {%>
+        <small class="post-editedTag">
+            Edited
+        </small>
+    <% } %>
     <small class="author-post-name">
         <a href="/users/profile/<%= i.user._id %>">
             <% if(i.user.avatar) {%>

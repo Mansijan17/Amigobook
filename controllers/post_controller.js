@@ -30,7 +30,8 @@ module.exports.createPost= async function(req,res)
                 content:req.body.content,
                 user:req.user._id,
                 update:false,
-                sharedFromPost:false
+                sharedFromPost:false,
+                edited:false
             });
             post=await post.populate("user","name email avatar").execPopulate();
             let job=queue.create("posts",post).save(function(err)
@@ -188,6 +189,7 @@ module.exports.updatePost2=async function(req,res)
         let post=await Post.findById(id);
         if(post.user==req.user.id)
         {
+            post.edited=true,
             post.update=false;
             if(!post.sharedFromPost)
             {
@@ -276,6 +278,7 @@ module.exports.sharePost=async function(req,res)
                 user:req.user._id,
                 update:false,
                 sharedFromPost:true,
+                edited:false
         });
        newcreatedPost.populate("user").execPopulate();
        let timestamps=new Date(newcreatedPost.createdAt).toLocaleString();
