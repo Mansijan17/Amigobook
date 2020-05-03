@@ -128,7 +128,7 @@
         <div class="post-share-box">
       
         <div class="post-shares-number" id="post- ${i._id }-shares-number">
-            <span class="post-shares-no-display" data-target="#post-${i.id}-shares" data-toggle="modal" >0 </span>
+            <span class="post-shares-no-display" data-target="#post-${i.id}-shares" data-toggle="modal" >0</span>
             <span data-toggle="modal" data-target="#post-${i._id}-share-modal">
                 <i class="fas fa-share"></i>
             </span>

@@ -3,15 +3,13 @@ class SharePost{
     {
         this.toggler=toggleElement;
         this.postShare();
-       
-        //this.deletePost($(" .delete-post-button",post));
+    
     }
     
     postShare()
     {
-        //console.log("share f 1");
+        
         let newSharePostForm=$(this.toggler);
-        //console.log(newSharePostForm);
         newSharePostForm.submit(function(e)
         {
             console.log("share f 2");
@@ -128,37 +126,16 @@ class SharePost{
                     </div>
                 </div>
                 <div class="post-timestamps">
-                    ${ i.createdAt.toLocaleString() }
+                    ${ data.data.newPostDate }
                 </div>
                 <div class="post-share-box">
               
                 <div class="post-shares-number" id="post- ${i._id }-shares-number">
-                    <span class="post-shares-no-display" data-target="#post-${i.id}-shares" data-toggle="modal" >0 </span>
                     <span data-toggle="modal" data-target="#post-${i._id}-share-modal">
                         <i class="fas fa-share"></i>
                     </span>
                 </div>
                 
-                <div class="modal fade" id="post-${i._id}-shares" role="dialog">
-                    <div class="modal-dialog">
-                    
-                      <!-- Modal content-->
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h4 class="modal-title" id="#post-${i._id}-title">Post Shares 
-                              <br></h4>
-                        </div>
-                        <div class="modal-body">
-                            <ul  class="post-share-username-list" id="post-${i._id}-shares-list">
-                               
-                        
-                            </ul>
-                        </div>
-                       
-                      </div>
-                      
-                    </div>
-                  </div>
         
                 <div class="modal post-share-modal fade" id="post-${i._id}-share-modal" role="dialog" >
                     <div class="modal-dialog">
@@ -170,25 +147,25 @@ class SharePost{
                               <br></h4>
                         </div>
                         <div class=" modal-body"  >
-                        <form action="/posts/share-post/" method="post" class="toggle-share-button" data-shares="0" id="post-${i._id }-share-form">
+                        <form action="/posts/share-post/" method="post" class="toggle-share-button" data-shares="${i.content.prevPostShares}" id="post-${i.content.prevPostId }-share-form">
                         <input type="text" name="content" required value="Add some thoughts to it!!!">
-                        <input type="hidden" name="post" value="${i._id}">
+                        <input type="hidden" name="post" value="${i.content.prevPostId}">
                         
                     
                         <div class="shared-post-form">
                             <p>
-                                <a href="/users/profile/${data.data.newUserID}">
+                                <a href="/users/profile/${i.content.prevAuthID}">
                                     
-                                        <img src="${data.data.newUserImage}"> 
-                                        <span>$${data.data.newUserName}</span>
+                                        <img src="${i.content.prevAuthImage}"> 
+                                        <span>${i.content.prevAuthName}</span>
                                 </a>
                             </p>
                             <p class="share-content">
-                            ${ i.content.newContent}
+                            ${i.content.prevAuthContent}
                             </p>
                         </div>
                         <div class="modal-footer">
-                            <button onclick="submitForm(this)" class="btn btn-secondary" data-dismiss="modal" name="${ i._id}">Submit</button>
+                            <button onclick="submitForm(this)" class="btn btn-secondary" data-dismiss="modal" name="${ i.content.prevPostId}">Submit</button>
                         </div>
                     </form>
                     
@@ -243,8 +220,68 @@ class SharePost{
                     })
                 }
                 deletePost($(" .delete-post-button",newPost));
-                
+                let updatePost=function(updateLink)
+                {
+                    $(updateLink).click(function(e)
+                    {
+                        e.preventDefault();
+                        $.ajax({
+                            type:"post",
+                            url:$(updateLink).prop("href"),
+                            success:function(data)
+                            {
+                                console.log(data.data);
+                            
+                            $(`#post-${data.data.postID}-content .post-text > span`).remove();
+                            
+                                   
+                                $(`#post-${data.data.postID}-content .post-text`).prepend(`<form action="/posts/update-post-p2" method="post" class="post-update-form">
+                                <textarea required  name="content" >${data.data.content.newContent}</textarea>
+                                    <input type="hidden" name="post" value="${data.data.postID}">
+                                    <button type="submit">Update</button>
+                                    </form>`);
+                                
+                                upadePostContent();
 
+                            },
+                            error:function(err)
+                            {
+                                console.log(err.responseText);
+                            }
+                        })
+                    })
+                }
+                updatePost($(" .update-post-button",newPost));
+                let upadePostContent=function()
+                    {
+                        $(".post-update-form").submit(function(e)
+                        {
+                            e.preventDefault();
+                            $.ajax({
+                                type:"post",
+                                url:"/posts/update-post-p2",
+                                data:$(".post-update-form").serialize(),
+                                success:function(data)
+                                {
+                                    console.log(data.data);
+                                    $(`#post-${data.data.postID}-content .post-text form`).remove();
+                                    $(`#post-${data.data.postID}-content .post-text`).prepend(`<span>${data.data.content}</span>`);
+                                    new Noty({
+                                        theme:"relax",
+                                        text:"Post updated successfully!",
+                                        type:"success",
+                                        layput:"topRight",
+                                        timeout:1500
+                                    }).show();
+                                },
+                                error:function(err)
+                                {
+                                    console.log(err.responseText);
+                                    return;
+                                }
+                            })
+                        })
+                    }
             }).fail(function(err)
             {
                 console.log('error in completing the request ',err);

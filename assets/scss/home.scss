@@ -233,11 +233,11 @@ h1:hover
                             {
                                
                                 
-                                transform: scale(1.3);
+                                transform: scale(1.2);
                             }
-                            span{
+                            span:hover{
 
-                                border-bottom: 1px darkseagreen;
+                                text-decoration: underline;
                             }
                             
                         }
@@ -306,11 +306,15 @@ h1:hover
                                     }
                                     span{
                                         
-                                        transition: all 0.5s ease-in;
+                                        font-variant: small-caps;
                                     }
                                     span:hover
                                     {
-                                        border-bottom: 1px dotted #4a93c5;;
+                                        font-weight: bold;
+                                    }
+                                    img:hover
+                                    {
+                                        filter: brightness(0.8);
                                     }
                                 }
                             }
@@ -383,7 +387,7 @@ h1:hover
                             }
                             img:hover
                             {
-                                box-shadow: 0px 0px 5px 2px cadetblue;
+                                filter: contrast(0.7);
                             }
                         }
                         span:hover
@@ -441,6 +445,14 @@ h1:hover
                                             background: #4eb380;
                                             padding: 2px;
                                             overflow-wrap: break-word;
+                                            
+                                        }
+                                        span:hover{
+                                           border: 1px dashed darkgreen;
+                                        }
+                                        img:hover
+                                        {
+                                            filter: contrast(1.5);
                                         }
                                     }
                                     >span
@@ -709,11 +721,15 @@ h1:hover
                                                     }
                                                     span{
                                         
-                                                        transition: all 0.5s ease-in;
+                                                        font-variant: petite-caps;
                                                     }
                                                     span:hover
                                                     {
-                                                        border-bottom: 1px dotted #4a93c5;;
+                                                        font-weight: bold;
+                                                    }
+                                                    img:hover
+                                                    {
+                                                        filter: brightness(0.8);
                                                     }
                                                 }
                                         }
@@ -825,6 +841,9 @@ h1:hover
                                                         width: 20px;
                                                         border-radius: 50%;
                                                     }
+                                                    img:hover{
+                                                        filter: contrast(1.5);
+                                                    }
                                                     .author-tag
                                                     {
                                                         background-color: lightseagreen;
@@ -832,6 +851,10 @@ h1:hover
                                                         padding: 2px;
                                                         color: white;
                                                     }
+                                                }
+                                                a:hover
+                                                {
+                                                    color: darkslategrey;
                                                 }
                                             }
 
@@ -932,8 +955,12 @@ h1:hover
                             span{
                                 cursor: pointer;
                             }
-                            a i:hover{
-                                transform: scale(1.5);
+                            span:hover
+                            {
+                                text-decoration: underline;
+                            }
+                            i:hover{
+                                transform: scale(1.3);
                             }
                         }
                         
@@ -999,6 +1026,8 @@ h1:hover
 
                                 a{
                                     color: #006881;
+                                    font-size: 16px;
+                                    font-variant-caps: all-petite-caps;
                                     img{
                                         height: 32px;
                                         width: 32px;
@@ -1012,6 +1041,10 @@ h1:hover
                                     span:hover
                                     {
                                         border-bottom: 1px dotted #4a93c5;;
+                                    }
+                                    img:hover
+                                    {
+                                        filter: contrast(1.2);
                                     }
                                 }
                             }
@@ -1073,6 +1106,18 @@ h1:hover
                                             a{
                                                 font-size: 18px;
                                                 color: #0e4657;
+
+                                                span,img
+                                                {
+                                                    transition: all 0.4s ease-in;
+                                                }
+                                                span:hover
+                                                {
+                                                    border-bottom: 1px solid #0e4657;;
+                                                }
+                                                img:hover{
+                                                    box-shadow: 0px 0px 4px 1px darkgrey;
+                                                }
                                             }
                                             img{
                                                 height: 40px;
@@ -1086,6 +1131,13 @@ h1:hover
                                             color: darkslategrey;
                                             font-size: 18px;
                                             margin-top: 20px;
+                                        }
+                                    }
+                                    .modal-footer
+                                    {
+                                        button:focus
+                                        {
+                                            outline: none;
                                         }
                                     }
                                     

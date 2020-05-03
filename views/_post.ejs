@@ -3,7 +3,7 @@
 <li  id="post-<%= i.id %>" class="post-list animated-box in">
     <div class="post-like-box">
         <div class="post-likes-number" id="post-<%= i._id %>-likes-number">
-            <span data-target="#post-<%= i.id %>-likes" data-toggle="modal" ><%= i.likes.length %> </span>
+            <span data-target="#post-<%= i.id %>-likes" data-toggle="modal" ><%= i.likes.length %></span>
             <a class="toggle-like-button " href="/likes/toggle/?id=<%=i._id%>&type=Post" data-likes="<%= i.likes.length %>">
                 <i class="fas fa-thumbs-up like-thumbs"></i>
             </a>
@@ -132,59 +132,61 @@
       
         <div class="post-shares-number" id="post-<%= i._id %>-shares-number">
             <% if(!i.sharedFromPost) {%>
-                <span class="post-shares-no-display" data-target="#post-<%= i.id %>-shares" data-toggle="modal" ><%= i.shares.length %> </span>
+                <span class="post-shares-no-display" data-target="#post-<%= i.id %>-shares" data-toggle="modal" ><%= i.shares.length %></span>
             <% } %>
             <span data-toggle="modal" data-target="#post-<%= i._id%>-share-modal">
                 <i class="fas fa-share"></i>
             </span>
         </div>
-        
-        <div class="modal fade" id="post-<%= i._id %>-shares" role="dialog">
-            <div class="modal-dialog">
-            
-              <!-- Modal content-->
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title" id="#post-<%=i._id%>-title">Post Shares 
-                      <br></h4>
-                </div>
-                <div class="modal-body">
-                    <ul  class="post-share-username-list" id="post-<%= i._id %>-shares-list">
-                        <% for(share of i.shares) {%>
-                            <li id="share-<%= share._id %>">
-                                
-                                <%- include("_shareDisplay"); %>
-                                
-                            </li>
-                        <% } %>
+        <% if(!i.sharedFromPost) {%>
+            <div class="modal fade" id="post-<%= i._id %>-shares" role="dialog">
+                <div class="modal-dialog">
                 
-                </ul>
-                </div>
-               
-              </div>
-              
-            </div>
-          </div>
-          
-        <div class="modal post-share-modal fade" id="post-<%= i._id%>-share-modal" role="dialog" >
-            <div class="modal-dialog">
-            
-              <!-- Modal content-->
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title" id="#post-<%=i._id%>-title">Share this Post?
-                      <br></h4>
-                </div>
-                <div class=" modal-body"  >
-                    <%- include("_sharePostForm"); %>
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h4 class="modal-title" id="#post-<%=i._id%>-title">Post Shares 
+                        <br></h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul  class="post-share-username-list" id="post-<%= i._id %>-shares-list">
+                            <% for(share of i.shares) {%>
+                                <li id="share-<%= share._id %>">
+                                    
+                                    <%- include("_shareDisplay"); %>
+                                    
+                                </li>
+                            <% } %>
                     
+                    </ul>
+                    </div>
+                
                 </div>
-              
+                
+                </div>
             </div>
-          </div>
-   
+          <% } %>
+        
+            <div class="modal post-share-modal fade" id="post-<%= i._id%>-share-modal" role="dialog" >
+                <div class="modal-dialog">
+                
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h4 class="modal-title" id="#post-<%=i._id%>-title">Share this Post?
+                        <br></h4>
+                    </div>
+                    <div class=" modal-body"  >
+                        <%- include("_sharePostForm"); %>
+                        
+                    </div>
+                
+                </div>
+            </div>
     
-        </div>
+        
+            </div>
+       
 
     
    

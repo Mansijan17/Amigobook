@@ -140,11 +140,13 @@
               position: absolute;
               left: -35px;
               top: 0px;
+          
             }
 
             img:hover
             {
-              box-shadow: 0px 0px 7px 2px lightsteelblue;
+              filter: drop-shadow(1px 3px 5px #ABDEE5);
+              
             }
 
             a

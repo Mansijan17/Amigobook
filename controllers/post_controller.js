@@ -277,8 +277,9 @@ module.exports.sharePost=async function(req,res)
                 update:false,
                 sharedFromPost:true,
         });
-        newcreatedPost.populate("user").execPopulate();
-       console.log(newcreatedPost.user);
+       newcreatedPost.populate("user").execPopulate();
+       let timestamps=new Date(newcreatedPost.createdAt).toLocaleString();
+       console.log(timestamps);
         let newShare=await Share.create({
                 post:req.body.post,
                 user:req.user._id,
@@ -299,6 +300,7 @@ module.exports.sharePost=async function(req,res)
                 newWholePost:newcreatedPost,
                 shareID:shareID,
                 originalPostID:req.body.post,
+                newPostDate:timestamps
             }
         })
         // req.flash("success","Post shared successfully!");
