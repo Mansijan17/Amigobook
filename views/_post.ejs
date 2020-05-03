@@ -72,25 +72,34 @@
        
         <div class="post-text">
                 <% if(!i.sharedFromPost) {%>
-                    <% if(!i.update) {%>
+                    <% if(locals.user.id!=i.user.id) { %>
                         <span> <%= i.content %> </span>
                     <% } else { %>
-                        <form action="/posts/update-post-p2" method="post" class="post-update-form">
-                            <textarea required  name="content" ><%= i.content%></textarea>
-                            <input type="hidden" name="post" value="<%= i._id%>">
-                            <button type="submit">Update</button>
-                        </form>
-                        
+                        <% if(!i.update ) {%>
+                            <span> <%= i.content %> </span>
+                        <% } else { %>
+                            <form action="/posts/update-post-p2" method="post" class="post-update-form">
+                                <textarea required  name="content" ><%= i.content%></textarea>
+                                <input type="hidden" name="post" value="<%= i._id%>">
+                                <button type="submit">Update</button>
+                            </form>
+                            
+                        <% } %>
                     <% } %>
+                    
                 <% } else { %>
-                    <% if(!i.update) {%>
+                    <% if(locals.user.id!=i.user.id) { %>
                         <span> <%= i.content.newContent %> </span>
                     <% } else { %>
-                        <form action="/posts/update-post-p2" method="post" class="post-update-form">
-                            <textarea required  name="content" ><%= i.content.newContent%></textarea>
-                            <input type="hidden" name="post" value="<%= i._id%>">
-                            <button type="submit">Update</button>
-                        </form>
+                        <% if(!i.update) {%>
+                            <span> <%= i.content.newContent %> </span>
+                        <% } else { %>
+                            <form action="/posts/update-post-p2" method="post" class="post-update-form">
+                                <textarea required  name="content" ><%= i.content.newContent%></textarea>
+                                <input type="hidden" name="post" value="<%= i._id%>">
+                                <button type="submit">Update</button>
+                            </form>
+                        <% } %>
                     <% } %>
                     <div class="copiedPost">
                         <div class="copiedAuthIntro">

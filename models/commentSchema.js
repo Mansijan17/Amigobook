@@ -28,6 +28,11 @@ const commentSchema=new mongoose.Schema({
     {
         type:Boolean,
         required:true
+    },
+    edited:
+    {
+        type:Boolean,
+        required:true,
     }
 
 },{

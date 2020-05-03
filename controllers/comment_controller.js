@@ -43,7 +43,8 @@ module.exports.createComment=async function(req,res)
                             content:req.body.content,
                             post:req.body.post,
                             user:req.user._id,
-                            update:false
+                            update:false,
+                            edited:false
                         });
            
           // console.log(newcomment);
@@ -169,7 +170,6 @@ module.exports.destroyComment=async function(req,res)
             post.save();
             //CHANGE:: delete the likes of the comments
             await Like.deleteMany({likeable:comment._id,onModel:"Comment"});
-            console.log(req);
             if(req.xhr)
             {
                 console.log("xhr");
@@ -204,18 +204,15 @@ module.exports.updateComment=async function(req,res)
     {
         let id=req.params.id;
         let comment=await Comment.findById(id);
-        //console.log(comment);
+        console.log("update controller 1");
         if(comment.user.id==req.user.id)
         {
-            comment.update=true;
-            comment.save();
-            //req.headers['x-requested-with'] ="XMLHttpRequest";
-            //console.log(req.headers['x-requested-with']);
-            console.log(req.xhr);
-            if(req.xhr)
+            if(!comment.update)
             {
-                console.log("xhr");
-                return res.status(200).json({
+                
+                comment.update=true;
+                comment.save();
+                return res.json(200,{
                     data:
                     {
                         commentID:id,
@@ -223,8 +220,9 @@ module.exports.updateComment=async function(req,res)
                     },
                     message:"Form Put"
                 })
+            
             }
-            return res.redirect("back");
+            
         }
         else
         {
@@ -249,21 +247,19 @@ module.exports.updateComment2=async function(req,res)
         {
             comment.content=req.body.content;
             comment.update=false;
+            comment.edited=true;
             comment.save();
-            console.log(req.xhr);
-            if(req.xhr)
-            {
-                return res.json(200,{
+            
+           
+            return res.json(200,{
                     data:
                     {
                         commentID:id,
                         content:req.body.content
                     },
                     message:"Comment Updated Successfully"
-                });
-            }
-            req.flash("success","Successfully updated comment!");
-            return res.redirect("back");
+            });
+            
         }
         else
         {

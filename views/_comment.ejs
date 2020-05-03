@@ -52,6 +52,9 @@
             </a>
         </small>
     <% } %>
+    <% if(comment.edited) { %>
+        <small class="comment-editedTag">Edited</small>
+    <% } %>
     <div class="comment-content" id="comment-<%= comment._id%>-content">
        
        

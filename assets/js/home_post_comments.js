@@ -148,7 +148,7 @@ class PostComments{
         <div class="comment-content" id="comment-${comment._id}-content">    
                            
             <div>    
-                <span>${comment.content}</span>
+                <span class="comment-text"><span>${comment.content}</span></span>
                 <br>
                 <small class="author-comment-name">
                 <a href="/users/profile/${comment.user._id }">
@@ -201,8 +201,10 @@ class PostComments{
 
     updateComment(updateLink)
     {
-        $(updateLink).submit(function(e)
+        
+        $(updateLink).click(function(e)
         {
+          
             e.preventDefault();
             $.ajax({
                 type:"get",
@@ -210,6 +212,50 @@ class PostComments{
                 success:function(data)
                 {
                     console.log(data.data);
+                   
+                    $(`#comment-${ data.data.commentID}-content div .comment-text > span`).remove();
+                    $(`#comment-${ data.data.commentID}-content div .comment-text`).append(`<form action="/comments/update-comment-c2" method="post" class="comment-update-form">
+                    <textarea required  name="content" >${ data.data.content}</textarea>
+                    <input type="hidden" name="comment" value="${ data.data.commentID}">
+                    <button type="submit">U</button>
+                    </form>`)
+                    
+                    let upadeCommentContent=function()
+                    {
+                        console.log("h1");
+                        $(".comment-update-form").submit(function(e)
+                        {
+                            console.log("h2");
+                            e.preventDefault();
+                            $.ajax({
+                                type:"post",
+                                url:"/comments/update-comment-c2",
+                                data:$(".comment-update-form").serialize(),
+                                success:function(data)
+                                {
+                                    console.log(data.data);
+                                    $(`#comment-${data.data.commentID}`).prepend(`<small class="comment-editedTag">
+                                    Edited
+                                    </small>`);
+                                    $(`#comment-${data.data.commentID}-content .comment-text form`).remove();
+                                    $(`#comment-${data.data.commentID}-content .comment-text `).prepend(`<span>${data.data.content}</span>`);
+                                    new Noty({
+                                        theme:"relax",
+                                        text:"Comment updated successfully!",
+                                        type:"success",
+                                        layput:"topRight",
+                                        timeout:1500
+                                    }).show();
+                                },
+                                error:function(err)
+                                {
+                                    console.log(err.responseText);
+                                    return;
+                                }
+                            })
+                        })
+                    }
+                    upadeCommentContent();
                 },
                 error:function(err)
                 {
@@ -218,4 +264,6 @@ class PostComments{
             })
         })
     }
+    
+   
 }
