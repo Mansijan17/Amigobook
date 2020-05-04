@@ -234,9 +234,13 @@ class PostComments{
                                 success:function(data)
                                 {
                                     console.log(data.data);
-                                    $(`#comment-${data.data.commentID}`).prepend(`<small class="comment-editedTag">
-                                    Edited
-                                    </small>`);
+                                    if(data.data.edited)
+                                    {
+                                            $(`#comment-${data.data.commentID}`).prepend(`<small class="comment-editedTag">
+                                        Edited
+                                        </small>`);
+                                    }
+                                    
                                     $(`#comment-${data.data.commentID}-content .comment-text form`).remove();
                                     $(`#comment-${data.data.commentID}-content .comment-text `).prepend(`<span>${data.data.content}</span>`);
                                     new Noty({

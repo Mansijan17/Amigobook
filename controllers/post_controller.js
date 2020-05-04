@@ -189,16 +189,23 @@ module.exports.updatePost2=async function(req,res)
         let post=await Post.findById(id);
         if(post.user==req.user.id)
         {
-            post.edited=true,
             post.update=false;
             if(!post.sharedFromPost)
             {
-                post.content=req.body.content;
-            }
+                if(post.content!=req.body.content)
+                {
+                    post.edited=true;
+                    post.content=req.body.content;
+                }
+            } 
             else
             {
                 //post.content["newContent"]=req.body.content;
-                await Post.findByIdAndUpdate(id,{$set:{"content.newContent":req.body.content}});
+                if(post.content.newContent!=req.body.content)
+                {
+                    await Post.findByIdAndUpdate(id,{$set:{"content.newContent":req.body.content}});
+                    post.edited=true;
+                }
                 
             }
             post.save();
@@ -209,7 +216,8 @@ module.exports.updatePost2=async function(req,res)
                     data:
                     {
                         postID:id,
-                        content:req.body.content
+                        content:req.body.content,
+                        edited:post.edited
                     },
                     message:"Post Updated Successfully"
                 });
@@ -236,6 +244,11 @@ module.exports.sharePost=async function(req,res)
 
         console.log("share controller called");
         console.log(req.body);
+        if(req.body.content=="")
+        {
+            req.flash("error","Empty Caption!");
+            return res.redirect("back");
+        }
         let post=await Post.findById(req.body.post).populate("user","name email gender avatar").populate("shares");
         let user=await User.findById(req.user.id);
         //let postUser=post.user;

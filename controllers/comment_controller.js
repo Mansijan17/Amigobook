@@ -250,17 +250,20 @@ module.exports.updateComment2=async function(req,res)
         let comment=await Comment.findById(id);
         if(comment.user.id==req.user.id)
         {
-            comment.content=req.body.content;
+            if(comment.content!=req.body.content)
+            {
+                    comment.edited=true;
+                    comment.content=req.body.content;
+            }
             comment.update=false;
-            comment.edited=true;
             comment.save();
-            
            
             return res.json(200,{
                     data:
                     {
                         commentID:id,
-                        content:req.body.content
+                        content:req.body.content,
+                        edited:comment.edited
                     },
                     message:"Comment Updated Successfully"
             });
