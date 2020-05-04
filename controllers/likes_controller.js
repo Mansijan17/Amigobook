@@ -73,6 +73,13 @@ module.exports.toggleLike=async function(req,res)
                     likedUser:user,
                     type:req.query.type
                 }
+                if(req.query.type=="Post")
+                {
+                    if(likeable.sharedFromPost)
+                    {
+                        likeOnPostandComments.content=likeable.content.newContent;
+                    }
+                }
                 if(likeable.user.id!=user.id)
                 {
                     let job=queue.create("likeOnPostsandComments",likeOnPostandComments).save(function(err)

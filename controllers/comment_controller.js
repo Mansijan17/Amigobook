@@ -48,7 +48,7 @@ module.exports.createComment=async function(req,res)
                         });
            
           // console.log(newcomment);
-           post.comments.push(newcomment);
+            post.comments.push(newcomment);
             post.save();
             let length=post.comments.length;
             console.log("length ",length);
@@ -57,14 +57,19 @@ module.exports.createComment=async function(req,res)
             let commentOnPost={
                 name:post.user.name,
                 email:post.user.email,
-                content:post.content,
-                comment:newcomment
+                comment:newcomment,
+                content:post.content
             }
             let nextComment={
                 comment:newcomment,
                 postContent:post.content
             }
-           // console.log("new post ",commentOnPost);
+            if(post.sharedFromPost)
+            {
+                commentOnPost.content=post.content.newContent;
+                nextComment.postContent=post.content.newContent;
+            }
+          
            /// CommentsMailer.newComment(newcoment);
            let job=queue.create("emails",nextComment).save(function(err)
            {

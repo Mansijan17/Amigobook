@@ -292,6 +292,26 @@ module.exports.sharePost=async function(req,res)
         shareID=newShare._id;
         post.shares.push(newShare._id);
         post.save();
+        let shareOnPost={
+            name:post.user.name,
+            email:post.user.email,
+            content:post.content,
+            sharedUserName:user.name
+        }
+        if(post.user.id!=user.id)
+        {
+            let job2=queue.create("shareonposts",shareOnPost).save(function(err)
+            {
+                if(err)
+                {
+                    console.log("error in creating a queue ",err);
+                    return;
+                }
+                console.log("share on post job enqueued " ,job2.id);
+
+            });
+        }
+
         return res.json(200,{
             message:"Request successful!",
             data:{

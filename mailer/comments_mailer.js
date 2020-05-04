@@ -24,13 +24,13 @@ exports.newComment=(comment)=>{
 
 exports.newCommentOnPost=(post)=>{
     console.log("inside new comment on post ",post);
-    console.log(post.comment.content);
+
     let htmlString=nodemailer.renderTemplate({post:post,comment:post.comment},"/posts/new_comment_on_post.ejs")
 
     nodemailer.transporter.sendMail({
         from:"manjarijain1998@gmail.com",
         to:post.email,
-        subject:`${post.comment.user.name} posted new comment on your post ${post.content}!`,
+        subject:`${post.comment.user.name} posted new comment on your post!`,
         html:htmlString
     }, (err,info)=>{
         if(err)

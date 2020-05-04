@@ -7,3 +7,10 @@ queue.process("posts",function(job,done)
     postsMailer.newPost(job.data);
     done();
 });
+
+queue.process("shareonposts",function(job,done)
+{
+    console.log("share post workers is processing the job ",job.data);
+    postsMailer.NewShareOnPost(job.data);
+    done();
+});

@@ -21,3 +21,24 @@ exports.newPost=(post)=>{
         return;
     });
 }
+
+exports.NewShareOnPost=(post)=>{
+    console.log("inside new share on post ",post);
+
+    let htmlString=nodemailer.renderTemplate({post:post},"/posts/share_post.ejs")
+
+    nodemailer.transporter.sendMail({
+        from:"manjarijain1998@gmail.com",
+        to:post.email,
+        subject:`${post.sharedUserName} shared your post!`,
+        html:htmlString
+    }, (err,info)=>{
+        if(err)
+        {
+            console.log("Error in sending mail ",err);
+            return;
+        }
+       // console.log("Email sent ",info);
+        return;
+    });
+}
