@@ -257,9 +257,11 @@ h1:hover
                                     width: 100%;
                                     .modal-title
                                     {
-                                        .like-thumbs:hover
+                                        span
                                         {
-                                            opacity: 1 !important;
+                                            display: block;
+                                            color: mediumvioletred;
+                                            margin-top: 5px;
                                         }
                                     }
                                     .modal-body
@@ -646,14 +648,19 @@ h1:hover
                                       
                                         .comment-likes-number
                                         {
+                                            font-size: 17.5px;
                                             span
                                             {
-                                                color:darkmagenta;
+                                                color: darkmagenta;
+                                                display: inline-block;
                                                 cursor: pointer;
+                                                margin-left: 5px;
                                             }
                                             a{
                                                 
                                                 color:#145556;
+                                                position: absolute;
+                                                left: 21px;
                                             }
                                             span:hover
                                             {
@@ -705,13 +712,11 @@ h1:hover
                                                     .modal-title
                                                     {
                                                         text-align: center;
-                                                        i
+                                                        span
                                                         {
-                                                            color: black;
-                                                        }
-                                                        .like-thumbs:hover
-                                                        {
-                                                            opacity: 1 !important;
+                                                            display: block;
+                                                            margin-top: 5px;
+                                                            color: mediumvioletred;
                                                         }
                                                     }
                                                     .modal-body
@@ -864,6 +869,7 @@ h1:hover
                                                 display: inline-block;
                                                 overflow-wrap: break-word;
                                                 width: 100%;
+                                                font-size: 17px;
 
                                                 .comment-update-form
                                                 {
@@ -1053,13 +1059,12 @@ h1:hover
                                     .modal-title
                                     {
                                         text-align: center;
-                                        i
-                                        {
-                                            color: black;
-                                        }
-                                        .like-thumbs:hover
-                                        {
-                                            opacity: 1 !important;
+                                        color: black;
+                                        span{
+                                            display: block;
+                                            margin-top: 5px;
+                                            font-size: 21px;
+                                            color: teal;
                                         }
                                     }
                                     .modal-body

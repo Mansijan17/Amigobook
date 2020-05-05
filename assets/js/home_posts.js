@@ -51,7 +51,7 @@
            
         <div class="post-like-box">
             <div class="post-likes-number" id="post-${ i._id }-likes-number">
-                <span data-target="#post-${i._id }-likes" data-toggle="modal">0</span>
+                <span data-target="#post-${i._id }-likes" data-toggle="modal"></span>
                 <a class="toggle-like-button" href="/likes/toggle/?id=${i._id}&type=Post" data-likes="0">
                     <i class="fas fa-thumbs-up like-thumbs"></i>
                 </a>
@@ -62,8 +62,8 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                    <h4 class="modal-title" id="#post-${i._id}-title">Post Reactions  
-                        <br></i></h4>
+                    <h4 class="modal-title" id="post-${i._id}-like-title">Post Reactions  
+                        <span><i class="far fa-heart"></i></span></h4>
                     </div>
                     <div class="modal-body">
                         <ul  class="post-like-username-list" id="post-${ i._id }-likes-list">
@@ -125,9 +125,9 @@
                     <input type="hidden" name="post" value="${ i._id }">
                     <button type="submit">Add comment</button>
                 </form>
-                <div class="post-comment-number" id="post-${ i._id}-comment-number" data-comments="0" data-target="#post-comments-${i._id}-list" data-toggle="collapse" >
+                <div class="post-comment-number" id="post-${ i._id}-comment-number" data-comments="0" data-target="#post-comments-${i._id}-list"  >
                 <span >
-                    0
+                    
                 </span>
                 <i class="fas fa-comments"></i>
             </div>
@@ -145,7 +145,7 @@
         <div class="post-share-box">
       
         <div class="post-shares-number" id="post- ${i._id }-shares-number">
-            <span class="post-shares-no-display" data-target="#post-${i.id}-shares" data-toggle="modal" >0</span>
+            <span class="post-shares-no-display" data-target="#post-${i.id}-shares" data-toggle="modal" ></span>
             <span data-toggle="modal" data-target="#post-${i._id}-share-modal">
                 <i class="fas fa-share"></i>
             </span>
@@ -157,8 +157,10 @@
               <!-- Modal content-->
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title" id="#post-${i._id}-title">Post Shares 
-                      <br></h4>
+                  <h4 class="modal-title" id="post-${i._id}-share-title">Post Shares 
+                    <span>
+                    <i class="fas fa-share-square"></i>
+                    </span></h4>
                 </div>
                 <div class="modal-body">
                     <ul  class="post-share-username-list" id="post-${i._id}-shares-list">
@@ -232,7 +234,16 @@
                         let shareCounts=parseInt($(`#post-${data.data.originalPostID}-share-form`).attr("data-shares"));
                         shareCounts-=1;
                         $(`#post-${data.data.originalPostID}-share-form`).attr("data-shares",shareCounts);
-                        $(`#post-${data.data.originalPostID}-shares-number .post-shares-no-display`).html(`${shareCounts}`);
+                        if(shareCounts>0)
+                        {
+                            $(`#post-${data.data.originalPostID}-shares-number .post-shares-no-display`).html(`${shareCounts}`);
+                            $(`#post-${ data.data.originalPostID}-share-title span`).html(`${sharesCount} <i class="fas fa-share-square"></i>`);
+                        }
+                        else
+                        {
+                            $(`#post-${data.data.originalPostID}-shares-number .post-shares-no-display`).html(``);
+                            $(`#post-${ data.data.originalPostID}-share-title span`).html(`<i class="fas fa-share-square"></i>`);
+                        }
                         $(`#share-${data.data.shareID}`).remove();
 
                     }

@@ -75,7 +75,12 @@ class PostComments{
                     let commentsCount=parseInt($(`#post-${postId}-comment-number`).attr("data-comments"));
                     commentsCount+=1;
                     $(`#post-${postId}-comment-number`).attr("data-comments",commentsCount);
-                    $(`#post-${postId}-comment-number`).html(`${commentsCount} <i class="fas fa-comments"></i>`);
+                    
+                    
+                        $(`#post-${postId}-comment-number`).attr("data-toggle","collapse");
+                        $(`#post-${postId}-comment-number`).html(`<span>${commentsCount}</span> <i class="fas fa-comments"></i>`);
+                    
+                    
                   
                     pSelf.deleteComment($(' .delete-comment-button', newComment));
                     pSelf.updateComment($(' .update-comment-button', newComment));
@@ -105,7 +110,7 @@ class PostComments{
 
         <div class="comment-like-box">
                 <div class="comment-likes-number" id="comment-${comment._id }-likes-number">
-                    <span data-target="#comment-${ comment._id }-likes" data-toggle="modal">0</span>
+                    <span data-target="#comment-${ comment._id }-likes" data-toggle="modal"></span>
                     <a class="toggle-like-button" href="/likes/toggle/?id=${comment._id}&type=Comment" data-likes="0">
                         <i class="fas fa-thumbs-up like-thumbs"></i>
                     </a>
@@ -117,8 +122,11 @@ class PostComments{
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h4 class="modal-title">Comment Reactions  
-                            <br></i></h4>
+                        <h4 class="modal-title" id="comment-${comment._id}-like-title">>Comment Reactions  
+                        <span>
+                       
+                        <i class="far fa-heart"></i>
+                      </span></h4>
                         </div>
                         <div class="modal-body">
                             
@@ -198,7 +206,16 @@ class PostComments{
                     console.log(commentsCount);
                     commentsCount-=1;
                     $(`#post-${data.data.postID}-comment-number`).attr("data-comments",commentsCount);
-                    $(`#post-${data.data.postID}-comment-number`).html(`${commentsCount} <i class="fas fa-comments"></i>`);
+                    if(commentsCount>0)
+                    {
+                        $(`#post-${data.data.postID}-comment-number`).attr("data-toggle","collapse");
+                        $(`#post-${data.data.postID}-comment-number`).html(`<span>${commentsCount}</span> <i class="fas fa-comments"></i>`);
+                    }
+                    else
+                    {
+                        $(`#post-${data.data.postID}-comment-number`).removeAttr("data-toggle");
+                        $(`#post-${data.data.postID}-comment-number`).html(`<span></span> <i class="fas fa-comments"></i>`);
+                    }
                     new Noty({
                         theme: 'relax',
                         text: "Comment Deleted!",

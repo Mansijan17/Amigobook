@@ -163,8 +163,10 @@ h1:hover {
                 width: 500px; }
                 .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .modal .modal-dialog .modal-content {
                   width: 100%; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .modal .modal-dialog .modal-content .modal-title .like-thumbs:hover {
-                    opacity: 1 !important; }
+                  .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .modal .modal-dialog .modal-content .modal-title span {
+                    display: block;
+                    color: mediumvioletred;
+                    margin-top: 5px; }
                   .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .modal .modal-dialog .modal-content .modal-body {
                     height: auto;
                     display: flex;
@@ -406,13 +408,19 @@ h1:hover {
                     left: 86%;
                     position: relative;
                     margin-bottom: 15px; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-likes-number span {
-                      color: darkmagenta;
-                      cursor: pointer; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-likes-number a {
-                      color: #145556; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-likes-number span:hover {
-                      color: #113a3b; }
+                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-likes-number {
+                      font-size: 17.5px; }
+                      .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-likes-number span {
+                        color: darkmagenta;
+                        display: inline-block;
+                        cursor: pointer;
+                        margin-left: 5px; }
+                      .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-likes-number a {
+                        color: #145556;
+                        position: absolute;
+                        left: 21px; }
+                      .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-likes-number span:hover {
+                        color: #113a3b; }
                     .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-view-likes {
                       position: absolute;
                       top: 0px;
@@ -438,10 +446,10 @@ h1:hover {
                           width: 100%; }
                           .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .modal .modal-dialog .modal-content .modal-title {
                             text-align: center; }
-                            .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .modal .modal-dialog .modal-content .modal-title i {
-                              color: black; }
-                            .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .modal .modal-dialog .modal-content .modal-title .like-thumbs:hover {
-                              opacity: 1 !important; }
+                            .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .modal .modal-dialog .modal-content .modal-title span {
+                              display: block;
+                              margin-top: 5px;
+                              color: mediumvioletred; }
                           .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .modal .modal-dialog .modal-content .modal-body {
                             height: auto;
                             display: flex;
@@ -534,7 +542,8 @@ h1:hover {
                         margin-bottom: 5px;
                         display: inline-block;
                         overflow-wrap: break-word;
-                        width: 100%; }
+                        width: 100%;
+                        font-size: 17px; }
                         .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content > div .comment-text .comment-update-form {
                           display: flex;
                           justify-content: space-around; }
@@ -649,11 +658,13 @@ h1:hover {
                 .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .modal .modal-dialog .modal-content {
                   width: 100%; }
                   .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .modal .modal-dialog .modal-content .modal-title {
-                    text-align: center; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .modal .modal-dialog .modal-content .modal-title i {
-                      color: black; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .modal .modal-dialog .modal-content .modal-title .like-thumbs:hover {
-                      opacity: 1 !important; }
+                    text-align: center;
+                    color: black; }
+                    .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .modal .modal-dialog .modal-content .modal-title span {
+                      display: block;
+                      margin-top: 5px;
+                      font-size: 21px;
+                      color: teal; }
                   .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .modal .modal-dialog .modal-content .modal-body {
                     height: auto;
                     display: flex;

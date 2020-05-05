@@ -3,7 +3,11 @@
 <li  id="post-<%= i.id %>" class="post-list animated-box in">
     <div class="post-like-box">
         <div class="post-likes-number" id="post-<%= i._id %>-likes-number">
-            <span data-target="#post-<%= i.id %>-likes" data-toggle="modal" ><%= i.likes.length %></span>
+            <% if(i.likes.length>0) { %>
+                <span data-target="#post-<%= i.id %>-likes" data-toggle="modal" ><%= i.likes.length %></span>
+            <% } else {%>
+                <span data-target="#post-<%= i.id %>-likes" data-toggle="modal" ></span>
+            <% } %>
             <a class="toggle-like-button " href="/likes/toggle/?id=<%=i._id%>&type=Post" data-likes="<%= i.likes.length %>">
                 <i class="fas fa-thumbs-up like-thumbs"></i>
             </a>
@@ -15,8 +19,16 @@
               <!-- Modal content-->
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title" id="#post-<%=i._id%>-title">Post Reactions  
-                      <br></h4>
+                  <h4 class="modal-title" id="post-<%=i._id%>-like-title">Post Reactions  
+                      
+                      <span>
+                        <% if(i.likes.length>0) { %>
+                            <%= i.likes.length%>
+                        <% } %>
+                        <i class="far fa-heart"></i>
+                      </span>
+
+                </h4>
                 </div>
                 <div class="modal-body">
                     <ul  class="post-like-username-list" id="post-<%= i._id %>-likes-list">
@@ -137,20 +149,30 @@
                 <input type="hidden" name="post" value="<%= i._id %>">
                 <button type="submit">Add comment</button>
             </form>
-            <div class="post-comment-number" id="post-<%= i._id%>-comment-number" data-comments="<%= i.comments.length %>" data-target="#post-comments-<%= i._id %>-list" data-toggle="collapse" >
-                <span >
-                    <%= i.comments.length %> 
-                </span>
+            <% if(i.comments.length>0) {%>
+                <div class="post-comment-number" id="post-<%= i._id%>-comment-number" data-comments="<%= i.comments.length %>" data-target="#post-comments-<%= i._id %>-list" data-toggle="collapse" >
+                        <span >
+                            <%= i.comments.length %> 
+                        </span>
+                    
+                    <i class="fas fa-comments"></i>
+                </div>
+            <% } else { %>
+                <div class="post-comment-number" id="post-<%= i._id%>-comment-number" data-comments="<%= i.comments.length %>" data-target="#post-comments-<%= i._id %>-list">
+                    <span >
+                    </span>
+                
                 <i class="fas fa-comments"></i>
             </div>
+            <% } %>
         </div>
         <div class="post-comments-list collapse" id="post-comments-<%= i._id %>-list">
-            <ul id="post-comments-<%= i._id %>">
-                <% for(comment of i.comments) { %>
-                   <%- include("_comment") -%>
-                <% } %>
-            </ul>
-    
+                <ul id="post-comments-<%= i._id %>">
+                    <% for(comment of i.comments) { %>
+                    <%- include("_comment") -%>
+                    <% } %>
+                </ul>
+        
         </div>
     </div>
 
@@ -162,7 +184,12 @@
       
         <div class="post-shares-number" id="post-<%= i._id %>-shares-number">
             <% if(!i.sharedFromPost) {%>
-                <span class="post-shares-no-display" data-target="#post-<%= i.id %>-shares" data-toggle="modal" ><%= i.shares.length %></span>
+                <% if(i.shares.length>0) {%>
+                    <span class="post-shares-no-display" data-target="#post-<%= i.id %>-shares" data-toggle="modal" ><%= i.shares.length %></span>
+                <% } else { %>
+                    <span class="post-shares-no-display" data-target="#post-<%= i.id %>-shares" data-toggle="modal" ></span>
+                <% } %>
+                
             <% } %>
             <span data-toggle="modal" data-target="#post-<%= i._id%>-share-modal">
                 <i class="fas fa-share"></i>
@@ -175,8 +202,14 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                    <h4 class="modal-title" id="#post-<%=i._id%>-title">Post Shares 
-                        <br></h4>
+                    <h4 class="modal-title" id="post-<%=i._id%>-share-title">Post Shares 
+                        <span>
+                            <% if(i.shares.length>0) { %>
+                                <%= i.shares.length%>
+                            <% } %>
+                            <i class="fas fa-share-square"></i>
+                          </span>
+                    </h4>
                     </div>
                     <div class="modal-body">
                         <ul  class="post-share-username-list" id="post-<%= i._id %>-shares-list">

@@ -32,6 +32,7 @@ class SharePost{
                             <span>${data.data.newUserName}</span>
                     </a></li>`) 
                 $(`#post-${ data.data.originalPostID}-shares-number .post-shares-no-display`).html(`${sharesCount}`);
+                $(`#post-${ data.data.originalPostID}-share-title span`).html(`${sharesCount} <i class="fas fa-share-square"></i>`);
                 new Noty({
                     theme:"relax",
                     text:"Post shared!",
@@ -45,7 +46,7 @@ class SharePost{
                    
                 <div class="post-like-box">
                     <div class="post-likes-number" id="post-${ i._id }-likes-number">
-                        <span data-target="#post-${i._id }-likes" data-toggle="modal">0</span>
+                        <span data-target="#post-${i._id }-likes" data-toggle="modal"></span>
                         <a class="toggle-like-button" href="/likes/toggle/?id=${i._id}&type=Post" data-likes="0">
                             <i class="fas fa-thumbs-up like-thumbs"></i>
                         </a>
@@ -56,8 +57,8 @@ class SharePost{
                         <!-- Modal content-->
                         <div class="modal-content">
                             <div class="modal-header">
-                            <h4 class="modal-title" id="#post-${i._id}-title">Post Reactions  
-                                <br></i></h4>
+                            <h4 class="modal-title" id="post-${i._id}-like-title">Post Reactions  
+                                <span><i class="far fa-heart"></i></span></h4>
                             </div>
                             <div class="modal-body">
                                 <ul  class="post-like-username-list" id="post-${ i._id }-likes-list">
@@ -127,9 +128,9 @@ class SharePost{
                             <input type="hidden" name="post" value="${ i._id }">
                             <button type="submit">Add comment</button>
                         </form>
-                        <div class="post-comment-number" id="post-${ i._id}-comment-number" data-comments="0" data-target="#post-comments-${i._id}-list" data-toggle="collapse" >
+                        <div class="post-comment-number" id="post-${ i._id}-comment-number" data-comments="0" data-target="#post-comments-${i._id}-list" >
                         <span >
-                          0
+                          
                         </span>
                         <i class="fas fa-comments"></i>
                     </div>
@@ -216,7 +217,16 @@ class SharePost{
                                     let shareCounts=parseInt($(`#post-${data.data.originalPostID}-share-form`).attr("data-shares"));
                                     shareCounts-=1;
                                     $(`#post-${data.data.originalPostID}-share-form`).attr("data-shares",shareCounts);
-                                    $(`#post-${data.data.originalPostID}-shares-number .post-shares-no-display`).html(`${shareCounts}`);
+                                    if(shareCounts>0)
+                                    {
+                                        $(`#post-${data.data.originalPostID}-shares-number .post-shares-no-display`).html(`${shareCounts}`);
+                                    }
+                                    else
+                                    {
+                                        $(`#post-${data.data.originalPostID}-shares-number .post-shares-no-display`).html(``);
+                                    }
+                                    
+                                    
                                     $(`#share-${data.data.shareID}`).remove();
 
                                 }

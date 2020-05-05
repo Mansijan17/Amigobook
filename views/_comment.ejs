@@ -4,7 +4,11 @@
 
     <div class="comment-like-box">
         <div class="comment-likes-number" id="comment-<%= comment._id %>-likes-number">
-            <span data-target="#comment-<%= comment._id %>-likes" data-toggle="modal"><%= comment.likes.length %></span>
+            <span data-target="#comment-<%= comment._id %>-likes" data-toggle="modal">
+                <% if(comment.likes.length>0) {%>
+                    <%= comment.likes.length %>
+                <% } %>
+            </span>
             <a class="toggle-like-button" href="/likes/toggle/?id=<%=comment._id%>&type=Comment" data-likes="<%= comment.likes.length %>">
                 <i class="fas fa-thumbs-up like-thumbs"></i>
             </a>
@@ -16,8 +20,14 @@
               <!-- Modal content-->
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">Comment Reactions  
-                      <br></i></h4>
+                  <h4 class="modal-title" id="comment-<%=comment._id%>-like-title">Comment Reactions  
+                    <span>
+                        <% if(comment.likes.length>0) { %>
+                            <%= comment.likes.length%>
+                        <% } %>
+                        <i class="far fa-heart"></i>
+                      </span>
+                    </h4>
                 </div>
                 <div class="modal-body">
                     

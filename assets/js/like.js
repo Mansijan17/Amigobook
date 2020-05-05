@@ -34,8 +34,20 @@ class ToggleLike{
                             <span>${data.data.name}</span>
                             </a></li>`)  
                 }
+                
                 $(self).attr("data-likes",likesCount);
-                $(`#${data.data.type}-${ data.data.id}-likes-number span`).html(`${likesCount}`)
+                if(likesCount>0)
+                {
+                
+                    $(`#${data.data.type}-${ data.data.id}-likes-number span`).html(`${likesCount}`)
+                    $(`#${data.data.type}-${ data.data.id}-like-title span`).html(`${likesCount} <i class="far fa-heart"></i>`)
+                }
+                else
+                {
+                    $(`#${data.data.type}-${ data.data.id}-likes-number span`).html(``);
+                    $(`#${data.data.type}-${ data.data.id}-like-title span`).html(` <i class="far fa-heart"></i>`);
+                }
+                
                 
 
             }).fail(function(err)
