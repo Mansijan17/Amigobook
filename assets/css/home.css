@@ -206,14 +206,28 @@ h1:hover {
                 font-family: "Font Awesome 5 Free";
                 display: inline-block;
                 color: #BF0A30; }
-          .home-container #feed-posts #posts-list-container > ul .post-list .delete-post-button {
+          .home-container #feed-posts #posts-list-container > ul .post-list .delete-post-modal {
             position: absolute;
             top: 13px;
             left: 13px;
             color: #C9A687;
-            font-size: 22.4px; }
-          .home-container #feed-posts #posts-list-container > ul .post-list .delete-post-button:hover i, .home-container #feed-posts #posts-list-container > ul .post-list .update-post-button:hover i {
+            font-size: 22.4px;
+            cursor: pointer; }
+          .home-container #feed-posts #posts-list-container > ul .post-list .delete-post-modal:hover i, .home-container #feed-posts #posts-list-container > ul .post-list .update-post-button:hover i {
             box-shadow: 0px 0px 6px 1px goldenrod; }
+          .home-container #feed-posts #posts-list-container > ul .post-list #deletePostModal {
+            width: 400px;
+            margin: auto;
+            margin-top: 150px;
+            color: black; }
+            .home-container #feed-posts #posts-list-container > ul .post-list #deletePostModal .modal-dialog {
+              width: 100%; }
+              .home-container #feed-posts #posts-list-container > ul .post-list #deletePostModal .modal-dialog .modal-body {
+                font-size: 16px; }
+              .home-container #feed-posts #posts-list-container > ul .post-list #deletePostModal .modal-dialog .modal-footer a {
+                color: white; }
+              .home-container #feed-posts #posts-list-container > ul .post-list #deletePostModal .modal-dialog .modal-footer button:focus {
+                outline: none; }
           .home-container #feed-posts #posts-list-container > ul .post-list .update-post-button {
             position: absolute;
             left: 5%;
@@ -475,12 +489,27 @@ h1:hover {
                     position: absolute;
                     left: 9px;
                     top: 7px; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion a {
+                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion span i {
                       font-weight: bolder;
                       font-size: 15px;
-                      translate: all 0.4s ease-in; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion a:hover {
+                      translate: all 0.4s ease-in;
+                      cursor: pointer; }
+                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion span i:hover {
                       color: #90212a; }
+                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion #deleteCommentModal {
+                      width: 400px;
+                      margin: auto;
+                      margin-top: 150px;
+                      color: black; }
+                      .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion #deleteCommentModal .modal-dialog {
+                        width: 100%;
+                        text-align: center; }
+                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion #deleteCommentModal .modal-dialog .modal-body {
+                          font-size: 16px; }
+                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion #deleteCommentModal .modal-dialog .modal-footer a {
+                          color: white; }
+                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion #deleteCommentModal .modal-dialog .modal-footer button:focus {
+                          outline: none; }
                   .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .update-comment-button {
                     position: absolute;
                     top: 8px;

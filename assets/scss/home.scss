@@ -332,19 +332,44 @@ h1:hover
                     }
 
                     
-                    .delete-post-button
+                    .delete-post-modal
                     {
                         position: absolute;
                         top: 13px;
                         left: 13px;
                         color: #C9A687;
                         font-size: 22.4px;
+                        cursor: pointer;
                     }
-                    .delete-post-button:hover,.update-post-button:hover
+                    .delete-post-modal:hover,.update-post-button:hover
                     {
                         i
                         {
                             box-shadow: 0px 0px 6px 1px goldenrod;
+                        }
+                    }
+                    #deletePostModal
+                    {
+                        width: 400px;
+                        margin: auto;
+                        margin-top: 150px;
+                        color:black;
+                        .modal-dialog
+                        {
+                            width: 100%;
+                            .modal-body
+                            {
+                                font-size: 16px;  
+                            }
+                            .modal-footer
+                            {
+                                a{
+                                    color: white;
+                                }
+                                 button:focus{
+                                    outline: none;
+                                 }
+                            }
                         }
                     }
                     .update-post-button
@@ -767,15 +792,41 @@ h1:hover
                                         left: 9px;
                                         top: 7px;
 
-                                        a{
+                                        span i{
                                             font-weight: bolder;
                                             font-size: 15px;
                                             translate: all 0.4s ease-in;
+                                            cursor: pointer;
                                         }
 
-                                        a:hover
+                                        span i:hover
                                         {
                                             color:#90212a;
+                                        }
+                                        #deleteCommentModal
+                                        {
+                                            width: 400px;
+                                            margin: auto;
+                                            margin-top: 150px;
+                                            color:black;
+                                            .modal-dialog
+                                            {
+                                                width: 100%;
+                                                text-align: center;
+                                                .modal-body
+                                                {
+                                                    font-size: 16px;  
+                                                }
+                                                .modal-footer
+                                                {
+                                                    a{
+                                                        color: white;
+                                                    }
+                                                    button:focus{
+                                                        outline: none;
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
 

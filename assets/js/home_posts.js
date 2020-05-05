@@ -81,9 +81,26 @@
         </div>
         
         <small> 
-        <a href="/posts/destroy-post/${ i._id }" class="delete-post-button">
-            <i class="fas fa-trash-alt"></i>
-        </a>
+        <span data-toggle="modal" data-target="#deletePostModal" class="delete-post-modal">
+        <i class="fas fa-trash-alt"></i>
+    </span>
+    <div class="modal fade" tabindex="-1" role="dialog" id="deletePostModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title"><i class="fas fa-trash-alt"></i> Post?</h2>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to delete it?</p>
+            </div>
+            <div class="modal-footer">
+              <a href="/posts/destroy-post/${ i._id }" class="delete-post-button btn btn-danger" data-dismiss="modal">Remove</a>
+              <button type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
+            </div>
+          </div>
+        </div>
+      </div>
+        
         </small>
         <small> 
             <a href="/posts/update-post/${i._id }" class="update-post-button">
