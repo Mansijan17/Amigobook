@@ -81,10 +81,10 @@
         </div>
         
         <small> 
-        <span data-toggle="modal" data-target="#deletePostModal" class="delete-post-modal">
+        <span data-toggle="modal" data-target="#post-${ i._id}-delete-modal" class="delete-post-modal">
         <i class="fas fa-trash-alt"></i>
     </span>
-    <div class="modal fade" tabindex="-1" role="dialog" id="deletePostModal">
+    <div class="modal fade post-delete-modal" tabindex="-1" role="dialog" id="post-${ i._id}-delete-modal">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -147,7 +147,7 @@
         <div class="post-shares-number" id="post- ${i._id }-shares-number">
             <span class="post-shares-no-display" data-target="#post-${i.id}-shares" data-toggle="modal" ></span>
             <span data-toggle="modal" data-target="#post-${i._id}-share-modal">
-                <i class="fas fa-share"></i>
+            <i class="fas fa-share-square"></i>
             </span>
         </div>
         
@@ -159,7 +159,8 @@
                 <div class="modal-header">
                   <h4 class="modal-title" id="post-${i._id}-share-title">Post Shares 
                     <span>
-                    <i class="fas fa-share-square"></i>
+                   
+                    <i class="fas fa-share"></i>
                     </span></h4>
                 </div>
                 <div class="modal-body">

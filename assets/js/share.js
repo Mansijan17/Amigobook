@@ -21,6 +21,17 @@ class SharePost{
             }).done(function(data)
             {
                 console.log(data.data);
+                if(!data.data.valid)
+                {
+                    new Noty({
+                        theme:"relax",
+                        text:"Original Post Deleted. Hence can't be shared!",
+                        type:"error",
+                        layput:"topRight",
+                        timeout:1500
+                    }).show();
+                    return;
+                }
                 let sharesCount=parseInt(newSharePostForm.attr("data-shares"));
                 console.log(sharesCount);
                 sharesCount+=1;
@@ -76,10 +87,10 @@ class SharePost{
                 </div>
                 
                 <small> 
-                <span data-toggle="modal" data-target="#deletePostModal" class="delete-post-modal">
+                <span data-toggle="modal" data-target="#post-${ i._id}-delete-modal" class="delete-post-modal">
         <i class="fas fa-trash-alt"></i>
     </span>
-    <div class="modal fade" tabindex="-1" role="dialog" id="deletePostModal">
+    <div class="modal fade post-delete-modal" tabindex="-1" role="dialog" id="post-${ i._id}-delete-modal">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -149,7 +160,8 @@ class SharePost{
               
                 <div class="post-shares-number" id="post- ${i._id }-shares-number">
                     <span data-toggle="modal" data-target="#post-${i._id}-share-modal">
-                        <i class="fas fa-share"></i>
+                       
+                        <i class="fas fa-share-square"></i>
                     </span>
                 </div>
                 

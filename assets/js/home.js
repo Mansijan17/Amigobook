@@ -70,3 +70,11 @@ function submitForm(x)
     console.log(postID);
      $(`#post-${postID}-share-form`).submit();
 }
+
+// function submitReplyModal(x)
+// {
+//     console.log(x);
+//     let commentID=x["name"];
+//     console.log(commentID);
+//      $(`#comment-${commentID}-reply-form`).submit();
+// }

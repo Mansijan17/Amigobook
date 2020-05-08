@@ -1,0 +1,21 @@
+<li id="reply-<%= reply._id%>">
+    <div class="reply-author-tag">
+        <a href="/users/profile/<%= reply.user._id %>">
+            <% if(reply.user.avatar) {%>
+                    <img src="<%= reply.user.avatar %>"> 
+            <% } else if (reply.user.gender=="male"){%>
+                    <img src="https://i.stack.imgur.com/HQwHI.jpg" width="100" height="100">
+            <% }  else {%>
+                    <img src="/images/femaleProfile.png" width="100" height="100">
+            <% } %>
+            <% if(reply.user.id==i.user.id) { %>
+                <span><%= reply.user["name"] %></span><span class="Author-tag" style="width: 45px;"> Author</span>
+            <% } else { %>
+                <span><%= reply.user["name"] %></span>
+            <% } %>
+        </a>
+    </div>
+
+    <div class="reply-content"><%= reply.content%></div>
+    
+</li>

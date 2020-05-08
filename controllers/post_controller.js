@@ -90,13 +90,18 @@ module.exports.destroyPost=async function(req,res)
     try
     {
         let post=await Post.findById(req.params.id);
-        //console.log(post);
+        console.log(post.id);
         if(post.user==req.user.id)
         {
             //change::: delete the likes of the post and associated comments
             console.log("remove post ",post);
+            let comments=post.comments;
+            for(let comment of comments)
+            {
+                await Like.deleteMany({likeable:comment,onModel:"Comment"});
+            }
             await Like.deleteMany({likeable:post,onModel:"Post"});
-            await Like.deleteMany({_id:{$in:post.comments}});
+           // await Like.deleteMany({_id:{$in:post.comments}});
             post.remove();
             await Comment.deleteMany({post:req.params.id});
             let shareID;
@@ -106,9 +111,20 @@ module.exports.destroyPost=async function(req,res)
                let share=await Share.findOne({createdPost:req.params.id});
                shareID=share._id;
                let originalPost=await Post.findById(post.content.prevPostId);
+               console.log(originalPostID);
                originalPost.shares.pull(share);
                originalPost.save();
                share.remove();
+            }
+            else
+            {
+                let postsBornFromThisPost=await Post.find({"content.prevPostId":post.id});
+                //console.log(postsBornFromThisPost);
+                for(let bornpost of postsBornFromThisPost)
+                {
+                    await Post.findByIdAndUpdate(bornpost._id,{$set:{"content.prevPostId":null,"content.prevPostShares":null,"content.prevAuthID":null,"content.prevAuthName":null,"content.prevAuthImage":null,"content.prevAuthContent":null}});
+                    await Share.deleteOne({createdPost:bornpost.id});
+                }
             }
              
             if(req.xhr){
@@ -250,95 +266,117 @@ module.exports.sharePost=async function(req,res)
             return res.redirect("back");
         }
         let post=await Post.findById(req.body.post).populate("user","name email gender avatar").populate("shares");
-        let user=await User.findById(req.user.id);
-        //let postUser=post.user;
         //console.log(post);
-        let userName=user.name;
-        let userImage=user.avatar;
-        if(!userImage)
+        let valid=true;
+    
+        if(post==null)
         {
-            if(user.gender=="male")
-            {
-                userImage="https://i.stack.imgur.com/HQwHI.jpg";
-            }
-            else
-            {
-                userImage="/images/femaleProfile.png"
-            }
-        }
-        let originalPostAuthImage=post.user.avatar;
-        if(!originalPostAuthImage)
-        {
-            if(post.user.gender=="male")
-            {
-                originalPostAuthImage="https://i.stack.imgur.com/HQwHI.jpg";
-            }
-            else
-            {
-                originalPostAuthImage="/images/femaleProfile.png"
-            }
-        }
-        let newcreatedPost=await Post.create({
-                content:{
-                    prevAuthName:post.user.name,
-                    prevAuthID:post.user.id,
-                    prevAuthImage:originalPostAuthImage,
-                    prevAuthContent:post.content,
-                    prevPostId:req.body.post,
-                    newContent:req.body.content,
-                    prevPostShares:post.shares.length+1,
-                },
-                user:req.user._id,
-                update:false,
-                sharedFromPost:true,
-                edited:false
-        });
-       newcreatedPost.populate("user").execPopulate();
-       let timestamps=new Date(newcreatedPost.createdAt).toLocaleString();
-       console.log(timestamps);
-        let newShare=await Share.create({
-                post:req.body.post,
-                user:req.user._id,
-                createdPost:newcreatedPost._id
-        });
-        //console.log(newShare);
-        shareID=newShare._id;
-        post.shares.push(newShare._id);
-        post.save();
-        let shareOnPost={
-            name:post.user.name,
-            email:post.user.email,
-            content:post.content,
-            sharedUserName:user.name
-        }
-        if(post.user.id!=user.id)
-        {
-            let job2=queue.create("shareonposts",shareOnPost).save(function(err)
-            {
-                if(err)
-                {
-                    console.log("error in creating a queue ",err);
-                    return;
+            valid=false;
+            return res.json(200,{
+                message:"Request successful!",
+                data:{
+                   
+                    valid:valid
                 }
-                console.log("share on post job enqueued " ,job2.id);
-
-            });
+            })
         }
+        else
+        {
+                let user=await User.findById(req.user.id);
+                //let postUser=post.user;
+                //console.log(post);
+                let userName=user.name;
+                let userImage=user.avatar;
+                if(!userImage)
+                {
+                    if(user.gender=="male")
+                    {
+                        userImage="https://i.stack.imgur.com/HQwHI.jpg";
+                    }
+                    else
+                    {
+                        userImage="/images/femaleProfile.png"
+                    }
+                }
+                let originalPostAuthImage=post.user.avatar;
+                if(!originalPostAuthImage)
+                {
+                    if(post.user.gender=="male")
+                    {
+                        originalPostAuthImage="https://i.stack.imgur.com/HQwHI.jpg";
+                    }
+                    else
+                    {
+                        originalPostAuthImage="/images/femaleProfile.png"
+                    }
+                }
+                newcreatedPost=await Post.create({
+                        content:{
+                            prevAuthName:post.user.name,
+                            prevAuthID:post.user.id,
+                            prevAuthImage:originalPostAuthImage,
+                            prevAuthContent:post.content,
+                            prevPostId:req.body.post,
+                            newContent:req.body.content,
+                            prevPostShares:post.shares.length+1,
+                        },
+                        user:req.user._id,
+                        update:false,
+                        sharedFromPost:true,
+                        edited:false
+                });
+            newcreatedPost.populate("user").execPopulate();
+            let timestamps=new Date(newcreatedPost.createdAt).toLocaleString();
+            console.log(timestamps);
+                let newShare=await Share.create({
+                        post:req.body.post,
+                        user:req.user._id,
+                        createdPost:newcreatedPost._id
+                });
+                //console.log(newShare);
+                shareID=newShare._id;
+                post.shares.push(newShare._id);
+                post.save();
+                let shareOnPost={
+                    name:post.user.name,
+                    email:post.user.email,
+                    content:post.content,
+                    sharedUserName:user.name
+                }
+                if(post.user.id!=user.id)
+                {
+                    let job2=queue.create("shareonposts",shareOnPost).save(function(err)
+                    {
+                        if(err)
+                        {
+                            console.log("error in creating a queue ",err);
+                            return;
+                        }
+                        console.log("share on post job enqueued " ,job2.id);
 
-        return res.json(200,{
-            message:"Request successful!",
-            data:{
-                newPostID:newcreatedPost._id,
-                newUserName:userName,
-                newUserID:req.user._id,
-                newUserImage:userImage,
-                newUserContent:req.body.content,
-                newWholePost:newcreatedPost,
-                shareID:shareID,
-                originalPostID:req.body.post,
-                newPostDate:timestamps
-            }
-        })
+                    });
+                }
+                return res.json(200,{
+                    message:"Request successful!",
+                    data:{
+                        newPostID:newcreatedPost._id,
+                        newUserName:userName,
+                        newUserID:req.user._id,
+                        newUserImage:userImage,
+                        newUserContent:req.body.content,
+                        newWholePost:newcreatedPost,
+                        shareID:shareID,
+                        originalPostID:req.body.post,
+                        newPostDate:timestamps,
+                        valid:valid
+                    }
+                })
+        }
+        
+       
+            
+        
+        
         // req.flash("success","Post shared successfully!");
         // return res.redirect("back");
     }

@@ -1,6 +1,8 @@
 const Comment=require('../models/commentSchema');
+const User=require('../models/userSchema');
 const Post=require('../models/post');
 const Like=require('../models/like');
+const commentReply=require('../models/commentReply');
 const commentsMailer=require('../mailer/comments_mailer');
 const queue=require('../config/kue');
 const commentEmailWorker=require('../worker/comment_email_worker');
@@ -166,15 +168,17 @@ module.exports.destroyComment=async function(req,res)
         let comment=await Comment.findById(req.params.id);
         let postId = comment.post;
         let post=await Post.findById(postId);
-        console.log("yessssssss");
         if(comment.user.id==req.user.id || post.user==req.user.id)
         {
+           
             console.log("comment controller delete");
+            await commentReply.deleteMany({_id:{$in:comment.replies}});
             comment.remove();
             post.comments.pull(comment);
             post.save();
             //CHANGE:: delete the likes of the comments
             await Like.deleteMany({likeable:comment._id,onModel:"Comment"});
+            
             if(req.xhr)
             {
                 console.log("xhr");
@@ -274,6 +278,64 @@ module.exports.updateComment2=async function(req,res)
             req.flash("error","You are not associated to update the comment");
             return res.redirect("back");
         }
+    }
+    catch(err)
+    {
+        console.log("error ",err);
+        return;
+    }
+}
+
+module.exports.createReply=async function(req,res)
+{
+    try{
+        console.log("reply controller ",req.body.comment);
+        let comment=await Comment.findById(req.body.comment);
+        let post=await Post.findById(comment.post);
+        //console.log(comment);
+        if(comment)
+        {
+            let newReply=await commentReply.create({
+                content:req.body.content,
+                comment:req.body.post,
+                user:req.user._id,
+                update:false,
+                edited:false
+            });
+            let authorTag="";
+            if(post.user==req.user.id)
+            {
+                authorTag="Author";
+            }
+            let user=await User.findById(req.user.id);
+            let userImage=user.avatar;
+            if(!userImage)
+            {
+                if(user.gender=="male")
+                {
+                    userImage="https://i.stack.imgur.com/HQwHI.jpg";
+                }
+                else
+                {
+                    userImage="/images/femaleProfile.png";
+                }
+            }
+            comment.replies.push(newReply);
+            comment.save();
+            return res.status(200).json({
+                data:{
+                    replyUserImage:userImage,
+                    replyUserName:user.name,
+                    replyContent:newReply.content,
+                    replyID:newReply.id,
+                    commentID:req.body.comment,
+                    replyUserID:user.id,
+                    authorTag:authorTag
+                },
+                message:"Comment Reply Successfully published"
+            });
+        }
+        return res.redirect("back");
     }
     catch(err)
     {

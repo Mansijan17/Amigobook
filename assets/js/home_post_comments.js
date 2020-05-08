@@ -23,6 +23,7 @@ class PostComments{
             self.updateComment($(this));
             console.log("updating comments");
         });
+      
     }
 
 
@@ -84,6 +85,7 @@ class PostComments{
                   
                     pSelf.deleteComment($(' .delete-comment-button', newComment));
                     pSelf.updateComment($(' .update-comment-button', newComment));
+                    new replyOnComment($(' .comment-reply-form', newComment));
                     new ToggleLike($(" .toggle-like-button", newComment));
                     new Noty({
                         theme: 'relax',
@@ -186,7 +188,46 @@ class PostComments{
                 </span>
             </div> 
         </div>   
-
+        <div class="comment-reply" data-target="#comment-${comment._id}-reply-modal" data-toggle="modal" >
+        <i class="fas fa-reply-all" title="View Replies" data-placement="top" data-toggle="tooltip"></i>
+    </div>
+    <div id="comment-${comment._id}-reply-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content commentReplyModal">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">
+                  <p>Comment Replies</p>
+                  <a href="/users/profile/${comment.user._id }">
+                   
+                    <img src="${comment.imageURL}" width="100" height="100">
+                    <span>${comment.user.name}</span><span class="${comment.authorTag}" style="width: 45px;"> ${comment.author}</span>
+                  
+                </a>
+              </h4>
+            </div>
+            <div class="modal-body">
+              <div class="commentReplyContent" id="comment-${comment._id}-reply-content">
+                      ${ comment.content }
+              </div>
+              <form action="/comments/create-comment-reply/" method="post" id="comment-${comment._id}-reply-form" class="comment-reply-form">
+                    <input type="text" name="content" placeholder="Want to add something?" required>
+                    <input type="hidden" name="comment" value="${comment._id}">
+                    <button type="submit" onclick="submitReplyModal(this)" name="${comment._id}">Add Reply</button>
+              </form>
+              <ul id="comment-${comment._id}-reply-list">
+   
+              </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+      
+        </div>
+      </div>
     </li>`);
     }
 
@@ -276,6 +317,7 @@ class PostComments{
                                     
                                     $(`#comment-${data.data.commentID}-content .comment-text form`).remove();
                                     $(`#comment-${data.data.commentID}-content .comment-text `).prepend(`<span>${data.data.content}</span>`);
+                                    $(`#comment-${data.data.commentID}-reply-content`).html(`${data.data.content}`);
                                     new Noty({
                                         theme:"relax",
                                         text:"Comment updated successfully!",
@@ -301,6 +343,7 @@ class PostComments{
             })
         })
     }
+
     
    
 }

@@ -33,7 +33,14 @@ const commentSchema=new mongoose.Schema({
     {
         type:Boolean,
         required:true,
-    }
+    },
+    replies:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"CommentReply"
+        }
+    ]
+    
 
 },{
     timestamps:true

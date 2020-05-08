@@ -53,10 +53,10 @@
     
     <% if(locals.user.id==i.user.id) { %>
         <small> 
-            <span data-toggle="modal" data-target="#deletePostModal" class="delete-post-modal">
+            <span data-toggle="modal" data-target="#post-<%= i._id%>-delete-modal" class="delete-post-modal">
                 <i class="fas fa-trash-alt"></i>
             </span>
-            <div class="modal fade" tabindex="-1" role="dialog" id="deletePostModal" >
+            <div class="modal fade post-delete-modal" tabindex="-1" role="dialog" id="post-<%= i._id%>-delete-modal" >
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -130,21 +130,26 @@
                         <% } %>
                     <% } %>
                     <div class="copiedPost">
-                        <div class="copiedAuthIntro">
-                            <a href="/users/profile/<%= i.content.prevAuthID%>">
-                                <span><%= i.content.prevAuthName%></span>
-                                <img  src="<%= i.content.prevAuthImage %>">
-                            </a>
-                        </div>
-                        <p><%= i.content.prevAuthContent%></p>
+                        <% if(i.content.prevAuthID!=null) {%>
+                            <div class="copiedAuthIntro">
+                                <a href="/users/profile/<%= i.content.prevAuthID%>">
+                                    <span><%= i.content.prevAuthName%></span>
+                                    <img  src="<%= i.content.prevAuthImage %>">
+                                </a>
+                            </div>
+                            <p><%= i.content.prevAuthContent%></p>
+                        <% } else {%>
+                            <p class="deletedOriginalPost">The Original Post is deleled!</p>
+                        <% } %>
                     </div>
+                   
                 <% } %>
                 
             
         </div>
         
         <div class="post-comments">
-            <form action="/comments/create-comment" method="post" id="post-<%= i._id %>-comments-form">
+            <form action="/comments/create-comment/" method="post" id="post-<%= i._id %>-comments-form">
                 <input type="text" name="content" placeholder="Type here to add comment...." required>
                 <input type="hidden" name="post" value="<%= i._id %>">
                 <button type="submit">Add comment</button>
@@ -189,11 +194,16 @@
                 <% } else { %>
                     <span class="post-shares-no-display" data-target="#post-<%= i.id %>-shares" data-toggle="modal" ></span>
                 <% } %>
+                <span data-toggle="modal" data-target="#post-<%= i._id%>-share-modal">
                 
+                    <i class="fas fa-share-square"></i>
+                </span>
+            <% } else if (i.content.prevAuthID!=null) {%>
+                <span data-toggle="modal" data-target="#post-<%= i._id%>-share-modal">
+                    
+                    <i class="fas fa-share-square"></i>
+                </span>
             <% } %>
-            <span data-toggle="modal" data-target="#post-<%= i._id%>-share-modal">
-                <i class="fas fa-share"></i>
-            </span>
         </div>
         <% if(!i.sharedFromPost) {%>
             <div class="modal fade" id="post-<%= i._id %>-shares" role="dialog">
@@ -207,7 +217,7 @@
                             <% if(i.shares.length>0) { %>
                                 <%= i.shares.length%>
                             <% } %>
-                            <i class="fas fa-share-square"></i>
+                            <i class="fas fa-share"></i>
                           </span>
                     </h4>
                     </div>
@@ -228,8 +238,6 @@
                 
                 </div>
             </div>
-          <% } %>
-        
             <div class="modal post-share-modal fade" id="post-<%= i._id%>-share-modal" role="dialog" >
                 <div class="modal-dialog">
                 
@@ -249,6 +257,28 @@
     
         
             </div>
+          <% } else if (i.content.prevAuthID!=null) {%>
+        
+                <div class="modal post-share-modal fade" id="post-<%= i._id%>-share-modal" role="dialog" >
+                    <div class="modal-dialog">
+                    
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h4 class="modal-title" id="#post-<%=i._id%>-title">Share this Post?
+                            <br></h4>
+                        </div>
+                        <div class=" modal-body"  >
+                            <%- include("_sharePostForm"); %>
+                            
+                        </div>
+                    
+                    </div>
+                </div>
+        
+            
+                </div>
+            <% } %>
        
 
     

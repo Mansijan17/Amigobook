@@ -217,18 +217,18 @@ h1:hover {
             cursor: pointer; }
           .home-container #feed-posts #posts-list-container > ul .post-list .delete-post-modal:hover i, .home-container #feed-posts #posts-list-container > ul .post-list .update-post-button:hover i {
             box-shadow: 0px 0px 6px 1px goldenrod; }
-          .home-container #feed-posts #posts-list-container > ul .post-list #deletePostModal {
+          .home-container #feed-posts #posts-list-container > ul .post-list .post-delete-modal {
             width: 400px;
             margin: auto;
             margin-top: 150px;
             color: black; }
-            .home-container #feed-posts #posts-list-container > ul .post-list #deletePostModal .modal-dialog {
+            .home-container #feed-posts #posts-list-container > ul .post-list .post-delete-modal .modal-dialog {
               width: 100%; }
-              .home-container #feed-posts #posts-list-container > ul .post-list #deletePostModal .modal-dialog .modal-body {
+              .home-container #feed-posts #posts-list-container > ul .post-list .post-delete-modal .modal-dialog .modal-body {
                 font-size: 16px; }
-              .home-container #feed-posts #posts-list-container > ul .post-list #deletePostModal .modal-dialog .modal-footer a {
+              .home-container #feed-posts #posts-list-container > ul .post-list .post-delete-modal .modal-dialog .modal-footer a {
                 color: white; }
-              .home-container #feed-posts #posts-list-container > ul .post-list #deletePostModal .modal-dialog .modal-footer button:focus {
+              .home-container #feed-posts #posts-list-container > ul .post-list .post-delete-modal .modal-dialog .modal-footer button:focus {
                 outline: none; }
           .home-container #feed-posts #posts-list-container > ul .post-list .update-post-button {
             position: absolute;
@@ -290,6 +290,14 @@ h1:hover {
               min-height: 100px;
               width: 100%;
               padding: 5px; }
+              .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-text .copiedPost .deletedOriginalPost {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 30px;
+                text-transform: uppercase;
+                color: darkred;
+                font-size: 18px; }
               .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-text .copiedPost .copiedAuthIntro {
                 max-width: 100%;
                 margin: auto;
@@ -532,6 +540,140 @@ h1:hover {
                     font-style: oblique;
                     color: #4bd4a1;
                     font-weight: bolder; }
+                  .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-reply {
+                    position: absolute;
+                    right: 6px;
+                    bottom: 3px;
+                    font-size: 18px;
+                    cursor: pointer;
+                    color: powderblue;
+                    filter: blur(0.8px); }
+                  .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-reply:hover {
+                    filter: blur(0px); }
+                  .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal {
+                    color: black;
+                    border-radius: 20px; }
+                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-title {
+                      font-variant: all-small-caps;
+                      color: teal;
+                      font-weight: 600;
+                      display: flex;
+                      flex-direction: column;
+                      align-items: center;
+                      font-size: 20px !important; }
+                      .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-title a {
+                        height: 50px; }
+                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-title a img {
+                          width: 50px;
+                          height: 50px;
+                          border-radius: 20%; }
+                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-title a img:hover {
+                          filter: contrast(1.2); }
+                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-title a span {
+                          font-family: serif;
+                          font-variant: none;
+                          font-size: 15px;
+                          font-weight: normal;
+                          color: black;
+                          display: inline-block;
+                          margin-right: 5px; }
+                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-title a span:hover {
+                          text-shadow: 1px 1px 2px darkslategrey; }
+                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-title a .author-tag {
+                          width: 45px;
+                          padding: 1px;
+                          font-size: 14px;
+                          text-align: center;
+                          background: #5ca3be;
+                          color: white; }
+                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-body {
+                      max-height: 400px;
+                      overflow: auto;
+                      display: flex;
+                      flex-direction: column;
+                      align-items: center; }
+                      .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-body .commentReplyContent {
+                        width: 90%;
+                        margin-bottom: 15px;
+                        padding: 5px;
+                        font-family: cursive;
+                        height: auto;
+                        color: #5e9592; }
+                      .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-body form {
+                        width: 65%;
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: 25px; }
+                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-body form input {
+                          width: 75%;
+                          border: none;
+                          border-bottom: 1.5px solid powderblue;
+                          color: darkslategrey; }
+                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-body form input::placeholder {
+                          font-style: italic; }
+                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-body form input:-webkit-autofill {
+                          transition: background-color 5000s ease-in-out 0s;
+                          -webkit-text-fill-color: darkslategrey; }
+                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-body form input:focus, .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-body form button:focus {
+                          outline: none; }
+                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-body form button {
+                          background: transparent;
+                          border: 1.5px solid #DCA8AB;
+                          padding: 6px;
+                          border-radius: 12px;
+                          transition: all 0.4s ease-in; }
+                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-body form button:hover {
+                          background: #ebf9f8; }
+                      .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-body ul {
+                        width: 65%;
+                        height: auto;
+                        overflow: auto; }
+                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-body ul li {
+                          color: slategray;
+                          min-height: 65px;
+                          margin-bottom: 11px;
+                          border-radius: 25px;
+                          padding: 5px;
+                          background-color: #eafafa;
+                          position: relative; }
+                          .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-body ul li .reply-author-tag {
+                            position: absolute;
+                            top: 0;
+                            padding: 5px;
+                            left: 5px;
+                            height: 25px; }
+                            .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-body ul li .reply-author-tag img {
+                              height: 20px;
+                              width: 20px;
+                              border-radius: 15px; }
+                            .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-body ul li .reply-author-tag span {
+                              font-size: 11.5px;
+                              color: #244582;
+                              font-variant-caps: petite-caps;
+                              font-weight: 600; }
+                            .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-body ul li .reply-author-tag .Author-tag {
+                              background: #73bbbc;
+                              color: white;
+                              margin-left: 5px;
+                              font-variant-caps: normal;
+                              padding: 3px; }
+                          .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-body ul li .reply-content {
+                            margin-top: 32px;
+                            padding-left: 20px;
+                            width: 95%;
+                            margin-bottom: 5px;
+                            color: dimgrey;
+                            height: auto; }
+                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-body ul li::before {
+                          content: "";
+                          position: absolute;
+                          bottom: -7px;
+                          right: 17px;
+                          border-top: 7px solid #eafafa;
+                          border-right: 4px solid #eafafa;
+                          border-left: 9px solid transparent; }
+                      .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .commentReplyModal .modal-body ul::-webkit-scrollbar {
+                        display: none; }
                   .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content {
                     margin-bottom: 20px;
                     text-align: center;

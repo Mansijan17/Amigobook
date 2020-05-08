@@ -63,6 +63,7 @@
     <script src="/js/like.js"></script>
     <script src="/js/home.js"></script>
     <script src="/js/share.js"></script>
+    <script src="/js/replyComment.js"></script>
     <script src="/js/chat_engine.js"></script>
     <script>
         $('.toggle-like-button').each(function(){
@@ -72,6 +73,10 @@
         $('.toggle-share-button').each(function(){
             let self = this;
             let postShare = new SharePost(self);
+        });
+        $('.comment-reply-form').each(function(){
+            let self = this;
+            let commentReply = new replyOnComment(self);
         });
 
     </script>
