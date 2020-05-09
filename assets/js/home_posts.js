@@ -228,10 +228,11 @@
                 url:$(deletelink).prop("href"),
                 success:function(data)
                 {
-                    console.log(data);
+                    console.log(data.data);
                     $(`#post-${data.data.postID}`).remove();
-                    if(data.data.shareID)
+                    if(data.data.shareID!=undefined)
                     {
+                        console.log("defined");
                         let shareCounts=parseInt($(`#post-${data.data.originalPostID}-share-form`).attr("data-shares"));
                         shareCounts-=1;
                         $(`#post-${data.data.originalPostID}-share-form`).attr("data-shares",shareCounts);
@@ -247,6 +248,21 @@
                         }
                         $(`#share-${data.data.shareID}`).remove();
 
+                    }else
+                    {
+                        
+                        
+                        if(data.data.bornPosts!=undefined)
+                        {
+                            for(let post of data.data.bornPosts)
+                            {
+                                console.log(post);
+                                $(`#post-${post._id}-content .post-text .copiedPost`).html(`<p class="deletedOriginalPost">The Original Post is deleled!</p>`);
+                                $(`#post-${post._id} .post-share-box`).remove();
+                             
+                            }
+                        }
+                        
                     }
                     new Noty({
                         theme:"relax",

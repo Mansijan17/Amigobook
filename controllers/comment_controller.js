@@ -297,7 +297,7 @@ module.exports.createReply=async function(req,res)
         {
             let newReply=await commentReply.create({
                 content:req.body.content,
-                comment:req.body.post,
+                comment:req.body.comment,
                 user:req.user._id,
                 update:false,
                 edited:false

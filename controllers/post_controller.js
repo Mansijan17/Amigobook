@@ -1,5 +1,6 @@
 const Post=require('../models/post');
 const Comment=require('../models/commentSchema');
+const replyComment=require('../models/commentReply');
 const Like=require('../models/like');
 const User=require('../models/userSchema');
 const Share=require('../models/share');
@@ -98,27 +99,40 @@ module.exports.destroyPost=async function(req,res)
             let comments=post.comments;
             for(let comment of comments)
             {
+                console.log(comment);
                 await Like.deleteMany({likeable:comment,onModel:"Comment"});
+                await replyComment.deleteMany({comment:comment});
             }
             await Like.deleteMany({likeable:post,onModel:"Post"});
            // await Like.deleteMany({_id:{$in:post.comments}});
             post.remove();
             await Comment.deleteMany({post:req.params.id});
             let shareID;
+            let postsBornFromThisPost;
             if(post.sharedFromPost)
             {
                
                let share=await Share.findOne({createdPost:req.params.id});
-               shareID=share._id;
-               let originalPost=await Post.findById(post.content.prevPostId);
-               console.log(originalPostID);
-               originalPost.shares.pull(share);
-               originalPost.save();
-               share.remove();
+               console.log("share Id ",share);
+               if(share!=null)
+               {
+                   console.log("yes ",post.content.prevPostId);
+                    shareID=share._id;
+                    let originalPost=await Post.findById(post.content.prevPostId);
+                    console.log(originalPost);
+                    originalPost.shares.pull(share);
+                    originalPost.save();
+                    share.remove();
+               }
+               else
+               {
+                   console.log("the original post deleted");
+               }
+               
             }
             else
             {
-                let postsBornFromThisPost=await Post.find({"content.prevPostId":post.id});
+                postsBornFromThisPost=await Post.find({"content.prevPostId":post.id});
                 //console.log(postsBornFromThisPost);
                 for(let bornpost of postsBornFromThisPost)
                 {
@@ -126,14 +140,16 @@ module.exports.destroyPost=async function(req,res)
                     await Share.deleteOne({createdPost:bornpost.id});
                 }
             }
-             
+             console.log(req.xhr);
             if(req.xhr){
                 console.log("post id ",req.params.id,shareID,post.content.prevPostId);
                 return res.json(200,{
                     data:{
                         originalPostID:post.content.prevPostId,
                         postID:req.params.id,
-                        shareID:shareID
+                        shareID:shareID,
+                        bornPosts:postsBornFromThisPost
+                        
                     },
                     message:"Post deleted successfully!"
                 });

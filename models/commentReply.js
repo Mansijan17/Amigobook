@@ -4,19 +4,22 @@ const commentReply=new mongoose.Schema({
     content:
     {
         type:String,
+        required:true,
     },
     //comments belongs to the post
     comment:
     {
         type:mongoose.Schema.Types.ObjectId,
-        ref:"Comment"
+        ref:"Comment",
+        required:true,
     },
      //comments belongs to the user
     user:
     {
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
-        autopopulate:true
+        autopopulate:true,
+        required:true
     },
     likes:[
         {   

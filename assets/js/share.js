@@ -222,9 +222,9 @@ class SharePost{
                             url:$(deletelink).prop("href"),
                             success:function(data)
                             {
-                                console.log(data);
+                                console.log(data.data);
                                 $(`#post-${data.data.postID}`).remove();
-                                if(data.data.shareID)
+                                if(data.data.shareID!=undefined)
                                 {
                                     let shareCounts=parseInt($(`#post-${data.data.originalPostID}-share-form`).attr("data-shares"));
                                     shareCounts-=1;
@@ -242,6 +242,7 @@ class SharePost{
                                     $(`#share-${data.data.shareID}`).remove();
 
                                 }
+                                
                                 new Noty({
                                     theme:"relax",
                                     text:"Post and associated comments are deleted!",
