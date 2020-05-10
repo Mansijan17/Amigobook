@@ -61,7 +61,7 @@ module.exports.home = async function(req, res){
                 
                 populate:
                 ({
-                    path:"likes replies",
+                    path:"likes",
                     options:{
                         sort:"-createdAt"
                     },

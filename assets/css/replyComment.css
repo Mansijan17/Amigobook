@@ -1,0 +1,188 @@
+.commentReplyClass {
+  color: black;
+  border-radius: 20px;
+  width: 80%;
+  margin: 75px auto 70px;
+  background: linear-gradient(to top, #13547a, #4daea3);
+  border: 2px dotted forestgreen;
+  padding: 20px 20px 40px;
+  height: auto;
+  min-height: 300px; }
+  .commentReplyClass .reply-header {
+    margin-bottom: 25px; }
+  .commentReplyClass .reply-title {
+    font-variant: all-small-caps;
+    color: #0f6b6b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 30px !important;
+    font-weight: bolder !important;
+    text-shadow: 2px 2px 2px lightseagreen; }
+    .commentReplyClass .reply-title p {
+      margin-bottom: 15px; }
+    .commentReplyClass .reply-title a img {
+      width: 100px;
+      height: 100px;
+      border-radius: 20%; }
+    .commentReplyClass .reply-title a img:hover {
+      filter: contrast(1.2); }
+    .commentReplyClass .reply-title a span {
+      font-family: serif;
+      font-variant: none;
+      font-size: 22px;
+      font-weight: normal;
+      color: silver;
+      display: inline-block;
+      margin-right: 5px;
+      text-shadow: none;
+      position: relative;
+      display: inline-block;
+      transition: all 0.4s ease-in-out; }
+    .commentReplyClass .reply-title a span:hover {
+      text-decoration: underline; }
+    .commentReplyClass .reply-title a .author-tag {
+      width: 60px;
+      height: 28px;
+      padding: 5px;
+      font-size: 16px;
+      text-align: center;
+      background: #5ca3be;
+      color: white;
+      margin-left: 6px; }
+    .commentReplyClass .reply-title a .author-tag:hover {
+      text-decoration: none; }
+  .commentReplyClass a:hover {
+    text-decoration: none; }
+  .commentReplyClass .reply-body {
+    max-height: 400px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    .commentReplyClass .reply-body .commentReplyContent {
+      width: 90%;
+      margin-bottom: 15px;
+      padding: 8px;
+      font-family: cursive;
+      height: auto;
+      color: #1a3c3a;
+      font-size: 20px; }
+    .commentReplyClass .reply-body form {
+      width: 65%;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 25px; }
+      .commentReplyClass .reply-body form input {
+        width: 75%;
+        border: none;
+        border-bottom: 1.5px solid powderblue;
+        color: darkslategrey;
+        background: transparent; }
+      .commentReplyClass .reply-body form input::placeholder {
+        font-style: italic;
+        color: darkslategrey; }
+      .commentReplyClass .reply-body form input:-webkit-autofill {
+        transition: background-color 5000s ease-in-out 0s;
+        -webkit-text-fill-color: darkslategrey; }
+      .commentReplyClass .reply-body form input:focus, .commentReplyClass .reply-body form button:focus {
+        outline: none; }
+      .commentReplyClass .reply-body form button {
+        height: 45px;
+        width: 18%;
+        background: transparent;
+        border: 1.5px solid #DCA8AB;
+        padding: 6px;
+        border-radius: 22px;
+        color: floralwhite;
+        transition: all 0.4s ease-in; }
+      .commentReplyClass .reply-body form button:hover {
+        background: #47a59f; }
+    .commentReplyClass .reply-body ul {
+      width: 65%;
+      height: auto;
+      min-height: 100px;
+      list-style: none;
+      overflow: auto; }
+      .commentReplyClass .reply-body ul li {
+        color: slategray;
+        min-height: 65px;
+        margin-bottom: 20px;
+        border-radius: 25px;
+        padding: 5px;
+        background-color: #eafafa;
+        position: relative; }
+        .commentReplyClass .reply-body ul li .bars .dropdown-toggle {
+          position: absolute;
+          right: 12px;
+          cursor: pointer; }
+        .commentReplyClass .reply-body ul li .bars .drop-design {
+          position: absolute;
+          left: 362px;
+          height: auto;
+          top: 16px;
+          min-width: 80px;
+          font-size: 12.5px;
+          box-sizing: border-box;
+          background: #188984;
+          color: #c3cec7;
+          align-items: center;
+          padding: 0; }
+          .commentReplyClass .reply-body ul li .bars .drop-design .dropdown-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid;
+            width: 100%;
+            padding: 3px;
+            margin-bottom: 2px;
+            cursor: pointer; }
+            .commentReplyClass .reply-body ul li .bars .drop-design .dropdown-item i {
+              margin-top: 2px; }
+          .commentReplyClass .reply-body ul li .bars .drop-design .dropdown-item:last-child {
+            border: none;
+            margin-bottom: 0; }
+          .commentReplyClass .reply-body ul li .bars .drop-design .dropdown-item:hover {
+            background: #1f7672; }
+        .commentReplyClass .reply-body ul li .modal-dialog {
+          width: 350px;
+          margin-top: 20%; }
+          .commentReplyClass .reply-body ul li .modal-dialog button:focus {
+            outline: none; }
+        .commentReplyClass .reply-body ul li .reply-author-tag {
+          position: absolute;
+          top: 0;
+          padding: 5px;
+          left: 5px;
+          height: 25px; }
+          .commentReplyClass .reply-body ul li .reply-author-tag img {
+            height: 20px;
+            width: 20px;
+            border-radius: 15px; }
+          .commentReplyClass .reply-body ul li .reply-author-tag span {
+            font-size: 11.5px;
+            color: #244582;
+            font-variant-caps: petite-caps;
+            font-weight: 600; }
+          .commentReplyClass .reply-body ul li .reply-author-tag .Author-tag {
+            background: #73bbbc;
+            color: white;
+            margin-left: 5px;
+            font-variant-caps: normal;
+            padding: 3px; }
+        .commentReplyClass .reply-body ul li .reply-content {
+          margin-top: 32px;
+          padding-left: 20px;
+          width: 95%;
+          margin-bottom: 5px;
+          color: dimgrey;
+          height: auto; }
+      .commentReplyClass .reply-body ul li::before {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        right: 17px;
+        border-top: 7px solid #eafafa;
+        border-right: 4px solid #eafafa;
+        border-left: 9px solid transparent; }
+    .commentReplyClass .reply-body ul::-webkit-scrollbar {
+      display: none; }

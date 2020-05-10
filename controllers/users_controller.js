@@ -30,7 +30,7 @@ module.exports.profile = async function (req, res) {
                 },
             
         }).populate({
-            path:"likes replies",
+            path:"likes",
             populate:{
                 path:"user"
             }

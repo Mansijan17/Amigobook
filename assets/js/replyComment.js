@@ -2,12 +2,25 @@ class replyOnComment{
     constructor(replyCommentForm)
     {
         this.replyForm=replyCommentForm;
-        this.reply();
+        let id=this.replyForm["id"].split("-")[1];
+        this.commentContainer=$(`#comment-${id}-reply`)
+        console.log(this.commentContainer);
+        this.reply(id);
+        let self=this;
+        $(" .delete-reply-button" ,this.commentContainer).each(function()
+        {
+            //let updateButton=$(" .update-post-button",self);
+           // updatePost(updateButton);
+            self.deleteReply($(this));
+            console.log("delete replies");
+
+        })
     }
 
-    reply()
+    reply(commentID)
     {
         let newReplyForm=$(this.replyForm);
+        let cSelf=this;
         
         newReplyForm.submit(function(e)
         {
@@ -20,8 +33,8 @@ class replyOnComment{
                 success:function(data)
                 {
                    console.log(data.data,data.data.commentID);
-                   console.log($(`#comment-${data.data.commentID}-reply-list`))
-                   $(`#comment-${data.data.commentID}-reply-list`).prepend($(`<li id="reply-${data.data.replyID}">
+                   console.log($(`#comment-${data.data.commentID}-reply-list`));
+                   let newReply=$(`<li id="reply-${data.data.replyID}">
                    <div class="reply-author-tag">
                        <a href="/users/profile/${data.data.replyUserID}">
                          
@@ -34,7 +47,10 @@ class replyOnComment{
                
                    <div class="reply-content">${ data.data.replyContent}</div>
                    
-                  </li>`));
+                  </li>`);
+                   $(`#comment-${data.data.commentID}-reply-list`).prepend(newReply);
+
+                  cSelf.deleteReply($(" .delete-reply-button",newReply))
                     new Noty({
                         theme:"relax",
                         text:"Reply Added Successfully!",
@@ -51,5 +67,33 @@ class replyOnComment{
             })
         })
         
+    }
+
+    deleteReply(deleteLink){
+        $(deleteLink).click(function(e){
+            e.preventDefault();
+            console.log("inside delete reply button ");
+            $.ajax({
+                type: 'get',
+                url: $(deleteLink).prop('href'),
+                success: function(data){
+                
+                    console.log("remove comment reply: ",data.data);
+                    $(`#reply-${data.data.replyID}`).remove();
+                    
+                    new Noty({
+                        theme: 'relax',
+                        text: "Comment Deleted!",
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500
+                        
+                    }).show();
+                },error: function(error){
+                    console.log(error.responseText);
+                }
+            });
+
+        });
     }
 }

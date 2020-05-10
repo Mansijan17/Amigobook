@@ -1,4 +1,39 @@
 <li id="reply-<%= reply._id%>">
+    <div class="dropdown bars">
+        <div class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-ellipsis-h"></i>
+        </div>
+        <div class="dropdown-menu drop-design" aria-labelledby="dropdownMenuLink">
+          <% if(locals.user.id==comment.user.id || locals.user.id==i.user.id || locals.user.id==reply.user.id) { %>
+            <div class="dropdown-item" data-toggle="modal" data-target="#deleteReplyModal">
+              Delete <i class="fas fa-times" ></i> 
+            </div>
+              
+          <% } %>
+          
+          <div class="dropdown-item">Action</div>
+          <div class="dropdown-item">Action</div>
+        </div>
+    </div>
+    <% if(locals.user.id==comment.user.id || locals.user.id==i.user.id || locals.user.id==reply.user.id) {%>
+      <div class="modal fade" tabindex="-1" role="dialog" id="deleteReplyModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title"><i class="fas fa-trash-alt"></i> Reply?</h2>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to delete it?</p>
+            </div>
+            <div class="modal-footer">
+              <a href="/comments/destroy-comment-reply/<%= reply._id %>" class="delete-reply-button btn btn-danger" data-dismiss="modal">Remove</a>
+              <button type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% } %>  
+   
     <div class="reply-author-tag">
         <a href="/users/profile/<%= reply.user._id %>">
             <% if(reply.user.avatar) {%>

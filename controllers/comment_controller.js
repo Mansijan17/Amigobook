@@ -286,6 +286,38 @@ module.exports.updateComment2=async function(req,res)
     }
 }
 
+module.exports.showReply=async function(req,res)
+{
+    try{
+
+        let id=req.params.id;
+        let comment=await Comment.findById(id).populate({
+            path:"replies",
+            options:{
+                sort:"-createdAt"
+            },
+            populate:{
+                path:"user"
+            }
+        }).populate("user");;
+        
+        let post=await Post.findById(comment.post);
+        post.populate("user");
+
+        return res.render("replyCommentContent",{
+            title:"Socialends | Comment Replies",
+            comment:comment,
+            i:post
+        });
+
+    }
+    catch(err)
+    {
+        console.log("error in showing replies ",err);
+        return;
+    }
+}
+
 module.exports.createReply=async function(req,res)
 {
     try{
@@ -336,6 +368,40 @@ module.exports.createReply=async function(req,res)
             });
         }
         return res.redirect("back");
+    }
+    catch(err)
+    {
+        console.log("error ",err);
+        return;
+    }
+}
+
+module.exports.deleteReply=async function(req,res)
+{
+    try{
+        let id=req.params.id;
+        console.log("delete reply comment ",id);
+        let reply=await commentReply.findById(id);
+        let comment=await Comment.findById(reply.comment);
+        console.log(comment)
+        let post=await Post.findById(comment.post);
+        if(req.user.id==comment.user.id || req.user.id==reply.user.id || req.user.id==post.user)
+        {
+            await Like.deleteMany({likeable:reply._id,onModel:"CommentReply"});
+            comment.replies.pull(reply);
+            comment.save();
+            reply.remove();
+            console.log(req.xhr);
+
+            return res.json(200,{
+                data:{
+                    replyID:reply.id,
+                },
+                message:"Reply Deleted Successfully"
+            })
+            
+        }
+
     }
     catch(err)
     {
