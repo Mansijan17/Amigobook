@@ -292,7 +292,7 @@ module.exports.showReply=async function(req,res)
 
         let id=req.params.id;
         let comment=await Comment.findById(id).populate({
-            path:"replies",
+            path:"replies likes",
             options:{
                 sort:"-createdAt"
             },
@@ -406,6 +406,123 @@ module.exports.deleteReply=async function(req,res)
     catch(err)
     {
         console.log("error ",err);
+        return;
+    }
+}
+
+module.exports.updateReply=async function(req,res)
+{
+    try
+    {
+        let id=req.params.id;
+        let reply=await commentReply.findById(id);
+        console.log("update reply controller 1 ",reply);
+        if(reply.user.id==req.user.id)
+        {
+            if(!reply.update)
+            {
+                
+                reply.update=true;
+                reply.save();
+                console.log(req.xhr);
+                //return res.redirect("back");
+                return res.json(200,{
+                    data:
+                    {
+                        replyID:id,
+                        content:reply.content
+                    },
+                    message:"Form Put"
+                })
+            
+            }
+            
+        }
+        else
+        {
+            req.flash("Error","You are not authorised to update this comment!");
+            return res.redirect("back");
+        }
+    }
+    catch(err)
+    {
+        console.log("error in updating comment ",err);
+        return;
+    }
+}
+
+module.exports.updateReply2=async function(req,res)
+{
+    try
+    {
+        console.log(req.body);
+        let id=req.body.reply;
+        let reply=await commentReply.findById(id);
+        console.log("update reply 2",id,reply);
+        if(reply.user.id==req.user.id)
+        {
+            if(reply.content!=req.body.content)
+            {
+                    reply.edited=true;
+                    reply.content=req.body.content;
+            }
+            reply.update=false;
+            reply.save();
+            //return res.redirect("back");
+            return res.json(200,{
+                    data:
+                    {
+                        replyID:id,
+                        content:req.body.content,
+                        edited:reply.edited
+                    },
+                    message:"Reply Updated Successfully"
+            });
+            
+        }
+        else
+        {
+            req.flash("error","You are not associated to update the comment");
+            return res.redirect("back");
+        }
+    }
+    catch(err)
+    {
+        console.log("error ",err);
+        return;
+    }
+}
+
+module.exports.destroyCommentReply=async function(req,res)
+{
+    try
+    {
+        let comment=await Comment.findById(req.params.id);
+        let postId = comment.post;
+        let post=await Post.findById(postId);
+        if(comment.user.id==req.user.id || post.user==req.user.id)
+        {
+           
+            console.log("comment controller delete");
+            await commentReply.deleteMany({_id:{$in:comment.replies}});
+            comment.remove();
+            post.comments.pull(comment);
+            post.save();
+            //CHANGE:: delete the likes of the comments
+            await Like.deleteMany({likeable:comment._id,onModel:"Comment"});
+            req.flash("success","Comment deleted!");
+            return res.redirect("/");
+            
+        }
+        else
+        {
+            req.flash("error","You are not associated to delete the comment");
+            return res.redirect("back");  
+        }
+    }
+    catch(err)
+    {
+        console.log("Error: ",err);
         return;
     }
 }

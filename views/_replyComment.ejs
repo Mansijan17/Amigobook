@@ -4,26 +4,27 @@
             <i class="fas fa-ellipsis-h"></i>
         </div>
         <div class="dropdown-menu drop-design" aria-labelledby="dropdownMenuLink">
-          <% if(locals.user.id==comment.user.id || locals.user.id==i.user.id || locals.user.id==reply.user.id) { %>
-            <div class="dropdown-item" data-toggle="modal" data-target="#deleteReplyModal">
+          <% if(locals.user.id==comment.user.id || locals.user.id==i.user || locals.user.id==reply.user.id) { %>
+            <div class="dropdown-item" data-toggle="modal" data-target="#deleteReplyModal-<%=reply._id%>">
               Delete <i class="fas fa-times" ></i> 
             </div>
-              
           <% } %>
-          
-          <div class="dropdown-item">Action</div>
-          <div class="dropdown-item">Action</div>
+          <% if(locals.user.id==reply.user.id) {%>  
+            <a class="dropdown-item update-reply-button" href="/comments/update-reply/<%= reply._id %>" >Edit <i class="fas fa-pen-square"></i></a>
+          <% } %>
+          <a class="dropdown-item">Reply <i class="far fa-comment-dots"></i></a>
+          <a class="dropdown-item">Like <i class="far fa-thumbs-up"></i></a>
         </div>
     </div>
-    <% if(locals.user.id==comment.user.id || locals.user.id==i.user.id || locals.user.id==reply.user.id) {%>
-      <div class="modal fade" tabindex="-1" role="dialog" id="deleteReplyModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <% if(locals.user.id==comment.user.id || locals.user.id==i.user || locals.user.id==reply.user.id) {%>
+      <div class="modal fade" tabindex="-1" role="dialog" id="deleteReplyModal-<%=reply._id%>" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h2 class="modal-title"><i class="fas fa-trash-alt"></i> Reply?</h2>
             </div>
             <div class="modal-body">
-              <p>Are you sure you want to delete it?</p>
+              <p>Are you sure you want to delete it? </p>
             </div>
             <div class="modal-footer">
               <a href="/comments/destroy-comment-reply/<%= reply._id %>" class="delete-reply-button btn btn-danger" data-dismiss="modal">Remove</a>
@@ -43,14 +44,29 @@
             <% }  else {%>
                     <img src="/images/femaleProfile.png" width="100" height="100">
             <% } %>
-            <% if(reply.user.id==i.user.id) { %>
+  
+            <% if(reply.user.id==i.user) { %>
                 <span><%= reply.user["name"] %></span><span class="Author-tag" style="width: 45px;"> Author</span>
             <% } else { %>
                 <span><%= reply.user["name"] %></span>
             <% } %>
         </a>
     </div>
-
-    <div class="reply-content"><%= reply.content%></div>
+    <% if( reply.user.id!=locals.user.id) {%>
+      <div class="reply-content"><%= reply.content%></div>
+    <% } else  {%>
+      <% if(reply.update) {%>
+          <form action="/comments/update-reply-r2" method="post" class="reply-update-form">
+              <textarea required  name="content" ><%= reply.content%></textarea>
+              <input type="hidden" name="reply" value="<%= reply._id%>">
+              <button type="submit">U</button>
+          </form>
+      <% } else { %>
+        <div class="reply-content"><%= reply.content%></div>
+      <% } %>
+  <% } %>
+    <% if(reply.edited) {%>
+        <span class="editedReply">Edited</span>
+    <% } %>
     
 </li>

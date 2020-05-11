@@ -48,12 +48,16 @@ submitsingup.on("click",function()
     confirmpwdID.removeClass("bckgd-dark");
 })
 
-var textarea = document.querySelector('.modal textarea');
+var textarea = document.querySelectorAll('form textarea');
 
-textarea.addEventListener('keydown', autosize);
+for(let i=0;i<textarea.length;i++)
+{
+    textarea[i].addEventListener('keydown', autosize);
+}
              
 function autosize(){
   var el = this;
+  console.log(el);
   setTimeout(function(){
     el.style.cssText = 'height:auto; padding:0';
     // for box-sizing other than "content-box" use:

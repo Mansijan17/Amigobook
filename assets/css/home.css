@@ -225,7 +225,10 @@ h1:hover {
             .home-container #feed-posts #posts-list-container > ul .post-list .post-delete-modal .modal-dialog {
               width: 100%; }
               .home-container #feed-posts #posts-list-container > ul .post-list .post-delete-modal .modal-dialog .modal-body {
-                font-size: 16px; }
+                font-size: 14px;
+                color: #8F9BA8;
+                width: 87%;
+                margin: auto; }
               .home-container #feed-posts #posts-list-container > ul .post-list .post-delete-modal .modal-dialog .modal-footer a {
                 color: white; }
               .home-container #feed-posts #posts-list-container > ul .post-list .post-delete-modal .modal-dialog .modal-footer button:focus {
@@ -512,19 +515,22 @@ h1:hover {
                       cursor: pointer; }
                     .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion span i:hover {
                       color: #90212a; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion #deleteCommentModal {
+                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion .deletecommentmodal {
                       width: 400px;
                       margin: auto;
                       margin-top: 150px;
                       color: black; }
-                      .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion #deleteCommentModal .modal-dialog {
+                      .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion .deletecommentmodal .modal-dialog {
                         width: 100%;
                         text-align: center; }
-                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion #deleteCommentModal .modal-dialog .modal-body {
-                          font-size: 16px; }
-                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion #deleteCommentModal .modal-dialog .modal-footer a {
+                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion .deletecommentmodal .modal-dialog .modal-body {
+                          font-size: 14px;
+                          color: #8F9BA8;
+                          width: 87%;
+                          margin: auto; }
+                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion .deletecommentmodal .modal-dialog .modal-footer a {
                           color: white; }
-                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion #deleteCommentModal .modal-dialog .modal-footer button:focus {
+                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion .deletecommentmodal .modal-dialog .modal-footer button:focus {
                           outline: none; }
                   .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .update-comment-button {
                     position: absolute;
@@ -566,7 +572,7 @@ h1:hover {
                           display: flex;
                           justify-content: space-around; }
                           .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content > div .comment-text .comment-update-form textarea {
-                            max-height: 40px;
+                            padding-left: 10px;
                             background: none;
                             resize: none;
                             border: 1.5px solid darkgreen;

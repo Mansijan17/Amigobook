@@ -9,6 +9,160 @@
     padding: 20px 20px 40px;
     height: auto;
     min-height: 300px;
+    position: relative;
+
+    .comment-like-box{
+        position: absolute;
+        right: 15px;
+        font-size: 20px;
+        color:#00388b;
+        cursor: pointer;
+
+        a{
+            color: #145556;
+        }
+
+        a:hover{
+            color:#00388b;
+        }
+        span:hover{
+            color:#145556;
+        }
+        
+        .modal
+        {
+            
+            color: black;
+            padding-right: 16px;
+
+            .modal-dialog
+            {
+                width: 500px;
+                .modal-content
+                {
+                    width: 100%;
+                    .modal-title
+                    {
+                        text-align: center;
+                        span
+                        {
+                            display: block;
+                            margin-top: 5px;
+                            color: mediumvioletred;
+                        }
+                    }
+                    .modal-body
+                    {
+                        height: auto;
+                        display: flex;
+                        justify-content: center;
+                        width: 100%;
+                    
+                    }
+                }
+
+            }
+        }
+                    
+        .comment-like-username-list
+        {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 60%;
+            padding-left: 0;
+            max-height: 300px;
+            overflow: auto;
+            font-size:15px;
+
+            li
+            {
+                min-height: 30px;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                text-align: right;
+                align-items: center;
+                margin: 1px;
+
+                a{
+                    color: #006881;
+                    img{
+                        height: 40px;
+                        width: 40px;
+                        border-radius: 50%;
+                        margin-right: 5px;
+                    }
+                    span{
+        
+                        font-variant: petite-caps;
+                    }
+                    span:hover
+                    {
+                        font-weight: bold;
+                    }
+                    img:hover
+                    {
+                        filter: brightness(0.8);
+                    }
+                }
+            }
+
+            li::after
+            {
+                content: '\f21e';
+                font-weight: 900;
+                font-family: "Font Awesome 5 Free";
+                display: inline-block;
+                color:#BF0A30;
+            }
+
+        }
+        .comment-like-username-list::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    .comment-deletion{
+        position: absolute;
+        font-size: 17px;
+        cursor: pointer;
+        color: ghostwhite;
+
+        span:hover{
+            color: #90212a;
+        }
+
+        .modal-dialog{
+            width: 400px;
+            margin-top: 175px;
+            text-align: center;
+
+            h2{
+                font-family: 'Gill Sans';
+                color: #5E99A2;
+                font-size: 27.2px !important;
+            }
+
+            .modal-content{
+                .modal-body{
+                    font-size: 14px;
+                    color: #8F9BA8;
+                    width: 87%;
+                    margin: auto;
+                }
+                .modal-footer{
+                    color:#7b6b6b;
+                    button:focus{
+                        outline: none;
+                    }
+                }
+            }
+        }
+    }
+
+
     .reply-header
     {
         margin-bottom: 25px;
@@ -76,8 +230,6 @@
     }
     .reply-body
     {
-        max-height: 400px;
-        overflow: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -87,9 +239,12 @@
             width: 90%;
             margin-bottom: 15px;
             padding: 8px;
-            font-family: cursive;
+            font-family: monospace;
             height: auto;
-            color: #1a3c3a;
+            border: 1.5px dashed darkslategray;
+            border-left: none;
+            border-right: none;
+            color:#52c6bf;
             font-size: 20px;
         }
 
@@ -104,13 +259,13 @@
                     width: 75%;
                     border: none;
                     border-bottom: 1.5px solid powderblue;
-                    color: darkslategrey;
+                    color:#1f2628;
                     background: transparent;
                 }
                 input::placeholder
                 {
                     font-style: italic;
-                    color: darkslategrey;
+                    color:#1f2628;
                 }
                 input:-webkit-autofill {
                     transition: background-color 5000s ease-in-out 0s;
@@ -138,14 +293,12 @@
         ul{
             width: 65%;
             height: auto;
-            min-height: 100px;
+            min-height: 50px;
             list-style: none;
-            overflow: auto;
-            
             li
             {
                 color: slategray;
-                min-height: 65px;
+                min-height: 70px;
                 margin-bottom: 20px;
                 border-radius: 25px;
                 padding: 5px;
@@ -163,7 +316,7 @@
                     .drop-design
                     {
                         position: absolute;
-                        left: 362px;
+                        left: 86%;
                         height: auto;
                         top: 16px;
                         min-width: 80px;
@@ -173,6 +326,10 @@
                         color: #c3cec7;
                         align-items: center;
                         padding: 0;
+
+                        a{
+                            color: #c3cec7;
+                        }
 
                         .dropdown-item
                         {
@@ -184,6 +341,7 @@
                             margin-bottom: 2px;
                             cursor: pointer;
 
+                            
                             i{
                                 margin-top: 2px;
                             }
@@ -203,7 +361,13 @@
                 .modal-dialog
                 {
                     width: 350px;
-                    margin-top: 20%;
+                    margin-top: 175px;
+                    text-align: center;
+                    .modal-title{
+                        font-family: 'Gill Sans';
+                        color: #5E99A2;
+                        font-size: 27.2px !important;
+                    }
 
                     button:focus{
                         outline: none;
@@ -247,6 +411,46 @@
                     margin-bottom: 5px;
                     color: dimgrey;
                     height: auto;
+                }
+                .editedReply{
+                    position: absolute;
+                    right: 38px;
+                    font-size: 11px;
+                    top: 6px;
+                    color: #bdb7b7;
+                    font-weight: 550;
+                }
+                .reply-update-form{
+                    margin-top: 35px;
+                    margin-left: 32px;
+                    margin-bottom: 10px;
+                    min-height: 30px;
+                    width: 85%;
+                    justify-content: space-between;
+
+                    textarea{
+                        width: 85%;
+                        resize: none;
+                        background: transparent;
+                        border: 1px solid lightblue;
+                        border-radius: 10px;
+                        padding-left: 10px;
+                    }
+                    textarea:focus,button:focus{
+                        outline:none;
+                    }
+                    textarea::-webkit-scrollbar {
+                        display: none;
+                    }
+                    button{
+                        width: 10%;
+                        color: thistle;
+                        border: none;
+                    }
+                    button:hover{
+                        box-shadow: 0px 0px 3px 1px lightblue;
+                        background: transparent;
+                    }
                 }
             }
             li::before

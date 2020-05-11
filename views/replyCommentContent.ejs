@@ -3,6 +3,82 @@
 <div id="comment-<%=comment._id%>-reply" class="">
   
       <div class="commentReplyClass">
+
+
+        <div class="comment-like-box">
+          <div class="comment-likes-number" id="comment-<%= comment._id %>-likes-number">
+              <span data-target="#comment-<%= comment._id %>-likes" data-toggle="modal">
+                  <% if(comment.likes.length>0) {%>
+                      <%= comment.likes.length %>
+                  <% } %>
+              </span>
+              <a class="toggle-like-button" href="/likes/toggle/?id=<%=comment._id%>&type=Comment" data-likes="<%= comment.likes.length %>">
+                  <i class="fas fa-thumbs-up like-thumbs"></i>
+              </a>
+          </div>
+  
+          <div class="modal fade" id="comment-<%= comment._id %>-likes" role="dialog">
+              <div class="modal-dialog">
+              
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="comment-<%=comment._id%>-like-title">Comment Reactions  
+                      <span>
+                          <% if(comment.likes.length>0) { %>
+                              <%= comment.likes.length%>
+                          <% } %>
+                          <i class="far fa-heart"></i>
+                        </span>
+                      </h4>
+                  </div>
+                  <div class="modal-body">
+                      
+                      <ul  class="comment-like-username-list " id="comment-<%= comment._id %>-likes-list">
+                              <% for(like of comment.likes) {%>
+                                  <li id="like-<%= like._id %>" class="comment-username-li">
+                                     
+                                      <%- include("_likeDisplay"); %>
+                                     
+                                  </li>
+                              <% } %>
+                      </ul>
+                  
+                  </div>
+                 
+                </div>
+                
+              </div>
+          </div>
+      </div>
+
+
+      <% if(locals.user.id==comment.user.id || locals.user.id==i.user) { %>
+        <small class="comment-deletion">
+            <span data-toggle="modal" data-target="#deleteCommentModal" class="delete-comment-modal">
+                <i class="fas fa-times"></i>
+            </span>
+            <div class="modal fade" tabindex="-1" role="dialog" id="deleteCommentModal" >
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h2 class="modal-title"><i class="fas fa-trash-alt"></i> Comment?</h2>
+                    </div>
+                    <div class="modal-body">
+                      <p style="text-align: left;">Are you sure you want to delete it? All the likes and replies will be lost forever.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <a href="/comments/destroy-comment-reply-page/<%= comment._id %>" class="delete-comment-button btn btn-danger">Remove</a>
+                      <button type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </small>
+      
+    <% } %>
+
+
         <div class="reply-header">
           <h4 class="reply-title">
               <p>Comment Replies</p>

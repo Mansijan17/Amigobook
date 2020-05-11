@@ -146,17 +146,17 @@ class PostComments{
                     
         </div>
         <small class="comment-deletion">
-        <span data-toggle="modal" data-target="#deleteCommentModal" class="delete-comment-modal">
+        <span data-toggle="modal" data-target="#deleteCommentModal-${comment._id}" class="delete-comment-modal">
         <i class="fas fa-times"></i>
     </span>
-    <div class="modal fade" tabindex="-1" role="dialog" id="deleteCommentModal" >
+    <div class="modal fade deletecommentmodal" tabindex="-1" role="dialog" id="deleteCommentModal-${comment._id}" style="padding-right:0px;" >
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h2 class="modal-title"><i class="fas fa-trash-alt"></i> Comment?</h2>
             </div>
             <div class="modal-body">
-              <p>Are you sure you want to delete it?</p>
+            <p style="text-align:left;">Are you sure you want to delete it? All the likes and replies will be lost forever.</p>
             </div>
             <div class="modal-footer">
               <a href="/comments/destroy-comment/${comment._id }" class="delete-comment-button btn btn-danger" data-dismiss="modal">Remove</a>

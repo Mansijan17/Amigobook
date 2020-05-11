@@ -7,7 +7,101 @@
   border: 2px dotted forestgreen;
   padding: 20px 20px 40px;
   height: auto;
-  min-height: 300px; }
+  min-height: 300px;
+  position: relative; }
+  .commentReplyClass .comment-like-box {
+    position: absolute;
+    right: 15px;
+    font-size: 20px;
+    color: #00388b;
+    cursor: pointer; }
+    .commentReplyClass .comment-like-box a {
+      color: #145556; }
+    .commentReplyClass .comment-like-box a:hover {
+      color: #00388b; }
+    .commentReplyClass .comment-like-box span:hover {
+      color: #145556; }
+    .commentReplyClass .comment-like-box .modal {
+      color: black;
+      padding-right: 16px; }
+      .commentReplyClass .comment-like-box .modal .modal-dialog {
+        width: 500px; }
+        .commentReplyClass .comment-like-box .modal .modal-dialog .modal-content {
+          width: 100%; }
+          .commentReplyClass .comment-like-box .modal .modal-dialog .modal-content .modal-title {
+            text-align: center; }
+            .commentReplyClass .comment-like-box .modal .modal-dialog .modal-content .modal-title span {
+              display: block;
+              margin-top: 5px;
+              color: mediumvioletred; }
+          .commentReplyClass .comment-like-box .modal .modal-dialog .modal-content .modal-body {
+            height: auto;
+            display: flex;
+            justify-content: center;
+            width: 100%; }
+    .commentReplyClass .comment-like-box .comment-like-username-list {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 60%;
+      padding-left: 0;
+      max-height: 300px;
+      overflow: auto;
+      font-size: 15px; }
+      .commentReplyClass .comment-like-box .comment-like-username-list li {
+        min-height: 30px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        text-align: right;
+        align-items: center;
+        margin: 1px; }
+        .commentReplyClass .comment-like-box .comment-like-username-list li a {
+          color: #006881; }
+          .commentReplyClass .comment-like-box .comment-like-username-list li a img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            margin-right: 5px; }
+          .commentReplyClass .comment-like-box .comment-like-username-list li a span {
+            font-variant: petite-caps; }
+          .commentReplyClass .comment-like-box .comment-like-username-list li a span:hover {
+            font-weight: bold; }
+          .commentReplyClass .comment-like-box .comment-like-username-list li a img:hover {
+            filter: brightness(0.8); }
+      .commentReplyClass .comment-like-box .comment-like-username-list li::after {
+        content: '\f21e';
+        font-weight: 900;
+        font-family: "Font Awesome 5 Free";
+        display: inline-block;
+        color: #BF0A30; }
+    .commentReplyClass .comment-like-box .comment-like-username-list::-webkit-scrollbar {
+      display: none; }
+  .commentReplyClass .comment-deletion {
+    position: absolute;
+    font-size: 17px;
+    cursor: pointer;
+    color: ghostwhite; }
+    .commentReplyClass .comment-deletion span:hover {
+      color: #90212a; }
+    .commentReplyClass .comment-deletion .modal-dialog {
+      width: 400px;
+      margin-top: 175px;
+      text-align: center; }
+      .commentReplyClass .comment-deletion .modal-dialog h2 {
+        font-family: 'Gill Sans';
+        color: #5E99A2;
+        font-size: 27.2px !important; }
+      .commentReplyClass .comment-deletion .modal-dialog .modal-content .modal-body {
+        font-size: 14px;
+        color: #8F9BA8;
+        width: 87%;
+        margin: auto; }
+      .commentReplyClass .comment-deletion .modal-dialog .modal-content .modal-footer {
+        color: #7b6b6b; }
+        .commentReplyClass .comment-deletion .modal-dialog .modal-content .modal-footer button:focus {
+          outline: none; }
   .commentReplyClass .reply-header {
     margin-bottom: 25px; }
   .commentReplyClass .reply-title {
@@ -55,8 +149,6 @@
   .commentReplyClass a:hover {
     text-decoration: none; }
   .commentReplyClass .reply-body {
-    max-height: 400px;
-    overflow: auto;
     display: flex;
     flex-direction: column;
     align-items: center; }
@@ -64,9 +156,12 @@
       width: 90%;
       margin-bottom: 15px;
       padding: 8px;
-      font-family: cursive;
+      font-family: monospace;
       height: auto;
-      color: #1a3c3a;
+      border: 1.5px dashed darkslategray;
+      border-left: none;
+      border-right: none;
+      color: #52c6bf;
       font-size: 20px; }
     .commentReplyClass .reply-body form {
       width: 65%;
@@ -77,11 +172,11 @@
         width: 75%;
         border: none;
         border-bottom: 1.5px solid powderblue;
-        color: darkslategrey;
+        color: #1f2628;
         background: transparent; }
       .commentReplyClass .reply-body form input::placeholder {
         font-style: italic;
-        color: darkslategrey; }
+        color: #1f2628; }
       .commentReplyClass .reply-body form input:-webkit-autofill {
         transition: background-color 5000s ease-in-out 0s;
         -webkit-text-fill-color: darkslategrey; }
@@ -101,12 +196,11 @@
     .commentReplyClass .reply-body ul {
       width: 65%;
       height: auto;
-      min-height: 100px;
-      list-style: none;
-      overflow: auto; }
+      min-height: 50px;
+      list-style: none; }
       .commentReplyClass .reply-body ul li {
         color: slategray;
-        min-height: 65px;
+        min-height: 70px;
         margin-bottom: 20px;
         border-radius: 25px;
         padding: 5px;
@@ -118,7 +212,7 @@
           cursor: pointer; }
         .commentReplyClass .reply-body ul li .bars .drop-design {
           position: absolute;
-          left: 362px;
+          left: 86%;
           height: auto;
           top: 16px;
           min-width: 80px;
@@ -128,6 +222,8 @@
           color: #c3cec7;
           align-items: center;
           padding: 0; }
+          .commentReplyClass .reply-body ul li .bars .drop-design a {
+            color: #c3cec7; }
           .commentReplyClass .reply-body ul li .bars .drop-design .dropdown-item {
             display: flex;
             justify-content: space-between;
@@ -145,7 +241,12 @@
             background: #1f7672; }
         .commentReplyClass .reply-body ul li .modal-dialog {
           width: 350px;
-          margin-top: 20%; }
+          margin-top: 175px;
+          text-align: center; }
+          .commentReplyClass .reply-body ul li .modal-dialog .modal-title {
+            font-family: 'Gill Sans';
+            color: #5E99A2;
+            font-size: 27.2px !important; }
           .commentReplyClass .reply-body ul li .modal-dialog button:focus {
             outline: none; }
         .commentReplyClass .reply-body ul li .reply-author-tag {
@@ -176,6 +277,38 @@
           margin-bottom: 5px;
           color: dimgrey;
           height: auto; }
+        .commentReplyClass .reply-body ul li .editedReply {
+          position: absolute;
+          right: 38px;
+          font-size: 11px;
+          top: 6px;
+          color: #bdb7b7;
+          font-weight: 550; }
+        .commentReplyClass .reply-body ul li .reply-update-form {
+          margin-top: 35px;
+          margin-left: 32px;
+          margin-bottom: 10px;
+          min-height: 30px;
+          width: 85%;
+          justify-content: space-between; }
+          .commentReplyClass .reply-body ul li .reply-update-form textarea {
+            width: 85%;
+            resize: none;
+            background: transparent;
+            border: 1px solid lightblue;
+            border-radius: 10px;
+            padding-left: 10px; }
+          .commentReplyClass .reply-body ul li .reply-update-form textarea:focus, .commentReplyClass .reply-body ul li .reply-update-form button:focus {
+            outline: none; }
+          .commentReplyClass .reply-body ul li .reply-update-form textarea::-webkit-scrollbar {
+            display: none; }
+          .commentReplyClass .reply-body ul li .reply-update-form button {
+            width: 10%;
+            color: thistle;
+            border: none; }
+          .commentReplyClass .reply-body ul li .reply-update-form button:hover {
+            box-shadow: 0px 0px 3px 1px lightblue;
+            background: transparent; }
       .commentReplyClass .reply-body ul li::before {
         content: "";
         position: absolute;
