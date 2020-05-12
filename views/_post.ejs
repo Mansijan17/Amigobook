@@ -100,35 +100,9 @@
        
         <div class="post-text">
                 <% if(!i.sharedFromPost) {%>
-                    <% if(locals.user.id!=i.user.id) { %>
-                        <span> <%= i.content %> </span>
-                    <% } else { %>
-                        <% if(!i.update ) {%>
-                            <span> <%= i.content %> </span>
-                        <% } else { %>
-                            <form action="/posts/update-post-p2" method="post" class="post-update-form">
-                                <textarea required  name="content" ><%= i.content%></textarea>
-                                <input type="hidden" name="post" value="<%= i._id%>">
-                                <button type="submit">Update</button>
-                            </form>
-                            
-                        <% } %>
-                    <% } %>
-                    
+                    <span> <%= i.content.newContent %> </span>
                 <% } else { %>
-                    <% if(locals.user.id!=i.user.id) { %>
-                        <span> <%= i.content.newContent %> </span>
-                    <% } else { %>
-                        <% if(!i.update) {%>
-                            <span> <%= i.content.newContent %> </span>
-                        <% } else { %>
-                            <form action="/posts/update-post-p2" method="post" class="post-update-form">
-                                <textarea required  name="content" ><%= i.content.newContent%></textarea>
-                                <input type="hidden" name="post" value="<%= i._id%>">
-                                <button type="submit">Update</button>
-                            </form>
-                        <% } %>
-                    <% } %>
+                    <span> <%= i.content.newContent %> </span>
                     <div class="copiedPost">
                         <% if(i.content.prevAuthID!=null) {%>
                             <div class="copiedAuthIntro">
@@ -144,8 +118,6 @@
                     </div>
                    
                 <% } %>
-                
-            
         </div>
         
         <div class="post-comments">

@@ -109,24 +109,9 @@
           </h4>
         </div>
         <div class="reply-body">
-          <% if(locals.user.id!=comment.user.id) {%>
-            <div class="commentReplyContent" id="comment-<%=comment._id%>-reply-content">
-              <%= comment.content %>
-            </div>
-          <% } else {%>
-            <% if(!comment.update) {%>
-              <div class="commentReplyContent" id="comment-<%=comment._id%>-reply-content">
-                <%= comment.content %>
-              </div>
-            <% } else {%>
-              <form action="/comments/update-comment-c2" method="post" class="comment-update-form">
-                <textarea required  name="content" ><%= comment.content%></textarea>
-                <input type="hidden" name="comment" value="<%= comment._id%>">
-                <button type="submit">U</button>
-            </form>
-            <% } %>
-          <% } %>
-          
+          <div class="commentReplyContent" id="comment-<%=comment._id%>-reply-content">
+            <%= comment.content %>
+          </div>
           <form action="/comments/create-comment-reply/" method="post" id="comment-<%= comment._id%>-reply-form" class="comment-reply-form">
                 <input type="text" name="content" placeholder="Want to add something?" required>
                 <input type="hidden" name="comment" value="<%= comment._id%>">

@@ -302,7 +302,15 @@ module.exports.showReply=async function(req,res)
             populate:{
                 path:"user"
             }
-        }).populate("user");;
+        }).populate("user");
+        let replies=comment.replies;
+        for(reply of replies)
+        {
+            reply.update=false;
+            reply.save();
+        }
+        comment.update=false;
+        comment.save();
         
         let post=await Post.findById(comment.post);
         post.populate("user");

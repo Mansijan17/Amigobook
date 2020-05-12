@@ -88,6 +88,22 @@ module.exports.home = async function(req, res){
                     path:"user"
                 }
             });
+        for(post of postLists)
+        {
+            post.update=false;
+            post.save();
+            for(comment of post.comments)
+            {
+                comment.update=false;
+                comment.save();
+            }
+        }
+        let comments=await Comment.find({});
+        for(comment of comments)
+        {
+            comment.update=false;
+            comment.save();
+        }
        // await Comment.find({}).sort("-createdAt");
       // console.log(postLists.comments);
      

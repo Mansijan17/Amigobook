@@ -12,7 +12,7 @@
           <% if(locals.user.id==reply.user.id) {%>  
             <a class="dropdown-item update-reply-button" href="/comments/update-reply/<%= reply._id %>" >Edit <i class="fas fa-pen-square"></i></a>
           <% } %>
-          <a class="dropdown-item">Reply <i class="far fa-comment-dots"></i></a>
+          <a class="dropdown-item reply-reply-button" href="/comments/reply-reply-r1/<%= reply._id%>">Reply <i class="far fa-comment-dots"></i></a>
           <a class="dropdown-item">Like <i class="far fa-thumbs-up"></i></a>
         </div>
     </div>
@@ -52,19 +52,7 @@
             <% } %>
         </a>
     </div>
-    <% if( reply.user.id!=locals.user.id) {%>
-      <div class="reply-content"><%= reply.content%></div>
-    <% } else  {%>
-      <% if(reply.update) {%>
-          <form action="/comments/update-reply-r2" method="post" class="reply-update-form">
-              <textarea required  name="content" ><%= reply.content%></textarea>
-              <input type="hidden" name="reply" value="<%= reply._id%>">
-              <button type="submit">U</button>
-          </form>
-      <% } else { %>
-        <div class="reply-content"><%= reply.content%></div>
-      <% } %>
-  <% } %>
+    <div class="reply-content"><%= reply.content%></div>
     <% if(reply.edited) {%>
         <span class="editedReply">Edited</span>
     <% } %>

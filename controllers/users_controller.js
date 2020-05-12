@@ -44,6 +44,23 @@ module.exports.profile = async function (req, res) {
             }
         });;
 
+        for(post of postLists)
+        {
+            post.update=false;
+            post.save();
+            for(comment of post.comments)
+            {
+                comment.update=false;
+                comment.save();
+            }
+        }
+        let comments=await Comment.find({});
+        for(comment of comments)
+        {
+            comment.update=false;
+            comment.save();
+        }
+
         return res.render('userProfile', {
             title: `${user.name} | Socialends`,
             profileUser: user,
