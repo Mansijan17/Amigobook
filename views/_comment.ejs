@@ -91,7 +91,7 @@
                 <span><%= comment.content %></span>
             <% } else  {%>
                 <% if(comment.update) {%>
-                    <form action="/comments/update-comment-c2" method="post" class="comment-update-form">
+                    <form action="/comments/update-comment-c2/" method="post" class="comment-update-form" id="comment-<%= comment._id %>-update-form">
                         <textarea required  name="content" ><%= comment.content%></textarea>
                         <input type="hidden" name="comment" value="<%= comment._id%>">
                         <button type="submit">U</button>

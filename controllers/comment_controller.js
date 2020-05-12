@@ -213,7 +213,7 @@ module.exports.updateComment=async function(req,res)
     {
         let id=req.params.id;
         let comment=await Comment.findById(id);
-        console.log("update controller 1");
+        console.log("update controller 1",comment);
         if(comment.user.id==req.user.id)
         {
             if(!comment.update)
@@ -250,8 +250,10 @@ module.exports.updateComment2=async function(req,res)
 {
     try
     {
+        console.log(req.body);
         let id=req.body.comment;
         let comment=await Comment.findById(id);
+        console.log(comment);
         if(comment.user.id==req.user.id)
         {
             if(comment.content!=req.body.content)
@@ -267,7 +269,8 @@ module.exports.updateComment2=async function(req,res)
                     {
                         commentID:id,
                         content:req.body.content,
-                        edited:comment.edited
+                        edited:comment.edited,
+                        postID:comment.post
                     },
                     message:"Comment Updated Successfully"
             });

@@ -162,6 +162,30 @@
         }
     }
 
+    .comment-update-tag
+    {
+        position: absolute;
+        left: 49px;
+        font-size: 18px;
+        top: 19px;
+
+        a{
+            color: #97d4cb;
+        }
+        a:hover{
+            color: turquoise;
+        }
+    }
+
+    .comment-editedTag
+    {
+        position: absolute;
+        left: 81px;
+        font-size: 15px;
+        color: powderblue;
+        font-variant-caps: unicase;
+    }
+
 
     .reply-header
     {
@@ -246,6 +270,47 @@
             border-right: none;
             color:#52c6bf;
             font-size: 20px;
+        }
+
+        .comment-update-form{
+
+            border: 1.5px dashed darkslategray;
+            width: 90%;
+            display: flex;
+            justify-content: space-evenly;
+            padding: 8px;
+            border-left: none;
+            color: #52c6bf;
+            font-size: 20px;
+            height: auto;
+            border-right: none;
+
+            textarea
+            {
+                background: transparent;
+                border: 1.5px solid #7cb07c;
+                resize: none;
+                width: 75%;
+                border-radius: 15px;
+                padding: 5px 3px 3px 12px;
+                font-family: monospace;
+            }
+            button{
+                border: none;
+                width: 60px;
+                transition: all 0.5s ease-in-out;
+                align-self: center;
+            }
+            textarea:focus,button:focus{
+                outline: none;
+            }
+            textarea::-webkit-scrollbar {
+                display: none;
+            }
+            button:hover{
+                background: transparent;
+                font-size: x-large;
+            }
         }
 
         form{

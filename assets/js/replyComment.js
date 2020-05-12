@@ -9,20 +9,31 @@ class replyOnComment{
         let self=this;
         $(" .delete-reply-button" ,this.commentContainer).each(function()
         {
-            //let updateButton=$(" .update-post-button",self);
-           // updatePost(updateButton);
             self.deleteReply($(this));
             console.log("delete replies");
 
         })
         $(" .update-reply-button" ,this.commentContainer).each(function()
         {
-            //let updateButton=$(" .update-post-button",self);
-           // updatePost(updateButton);
             self.updateReply($(this));
             console.log("update replies");
-
         })
+        $(" .update-comment-button" ,this.commentContainer).each(function()
+        {
+            self.updateComment($(this));
+            console.log("update comments");
+        })
+        $(" .comment-update-form" ,this.commentContainer).each(function()
+        {
+            self.updateCommentContent($(this));
+            console.log("update comments content");
+        })
+        $(" .reply-update-form" ,this.commentContainer).each(function()
+        {
+            self.updateReplyContent($(this));
+            console.log("update comment replies content");
+        })
+      
     }
 
     reply(commentID)
@@ -198,6 +209,155 @@ class replyOnComment{
                 error:function(err)
                 {
                     console.log("error ",err.responseText);
+                }
+            })
+        })
+    }
+
+
+    updateReplyContent(form)
+    {
+        $(form).submit(function(e)
+        {
+            e.preventDefault();
+            $.ajax({
+                type:"post",
+                url:"/comments/update-reply-r2",
+                data:$(form).serialize(),
+                success:function(data)
+                {
+                    console.log(data.data);
+                    if(data.data.edited)
+                    {
+                            $(`#reply-${data.data.replyID}`).prepend(`<span class="editedReply">Edited</span>`);
+                    }
+                    
+                    $(`#reply-${ data.data.replyID} form`).remove();
+                    $(`#reply-${ data.data.replyID} `).append(`<div class="reply-content">${data.data.content}</div>`);
+
+                    new Noty({
+                        theme:"relax",
+                        text:"Reply updated successfully!",
+                        type:"success",
+                        layput:"topRight",
+                        timeout:1500
+                    }).show();
+                },
+                error:function(err)
+                {
+                    console.log(err.responseText);
+                    return;
+                }
+            })
+        })
+    }
+
+    updateComment(updateLink)
+    {
+        console.log("up1",$(updateLink).prop("href"));
+        $(updateLink).click(function(e)
+        {
+            console.log("up2");
+            e.preventDefault();
+            $.ajax({
+                type:"get",
+                url:$(updateLink).prop("href"),
+                success:function(data)
+                {
+                    console.log("h111", data);
+                   
+                    $(`#comment-${ data.data.commentID}-reply .commentReplyContent`).remove();
+                    $(`#comment-${ data.data.commentID}-reply .commentReplyClass .reply-body`).prepend(`<form action="/comments/update-comment-c2" method="post" class="comment-update-form">
+                    <textarea required  name="content" >${ data.data.content}</textarea>
+                    <input type="hidden" name="comment" value="${ data.data.commentID}">
+                    <button type="submit">U</button>
+                    </form>`)
+                    
+                    let upadeCommentContent=function()
+                    {
+                        console.log($(".comment-update-form"));
+                        $(".comment-update-form").submit(function(e)
+                        {
+                            console.log("h2");
+                            e.preventDefault();
+                            $.ajax({
+                                type:"post",
+                                url:"/comments/update-comment-c2",
+                                data:$(".comment-update-form").serialize(),
+                                success:function(data)
+                                {
+                                    console.log(data.data);
+                                    if(data.data.edited)
+                                    {
+                                            $(`#comment-${data.data.commentID}`).prepend(`<small class="comment-editedTag">
+                                        Edited
+                                        </small>`);
+                                    }
+                                    $(`#comment-${data.data.commentID}-reply .commentReplyClass .reply-body .comment-update-form`).remove();
+                                    $(`#comment-${data.data.commentID}-reply .commentReplyClass .reply-body`).prepend(`<div class="commentReplyContent" id="comment-${data.data.commentID}-reply-content">
+                                    ${data.data.content}
+                                  </div>`);
+                                    new Noty({
+                                        theme:"relax",
+                                        text:"Comment updated successfully!",
+                                        type:"success",
+                                        layput:"topRight",
+                                        timeout:1500
+                                    }).show();
+                                },
+                                error:function(err)
+                                {
+                                    console.log(err.responseText);
+                                    return;
+                                }
+                            })
+                        })
+                    }
+                    upadeCommentContent();
+                },
+                error:function(err)
+                {
+                    console.log("error ",err.responseText);
+                }
+            })
+        })
+    }
+
+    updateCommentContent(form)
+    {
+        console.log("u c c1 ",$(form));
+        $(form).submit(function(e)
+        {
+            console.log("u c c2");
+            e.preventDefault();
+            $.ajax({
+                type:"post",
+                url:"/comments/update-comment-c2",
+                data:$(form).serialize(),
+                success:function(data)
+                {
+                    console.log(data.data);
+                    if(data.data.edited)
+                    {
+                            $(`#comment-${data.data.commentID}`).prepend(`<small class="comment-editedTag">
+                        Edited
+                        </small>`);
+                    }
+                    $(`#comment-${data.data.commentID}-reply .commentReplyClass .reply-body .comment-update-form`).remove();
+                    $(`#comment-${data.data.commentID}-reply .commentReplyClass .reply-body`).prepend(`<div class="commentReplyContent" id="comment-${data.data.commentID}-reply-content">
+                    ${data.data.content}</div>`);
+                    new Noty({
+                        theme:"relax",
+                        text:"Comment updated successfully!",
+                        type:"success",
+                        layput:"topRight",
+                        timeout:1500
+                    }).show();
+                },
+                error:function(err)
+                {
+                    console.log(err.responseText);
+                    return;
                 }
             })
         })

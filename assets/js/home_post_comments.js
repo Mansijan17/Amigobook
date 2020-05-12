@@ -23,6 +23,10 @@ class PostComments{
             self.updateComment($(this));
             console.log("updating comments");
         });
+        $(' .comment-update-form', this.postContainer).each(function(){
+            self.updateCommentContent($(this));
+            console.log("updating comment contents");
+        });
       
     }
 
@@ -85,7 +89,7 @@ class PostComments{
                   
                     pSelf.deleteComment($(' .delete-comment-button', newComment));
                     pSelf.updateComment($(' .update-comment-button', newComment));
-                    new replyOnComment($(' .comment-reply-form', newComment));
+   
                     new ToggleLike($(" .toggle-like-button", newComment));
                     new Noty({
                         theme: 'relax',
@@ -257,9 +261,10 @@ class PostComments{
                     <button type="submit">U</button>
                     </form>`)
                     
-                    let upadeCommentContent=function()
+                    
+                    let updateCommentContent=function()
                     {
-                        console.log("h1");
+                        
                         $(".comment-update-form").submit(function(e)
                         {
                             console.log("h2");
@@ -297,11 +302,53 @@ class PostComments{
                             })
                         })
                     }
-                    upadeCommentContent();
+
+                    updateCommentContent();
                 },
                 error:function(err)
                 {
                     console.log("error ",err.responseText);
+                }
+            })
+        })
+    }
+
+    updateCommentContent(form)
+    {
+        console.log("h1",$(form));
+        $(form).submit(function(e)
+        {
+            console.log("h2");
+            e.preventDefault();
+            $.ajax({
+                type:"post",
+                url:"/comments/update-comment-c2",
+                data:$(".comment-update-form").serialize(),
+                success:function(data)
+                {
+                    console.log(data.data);
+                    if(data.data.edited)
+                    {
+                            $(`#comment-${data.data.commentID}`).prepend(`<small class="comment-editedTag">
+                        Edited
+                        </small>`);
+                    }
+                    
+                    $(`#comment-${data.data.commentID}-content .comment-text form`).remove();
+                    $(`#comment-${data.data.commentID}-content .comment-text `).prepend(`<span>${data.data.content}</span>`);
+                    $(`#comment-${data.data.commentID}-reply-content`).html(`${data.data.content}`);
+                    new Noty({
+                        theme:"relax",
+                        text:"Comment updated successfully!",
+                        type:"success",
+                        layput:"topRight",
+                        timeout:1500
+                    }).show();
+                },
+                error:function(err)
+                {
+                    console.log(err.responseText);
+                    return;
                 }
             })
         })

@@ -102,6 +102,21 @@
         color: #7b6b6b; }
         .commentReplyClass .comment-deletion .modal-dialog .modal-content .modal-footer button:focus {
           outline: none; }
+  .commentReplyClass .comment-update-tag {
+    position: absolute;
+    left: 49px;
+    font-size: 18px;
+    top: 19px; }
+    .commentReplyClass .comment-update-tag a {
+      color: #97d4cb; }
+    .commentReplyClass .comment-update-tag a:hover {
+      color: turquoise; }
+  .commentReplyClass .comment-editedTag {
+    position: absolute;
+    left: 81px;
+    font-size: 15px;
+    color: powderblue;
+    font-variant-caps: unicase; }
   .commentReplyClass .reply-header {
     margin-bottom: 25px; }
   .commentReplyClass .reply-title {
@@ -163,6 +178,37 @@
       border-right: none;
       color: #52c6bf;
       font-size: 20px; }
+    .commentReplyClass .reply-body .comment-update-form {
+      border: 1.5px dashed darkslategray;
+      width: 90%;
+      display: flex;
+      justify-content: space-evenly;
+      padding: 8px;
+      border-left: none;
+      color: #52c6bf;
+      font-size: 20px;
+      height: auto;
+      border-right: none; }
+      .commentReplyClass .reply-body .comment-update-form textarea {
+        background: transparent;
+        border: 1.5px solid #7cb07c;
+        resize: none;
+        width: 75%;
+        border-radius: 15px;
+        padding: 5px 3px 3px 12px;
+        font-family: monospace; }
+      .commentReplyClass .reply-body .comment-update-form button {
+        border: none;
+        width: 60px;
+        transition: all 0.5s ease-in-out;
+        align-self: center; }
+      .commentReplyClass .reply-body .comment-update-form textarea:focus, .commentReplyClass .reply-body .comment-update-form button:focus {
+        outline: none; }
+      .commentReplyClass .reply-body .comment-update-form textarea::-webkit-scrollbar {
+        display: none; }
+      .commentReplyClass .reply-body .comment-update-form button:hover {
+        background: transparent;
+        font-size: x-large; }
     .commentReplyClass .reply-body form {
       width: 65%;
       display: flex;

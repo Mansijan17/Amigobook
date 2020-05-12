@@ -75,6 +75,14 @@ function submitForm(x)
      $(`#post-${postID}-share-form`).submit();
 }
 
+// function submitCommentUpdateForm(x)
+// {
+//   let commentID=x["name"];
+//   console.log(commentID);
+//   console.log($(`#comment-${commentID}-update-form`))
+//   $(`#comment-${commentID}-update-form`).submit();
+// }
+
 // function submitReplyModal(x)
 // {
 //     console.log(x);
@@ -82,3 +90,13 @@ function submitForm(x)
 //     console.log(commentID);
 //      $(`#comment-${commentID}-reply-form`).submit();
 // }
+
+window.addEventListener( "pageshow", function ( event ) {
+    var historyTraversal = event.persisted || 
+                           ( typeof window.performance != "undefined" && 
+                                window.performance.navigation.type === 2 );
+    if ( historyTraversal ) {
+      // Handle page restore.
+      window.location.reload();
+    }
+  });
