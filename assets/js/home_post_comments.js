@@ -23,10 +23,6 @@ class PostComments{
             self.updateComment($(this));
             console.log("updating comments");
         });
-        $(' .comment-update-form', this.postContainer).each(function(){
-            self.updateCommentContent($(this));
-            console.log("updating comment contents");
-        });
       
     }
 
@@ -312,48 +308,4 @@ class PostComments{
             })
         })
     }
-
-    updateCommentContent(form)
-    {
-        console.log("h1",$(form));
-        $(form).submit(function(e)
-        {
-            console.log("h2");
-            e.preventDefault();
-            $.ajax({
-                type:"post",
-                url:"/comments/update-comment-c2",
-                data:$(".comment-update-form").serialize(),
-                success:function(data)
-                {
-                    console.log(data.data);
-                    if(data.data.edited)
-                    {
-                            $(`#comment-${data.data.commentID}`).prepend(`<small class="comment-editedTag">
-                        Edited
-                        </small>`);
-                    }
-                    
-                    $(`#comment-${data.data.commentID}-content .comment-text form`).remove();
-                    $(`#comment-${data.data.commentID}-content .comment-text `).prepend(`<span>${data.data.content}</span>`);
-                    $(`#comment-${data.data.commentID}-reply-content`).html(`${data.data.content}`);
-                    new Noty({
-                        theme:"relax",
-                        text:"Comment updated successfully!",
-                        type:"success",
-                        layput:"topRight",
-                        timeout:1500
-                    }).show();
-                },
-                error:function(err)
-                {
-                    console.log(err.responseText);
-                    return;
-                }
-            })
-        })
-    }
-
-    
-   
 }

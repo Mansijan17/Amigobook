@@ -57,7 +57,17 @@ for(let i=0;i<textarea.length;i++)
              
 function autosize(){
   var el = this;
-  console.log(el);
+  setTimeout(function(){
+    el.style.cssText = 'height:auto; padding:0';
+    // for box-sizing other than "content-box" use:
+    // el.style.cssText = '-moz-box-sizing:content-box';
+    el.style.cssText = 'height:' + el.scrollHeight + 'px';
+  },0);
+}
+
+            
+function autosize1(textarea){
+  var el = textarea;
   setTimeout(function(){
     el.style.cssText = 'height:auto; padding:0';
     // for box-sizing other than "content-box" use:
@@ -74,6 +84,22 @@ function submitForm(x)
     console.log(postID);
      $(`#post-${postID}-share-form`).submit();
 }
+
+function removetagVisible(x){
+
+  let replyID=x["name"];
+  console.log(replyID);
+  $(`#removetag-${replyID}`).css("display","block");
+}
+
+function removetagInvisible(){
+
+  $('.removetag').css("display","none");
+}
+$(document).ready(function()
+{
+  removetagInvisible();
+})
 
 // function submitCommentUpdateForm(x)
 // {

@@ -1,4 +1,4 @@
-<li id="reply-<%= reply._id%>">
+<li id="reply-<%= reply._id%>" onmouseup="removetagInvisible()">
     <div class="dropdown bars">
         <div class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-ellipsis-h"></i>
@@ -52,7 +52,27 @@
             <% } %>
         </a>
     </div>
-    <div class="reply-content"><%= reply.content%></div>
+    <div class="reply-content" >
+      <% if(!reply.isReply) { %>
+          <%= reply.content%>
+      <% } else { %>
+          <% if(reply.content.originalReplyID!=null) { %>
+                <% if(locals.user.id!=reply.user.id) { %>
+                  <a href="/users/profile/<%= reply.content.originalAuthorID%>" >
+                    <%= reply.content.originalAuthorName%>
+                  </a>
+                <% } else { %>
+                  <div class="removetag" id="removetag-<%= reply._id%>">
+                    <a href="/comments/reply-remove-tag/<%= reply._id %>" class="removetag-button">Remove Tag?</a>
+                  </div>
+                  <a href="/users/profile/<%= reply.content.originalAuthorID%>" onmouseover="removetagVisible(this)" name="<%= reply._id%>">
+                    <%= reply.content.originalAuthorName%>
+                </a>
+                <% } %>
+          <% } %> 
+          <span class="replyreplycontent"><%= reply.content.content %></span>
+      <% } %>
+    </div>
     <% if(reply.edited) {%>
         <span class="editedReply">Edited</span>
     <% } %>

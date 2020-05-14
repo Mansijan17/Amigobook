@@ -3,7 +3,7 @@ const mongoose=require('mongoose');
 const commentReply=new mongoose.Schema({
     content:
     {
-        type:String,
+        type:Object,
         required:true,
     },
     //comments belongs to the post
@@ -37,7 +37,11 @@ const commentReply=new mongoose.Schema({
         type:Boolean,
         required:true,
     },
-    
+    isReply:
+    {
+        type:Boolean,
+        required:true,
+    },
 
 },{
     timestamps:true

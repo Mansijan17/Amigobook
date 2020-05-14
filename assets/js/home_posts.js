@@ -373,14 +373,8 @@
             let self=$(this);
             let deleteButton=$(" .delete-post-button",self);
             let updateButton=$(" .update-post-button",self);
-            let updateContentButton=$(" .post-update-form",self);
-            console.log(updateContentButton);
             updatePost(updateButton);
             deletePost(deleteButton);
-            if(updateContentButton.length>0)
-            {
-                updatePostContent(updateContentButton);
-            }
             let postId=self.prop("id").split("-")[1];
             new PostComments(postId);
         })

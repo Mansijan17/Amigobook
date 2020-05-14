@@ -54,12 +54,7 @@ module.exports.profile = async function (req, res) {
                 comment.save();
             }
         }
-        let comments=await Comment.find({});
-        for(comment of comments)
-        {
-            comment.update=false;
-            comment.save();
-        }
+       
 
         return res.render('userProfile', {
             title: `${user.name} | Socialends`,

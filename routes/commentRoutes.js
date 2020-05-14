@@ -15,4 +15,9 @@ router.post("/create-comment-reply/",password.checkAuthentication,commentControl
 router.get("/destroy-comment-reply/:id",password.checkAuthentication,commentController.deleteReply);
 router.get("/update-reply/:id",password.checkAuthentication,commentController.updateReply);
 router.post("/update-reply-r2/",password.checkAuthentication,commentController.updateReply2);
+router.get("/reply-reply-r1/:id",password.checkAuthentication,commentController.replyReply1);
+router.post("/reply-reply-r2/",password.checkAuthentication,commentController.replyReply2);
+router.get("/reply-remove-tag/:id",password.checkAuthentication,commentController.removeTag);
+
+
 module.exports=router;

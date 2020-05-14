@@ -476,6 +476,64 @@
                     margin-bottom: 5px;
                     color: dimgrey;
                     height: auto;
+                    position: relative;
+                    word-break: break-all;
+                    overflow-wrap: break-word;
+                    display: flex;
+
+                    a{
+                        width: 25%;
+                        align-self: center;
+                    }
+                    
+
+                    .replyreplycontent{
+                        overflow-wrap: break-word;
+                        width: 70%;
+                        height: auto;
+                        display: inline-block;
+                    
+                    }
+
+                    .removetag{
+                        position: absolute;
+                        top: -23px;
+                        font-size: 11px;
+                        font-weight: 600;
+                        background: #0b516b;
+                        padding: 4px;
+                        padding-bottom: 1px;
+                        border-radius: 6px;
+                        color: whitesmoke;
+                        overflow-wrap: normal;
+
+                        a{
+                            display: inline-block;
+                            margin-left: -7px;
+                            font-family:'Lucida Grande';
+                            color: whitesmoke;
+                            width: 100%;
+                        }
+                        a:hover{
+                            color: #ddd0d0;
+                        }
+                    }
+
+                    .removetag::before{
+                        content: "";
+                        width: 0;
+                        position: relative;
+                        height: 0;
+                        bottom: -19.5px;
+                        left: 43%;
+                        border-top: 6px solid #0b516b;
+                        border-left: 5px solid transparent;
+                        border-right: 5px solid transparent;
+                    }
+
+                   a:hover{
+                       color: #1d8080;;
+                   }
                 }
                 .editedReply{
                     position: absolute;
@@ -492,6 +550,7 @@
                     min-height: 30px;
                     width: 85%;
                     justify-content: space-between;
+
 
                     textarea{
                         width: 85%;
@@ -515,6 +574,63 @@
                     button:hover{
                         box-shadow: 0px 0px 3px 1px lightblue;
                         background: transparent;
+                    }
+                    .reply2button:hover{
+                        background: transparent;
+                        text-decoration: underline;
+                        box-shadow: none;
+                    }
+                }
+                .reply-reply-form{
+                    width: 90%;
+                    margin: 0;
+                    margin-left: 32px;
+                    display: flex;
+                    flex-direction: column;
+
+                    .div1,.div2{
+                        margin-bottom: 0px;
+                        display: flex;
+                        align-items: center;
+                        width: 100%;
+                    }
+                   
+                    input[type="text"]
+                    {
+                        align-self: center;
+                        margin-top: 7px;
+                        border: none;
+                        font-weight: bold;
+                        font-size: 11px;
+                        width: auto;
+                    }
+
+                    textarea{
+                        height: 30px;
+                        align-self: center;
+                        resize: none;
+                        width: 75%;
+                        background: none;
+                        border: none;
+                        border-bottom: 1.2px solid #6565a6;
+                        margin-right: 5%;
+                    }
+                    textarea:focus,button:focus{
+                        outline: none;
+                    }
+                    textarea::-webkit-scrollbar {
+                        display: none;
+                    }
+                    button{
+                        background: #95bad9;
+                        padding: 0;
+                        border: none;
+                        height: 30px;
+                        width: 15%;
+                        align-self: center;
+                    }
+                    button:hover{
+                        background: #26669c;
                     }
                 }
             }

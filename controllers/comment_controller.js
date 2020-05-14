@@ -343,7 +343,8 @@ module.exports.createReply=async function(req,res)
                 comment:req.body.comment,
                 user:req.user._id,
                 update:false,
-                edited:false
+                edited:false,
+                isReply:false
             });
             let authorTag="";
             if(post.user==req.user.id)
@@ -441,7 +442,8 @@ module.exports.updateReply=async function(req,res)
                     data:
                     {
                         replyID:id,
-                        content:reply.content
+                        content:reply.content,
+                        isReply:reply.isReply
                     },
                     message:"Form Put"
                 })
@@ -469,23 +471,37 @@ module.exports.updateReply2=async function(req,res)
         console.log(req.body);
         let id=req.body.reply;
         let reply=await commentReply.findById(id);
-        console.log("update reply 2",id,reply);
+        console.log("update reply 2",reply);
         if(reply.user.id==req.user.id)
         {
-            if(reply.content!=req.body.content)
+            if(!reply.isReply)
             {
-                    reply.edited=true;
-                    reply.content=req.body.content;
+                if(reply.content!=req.body.content)
+                {
+                        reply.edited=true;
+                        reply.content=req.body.content;
+                }
             }
+            else
+            {
+                if(reply.content.content!=req.body.content)
+                {
+                        reply.edited=true;
+                        await commentReply.findByIdAndUpdate(reply.id,{$set:{"content.content":req.body.content}});
+                }
+            }
+            
             reply.update=false;
             reply.save();
+            console.log(reply);
             //return res.redirect("back");
             return res.json(200,{
                     data:
                     {
                         replyID:id,
                         content:req.body.content,
-                        edited:reply.edited
+                        edited:reply.edited,
+                        isReply:reply.isReply
                     },
                     message:"Reply Updated Successfully"
             });
@@ -534,6 +550,123 @@ module.exports.destroyCommentReply=async function(req,res)
     catch(err)
     {
         console.log("Error: ",err);
+        return;
+    }
+}
+
+module.exports.replyReply1=async function(req,res)
+{
+    try{
+
+        let id=req.params.id;
+        //console.log(id);
+        let reply=await commentReply.findById(id).populate("user");
+        //console.log(reply);
+        return res.json(200,{
+            data:{
+                name:reply.user.name,
+                userID:reply.user.id,
+                commentID:reply.comment,
+                replyID:reply.id
+            },
+            message:"New Reply Form Put"
+        })
+    }
+    catch(err)
+    {
+        console.log("error in replying to the replies ",err);
+        return
+    }
+}
+
+module.exports.replyReply2=async function(req,res)
+{
+    try{
+
+        //console.log(req.body);
+        let comment=await Comment.findById(req.body.comment);
+        let reply=await commentReply.findById(req.body.reply);
+        let post=await Post.findById(comment.post);
+        if(comment)
+        {
+            let newContent={
+                content:req.body.content,
+                originalReplyID:reply.id,
+                originalAuthorID:reply.user._id,
+                originalAuthorName:reply.user.name,
+            }
+           // console.log(newContent);
+            let newReply=await commentReply.create({
+                content:newContent,
+                comment:req.body.comment,
+                user:req.user._id,
+                update:false,
+                edited:false,
+                isReply:true
+            });
+            let authorTag="";
+            if(post.user==req.user.id)
+            {
+                authorTag="Author";
+            }
+            let user=await User.findById(req.user.id);
+            let userImage=user.avatar;
+            if(!userImage)
+            {
+                if(user.gender=="male")
+                {
+                    userImage="https://i.stack.imgur.com/HQwHI.jpg";
+                }
+                else
+                {
+                    userImage="/images/femaleProfile.png";
+                }
+            }
+            console.log(newReply);
+            comment.replies.push(newReply);
+            comment.save();
+            return res.status(200).json({
+                data:{
+                    replyUserImage:userImage,
+                    replyUserName:user.name,
+                    replyContent:newReply.content,
+                    replyID:newReply.id,
+                    commentID:req.body.comment,
+                    replyUserID:user.id,
+                    authorTag:authorTag,
+                    isReply:reply.isReply
+                },
+                message:"Comment Reply Successfully published"
+            });
+        }
+        return res.redirect("back");
+        
+    }
+    catch(err)
+    {
+        console.log("error in replying to the replies ",err);
+        return
+    }
+}
+
+module.exports.removeTag=async function(req,res)
+{
+    try{
+        let id=req.params.id;
+        let reply=await commentReply.findById(id);
+        console.log(reply);
+        await commentReply.findByIdAndUpdate(id,{$set:{"content.originalReplyID":null,"content.originalAuthorID":null,"content.originalAuthorName":null}});
+        return res.json(200,{
+            data:{
+                replyID:reply.id,
+            },
+            message:"Removetag Successfully!"
+        })
+        return res.redirect("back");
+    }
+    catch(err)
+    {
+        console.log("error in removing tag ",err);
         return;
     }
 }
