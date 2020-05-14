@@ -261,7 +261,7 @@
         .commentReplyContent
         {
             width: 90%;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
             padding: 8px;
             font-family: monospace;
             height: auto;
@@ -317,28 +317,32 @@
                 width: 65%;
                 display: flex;
                 justify-content: space-between;
-                margin-bottom: 25px;
+                margin-bottom: 35px;
 
-                input
+                textarea
                 {
                     width: 75%;
                     border: none;
                     border-bottom: 1.5px solid powderblue;
                     color:#1f2628;
                     background: transparent;
+                    resize: none;
                 }
-                input::placeholder
+                textarea::placeholder
                 {
                     font-style: italic;
                     color:#1f2628;
                 }
-                input:-webkit-autofill {
+                textarea:-webkit-autofill {
                     transition: background-color 5000s ease-in-out 0s;
                     -webkit-text-fill-color:darkslategrey;
                 }
-                input:focus,button:focus
+                textarea:focus,button:focus
                 {
                     outline: none;
+                }
+                textarea::-webkit-scrollbar {
+                    display: none;
                 }
                 button{
                     height: 45px;
@@ -483,10 +487,75 @@
 
                     a{
                         width: 25%;
-                        align-self: center;
                     }
                     
+                    .authorarrow{
+                        display: flex;
+                        flex-direction: column;
+                        margin-bottom: 30px;
+                        margin-right: 6px;
 
+                        .pointarrows{
+                            position: absolute;
+                            left: 15%;
+                            height: 25px;
+                            width: 50px;
+                            top: 25px;
+                            align-self: center;
+                            align-items: center;
+                            justify-content: space-evenly;
+                            display: flex;
+                            // background: linear-gradient(45deg, #C8EEDB, #9BE0BD, #48C686, #5ACB92);
+                            // background-size: 400% 400%;
+                            // animation: gradient 5s ease-in-out infinite;
+
+
+                            .circle{
+                                width: 5px;
+                                height: 5px;
+                                border-radius: 50%;
+                                margin: 1px;
+                                background: linear-gradient(45deg, #C8EEDB, #9BE0BD, #48C686, #5ACB92);
+                                background-size: 400% 400%;
+                                animation: gradient 5s ease-in-out infinite;
+                            }
+                            .topright{
+                                position: absolute;
+                                top: 2px;
+                                right: 7px;
+                            }
+                            .topright2{
+                                position: absolute;
+                                top: -4px;
+                                right: 13px;
+                            }
+                            .bottomright{
+                                position: absolute;
+                                bottom: 2px;
+                                right: 7px;
+                            }
+                            .bottomright2{
+                                position: absolute;
+                                bottom: -4px;
+                                right: 13px;
+                            }
+
+                        }
+
+                        @keyframes gradient {
+                            0% {
+                                background-position: 0% 50%;
+                            }
+                            50% {
+                                background-position: 100% 50%;
+                            }
+                            100% {
+                                background-position: 0% 50%;
+                            }
+                        }
+
+                    }
+                    
                     .replyreplycontent{
                         overflow-wrap: break-word;
                         width: 70%;
@@ -603,6 +672,7 @@
                         font-weight: bold;
                         font-size: 11px;
                         width: auto;
+                        background: transparent;
                     }
 
                     textarea{

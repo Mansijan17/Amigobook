@@ -443,7 +443,8 @@ module.exports.updateReply=async function(req,res)
                     {
                         replyID:id,
                         content:reply.content,
-                        isReply:reply.isReply
+                        isReply:reply.isReply,
+                        commentID:reply.comment
                     },
                     message:"Form Put"
                 })
@@ -501,7 +502,8 @@ module.exports.updateReply2=async function(req,res)
                         replyID:id,
                         content:req.body.content,
                         edited:reply.edited,
-                        isReply:reply.isReply
+                        isReply:reply.isReply,
+                        commentID:reply.comment
                     },
                     message:"Reply Updated Successfully"
             });
@@ -655,14 +657,15 @@ module.exports.removeTag=async function(req,res)
         let id=req.params.id;
         let reply=await commentReply.findById(id);
         console.log(reply);
-        await commentReply.findByIdAndUpdate(id,{$set:{"content.originalReplyID":null,"content.originalAuthorID":null,"content.originalAuthorName":null}});
+        reply.content=reply.content.content;
+        reply.isReply=false;
+        reply.save();
         return res.json(200,{
             data:{
                 replyID:reply.id,
             },
             message:"Removetag Successfully!"
         })
-        return res.redirect("back");
     }
     catch(err)
     {

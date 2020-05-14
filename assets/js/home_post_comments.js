@@ -166,7 +166,7 @@ class PostComments{
         </div>
       </div>
         </small>
-        <small> 
+        <small class="updatecommenttag"> 
             <a href="/comments/update-comment/${comment._id }" class="update-comment-button" >
                 <i class="fas fa-marker"></i>
             </a>
@@ -204,8 +204,10 @@ class PostComments{
                 url: $(deleteLink).prop('href'),
                 success: function(data){
                 
-                    console.log("remove comment: ",data.data);
+                    console.log("remove comment: ");
+                    
                     $(`#comment-${data.data.comment_id}`).remove();
+
                     let commentsCount=parseInt($(`#post-${data.data.postID}-comment-number`).attr("data-comments"));
                     console.log(commentsCount);
                     commentsCount-=1;
@@ -249,13 +251,31 @@ class PostComments{
                 success:function(data)
                 {
                     console.log(data.data);
+                    $(`.post-comments-list>ul>li`).each(function()
+                    {
+                        let self=$(this);
+                        let button=$(" .updatecommenttag",self);
+                        let i=$(" .update-comment-button",button)
+                        i.css("pointer-events","none");
+                        button.css("cursor","no-drop");
+
+                    });
+                    $(`#comment-${ data.data.commentID} .comment-deletion`).css("cursor","no-drop");
+                    $(`#comment-${ data.data.commentID} .comment-deletion span`).css("pointer-events","none");
+                    $(`.post-comments>form`).each(function()
+                    {
+                        let self=$(this);
+                        self.css("cursor","no-drop");
+                        let button=$(" button",self);
+                        button.css("pointer-events","none");
+                    })
                    
-                    $(`#comment-${ data.data.commentID}-content div .comment-text > span`).remove();
-                    $(`#comment-${ data.data.commentID}-content div .comment-text`).append(`<form action="/comments/update-comment-c2" method="post" class="comment-update-form">
-                    <textarea required  name="content" >${ data.data.content}</textarea>
+                    $(`#comment-${ data.data.commentID}-content div .comment-text`).remove();
+                    $(`#comment-${ data.data.commentID}-content div`).prepend(`<span class="comment-text" style="width:100%"><form action="/comments/update-comment-c2" method="post" class="comment-update-form">
+                    <textarea required  name="content" onkeydown="autosize1(this)">${ data.data.content}</textarea>
                     <input type="hidden" name="comment" value="${ data.data.commentID}">
                     <button type="submit">U</button>
-                    </form>`)
+                    </form></span>`)
                     
                     
                     let updateCommentContent=function()
@@ -272,6 +292,27 @@ class PostComments{
                                 success:function(data)
                                 {
                                     console.log(data.data);
+                                    $(`.post-comments-list>ul>li`).each(function()
+                                    {
+                                        let self=$(this);
+                                        
+                                        let button=$(" .updatecommenttag",self);
+                                        
+                                        let i=$(" .update-comment-button",button)
+                                    
+                                        i.css("pointer-events","auto");
+                                        button.css("cursor","pointer");
+
+                                    });
+                                    $(`.post-comments>form`).each(function()
+                                    {
+                                        let self=$(this);
+                                        self.css("cursor","pointer");
+                                        let button=$(" button",self);
+                                        button.css("pointer-events","auto");
+                                    })
+                                    $(`#comment-${ data.data.commentID} .comment-deletion`).css("cursor","pointer");
+                                    $(`#comment-${ data.data.commentID} .comment-deletion span`).css("pointer-events","auto");
                                     if(data.data.edited)
                                     {
                                             $(`#comment-${data.data.commentID}`).prepend(`<small class="comment-editedTag">
@@ -280,7 +321,8 @@ class PostComments{
                                     }
                                     
                                     $(`#comment-${data.data.commentID}-content .comment-text form`).remove();
-                                    $(`#comment-${data.data.commentID}-content .comment-text `).prepend(`<span>${data.data.content}</span>`);
+                                    $(`#comment-${data.data.commentID}-content .comment-text`).css("width","80%");
+                                    $(`#comment-${data.data.commentID}-content .comment-text`).prepend(`<span>${data.data.content}</span>`);
                                     $(`#comment-${data.data.commentID}-reply-content`).html(`${data.data.content}`);
                                     new Noty({
                                         theme:"relax",

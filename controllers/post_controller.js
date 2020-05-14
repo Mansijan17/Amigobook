@@ -184,6 +184,8 @@ module.exports.updatePost=async function(req,res)
             {
                 post.update=true;
                 post.save();
+                let postLists=await Post.find({"user":req.user.id});
+                console.log("up ",postLists);
                 if(req.xhr)
                 {
                     return res.json(200,{
@@ -192,6 +194,7 @@ module.exports.updatePost=async function(req,res)
                             postID:id,
                             content:post.content,
                             shared:post.sharedFromPost,
+                            posts:postLists
                         },
                         message:"Form Put"
                     })
@@ -242,6 +245,8 @@ module.exports.updatePost2=async function(req,res)
             }
             post.save();
             console.log(post);
+            let postLists=await Post.find({"user":req.user.id});
+            console.log("up 2",postLists);
             if(req.xhr)
             {
                 return res.json(200,{
@@ -249,7 +254,8 @@ module.exports.updatePost2=async function(req,res)
                     {
                         postID:id,
                         content:req.body.content,
-                        edited:post.edited
+                        edited:post.edited,
+                        posts:postLists
                     },
                     message:"Post Updated Successfully"
                 });

@@ -86,7 +86,7 @@ class SharePost{
             
                 </div>
                 
-                <small> 
+                <small class="post-deletion> 
                 <span data-toggle="modal" data-target="#post-${ i._id}-delete-modal" class="delete-post-modal">
         <i class="fas fa-trash-alt"></i>
     </span>
@@ -107,7 +107,7 @@ class SharePost{
         </div>
       </div>
                 </small>
-                <small> 
+                <small class="updateposttag"> 
                     <a href="/posts/update-post/${i._id }" class="update-post-button">
                         <i class="fas fa-pen-fancy"></i>
                     </a>
@@ -135,7 +135,7 @@ class SharePost{
                     </div>
                     <div class="post-comments">
                         <form action="/comments/create-comment" method="post" id="post-${ i._id }-comments-form">
-                            <input type="text" name="content" placeholder="Type here to add comment...." required>
+                            <textarea type="text" name="content" placeholder="Type here to add comment...." required onkeydown="autosize1(this)"></textarea>
                             <input type="hidden" name="post" value="${ i._id }">
                             <button type="submit">Add comment</button>
                         </form>
@@ -270,12 +270,26 @@ class SharePost{
                             success:function(data)
                             {
                                 console.log(data.data);
+                                $(`#posts-list-container>ul>li`).each(function()
+                                {
+                                    let self=$(this);
+                                    //console.log(self);
+                                    let button=$(" .updateposttag",self);
+                                    console.log(button);
+                                    let i=$(" .update-post-button",button)
+                                    console.log(i)
+                                    i.css("pointer-events","none");
+                                    button.css("cursor","no-drop");
+
+                                })
+                                $(`#post-${data.data.postID} .post-deletion`).css("cursor","no-drop");
+                                $(`#post-${data.data.postID} .post-deletion span`).css("pointer-events","none");
                             
                             $(`#post-${data.data.postID}-content .post-text > span`).remove();
                             
                                    
                                 $(`#post-${data.data.postID}-content .post-text`).prepend(`<form action="/posts/update-post-p2" method="post" class="post-update-form">
-                                <textarea required  name="content" >${data.data.content.newContent}</textarea>
+                                <textarea required  name="content" onkeydown="autosize1(this)">${data.data.content.newContent}</textarea>
                                     <input type="hidden" name="post" value="${data.data.postID}">
                                     <button type="submit">Update</button>
                                     </form>`);
@@ -303,6 +317,20 @@ class SharePost{
                                 success:function(data)
                                 {
                                     console.log(data.data);
+                                    $(`#posts-list-container>ul>li`).each(function()
+                                    {
+                                        let self=$(this);
+                                        //console.log(self);
+                                        let button=$(" .updateposttag",self);
+                                        console.log(button);
+                                        let i=$(" .update-post-button",button)
+                                        console.log(i)
+                                        i.css("pointer-events","auto");
+                                        button.css("cursor","pointer");
+
+                                    })
+                                    $(`#post-${data.data.postID} .post-deletion`).css("cursor","pointer");
+                                    $(`#post-${data.data.postID} .post-deletion span`).css("pointer-events","all");
                                     if(data.data.edited)
                                     {
                                             

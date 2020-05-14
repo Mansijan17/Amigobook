@@ -169,7 +169,7 @@
     align-items: center; }
     .commentReplyClass .reply-body .commentReplyContent {
       width: 90%;
-      margin-bottom: 15px;
+      margin-bottom: 25px;
       padding: 8px;
       font-family: monospace;
       height: auto;
@@ -213,21 +213,24 @@
       width: 65%;
       display: flex;
       justify-content: space-between;
-      margin-bottom: 25px; }
-      .commentReplyClass .reply-body form input {
+      margin-bottom: 35px; }
+      .commentReplyClass .reply-body form textarea {
         width: 75%;
         border: none;
         border-bottom: 1.5px solid powderblue;
         color: #1f2628;
-        background: transparent; }
-      .commentReplyClass .reply-body form input::placeholder {
+        background: transparent;
+        resize: none; }
+      .commentReplyClass .reply-body form textarea::placeholder {
         font-style: italic;
         color: #1f2628; }
-      .commentReplyClass .reply-body form input:-webkit-autofill {
+      .commentReplyClass .reply-body form textarea:-webkit-autofill {
         transition: background-color 5000s ease-in-out 0s;
         -webkit-text-fill-color: darkslategrey; }
-      .commentReplyClass .reply-body form input:focus, .commentReplyClass .reply-body form button:focus {
+      .commentReplyClass .reply-body form textarea:focus, .commentReplyClass .reply-body form button:focus {
         outline: none; }
+      .commentReplyClass .reply-body form textarea::-webkit-scrollbar {
+        display: none; }
       .commentReplyClass .reply-body form button {
         height: 45px;
         width: 18%;
@@ -328,8 +331,54 @@
           overflow-wrap: break-word;
           display: flex; }
           .commentReplyClass .reply-body ul li .reply-content a {
-            width: 25%;
-            align-self: center; }
+            width: 25%; }
+          .commentReplyClass .reply-body ul li .reply-content .authorarrow {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 30px;
+            margin-right: 6px; }
+            .commentReplyClass .reply-body ul li .reply-content .authorarrow .pointarrows {
+              position: absolute;
+              left: 15%;
+              height: 25px;
+              width: 50px;
+              top: 25px;
+              align-self: center;
+              align-items: center;
+              justify-content: space-evenly;
+              display: flex; }
+              .commentReplyClass .reply-body ul li .reply-content .authorarrow .pointarrows .circle {
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                margin: 1px;
+                background: linear-gradient(45deg, #C8EEDB, #9BE0BD, #48C686, #5ACB92);
+                background-size: 400% 400%;
+                animation: gradient 5s ease-in-out infinite; }
+              .commentReplyClass .reply-body ul li .reply-content .authorarrow .pointarrows .topright {
+                position: absolute;
+                top: 2px;
+                right: 7px; }
+              .commentReplyClass .reply-body ul li .reply-content .authorarrow .pointarrows .topright2 {
+                position: absolute;
+                top: -4px;
+                right: 13px; }
+              .commentReplyClass .reply-body ul li .reply-content .authorarrow .pointarrows .bottomright {
+                position: absolute;
+                bottom: 2px;
+                right: 7px; }
+              .commentReplyClass .reply-body ul li .reply-content .authorarrow .pointarrows .bottomright2 {
+                position: absolute;
+                bottom: -4px;
+                right: 13px; }
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%; }
+  50% {
+    background-position: 100% 50%; }
+  100% {
+    background-position: 0% 50%; } }
           .commentReplyClass .reply-body ul li .reply-content .replyreplycontent {
             overflow-wrap: break-word;
             width: 70%;
@@ -419,7 +468,8 @@
             border: none;
             font-weight: bold;
             font-size: 11px;
-            width: auto; }
+            width: auto;
+            background: transparent; }
           .commentReplyClass .reply-body ul li .reply-reply-form textarea {
             height: 30px;
             align-self: center;

@@ -52,7 +52,7 @@
     </div>
     
     <% if(locals.user.id==i.user.id) { %>
-        <small> 
+        <small class="post-deletion"> 
             <span data-toggle="modal" data-target="#post-<%= i._id%>-delete-modal" class="delete-post-modal">
                 <i class="fas fa-trash-alt"></i>
             </span>
@@ -73,7 +73,7 @@
                 </div>
               </div>
         </small>
-        <small> 
+        <small class="updateposttag"> 
             <a href="/posts/update-post/<%= i._id %>" class="update-post-button">
                 <i class="fas fa-pen-fancy"></i>
             </a>
@@ -100,7 +100,7 @@
        
         <div class="post-text">
                 <% if(!i.sharedFromPost) {%>
-                    <span> <%= i.content.newContent %> </span>
+                    <span> <%= i.content %> </span>
                 <% } else { %>
                     <span> <%= i.content.newContent %> </span>
                     <div class="copiedPost">
@@ -122,7 +122,7 @@
         
         <div class="post-comments">
             <form action="/comments/create-comment/" method="post" id="post-<%= i._id %>-comments-form">
-                <input type="text" name="content" placeholder="Type here to add comment...." required>
+                <textarea type="text" name="content" placeholder="Type here to add comment...." required onkeydown="autosize1(this)"></textarea>
                 <input type="hidden" name="post" value="<%= i._id %>">
                 <button type="submit">Add comment</button>
             </form>

@@ -5,9 +5,9 @@
         </div>
         <div class="dropdown-menu drop-design" aria-labelledby="dropdownMenuLink">
           <% if(locals.user.id==comment.user.id || locals.user.id==i.user || locals.user.id==reply.user.id) { %>
-            <div class="dropdown-item" data-toggle="modal" data-target="#deleteReplyModal-<%=reply._id%>">
+            <a class="dropdown-item" data-toggle="modal" data-target="#deleteReplyModal-<%=reply._id%>">
               Delete <i class="fas fa-times" ></i> 
-            </div>
+            </a>
           <% } %>
           <% if(locals.user.id==reply.user.id) {%>  
             <a class="dropdown-item update-reply-button" href="/comments/update-reply/<%= reply._id %>" >Edit <i class="fas fa-pen-square"></i></a>
@@ -52,23 +52,57 @@
             <% } %>
         </a>
     </div>
-    <div class="reply-content" >
+    <div class="reply-content" id="reply-<%=reply._id%>-content">
       <% if(!reply.isReply) { %>
           <%= reply.content%>
       <% } else { %>
           <% if(reply.content.originalReplyID!=null) { %>
                 <% if(locals.user.id!=reply.user.id) { %>
-                  <a href="/users/profile/<%= reply.content.originalAuthorID%>" >
+                  <a href="/users/profile/<%= reply.content.originalAuthorID%>" class="authorarrow">
                     <%= reply.content.originalAuthorName%>
+                    <div class="pointarrows">
+                      <div class="circle "></div>
+                      <div class="circle"></div>
+                      <div class="circle"></div>
+                      <div class="circle"></div>
+                      <div class="circle"></div>
+                      
+                      <div class="circle topright" >
+                      </div>
+                      <div class="circle topright2">
+                      </div>
+                      <div class="circle bottomright">
+                      </div>
+                      <div class="circle bottomright2">
+                      </div>
+                  </div>
                   </a>
                 <% } else { %>
                   <div class="removetag" id="removetag-<%= reply._id%>">
                     <a href="/comments/reply-remove-tag/<%= reply._id %>" class="removetag-button">Remove Tag?</a>
                   </div>
-                  <a href="/users/profile/<%= reply.content.originalAuthorID%>" onmouseover="removetagVisible(this)" name="<%= reply._id%>">
+                
+                  <a href="/users/profile/<%= reply.content.originalAuthorID%>" onmouseover="removetagVisible(this)" name="<%= reply._id%>" class="authorarrow">
                     <%= reply.content.originalAuthorName%>
-                </a>
+                    <div class="pointarrows">
+                        <div class="circle "></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        
+                        <div class="circle topright" >
+                        </div>
+                        <div class="circle topright2">
+                        </div>
+                        <div class="circle bottomright">
+                        </div>
+                        <div class="circle bottomright2">
+                        </div>
+                    </div>
+                  </a>
                 <% } %>
+                
           <% } %> 
           <span class="replyreplycontent"><%= reply.content.content %></span>
       <% } %>

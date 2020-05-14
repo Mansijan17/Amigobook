@@ -73,7 +73,7 @@
       
     <% } %>
     <% if(locals.user.id==comment.user.id) {%>
-        <small> 
+        <small class="updatecommenttag"> 
             <a href="/comments/update-comment/<%= comment._id %>" class="update-comment-button" >
                 <i class="fas fa-marker"></i>
             </a>

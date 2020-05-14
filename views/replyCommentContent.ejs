@@ -113,7 +113,7 @@
             <%= comment.content %>
           </div>
           <form action="/comments/create-comment-reply/" method="post" id="comment-<%= comment._id%>-reply-form" class="comment-reply-form">
-                <input type="text" name="content" placeholder="Want to add something?" required>
+                <textarea onkeydown="autosize1(this)" name="content" placeholder="Want to add something?" required></textarea>
                 <input type="hidden" name="comment" value="<%= comment._id%>">
                 <button type="submit" onclick="submitReplyModal(this)" name="<%= comment._id%>">Add Reply</button>
           </form>

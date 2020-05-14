@@ -68,6 +68,7 @@ function autosize(){
             
 function autosize1(textarea){
   var el = textarea;
+  console.log(el);
   setTimeout(function(){
     el.style.cssText = 'height:auto; padding:0';
     // for box-sizing other than "content-box" use:

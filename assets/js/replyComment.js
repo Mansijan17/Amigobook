@@ -6,6 +6,7 @@ class replyOnComment{
         this.commentContainer=$(`#comment-${id}-reply`)
         console.log(this.commentContainer);
         this.reply(id);
+        this.commentID=id;
         let self=this;
         $(" .update-comment-button" ,this.commentContainer).each(function()
         {
@@ -40,7 +41,8 @@ class replyOnComment{
     {
         let newReplyForm=$(this.replyForm);
         let cSelf=this;
-        console.log(cSelf);
+
+        
         newReplyForm.submit(function(e)
         {
             console.log(newReplyForm);
@@ -93,7 +95,7 @@ class replyOnComment{
                        </a>
                    </div>
                
-                   <div class="reply-content">${ data.data.replyContent}</div>
+                   <div class="reply-content" id="reply-${data.data.replyUserID}-content">${ data.data.replyContent}</div>
                    
                   </li>`);
                    $(`#comment-${data.data.commentID}-reply-list`).prepend(newReply);
@@ -158,8 +160,20 @@ class replyOnComment{
                 url:$(updateLink).prop("href"),
                 success:function(data)
                 {
-                    console.log(data.data);
-                   
+                    console.log("h111", data.data.content);
+                    $(`#comment-${data.data.commentID}-reply .comment-update-tag a i`).css("pointer-events","none");
+                    $(`#comment-${data.data.commentID}-reply .comment-update-tag a`).css("cursor","no-drop");
+                    $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form button`).css("pointer-events","none");
+                    $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form`).css("cursor","no-drop");
+                    $(`#comment-${data.data.commentID}-reply-list>li>.bars>.dropdown-toggle`).each(function()
+                    {
+                        let self=$(this);
+                        let i=$(" i",self);
+                        console.log(i);
+                        i.css("pointer-events","none");
+                        self.css("cursor","no-drop");
+                        
+                    })
                     if(!data.data.isReply)
                     {
                         $(`#reply-${ data.data.replyID} .reply-content`).remove();
@@ -170,6 +184,7 @@ class replyOnComment{
                         </form>`)
                     }
                     else{
+                        let str=data.data.content.content.trim();
                         $(`#reply-${ data.data.replyID} .reply-content .replyreplycontent`).remove();
                         $(`#reply-${ data.data.replyID} .reply-content`).append(`<form action="/comments/update-reply-r2" method="post" class="reply-update-form"
                         style="       margin: 0;
@@ -179,8 +194,8 @@ class replyOnComment{
                         justify-content: space-around;
                         min-height: 30px;
                         width: 86%;">
-                        <textarea required  name="content" onkeydown="autosize1(this)"> ${ data.data.content.content}</textarea>
-                        <input type="hidden" name="reply" value="${ data.data.replyID}">
+                        <textarea required  name="content" onkeydown="autosize1(this)">${str}</textarea>
+                        <input type="hidden" name="reply" value="${data.data.replyID}">
                         <button type="submit" style="align-self:center;" class="reply2button">U</button>
                         </form>`)
                     }
@@ -200,6 +215,19 @@ class replyOnComment{
                                 success:function(data)
                                 {
                                     console.log(data.data);
+                                    $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form button`).css("pointer-events","auto");
+                                    $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form`).css("cursor","pointer");
+                                    $(`#comment-${data.data.commentID}-reply .comment-update-tag a i`).css("pointer-events","auto");
+                                    $(`#comment-${data.data.commentID}-reply .comment-update-tag a`).css("cursor","pointer");
+                                    $(`#comment-${data.data.commentID}-reply-list>li>.bars>.dropdown-toggle`).each(function()
+                                    {
+                                        let self=$(this);
+                                        let i=$(" i",self);
+                                        console.log(i);
+                                        i.css("pointer-events","auto");
+                                        self.css("cursor","pointer");
+                                        
+                                    })
                                     if(data.data.edited)
                                     {
                                             $(`#reply-${data.data.replyID}`).prepend(`<span class="editedReply">Edited</span>`);
@@ -254,11 +282,20 @@ class replyOnComment{
                 url:$(updateLink).prop("href"),
                 success:function(data)
                 {
-                    console.log("h111", data);
-                   
+                    $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form button`).css("pointer-events","none");
+                    $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form`).css("cursor","no-drop");
+                    $(`#comment-${data.data.commentID}-reply-list>li>.bars>.dropdown-toggle`).each(function()
+                    {
+                        let self=$(this);
+                        let i=$(" i",self);
+                        console.log(i);
+                        i.css("pointer-events","none");
+                        self.css("cursor","no-drop");
+                        
+                    })
                     $(`#comment-${ data.data.commentID}-reply .commentReplyContent`).remove();
                     $(`#comment-${ data.data.commentID}-reply .commentReplyClass .reply-body`).prepend(`<form action="/comments/update-comment-c2" method="post" class="comment-update-form">
-                    <textarea required  name="content" onkeydown="autosize1(this)">${ data.data.content}</textarea>
+                    <textarea required  name="content" onkeydown="autosize1(this)">${data.data.content}</textarea>
                     <input type="hidden" name="comment" value="${ data.data.commentID}">
                     <button type="submit">U</button>
                     </form>`)
@@ -277,6 +314,17 @@ class replyOnComment{
                                 success:function(data)
                                 {
                                     console.log(data.data);
+                                    $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form button`).css("pointer-events","auto");
+                                    $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form`).css("cursor","pointer");
+                                    $(`#comment-${data.data.commentID}-reply-list>li>.bars>.dropdown-toggle`).each(function()
+                                    {
+                                        let self=$(this);
+                                        let i=$(" i",self);
+                                        console.log(i);
+                                        i.css("pointer-events","auto");
+                                        self.css("cursor","pointer");
+                                        
+                                    })
                                     if(data.data.edited)
                                     {
                                             $(`#comment-${data.data.commentID}`).prepend(`<small class="comment-editedTag">
@@ -315,18 +363,29 @@ class replyOnComment{
 
     replyReply1(replyLink)
     {
-        console.log("h1",$(replyLink))
-        let cSelf=this;
+        
+        let cSelf=this; 
         $(replyLink).click(function(e)
         {
-            console.log("h2",cSelf);
             e.preventDefault();
             $.ajax({
                 type:"get",
                 url:$(replyLink).prop("href"),
                 success:function(data)
                 {
-                    console.log(data.data,cSelf);
+                    $(`#comment-${data.data.commentID}-reply .comment-update-tag a i`).css("pointer-events","none");
+                    $(`#comment-${data.data.commentID}-reply .comment-update-tag a`).css("cursor","no-drop");
+                    $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form button`).css("pointer-events","none");
+                    $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form`).css("cursor","no-drop");
+                    $(`#comment-${data.data.commentID}-reply-list>li>.bars>.dropdown-toggle`).each(function()
+                    {
+                        let self=$(this);
+                        let i=$(" i",self);
+                        console.log(i);
+                        i.css("pointer-events","none");
+                        self.css("cursor","no-drop");
+                        
+                    })
                     $(`#comment-${data.data.commentID}-reply-list`).append(`<li class="reply-form-list"><form action="/comments/reply-reply-r2" method="post" class="reply-reply-form">
                     <div class="div1">
                         <input type="text" name="userName" value="${data.data.name}" disabled>
@@ -352,6 +411,19 @@ class replyOnComment{
                                 data:$(".reply-reply-form").serialize(),
                                 success:function(data)
                                 {
+                                    $(`#comment-${data.data.commentID}-reply .comment-update-tag a i`).css("pointer-events","auto");
+                                    $(`#comment-${data.data.commentID}-reply .comment-update-tag a`).css("cursor","pointer");
+                                    $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form button`).css("pointer-events","auto");
+                                    $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form`).css("cursor","pointer");
+                                    $(`#comment-${data.data.commentID}-reply-list>li>.bars>.dropdown-toggle`).each(function()
+                                    {
+                                        let self=$(this);
+                                        let i=$(" i",self);
+                                        console.log(i);
+                                        i.css("pointer-events","auto");
+                                        self.css("cursor","pointer");
+                                        
+                                    })
                                     $('.reply-form-list').remove();
                                     let newReply=$(`<li id="reply-${data.data.replyID}" onmouseup="removetagInvisible()">
                                     <div class="dropdown bars">
@@ -393,12 +465,28 @@ class replyOnComment{
                                         </a>
                                     </div>
                                 
-                                    <div class="reply-content">
-                                            <div class="removetag" id="removetag-${data.data.replyUserID}">
+                                    <div class="reply-content" id="reply-${data.data.replyID}-content">
+                                            <div class="removetag" id="removetag-${data.data.replyID}">
                                                 <a href="/comments/reply-remove-tag/${data.data.replyID }" class="removetag-button">Remove Tag?</a>
                                             </div>
-                                        <a href="/users/profile/${data.data.replyContent.originalAuthorID}" onmouseover="removetagVisible(this)" name="${data.data.replyUserID}">
+                                        <a href="/users/profile/${data.data.replyContent.originalAuthorID}" onmouseover="removetagVisible(this)" name="${data.data.replyID}" class="authorarrow">
                                               ${data.data.replyContent.originalAuthorName}
+                                              <div class="pointarrows">
+                                              <div class="circle "></div>
+                                              <div class="circle"></div>
+                                              <div class="circle"></div>
+                                              <div class="circle"></div>
+                                              <div class="circle"></div>
+                                              
+                                              <div class="circle topright" >
+                                              </div>
+                                              <div class="circle topright2">
+                                              </div>
+                                              <div class="circle bottomright">
+                                              </div>
+                                              <div class="circle bottomright2">
+                                              </div>
+                                          </div>
                                         </a>
                                           <span class="replyreplycontent">  ${ data.data.replyContent.content}</span>
                                     </div>
@@ -447,9 +535,9 @@ class replyOnComment{
                 url: $(removeTagLink).prop('href'),
                 success: function(data){
                 
-                    console.log(data.data,$(`.reply-content #removetag-${data.data.replyID}`));
-                    $(`.reply-content #removetag-${data.data.replyID}`).remove();
-                    $(`.reply-content a`).remove();
+                    console.log(data.data,$(`#reply-${data.data.replyID}`));
+                    $(`#reply-${data.data.replyID} .reply-content a`).remove();
+                    $(`#reply-${data.data.replyID} .reply-content .removetag`).remove();
                     new Noty({
                         theme: 'relax',
                         text: "Removed Tag Successfully!",
