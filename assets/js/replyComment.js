@@ -56,6 +56,36 @@ class replyOnComment{
                    console.log(data.data,data.data.commentID);
                    console.log($(`#comment-${data.data.commentID}-reply-list`));
                    let newReply=$(`<li id="reply-${data.data.replyID}" onmouseup="removetagInvisible()">
+                    <div class="commentreply-like-box">
+                        <div class="commentreply-likes-number" id="commentreply-${data.data.replyID}-likes-number">
+                            <span data-target="#commentreply-${data.data.replyID}-likes" data-toggle="modal">
+                                
+                            </span>
+                        </div>
+                        <div class="modal commentreplylikemodal fade" id="commentreply-${data.data.replyID}-likes" role="dialog">
+                            <div class="modal-dialog ">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h4 class="modal-title" id="commentreply-${data.data.replyID}-like-title">Reply Reactions  
+                                    <span>
+                                        <i class="far fa-heart"></i>
+                                    </span>
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    
+                                    <ul  class="commentreply-like-username-list " id="commentreply-${data.data.replyID}-likes-list">
+                                            
+                                    </ul>
+                                
+                                </div>
+                            
+                            </div>
+                            
+                            </div>
+                        </div>
+                   </div>
                    <div class="dropdown bars">
                    <div class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                        <i class="fas fa-ellipsis-h"></i>
@@ -66,11 +96,11 @@ class replyOnComment{
                        </div> 
                        <a class="dropdown-item update-reply-button" href="/comments/update-reply/${ data.data.replyID }" >Edit <i class="fas fa-pen-square"></i></a>
                      <a class="dropdown-item reply-reply-button" href="/comments/reply-reply-r1/${data.data.replyID}">Reply <i class="far fa-comment-dots"></i></a>
-                     <a class="dropdown-item">Like <i class="far fa-thumbs-up"></i></a>
+                     <a class="dropdown-item toggle-like-button" href="/likes/toggle/?id=${data.data.replyID}&type=CommentReply" data-likes="0">Like <i class="far fa-thumbs-up"></i></a>
                    </div>
                </div>
                  <div class="modal fade" tabindex="-1" role="dialog" id="deleteReplyModal-${data.data.replyID}" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                   <div class="modal-dialog" role="document">
+                   <div class="modal-dialog replydeletemodaldialog" role="document">
                      <div class="modal-content">
                        <div class="modal-header">
                          <h2 class="modal-title"><i class="fas fa-trash-alt"></i> Reply?</h2>
@@ -103,6 +133,8 @@ class replyOnComment{
                   cSelf.deleteReply($(" .delete-reply-button",newReply));
                   cSelf.updateReply($(' .update-reply-button', newReply));
                   cSelf.replyReply1($(' .reply-reply-button', newReply));
+                  console.log($(" .toggle-like-button", newReply));
+                  new ToggleLike($(" .toggle-like-button", newReply));
                     new Noty({
                         theme:"relax",
                         text:"Reply Added Successfully!",
@@ -165,10 +197,10 @@ class replyOnComment{
                     $(`#comment-${data.data.commentID}-reply .comment-update-tag a`).css("cursor","no-drop");
                     $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form button`).css("pointer-events","none");
                     $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form`).css("cursor","no-drop");
-                    $(`#comment-${data.data.commentID}-reply-list>li>.bars>.dropdown-toggle`).each(function()
+                    $(`#comment-${data.data.commentID}-reply-list>li>.bars`).each(function()
                     {
                         let self=$(this);
-                        let i=$(" i",self);
+                        let i=$(" .dropdown-toggle",self);
                         console.log(i);
                         i.css("pointer-events","none");
                         self.css("cursor","no-drop");
@@ -219,10 +251,10 @@ class replyOnComment{
                                     $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form`).css("cursor","pointer");
                                     $(`#comment-${data.data.commentID}-reply .comment-update-tag a i`).css("pointer-events","auto");
                                     $(`#comment-${data.data.commentID}-reply .comment-update-tag a`).css("cursor","pointer");
-                                    $(`#comment-${data.data.commentID}-reply-list>li>.bars>.dropdown-toggle`).each(function()
+                                    $(`#comment-${data.data.commentID}-reply-list>li>.bars`).each(function()
                                     {
                                         let self=$(this);
-                                        let i=$(" i",self);
+                                        let i=$(" .dropdown-toggle",self);
                                         console.log(i);
                                         i.css("pointer-events","auto");
                                         self.css("cursor","pointer");
@@ -377,10 +409,10 @@ class replyOnComment{
                     $(`#comment-${data.data.commentID}-reply .comment-update-tag a`).css("cursor","no-drop");
                     $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form button`).css("pointer-events","none");
                     $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form`).css("cursor","no-drop");
-                    $(`#comment-${data.data.commentID}-reply-list>li>.bars>.dropdown-toggle`).each(function()
+                    $(`#comment-${data.data.commentID}-reply-list>li>.bars`).each(function()
                     {
                         let self=$(this);
-                        let i=$(" i",self);
+                        let i=$(" .dropdown-toggle",self);
                         console.log(i);
                         i.css("pointer-events","none");
                         self.css("cursor","no-drop");
@@ -415,10 +447,10 @@ class replyOnComment{
                                     $(`#comment-${data.data.commentID}-reply .comment-update-tag a`).css("cursor","pointer");
                                     $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form button`).css("pointer-events","auto");
                                     $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form`).css("cursor","pointer");
-                                    $(`#comment-${data.data.commentID}-reply-list>li>.bars>.dropdown-toggle`).each(function()
+                                    $(`#comment-${data.data.commentID}-reply-list>li>.bars`).each(function()
                                     {
                                         let self=$(this);
-                                        let i=$(" i",self);
+                                        let i=$(" .dropdown-toggle",self);
                                         console.log(i);
                                         i.css("pointer-events","auto");
                                         self.css("cursor","pointer");
@@ -426,6 +458,36 @@ class replyOnComment{
                                     })
                                     $('.reply-form-list').remove();
                                     let newReply=$(`<li id="reply-${data.data.replyID}" onmouseup="removetagInvisible()">
+                                    <div class="commentreply-like-box">
+                                            <div class="commentreply-likes-number" id="commentreply-${data.data.replyID}-likes-number">
+                                                <span data-target="#commentreply-${data.data.replyID}-likes" data-toggle="modal">
+                                                    
+                                                </span>
+                                            </div>
+                                            <div class="modal commentreplylikemodal fade" id="commentreply-${data.data.replyID}-likes" role="dialog">
+                                                <div class="modal-dialog ">
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <h4 class="modal-title" id="commentreply-${data.data.replyID}-like-title">Reply Reactions  
+                                                        <span>
+                                                            <i class="far fa-heart"></i>
+                                                        </span>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        
+                                                        <ul  class="commentreply-like-username-list " id="commentreply-${data.data.replyID}-likes-list">
+                                                                
+                                                        </ul>
+                                                    
+                                                    </div>
+                                                
+                                                </div>
+                                                
+                                                </div>
+                                            </div>
+                                    </div>
                                     <div class="dropdown bars">
                                     <div class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-ellipsis-h"></i>
@@ -436,11 +498,11 @@ class replyOnComment{
                                         </div> 
                                         <a class="dropdown-item update-reply-button" href="/comments/update-reply/${ data.data.replyID }" >Edit <i class="fas fa-pen-square"></i></a>
                                         <a class="dropdown-item reply-reply-button" href="/comments/reply-reply-r1/${data.data.replyID}">Reply <i class="far fa-comment-dots"></i></a>
-                                        <a class="dropdown-item">Like <i class="far fa-thumbs-up"></i></a>
+                                        <a class="dropdown-item toggle-like-button" href="/likes/toggle/?id=${data.data.replyID}&type=CommentReply" data-likes="0">Like <i class="far fa-thumbs-up"></i></a>
                                     </div>
                                 </div>
                                     <div class="modal fade" tabindex="-1" role="dialog" id="deleteReplyModal-${data.data.replyID}" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
+                                    <div class="modal-dialog replydeletemodaldialog" role="document">
                                         <div class="modal-content">
                                         <div class="modal-header">
                                             <h2 class="modal-title"><i class="fas fa-trash-alt"></i> Reply?</h2>
@@ -497,6 +559,7 @@ class replyOnComment{
                                     cSelf.updateReply($(' .update-reply-button', newReply));
                                     cSelf.replyReply1($(' .reply-reply-button', newReply));
                                     cSelf.removeTag($(' .removetag-button', newReply));
+                                    new ToggleLike($(" .toggle-like-button", newReply));
                                     new Noty({
                                         theme:"relax",
                                         text:"Reply published successfully!",

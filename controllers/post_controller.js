@@ -91,15 +91,22 @@ module.exports.destroyPost=async function(req,res)
     try
     {
         let post=await Post.findById(req.params.id);
-        console.log(post.id);
+       // console.log(post.id);
         if(post.user==req.user.id)
         {
             //change::: delete the likes of the post and associated comments
-            console.log("remove post ",post);
+            //console.log("remove post ",post);
             let comments=post.comments;
             for(let comment of comments)
             {
-                console.log(comment);
+                //console.log(comment);
+                let replies=await replyComment.find({comment:comment});
+                //console.log(replies);
+                for(reply of replies)
+                {
+                    console.log(reply.id);
+                    await Like.deleteMany({likeable:reply,onModel:"CommentReply"});
+                }
                 await Like.deleteMany({likeable:comment,onModel:"Comment"});
                 await replyComment.deleteMany({comment:comment});
             }

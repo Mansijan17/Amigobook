@@ -21,20 +21,20 @@
       color: #00388b; }
     .commentReplyClass .comment-like-box span:hover {
       color: #145556; }
-    .commentReplyClass .comment-like-box .modal {
+    .commentReplyClass .comment-like-box .commentlikemodal {
       color: black;
       padding-right: 16px; }
-      .commentReplyClass .comment-like-box .modal .modal-dialog {
+      .commentReplyClass .comment-like-box .commentlikemodal .modal-dialog {
         width: 500px; }
-        .commentReplyClass .comment-like-box .modal .modal-dialog .modal-content {
+        .commentReplyClass .comment-like-box .commentlikemodal .modal-dialog .modal-content {
           width: 100%; }
-          .commentReplyClass .comment-like-box .modal .modal-dialog .modal-content .modal-title {
+          .commentReplyClass .comment-like-box .commentlikemodal .modal-dialog .modal-content .modal-title {
             text-align: center; }
-            .commentReplyClass .comment-like-box .modal .modal-dialog .modal-content .modal-title span {
+            .commentReplyClass .comment-like-box .commentlikemodal .modal-dialog .modal-content .modal-title span {
               display: block;
               margin-top: 5px;
               color: mediumvioletred; }
-          .commentReplyClass .comment-like-box .modal .modal-dialog .modal-content .modal-body {
+          .commentReplyClass .comment-like-box .commentlikemodal .modal-dialog .modal-content .modal-body {
             height: auto;
             display: flex;
             justify-content: center;
@@ -255,6 +255,76 @@
         padding: 5px;
         background-color: #eafafa;
         position: relative; }
+        .commentReplyClass .reply-body ul li .commentreply-like-box {
+          position: absolute;
+          left: 45%;
+          top: 8px;
+          font-size: 12px;
+          font-weight: 600;
+          cursor: pointer; }
+          .commentReplyClass .reply-body ul li .commentreply-like-box .commentreplylikemodal {
+            color: black;
+            padding-right: 16px; }
+            .commentReplyClass .reply-body ul li .commentreply-like-box .commentreplylikemodal .modal-dialog {
+              width: 500px; }
+              .commentReplyClass .reply-body ul li .commentreply-like-box .commentreplylikemodal .modal-dialog .modal-content {
+                width: 100%; }
+                .commentReplyClass .reply-body ul li .commentreply-like-box .commentreplylikemodal .modal-dialog .modal-content .modal-title {
+                  text-align: center; }
+                  .commentReplyClass .reply-body ul li .commentreply-like-box .commentreplylikemodal .modal-dialog .modal-content .modal-title span {
+                    display: block;
+                    margin-top: 5px;
+                    color: mediumvioletred; }
+                .commentReplyClass .reply-body ul li .commentreply-like-box .commentreplylikemodal .modal-dialog .modal-content .modal-body {
+                  height: auto;
+                  display: flex;
+                  justify-content: center;
+                  width: 100%; }
+          .commentReplyClass .reply-body ul li .commentreply-like-box .commentreply-like-username-list {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 60%;
+            padding-left: 0;
+            max-height: 300px;
+            overflow: auto;
+            font-size: 15px; }
+            .commentReplyClass .reply-body ul li .commentreply-like-box .commentreply-like-username-list li {
+              min-height: 30px;
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              text-align: right;
+              align-items: center;
+              margin: 1px;
+              background: transparent; }
+              .commentReplyClass .reply-body ul li .commentreply-like-box .commentreply-like-username-list li a {
+                color: #006881; }
+                .commentReplyClass .reply-body ul li .commentreply-like-box .commentreply-like-username-list li a img {
+                  height: 40px;
+                  width: 40px;
+                  border-radius: 50%;
+                  margin-right: 5px; }
+                .commentReplyClass .reply-body ul li .commentreply-like-box .commentreply-like-username-list li a span {
+                  font-variant: petite-caps;
+                  font-weight: normal; }
+                .commentReplyClass .reply-body ul li .commentreply-like-box .commentreply-like-username-list li a span:hover {
+                  font-weight: bold; }
+                .commentReplyClass .reply-body ul li .commentreply-like-box .commentreply-like-username-list li a img:hover {
+                  filter: brightness(0.8); }
+            .commentReplyClass .reply-body ul li .commentreply-like-box .commentreply-like-username-list li::after {
+              content: '\f21e';
+              font-weight: 900;
+              font-family: "Font Awesome 5 Free";
+              display: inline-block;
+              color: #BF0A30; }
+            .commentReplyClass .reply-body ul li .commentreply-like-box .commentreply-like-username-list li:before {
+              display: none; }
+          .commentReplyClass .reply-body ul li .commentreply-like-box .commentreply-like-username-list::-webkit-scrollbar {
+            display: none; }
+        .commentReplyClass .reply-body ul li .commentreply-like-box:hover {
+          color: black; }
         .commentReplyClass .reply-body ul li .bars .dropdown-toggle {
           position: absolute;
           right: 12px;
@@ -288,15 +358,15 @@
             margin-bottom: 0; }
           .commentReplyClass .reply-body ul li .bars .drop-design .dropdown-item:hover {
             background: #1f7672; }
-        .commentReplyClass .reply-body ul li .modal-dialog {
+        .commentReplyClass .reply-body ul li .replydeletemodaldialog {
           width: 350px;
           margin-top: 175px;
           text-align: center; }
-          .commentReplyClass .reply-body ul li .modal-dialog .modal-title {
+          .commentReplyClass .reply-body ul li .replydeletemodaldialog .modal-title {
             font-family: 'Gill Sans';
             color: #5E99A2;
             font-size: 27.2px !important; }
-          .commentReplyClass .reply-body ul li .modal-dialog button:focus {
+          .commentReplyClass .reply-body ul li .replydeletemodaldialog button:focus {
             outline: none; }
         .commentReplyClass .reply-body ul li .reply-author-tag {
           position: absolute;

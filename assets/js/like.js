@@ -2,24 +2,27 @@ class ToggleLike{
     constructor(toggleElement)
     {
         this.toggler=toggleElement;
+        console.log(this.toggler);
         this.toggleLike();
     }
 
     toggleLike()
     {
+        console.log(this.toggler);
         $(this.toggler).click(function(e)
         {
+            console.log($(this.toggler))
             e.preventDefault();
             let self=this;
 
             $.ajax({
-                type:"post",
+                type:"get",
                 url:$(self).attr("href"),
             }).done(function(data)
             {
-                //console.log(data.data);
+                console.log(data.data);
                 let likesCount=parseInt($(self).attr("data-likes"));
-               // console.log(likesCount);
+                console.log(likesCount);
                 data.data.type=data.data.type.toLowerCase();
                 if(data.data.deleted==true)
                 {
@@ -38,9 +41,24 @@ class ToggleLike{
                 $(self).attr("data-likes",likesCount);
                 if(likesCount>0)
                 {
-                
-                    $(`#${data.data.type}-${ data.data.id}-likes-number span`).html(`${likesCount}`)
-                    $(`#${data.data.type}-${ data.data.id}-like-title span`).html(`${likesCount} <i class="far fa-heart"></i>`)
+                    if(data.data.type=="commentreply")
+                    {
+                        console.log("eq");
+                        if(likesCount==1)
+                        {
+                            $(`#${data.data.type}-${ data.data.id}-likes-number span`).html(`${likesCount} Reaction`)
+                        }
+                        else
+                        {
+                            $(`#${data.data.type}-${ data.data.id}-likes-number span`).html(`${likesCount} Reactions`)
+                        }
+                    }
+                    else
+                    {
+                        $(`#${data.data.type}-${ data.data.id}-likes-number span`).html(`${likesCount}`)
+                        $(`#${data.data.type}-${ data.data.id}-like-title span`).html(`${likesCount} <i class="far fa-heart"></i>`)
+                    }
+                    
                 }
                 else
                 {

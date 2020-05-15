@@ -1,4 +1,50 @@
 <li id="reply-<%= reply._id%>" onmouseup="removetagInvisible()">
+  <div class="commentreply-like-box">
+    <div class="commentreply-likes-number" id="commentreply-<%= reply._id %>-likes-number">
+        <span data-target="#commentreply-<%= reply._id %>-likes" data-toggle="modal">
+            <% if(reply.likes.length>0) {%>
+                <%= reply.likes.length %> 
+                <% if(reply.likes.length==1) {%>
+                    Reaction
+                <% } else { %>
+                    Reactions
+                <% } %>
+            <% } %> 
+        </span>
+    </div>
+    <div class="modal commentreplylikemodal fade" id="commentreply-<%= reply._id %>-likes" role="dialog">
+        <div class="modal-dialog ">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="commentreply-<%=reply._id%>-like-title">Reply Reactions  
+                <span>
+                    <% if(reply.likes.length>0) { %>
+                        <%= reply.likes.length%>
+                    <% } %>
+                    <i class="far fa-heart"></i>
+                  </span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                
+                <ul  class="commentreply-like-username-list " id="commentreply-<%= reply._id %>-likes-list">
+                        <% for(like of reply.likes) {%>
+                            <li id="like-<%= like._id %>" class="commentreply-username-li">
+                               
+                                <%- include("_likeDisplay"); %>
+                               
+                            </li>
+                        <% } %>
+                </ul>
+            
+            </div>
+           
+          </div>
+          
+        </div>
+    </div>
+</div>
     <div class="dropdown bars">
         <div class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-ellipsis-h"></i>
@@ -13,12 +59,12 @@
             <a class="dropdown-item update-reply-button" href="/comments/update-reply/<%= reply._id %>" >Edit <i class="fas fa-pen-square"></i></a>
           <% } %>
           <a class="dropdown-item reply-reply-button" href="/comments/reply-reply-r1/<%= reply._id%>">Reply <i class="far fa-comment-dots"></i></a>
-          <a class="dropdown-item">Like <i class="far fa-thumbs-up"></i></a>
+          <a class="dropdown-item toggle-like-button" href="/likes/toggle/?id=<%=reply._id%>&type=CommentReply" data-likes="<%= reply.likes.length %>">Like <i class="far fa-thumbs-up"></i></a>
         </div>
     </div>
     <% if(locals.user.id==comment.user.id || locals.user.id==i.user || locals.user.id==reply.user.id) {%>
       <div class="modal fade" tabindex="-1" role="dialog" id="deleteReplyModal-<%=reply._id%>" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog replydeletemodaldialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h2 class="modal-title"><i class="fas fa-trash-alt"></i> Reply?</h2>

@@ -29,7 +29,7 @@
             color:#145556;
         }
         
-        .modal
+        .commentlikemodal
         {
             
             color: black;
@@ -374,6 +374,118 @@
                 background-color: #eafafa;
                 position: relative;
 
+                .commentreply-like-box{
+                    position: absolute;
+                    left:45%;
+                    top: 8px;
+                    font-size: 12px;
+                    font-weight: 600;
+                    cursor: pointer;
+
+                    .commentreplylikemodal
+                    {
+                        
+                        color: black;
+                        padding-right: 16px;
+
+                        .modal-dialog
+                        {
+                            width: 500px;
+                            .modal-content
+                            {
+                                width: 100%;
+                                .modal-title
+                                {
+                                    text-align: center;
+                                    span
+                                    {
+                                        display: block;
+                                        margin-top: 5px;
+                                        color: mediumvioletred;
+                                    }
+                                }
+                                .modal-body
+                                {
+                                    height: auto;
+                                    display: flex;
+                                    justify-content: center;
+                                    width: 100%;
+                                
+                                }
+                            }
+
+                        }
+                    }
+                                
+                    .commentreply-like-username-list
+                    {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        width: 60%;
+                        padding-left: 0;
+                        max-height: 300px;
+                        overflow: auto;
+                        font-size:15px;
+
+                        li
+                        {
+                            min-height: 30px;
+                            width: 100%;
+                            display: flex;
+                            justify-content: space-between;
+                            text-align: right;
+                            align-items: center;
+                            margin: 1px;
+                            background: transparent;
+
+                            a{
+                                color: #006881;
+                                img{
+                                    height: 40px;
+                                    width: 40px;
+                                    border-radius: 50%;
+                                    margin-right: 5px;
+                                }
+                                span{
+                    
+                                    font-variant: petite-caps;
+                                    font-weight: normal;
+                                }
+                                span:hover
+                                {
+                                    font-weight: bold;
+                                }
+                                img:hover
+                                {
+                                    filter: brightness(0.8);
+                                }
+                            }
+                        }
+
+                        li::after
+                        {
+                            content: '\f21e';
+                            font-weight: 900;
+                            font-family: "Font Awesome 5 Free";
+                            display: inline-block;
+                            color:#BF0A30;
+                        }
+                        li:before{
+                            display: none;
+                        }
+
+                    }
+                    .commentreply-like-username-list::-webkit-scrollbar {
+                        display: none;
+                    }
+                }
+
+                .commentreply-like-box:hover{
+                    color: black;
+                }
+
                 .bars
                 {
                     .dropdown-toggle
@@ -427,7 +539,7 @@
                     }
                 }
 
-                .modal-dialog
+                .replydeletemodaldialog
                 {
                     width: 350px;
                     margin-top: 175px;

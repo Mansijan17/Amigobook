@@ -172,6 +172,13 @@ module.exports.destroyComment=async function(req,res)
         {
            
             console.log("comment controller delete");
+            let replies=comment.replies;
+            console.log(replies);
+            for(let reply of replies)
+            {
+                console.log(reply);
+                await Like.deleteMany({likeable:reply,onModel:"CommentReply"});
+            }
             await commentReply.deleteMany({_id:{$in:comment.replies}});
             comment.remove();
             post.comments.pull(comment);
@@ -300,12 +307,19 @@ module.exports.showReply=async function(req,res)
                 sort:"-createdAt"
             },
             populate:{
-                path:"user"
+                path:"user likes",
+                populate:{
+                    path:"user"
+                },
+                options:{
+                    sort:"-createdAt"
+                },
             }
         }).populate("user");
         let replies=comment.replies;
         for(reply of replies)
         {
+            console.log(reply.likes);
             reply.update=false;
             reply.save();
         }

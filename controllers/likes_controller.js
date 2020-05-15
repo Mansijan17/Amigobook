@@ -2,6 +2,7 @@ const Like=require('../models/like');
 const Post=require("../models/post");
 const Comment=require('../models/commentSchema');
 const User=require('../models/userSchema');
+const commentReply=require('../models/commentReply');
 const queue=require('../config/kue');
 const likeEmailWorker=require('../worker/like_email_worker');
 
@@ -17,11 +18,15 @@ module.exports.toggleLike=async function(req,res)
         {
             likeable=await Post.findById(req.query.id).populate("likes").populate("user","name email");
         }
-        else
+        else if(req.query.type=="Comment")
         {
             likeable=await Comment.findById(req.query.id).populate("likes").populate("user","name email");
         }
-         console.log(likeable.likes);
+        else
+        {
+            likeable=await commentReply.findById(req.query.id).populate("likes").populate("user","name email");
+        }
+        // console.log(likeable.likes);
         //check if a like already exists
         let existingLike=await Like.findOne({
             likeable:req.query.id,
