@@ -316,7 +316,7 @@ module.exports.showReply=async function(req,res)
         post.populate("user");
 
         return res.render("replyCommentContent",{
-            title:"Socialends | Comment Replies",
+            title:"Skyinyou | Comment Replies",
             comment:comment,
             i:post
         });

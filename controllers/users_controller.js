@@ -57,7 +57,7 @@ module.exports.profile = async function (req, res) {
        
 
         return res.render('userProfile', {
-            title: `${user.name} | Socialends`,
+            title: `${user.name} | Skyinyou`,
             profileUser: user,
             posts:postLists
         })
@@ -141,7 +141,7 @@ module.exports.signUp = function (req, res) {
     }
    // req.flash("error", "Invalid details!");
     return res.render('userSignUp', {
-        title: "Socialends | Sign Up"
+        title: "Skyinyou | Sign Up"
     })
 }
 
@@ -152,7 +152,7 @@ module.exports.signIn = function (req, res) {
         return res.redirect("/");
     }
     return res.render('userSignIn', {
-        title: "Socialends | Sign In"
+        title: "Skyinyou | Sign In"
     })
 }
 
@@ -250,7 +250,7 @@ module.exports.destroySession = function (req, res) {
 module.exports.forgetPassword=function(req,res)
 {
     return res.render("forgetPassword",{
-        title:"Socialend | Forget Password"
+        title:"Skyinyou | Forget Password"
     });
 }
 
@@ -307,7 +307,7 @@ module.exports.newPassword=function(req,res)
     var id=req.params.id;
     //console.log(id);
     return res.render("new_confirm_password",{
-        title:"Socialend | New Password",
+        title:"Skyinyou | New Password",
         acessToken:id
     });
 }
@@ -444,7 +444,7 @@ module.exports.confirmAccount=function(req,res)
     var id=req.params.id;
     console.log("confirm account");
     return res.render("confirmAccount",{
-        title:"Socialend | Confirm Account",
+        title:"Skyinyou | Confirm Account",
         acessToken:id
     });
 }
