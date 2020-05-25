@@ -1361,8 +1361,8 @@ h1:hover
 
     @media screen and (max-width:411px)
     {
-        p{
-            margin-top: 85px !important;
+        .headingintro{
+            margin-top: 90px !important;
         }
     }
 
@@ -1402,6 +1402,7 @@ h1:hover
             display: flex;
             justify-content: space-evenly;
             position: relative;
+            margin-bottom: 30px;
 
             img
             {
@@ -1736,7 +1737,7 @@ h1:hover
             .display-signUp-form
             {
                 height: auto !important;
-                margin-bottom: 80px !important;
+                margin-bottom: 40px !important;
 
                 form
                 {

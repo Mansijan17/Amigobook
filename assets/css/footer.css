@@ -61,16 +61,18 @@
     align-items: center;
     font-size: 20px;
     height: 40px; }
-    #layout-footer div ul {
-      margin: 0; }
-      #layout-footer div ul li {
-        margin-right: 20px;
-        list-style: none;
-        display: inline-block; }
-        #layout-footer div ul li a {
-          text-decoration: none;
-          color: white;
-          transition: border-bottom 1s; }
+    #layout-footer div .initiated {
+      margin-left: 5px; }
+    #layout-footer div a {
+      margin-left: 3px;
+      color: white;
+      font-style: italic;
+      font-family: -webkit-pictograph; }
+    #layout-footer div a:hover {
+      color: #174c5f;
+      text-decoration: none; }
+    #layout-footer div a:active, #layout-footer div a:focus {
+      text-decoration: none; }
 
 @media screen and (max-width: 700px) {
   #layout-footer > div {
@@ -88,4 +90,4 @@
     font-size: 17.5px;
     display: flex;
     flex-direction: column;
-    padding: 22px !important; } }
+    padding: 30px !important; } }

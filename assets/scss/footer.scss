@@ -75,25 +75,29 @@
         font-size: 20px;
         height: 40px;
 
-        ul
-        {
-            margin: 0;
-
-            li
-            {
-                margin-right: 20px;
-                list-style: none;
-                display: inline-block;
+        .initiated{
+          margin-left: 5px;
+        }
 
                 a
                 {
-                    text-decoration: none;
-                    color: white;
-                    transition: border-bottom 1s;
+                  margin-left: 3px;
+                  color: white;
+                  font-style: italic;
+                  font-family: -webkit-pictograph;
+                }
+
+                a:hover{
+                  color: #174c5f;
+                  text-decoration: none;
+                }
+                a:active,a:focus
+                {
+                  text-decoration: none;
                 }
                
-            }
-        }
+            
+        
         
     }
 }
@@ -134,7 +138,7 @@
       font-size: 17.5px;
       display: flex;
       flex-direction: column;
-      padding: 22px !important;
+      padding: 30px !important;
     }
   }
 }
