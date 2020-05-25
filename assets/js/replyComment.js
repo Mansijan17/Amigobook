@@ -531,24 +531,9 @@ class replyOnComment{
                                             <div class="removetag" id="removetag-${data.data.replyID}">
                                                 <a href="/comments/reply-remove-tag/${data.data.replyID }" class="removetag-button">Remove Tag?</a>
                                             </div>
-                                        <a href="/users/profile/${data.data.replyContent.originalAuthorID}" onmouseover="removetagVisible(this)" name="${data.data.replyID}" class="authorarrow">
+                                        <a href="/users/profile/${data.data.replyContent.originalAuthorID}" onmouseover="removetagVisible(this)" name="${data.data.replyID}">
                                               ${data.data.replyContent.originalAuthorName}
-                                              <div class="pointarrows">
-                                              <div class="circle "></div>
-                                              <div class="circle"></div>
-                                              <div class="circle"></div>
-                                              <div class="circle"></div>
-                                              <div class="circle"></div>
-                                              
-                                              <div class="circle topright" >
-                                              </div>
-                                              <div class="circle topright2">
-                                              </div>
-                                              <div class="circle bottomright">
-                                              </div>
-                                              <div class="circle bottomright2">
-                                              </div>
-                                          </div>
+                                             
                                         </a>
                                           <span class="replyreplycontent">  ${ data.data.replyContent.content}</span>
                                     </div>

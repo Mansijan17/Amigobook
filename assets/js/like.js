@@ -43,7 +43,7 @@ class ToggleLike{
                 {
                     if(data.data.type=="commentreply")
                     {
-                        console.log("eq");
+                        
                         if(likesCount==1)
                         {
                             $(`#${data.data.type}-${ data.data.id}-likes-number span`).html(`${likesCount} Reaction`)
@@ -52,6 +52,7 @@ class ToggleLike{
                         {
                             $(`#${data.data.type}-${ data.data.id}-likes-number span`).html(`${likesCount} Reactions`)
                         }
+                        $(`#${data.data.type}-${ data.data.id}-like-title span`).html(`${likesCount} <i class="far fa-heart"></i>`)
                     }
                     else
                     {

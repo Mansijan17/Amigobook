@@ -1,19 +1,12 @@
-<% if(locals.user) { %>
-    <footer id="layout-footer" style="justify-content: space-between;padding:0px 20px;">
-<% } else { %>
-<footer id="layout-footer">
-<% } %>
-    <% if(locals.user){%>
-        <div >
-            &copy Skyinyou Foundation (Initiated by Manjari Jain)
-        </div>
-    <% } else {%>
-        <div style="margin:auto;width: 65%;">
-            &copy Skyinyou Foundation (Initiated by Manjari Jain)
-        </div>
-    <% } %>
 
-    <% if (locals.user) {%>
+<footer id="layout-footer">
+    
+        <div style="margin:auto">
+            <span>&copy Skyinyou Foundation</span><span> (Initiated by Manjari Jain)</span>
+        </div>
+    
+
+    <!-- <% if (locals.user) {%>
         <div>
             <ul>
                 <li>
@@ -25,5 +18,5 @@
             </ul>
         
         </div>
-    <% } %>
+    <% } %> -->
 </footer>

@@ -12,7 +12,7 @@
             <% } %> 
         </span>
     </div>
-    <div class="modal commentreplylikemodal fade" id="commentreply-<%= reply._id %>-likes" role="dialog">
+    <div class="modal commentreplylikemodal fade" id="commentreply-<%= reply._id %>-likes" role="dialog" >
         <div class="modal-dialog ">
           <!-- Modal content-->
           <div class="modal-content">
@@ -104,48 +104,18 @@
       <% } else { %>
           <% if(reply.content.originalReplyID!=null) { %>
                 <% if(locals.user.id!=reply.user.id) { %>
-                  <a href="/users/profile/<%= reply.content.originalAuthorID%>" class="authorarrow">
+                  <a href="/users/profile/<%= reply.content.originalAuthorID%>" >
                     <%= reply.content.originalAuthorName%>
-                    <div class="pointarrows">
-                      <div class="circle "></div>
-                      <div class="circle"></div>
-                      <div class="circle"></div>
-                      <div class="circle"></div>
-                      <div class="circle"></div>
-                      
-                      <div class="circle topright" >
-                      </div>
-                      <div class="circle topright2">
-                      </div>
-                      <div class="circle bottomright">
-                      </div>
-                      <div class="circle bottomright2">
-                      </div>
-                  </div>
+                    
                   </a>
                 <% } else { %>
                   <div class="removetag" id="removetag-<%= reply._id%>">
                     <a href="/comments/reply-remove-tag/<%= reply._id %>" class="removetag-button">Remove Tag?</a>
                   </div>
                 
-                  <a href="/users/profile/<%= reply.content.originalAuthorID%>" onmouseover="removetagVisible(this)" name="<%= reply._id%>" class="authorarrow">
+                  <a href="/users/profile/<%= reply.content.originalAuthorID%>" onmouseover="removetagVisible(this)" name="<%= reply._id%>">
                     <%= reply.content.originalAuthorName%>
-                    <div class="pointarrows">
-                        <div class="circle "></div>
-                        <div class="circle"></div>
-                        <div class="circle"></div>
-                        <div class="circle"></div>
-                        <div class="circle"></div>
-                        
-                        <div class="circle topright" >
-                        </div>
-                        <div class="circle topright2">
-                        </div>
-                        <div class="circle bottomright">
-                        </div>
-                        <div class="circle bottomright2">
-                        </div>
-                    </div>
+                   
                   </a>
                 <% } %>
                 

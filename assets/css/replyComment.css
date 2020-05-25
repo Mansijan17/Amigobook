@@ -22,12 +22,11 @@
     .commentReplyClass .comment-like-box span:hover {
       color: #145556; }
     .commentReplyClass .comment-like-box .commentlikemodal {
-      color: black;
-      padding-right: 16px; }
+      color: black; }
       .commentReplyClass .comment-like-box .commentlikemodal .modal-dialog {
-        width: 500px; }
+        max-height: 400px; }
         .commentReplyClass .comment-like-box .commentlikemodal .modal-dialog .modal-content {
-          width: 100%; }
+          max-height: inherit; }
           .commentReplyClass .comment-like-box .commentlikemodal .modal-dialog .modal-content .modal-title {
             text-align: center; }
             .commentReplyClass .comment-like-box .commentlikemodal .modal-dialog .modal-content .modal-title span {
@@ -38,25 +37,22 @@
             height: auto;
             display: flex;
             justify-content: center;
-            width: 100%; }
+            width: 100%;
+            max-height: inherit; }
     .commentReplyClass .comment-like-box .comment-like-username-list {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 60%;
+      width: 90%;
       padding-left: 0;
-      max-height: 300px;
-      overflow: auto;
+      max-height: 285px;
+      overflow-y: auto;
       font-size: 15px; }
       .commentReplyClass .comment-like-box .comment-like-username-list li {
         min-height: 30px;
-        width: 100%;
+        width: 95%;
         display: flex;
         justify-content: space-between;
         text-align: right;
         align-items: center;
-        margin: 1px; }
+        margin: 2px auto; }
         .commentReplyClass .comment-like-box .comment-like-username-list li a {
           color: #006881; }
           .commentReplyClass .comment-like-box .comment-like-username-list li a img {
@@ -86,8 +82,8 @@
     .commentReplyClass .comment-deletion span:hover {
       color: #90212a; }
     .commentReplyClass .comment-deletion .modal-dialog {
-      width: 400px;
-      margin-top: 175px;
+      width: 320px;
+      margin: 175px auto 0px;
       text-align: center; }
       .commentReplyClass .comment-deletion .modal-dialog h2 {
         font-family: 'Gill Sans';
@@ -129,7 +125,8 @@
     font-weight: bolder !important;
     text-shadow: 2px 2px 2px lightseagreen; }
     .commentReplyClass .reply-title p {
-      margin-bottom: 15px; }
+      margin-bottom: 15px;
+      text-align: center; }
     .commentReplyClass .reply-title a img {
       width: 100px;
       height: 100px;
@@ -249,7 +246,7 @@
       list-style: none; }
       .commentReplyClass .reply-body ul li {
         color: slategray;
-        min-height: 70px;
+        min-height: 67px;
         margin-bottom: 20px;
         border-radius: 25px;
         padding: 5px;
@@ -263,12 +260,11 @@
           font-weight: 600;
           cursor: pointer; }
           .commentReplyClass .reply-body ul li .commentreply-like-box .commentreplylikemodal {
-            color: black;
-            padding-right: 16px; }
+            color: black; }
             .commentReplyClass .reply-body ul li .commentreply-like-box .commentreplylikemodal .modal-dialog {
-              width: 500px; }
+              max-height: 400px; }
               .commentReplyClass .reply-body ul li .commentreply-like-box .commentreplylikemodal .modal-dialog .modal-content {
-                width: 100%; }
+                max-height: inherit; }
                 .commentReplyClass .reply-body ul li .commentreply-like-box .commentreplylikemodal .modal-dialog .modal-content .modal-title {
                   text-align: center; }
                   .commentReplyClass .reply-body ul li .commentreply-like-box .commentreplylikemodal .modal-dialog .modal-content .modal-title span {
@@ -279,25 +275,22 @@
                   height: auto;
                   display: flex;
                   justify-content: center;
-                  width: 100%; }
+                  width: 100%;
+                  max-height: inherit; }
           .commentReplyClass .reply-body ul li .commentreply-like-box .commentreply-like-username-list {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 60%;
+            width: 90%;
             padding-left: 0;
-            max-height: 300px;
-            overflow: auto;
+            max-height: 285px;
+            overflow-y: auto;
             font-size: 15px; }
             .commentReplyClass .reply-body ul li .commentreply-like-box .commentreply-like-username-list li {
               min-height: 30px;
-              width: 100%;
+              width: 95%;
               display: flex;
               justify-content: space-between;
               text-align: right;
               align-items: center;
-              margin: 1px;
+              margin: 2px auto;
               background: transparent; }
               .commentReplyClass .reply-body ul li .commentreply-like-box .commentreply-like-username-list li a {
                 color: #006881; }
@@ -399,9 +392,13 @@
           position: relative;
           word-break: break-all;
           overflow-wrap: break-word;
-          display: flex; }
+          display: flex;
+          text-align: justify; }
           .commentReplyClass .reply-body ul li .reply-content a {
-            width: 25%; }
+            width: 25%;
+            display: block;
+            height: auto;
+            word-break: break-word; }
           .commentReplyClass .reply-body ul li .reply-content .authorarrow {
             display: flex;
             flex-direction: column;
@@ -450,10 +447,11 @@
   100% {
     background-position: 0% 50%; } }
           .commentReplyClass .reply-body ul li .reply-content .replyreplycontent {
-            overflow-wrap: break-word;
             width: 70%;
             height: auto;
-            display: inline-block; }
+            display: inline-block;
+            word-break: break-word;
+            text-align: justify; }
           .commentReplyClass .reply-body ul li .reply-content .removetag {
             position: absolute;
             top: -23px;
@@ -572,3 +570,63 @@
         border-left: 9px solid transparent; }
     .commentReplyClass .reply-body ul::-webkit-scrollbar {
       display: none; }
+
+@media screen and (max-width: 830px) {
+  .commentReplyClass {
+    width: 92%; }
+    .commentReplyClass ul {
+      width: 80% !important; }
+    .commentReplyClass .commentreplylikemodal ul, .commentReplyClass .commentlikemodal ul {
+      width: 100% !important; }
+  .comment-reply-form {
+    width: 80% !important; }
+    .comment-reply-form button {
+      width: 24% !important; } }
+
+@media screen and (max-width: 600px) {
+  .commentReplyClass .reply-header {
+    margin-top: 28px; }
+  .commentReplyClass .commentReplyContent {
+    width: 100% !important; }
+  .commentReplyClass .comment-reply-form {
+    width: 95% !important; }
+  .commentReplyClass .comment-replies-list {
+    width: 100% !important;
+    padding: 0; } }
+
+@media screen and (max-width: 549px) {
+  .commentReplyClass {
+    margin-top: 68px;
+    width: 98%; }
+    .commentReplyClass .comment-update-tag {
+      top: 46px;
+      left: 14px; }
+    .commentReplyClass .comment-editedTag {
+      left: 45px; }
+    .commentReplyClass .commentreplylikemodal, .commentReplyClass .commentlikemodal {
+      padding: 0; } }
+
+@media (max-width: 500px) {
+  .commentReplyClass {
+    margin-top: 120px; }
+    .commentReplyClass .comment-reply-form button {
+      font-size: 12px; }
+    .commentReplyClass .dropdown-menu {
+      left: 78% !important; } }
+
+@media (max-width: 370px) {
+  .commentReplyClass .reply-header {
+    margin-top: 50px; }
+  .commentReplyClass .dropdown-menu {
+    left: 70% !important; } }
+
+@media (min-width: 320px) {
+  .commentReplyClass .commentreplylikemodal .modal-dialog, .commentReplyClass .commentlikemodal .modal-dialog {
+    width: 320px;
+    margin: 30px auto; } }
+
+@media (min-width: 550px) {
+  .commentReplyClass .commentreplylikemodal .modal-dialog, .commentReplyClass .commentlikemodal .modal-dialog {
+    width: 550px; }
+  .commentReplyClass .comment-deletion .modal-dialog {
+    width: 400px; } }

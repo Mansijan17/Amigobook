@@ -125,7 +125,8 @@
     ul
     {
         margin-top: 10px !important;
-
+        text-align: center;
+        padding: 0;
         li
         {
             display: inline-block;
@@ -172,11 +173,29 @@
     }
 }
 
-@media screen and (max-width:435px)
+@media screen and (max-width:500px)
 {
   #layout-header
   {
     justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    .userprofilelink{
+      margin-left: 11%;
+    }
+
+  }
+}
+
+@media (max-width:375px)
+{
+  #layout-header
+  {
+    .userprofilelink{
+      margin-bottom: 12px;
+      margin-top: 10px;
+      margin-left: 15%;
+    }
   }
 }
 
@@ -186,6 +205,9 @@
   {
     justify-content: center;
 
+   
+
+    
     ul{
       text-align: center;
     }

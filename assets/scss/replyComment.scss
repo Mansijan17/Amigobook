@@ -33,14 +33,14 @@
         {
             
             color: black;
-            padding-right: 16px;
+        
 
             .modal-dialog
             {
-                width: 500px;
+                max-height:400px;
                 .modal-content
                 {
-                    width: 100%;
+                    max-height:inherit;
                     .modal-title
                     {
                         text-align: center;
@@ -57,6 +57,7 @@
                         display: flex;
                         justify-content: center;
                         width: 100%;
+                        max-height:inherit;
                     
                     }
                 }
@@ -66,25 +67,22 @@
                     
         .comment-like-username-list
         {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 60%;
+            width: 90%;
             padding-left: 0;
-            max-height: 300px;
-            overflow: auto;
-            font-size:15px;
+            max-height: 285px;
+            overflow-y: auto;
+            font-size: 15px;
 
             li
             {
+                
                 min-height: 30px;
-                width: 100%;
+                width: 95%;
                 display: flex;
                 justify-content: space-between;
                 text-align: right;
                 align-items: center;
-                margin: 1px;
+                margin: 2px auto;
 
                 a{
                     color: #006881;
@@ -135,10 +133,9 @@
         }
 
         .modal-dialog{
-            width: 400px;
-            margin-top: 175px;
+            width: 320px;
+            margin: 175px auto 0px;
             text-align: center;
-
             h2{
                 font-family: 'Gill Sans';
                 color: #5E99A2;
@@ -203,6 +200,7 @@
         text-shadow: 2px 2px 2px lightseagreen;
         p{
             margin-bottom: 15px;
+            text-align: center;
         }
         a{
             
@@ -367,7 +365,7 @@
             li
             {
                 color: slategray;
-                min-height: 70px;
+                min-height: 67px;
                 margin-bottom: 20px;
                 border-radius: 25px;
                 padding: 5px;
@@ -386,14 +384,15 @@
                     {
                         
                         color: black;
-                        padding-right: 16px;
+                   
+                        
 
                         .modal-dialog
                         {
-                            width: 500px;
+                            max-height:400px;
                             .modal-content
                             {
-                                width: 100%;
+                               max-height:inherit;
                                 .modal-title
                                 {
                                     text-align: center;
@@ -410,6 +409,7 @@
                                     display: flex;
                                     justify-content: center;
                                     width: 100%;
+                                    max-height: inherit;
                                 
                                 }
                             }
@@ -419,25 +419,22 @@
                                 
                     .commentreply-like-username-list
                     {
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
-                        width: 60%;
+                        width: 90%;
                         padding-left: 0;
-                        max-height: 300px;
-                        overflow: auto;
-                        font-size:15px;
+                        max-height: 285px;
+                        overflow-y: auto;
+                        font-size: 15px;
 
                         li
                         {
+                            
                             min-height: 30px;
-                            width: 100%;
+                            width: 95%;
                             display: flex;
                             justify-content: space-between;
                             text-align: right;
                             align-items: center;
-                            margin: 1px;
+                            margin: 2px auto;
                             background: transparent;
 
                             a{
@@ -596,9 +593,12 @@
                     word-break: break-all;
                     overflow-wrap: break-word;
                     display: flex;
-
+                    text-align: justify;
                     a{
                         width: 25%;
+                        display: block;
+                        height: auto;
+                        word-break: break-word;
                     }
                     
                     .authorarrow{
@@ -669,10 +669,11 @@
                     }
                     
                     .replyreplycontent{
-                        overflow-wrap: break-word;
                         width: 70%;
                         height: auto;
                         display: inline-block;
+                        word-break: break-word;
+                        text-align: justify;
                     
                     }
 
@@ -829,6 +830,143 @@
         }
         ul::-webkit-scrollbar {
             display: none;
+        }
+    }
+}
+
+@media screen and (max-width:830px)
+{
+    .commentReplyClass{
+        width: 92%;
+        ul{
+            width: 80% !important;
+        }
+        .commentreplylikemodal,.commentlikemodal
+        {
+            ul{
+                width: 100% !important;
+            }
+        }
+    }
+    .comment-reply-form{
+        width: 80% !important;
+        button{
+            width: 24% !important;
+        }
+       
+    }
+}
+
+
+@media screen and (max-width:600px)
+{
+    .commentReplyClass{
+        .reply-header{
+            margin-top: 28px;
+            
+        }
+        .commentReplyContent
+        {
+            width: 100% !important;
+        }
+        .comment-reply-form
+        {
+            width: 95% !important;
+        }
+        .comment-replies-list
+        {
+            width: 100% !important;
+            padding: 0;
+        }
+    }
+}
+
+@media screen and (max-width:549px)
+{
+    .commentReplyClass{
+        margin-top: 68px;
+        width: 98%;
+
+        .comment-update-tag{
+            top:46px;
+            left:14px;
+        }
+        .comment-editedTag{
+            left: 45px;
+        }
+        .commentreplylikemodal,.commentlikemodal
+        {
+            padding: 0;
+        }
+    }
+}
+
+@media (max-width:500px)
+{
+    .commentReplyClass
+    {
+        margin-top: 120px;
+
+        .comment-reply-form
+        {
+            button{
+                font-size: 12px;
+            }
+        }
+        .dropdown-menu
+        {
+            left: 78% !important;
+        }
+    }
+}
+
+@media (max-width:370px)
+{
+    .commentReplyClass
+    {
+        .reply-header
+        {
+            margin-top: 50px;
+        }
+        .dropdown-menu
+        {
+            left: 70% !important;
+        }
+    }
+}
+
+@media (min-width:320px)
+{
+    .commentReplyClass{
+        .commentreplylikemodal,.commentlikemodal
+        {
+            .modal-dialog
+            {
+                width: 320px;
+                margin: 30px auto;
+              
+            }
+        }
+    }
+}
+
+@media (min-width:550px)
+{
+    .commentReplyClass{
+        .commentreplylikemodal,.commentlikemodal
+        {
+            .modal-dialog
+            {
+                width: 550px;
+                
+            }
+        }
+        .comment-deletion
+        {
+            .modal-dialog
+            {
+                width: 400px;
+            }
         }
     }
 }
