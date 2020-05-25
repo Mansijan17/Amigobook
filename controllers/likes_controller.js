@@ -57,6 +57,11 @@ module.exports.toggleLike=async function(req,res)
             likeable.save();
             existingLike.remove();
             deleted=true;
+            if(req.query.type=="Post")
+            {
+                likeable.likesLength-=1;
+                likeable.save();
+            }
         }
         else
         {
@@ -68,6 +73,10 @@ module.exports.toggleLike=async function(req,res)
             });
             likeID=newLike._id;
             likeable.likes.push(newLike._id);
+            if(req.query.type=="Post")
+            {
+                likeable.likesLength+=1;
+            }
             likeable.save();
             //if(req.query.type=="Post")
             //{
@@ -80,6 +89,7 @@ module.exports.toggleLike=async function(req,res)
                 }
                 if(req.query.type=="Post")
                 {
+                    
                     if(likeable.sharedFromPost)
                     {
                         likeOnPostandComments.content=likeable.content.newContent;

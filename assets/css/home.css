@@ -859,9 +859,10 @@ h1:hover {
     @media screen and (max-width: 700px) {
       .homepage-without-login .display-area > div {
         width: 100%;
-        margin: 10px; }
+        margin: 10px;
+        height: auto !important; }
       .homepage-without-login .display-area .display-images {
-        height: 300px; } }
+        height: 300px !important; } }
     .homepage-without-login .display-area .display-images {
       display: flex;
       justify-content: space-evenly;
@@ -980,7 +981,7 @@ h1:hover {
         flex-wrap: wrap;
         align-items: center;
         width: 65%;
-        margin: 0px auto 45px;
+        margin: 0px auto 10px;
         height: auto; }
         .homepage-without-login .display-area .display-signUp-form form > div {
           margin: 10px;
@@ -1062,15 +1063,44 @@ h1:hover {
           .homepage-without-login .display-area .display-signUp-form .other-signins .google-signin img {
             width: 30px; }
         .homepage-without-login .display-area .display-signUp-form .other-signins .google-signin:hover {
-          box-shadow: 0px 0px 7px 0px #008686; }
+          box-shadow: 0px 0px 7px 0px #008686;
+          text-shadow: 3px 3px #547754; }
         .homepage-without-login .display-area .display-signUp-form .other-signins .forget-password {
           border-color: #358b94;
           background: #1d6067; }
         .homepage-without-login .display-area .display-signUp-form .other-signins .forget-password:hover {
-          box-shadow: 0px 0px 7px 0px #358b94; }
+          box-shadow: 0px 0px 7px 0px #358b94;
+          text-shadow: 3px 3px #395039; }
       @media screen and (max-width: 1100px) {
         .homepage-without-login .display-area .display-signUp-form .other-signins {
-          flex-direction: column; } }
+          flex-direction: column;
+          height: auto !important; }
+          .homepage-without-login .display-area .display-signUp-form .other-signins a {
+            width: 70%; } }
+      @media screen and (max-width: 800px) {
+        .homepage-without-login .display-area .display-signUp-form .display-signUp-form form {
+          margin-bottom: 9px !important; }
+        .homepage-without-login .display-area .display-signUp-form .other-signins {
+          margin-bottom: 10px; }
+          .homepage-without-login .display-area .display-signUp-form .other-signins a {
+            width: 80% !important; } }
+      @media screen and (max-width: 700px) {
+        .homepage-without-login .display-area .display-signUp-form .other-signins {
+          margin-bottom: 10px; }
+          .homepage-without-login .display-area .display-signUp-form .other-signins a {
+            width: 60% !important;
+            min-height: 60px; } }
+      @media screen and (max-width: 600px) {
+        .homepage-without-login .display-area .display-signUp-form .other-signins a {
+          width: 75% !important; } }
+      @media screen and (max-width: 430px) {
+        .homepage-without-login .display-area .display-signUp-form .other-signins a {
+          width: 95% !important; }
+          .homepage-without-login .display-area .display-signUp-form .other-signins a span {
+            font-size: 19px; } }
+      @media screen and (max-width: 380px) {
+        .homepage-without-login .display-area .display-signUp-form .other-signins a {
+          width: 110% !important; } }
     @media screen and (max-width: 411px) {
       .homepage-without-login .display-area .display-signUp-form {
         height: auto !important;

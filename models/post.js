@@ -45,6 +45,10 @@ const postSchema=new mongoose.Schema({
     edited:{
         type:Boolean,
         required:true
+    },
+    likesLength:{
+        type:Number,
+        required:true
     }
 },
 {

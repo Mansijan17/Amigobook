@@ -121,3 +121,9 @@
 @media screen and (max-width: 435px) {
   #layout-header {
     justify-content: space-around; } }
+
+@media screen and (max-width: 330px) {
+  #layout-header {
+    justify-content: center; }
+    #layout-header ul {
+      text-align: center; } }

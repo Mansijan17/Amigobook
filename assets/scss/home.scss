@@ -1384,12 +1384,13 @@ h1:hover
             {
                 width:100%;
                 margin: 10px;
+                height: auto !important;
                 
             }
 
             .display-images
             {
-                height: 300px;
+                height: 300px !important;
             }
         }
 
@@ -1491,7 +1492,7 @@ h1:hover
                 flex-wrap: wrap;
                 align-items: center;
                 width:65%;
-                margin:0px auto 45px;
+                margin:0px auto 10px;
                 height: auto;
                 
                 >div
@@ -1624,6 +1625,7 @@ h1:hover
                 .google-signin:hover
                 {
                     box-shadow: 0px 0px 7px 0px #008686;
+                    text-shadow: 3px 3px #547754;
                 }
                 .forget-password
                 {
@@ -1633,6 +1635,7 @@ h1:hover
                 .forget-password:hover
                 {
                     box-shadow: 0px 0px 7px 0px #358b94;
+                    text-shadow: 3px 3px #395039;
                 }
             }
 
@@ -1641,7 +1644,84 @@ h1:hover
                 .other-signins
                 {
                     flex-direction: column;
+                    height: auto !important;
+
+                    a{
+                        width: 70%;
+                    }
                 }
+            }
+
+            @media screen and (max-width:800px)
+            {
+                .display-signUp-form 
+                {
+                    form{
+                        margin-bottom: 9px !important;
+                    }
+                   
+                }
+                .other-signins
+                {
+                    margin-bottom: 10px;
+                    a{
+                        width:80% !important;
+                    
+                    }
+                    
+                }
+
+               
+            }
+
+            @media screen and (max-width:700px)
+            {
+                .other-signins
+                {
+                    margin-bottom: 10px;
+                    a{
+                        width:60% !important;
+                        min-height: 60px;
+                    
+                    }
+                    
+                }
+            }
+
+            @media screen and (max-width:600px)
+            {
+                .other-signins {
+                    a{
+                         width: 75% !important;
+                    }
+                }
+            }
+
+            @media screen and (max-width:430px)
+            {
+                
+                .other-signins
+                {
+                    a{
+                        width:95% !important;
+                        span
+                        {
+                            font-size: 19px;
+                        }
+                    }
+                }
+
+            }
+            @media screen and (max-width:380px)
+            {
+                .other-signins
+                {
+                    a{
+                        width:110% !important;
+                      
+                    }
+                }
+
             }
 
        

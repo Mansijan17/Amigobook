@@ -86,7 +86,7 @@ class SharePost{
             
                 </div>
                 
-                <small class="post-deletion> 
+                <small class="post-deletion"> 
                 <span data-toggle="modal" data-target="#post-${ i._id}-delete-modal" class="delete-post-modal">
         <i class="fas fa-trash-alt"></i>
     </span>

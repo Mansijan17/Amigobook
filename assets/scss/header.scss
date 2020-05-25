@@ -179,3 +179,15 @@
     justify-content: space-around;
   }
 }
+
+@media screen and (max-width:330px)
+{
+  #layout-header
+  {
+    justify-content: center;
+
+    ul{
+      text-align: center;
+    }
+  }
+}

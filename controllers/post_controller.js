@@ -32,7 +32,8 @@ module.exports.createPost= async function(req,res)
                 user:req.user._id,
                 update:false,
                 sharedFromPost:false,
-                edited:false
+                edited:false,
+                likesLength:0
             });
             post=await post.populate("user","name email avatar").execPopulate();
             let job=queue.create("posts",post).save(function(err)
@@ -352,7 +353,8 @@ module.exports.sharePost=async function(req,res)
                         user:req.user._id,
                         update:false,
                         sharedFromPost:true,
-                        edited:false
+                        edited:false,
+                        likesLength:0
                 });
             newcreatedPost.populate("user").execPopulate();
             let timestamps=new Date(newcreatedPost.createdAt).toLocaleString();
