@@ -1478,7 +1478,7 @@ h1:hover
             font-family: serif;
             p
             {
-                margin-left: 25px;
+                text-align: center;;
                 font-size: 28px;
                 text-decoration: underline;
                 margin-top: 20px;
@@ -1738,6 +1738,10 @@ h1:hover
             {
                 height: auto !important;
                 margin-bottom: 40px !important;
+
+                p{
+                    font-size: 24px;
+                }
 
                 form
                 {

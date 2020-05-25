@@ -971,7 +971,7 @@ h1:hover {
       border-radius: 25px;
       font-family: serif; }
       .homepage-without-login .display-area .display-signUp-form p {
-        margin-left: 25px;
+        text-align: center;
         font-size: 28px;
         text-decoration: underline;
         margin-top: 20px; }
@@ -1108,6 +1108,8 @@ h1:hover {
       .homepage-without-login .display-area .display-signUp-form {
         height: auto !important;
         margin-bottom: 40px !important; }
+        .homepage-without-login .display-area .display-signUp-form p {
+          font-size: 24px; }
         .homepage-without-login .display-area .display-signUp-form form {
           width: 90%; } }
 
