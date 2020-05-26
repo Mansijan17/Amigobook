@@ -63,13 +63,15 @@ module.exports.createComment=async function(req,res)
                 content:post.content
             }
             let nextComment={
-                comment:newcomment,
-                postContent:post.content
+                thought:newcomment,
+                parentContent:post.content,
+                type:"comment",
+                parentType:"post"
             }
             if(post.sharedFromPost)
             {
                 commentOnPost.content=post.content.newContent;
-                nextComment.postContent=post.content.newContent;
+                nextComment.parentContent=post.content.newContent;
             }
           
            /// CommentsMailer.newComment(newcoment);
@@ -386,6 +388,27 @@ module.exports.createReply=async function(req,res)
             }
             comment.replies.push(newReply);
             comment.save();
+            if(comment.user.id!=req.user.id)
+            {
+                let nextReply={
+                    thought:newReply,
+                    parentContent:comment.content,
+                    type:"reply",
+                    parentType:"comment"
+                }
+               
+               let job=queue.create("emails",nextReply).save(function(err)
+               {
+                   if(err)
+                   {
+                       console.log("error in creating a queue ",err);
+                       return;
+                   }
+                   console.log("reply job enqueued " ,job.id);
+    
+               });
+            }
+
             return res.status(200).json({
                 data:{
                     replyUserImage:userImage,
@@ -399,7 +422,6 @@ module.exports.createReply=async function(req,res)
                 message:"Comment Reply Successfully published"
             });
         }
-        return res.redirect("back");
     }
     catch(err)
     {
@@ -412,10 +434,8 @@ module.exports.deleteReply=async function(req,res)
 {
     try{
         let id=req.params.id;
-        console.log("delete reply comment ",id);
         let reply=await commentReply.findById(id);
         let comment=await Comment.findById(reply.comment);
-        console.log(comment)
         let post=await Post.findById(comment.post);
         if(req.user.id==comment.user.id || req.user.id==reply.user.id || req.user.id==post.user)
         {
@@ -448,7 +468,6 @@ module.exports.updateReply=async function(req,res)
     {
         let id=req.params.id;
         let reply=await commentReply.findById(id);
-        console.log("update reply controller 1 ",reply);
         if(reply.user.id==req.user.id)
         {
             if(!reply.update)
@@ -457,7 +476,6 @@ module.exports.updateReply=async function(req,res)
                 reply.update=true;
                 reply.save();
                 console.log(req.xhr);
-                //return res.redirect("back");
                 return res.json(200,{
                     data:
                     {
@@ -492,7 +510,6 @@ module.exports.updateReply2=async function(req,res)
         console.log(req.body);
         let id=req.body.reply;
         let reply=await commentReply.findById(id);
-        console.log("update reply 2",reply);
         if(reply.user.id==req.user.id)
         {
             if(!reply.isReply)
@@ -515,7 +532,6 @@ module.exports.updateReply2=async function(req,res)
             reply.update=false;
             reply.save();
             console.log(reply);
-            //return res.redirect("back");
             return res.json(200,{
                     data:
                     {
@@ -552,7 +568,6 @@ module.exports.destroyCommentReply=async function(req,res)
         if(comment.user.id==req.user.id || post.user==req.user.id)
         {
            
-            console.log("comment controller delete");
             await commentReply.deleteMany({_id:{$in:comment.replies}});
             comment.remove();
             post.comments.pull(comment);
@@ -581,9 +596,7 @@ module.exports.replyReply1=async function(req,res)
     try{
 
         let id=req.params.id;
-        //console.log(id);
         let reply=await commentReply.findById(id).populate("user");
-        //console.log(reply);
         return res.json(200,{
             data:{
                 name:reply.user.name,
@@ -605,7 +618,6 @@ module.exports.replyReply2=async function(req,res)
 {
     try{
 
-        //console.log(req.body);
         let comment=await Comment.findById(req.body.comment);
         let reply=await commentReply.findById(req.body.reply);
         let post=await Post.findById(comment.post);
@@ -617,7 +629,7 @@ module.exports.replyReply2=async function(req,res)
                 originalAuthorID:reply.user._id,
                 originalAuthorName:reply.user.name,
             }
-           // console.log(newContent);
+     
             let newReply=await commentReply.create({
                 content:newContent,
                 comment:req.body.comment,
@@ -626,6 +638,8 @@ module.exports.replyReply2=async function(req,res)
                 edited:false,
                 isReply:true
             });
+            newReply.populate("user","name email");
+            console.log(newReply.content)
             let authorTag="";
             if(post.user==req.user.id)
             {
@@ -644,9 +658,29 @@ module.exports.replyReply2=async function(req,res)
                     userImage="/images/femaleProfile.png";
                 }
             }
-            console.log(newReply);
             comment.replies.push(newReply);
             comment.save();
+            
+            if(reply.user.id!=req.user.id)
+            {
+                let nextReply={
+                    thought:newReply,
+                    parentContent:reply.content.content,
+                    type:"reply",
+                    parentType:"thought"
+                }
+           
+               let job=queue.create("emails",nextReply).save(function(err)
+               {
+                   if(err)
+                   {
+                       console.log("error in creating a queue ",err);
+                       return;
+                   }
+                   console.log("reply job enqueued " ,job.id);
+    
+               });
+            }
             return res.status(200).json({
                 data:{
                     replyUserImage:userImage,
@@ -661,7 +695,6 @@ module.exports.replyReply2=async function(req,res)
                 message:"Comment Reply Successfully published"
             });
         }
-        return res.redirect("back");
         
     }
     catch(err)

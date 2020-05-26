@@ -2,14 +2,14 @@ const nodemailer=require('../config/nodemailer');
 
 // this is another way of exporting method
 
-exports.newComment=(comment)=>{
-    //console.log("inside new comment ",comment);
-    let htmlString=nodemailer.renderTemplate({comment:comment},"/comments/new_comment.ejs")
+exports.newCommentandReply=(expressThoughts)=>{
+    //console.log("inside new comment ",expressThoughts);
+    let htmlString=nodemailer.renderTemplate({expressThoughts:expressThoughts},"/comments_replies/new_comment_reply.ejs")
 
     nodemailer.transporter.sendMail({
         from:"manjarijain1998@gmail.com",
-        to:comment.comment.user.email,
-        subject:"New comment published!",
+        to:expressThoughts.thought.user.email,
+        subject:`New ${expressThoughts.type} published!`,
         html:htmlString
     }, (err,info)=>{
         if(err)

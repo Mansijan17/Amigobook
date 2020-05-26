@@ -59,8 +59,6 @@ function autosize(){
   var el = this;
   setTimeout(function(){
     el.style.cssText = 'height:auto; padding:0';
-    // for box-sizing other than "content-box" use:
-    // el.style.cssText = '-moz-box-sizing:content-box';
     el.style.cssText = 'height:' + el.scrollHeight + 'px';
   },0);
 }
@@ -68,11 +66,8 @@ function autosize(){
             
 function autosize1(textarea){
   var el = textarea;
-  console.log(el);
   setTimeout(function(){
     el.style.cssText = 'height:auto; padding:0';
-    // for box-sizing other than "content-box" use:
-    // el.style.cssText = '-moz-box-sizing:content-box';
     el.style.cssText = 'height:' + el.scrollHeight + 'px';
   },0);
 }
@@ -102,29 +97,12 @@ $(document).ready(function()
   removetagInvisible();
 })
 
-// function submitCommentUpdateForm(x)
-// {
-//   let commentID=x["name"];
-//   console.log(commentID);
-//   console.log($(`#comment-${commentID}-update-form`))
-//   $(`#comment-${commentID}-update-form`).submit();
-// }
-
-// function submitReplyModal(x)
-// {
-//     console.log(x);
-//     let commentID=x["name"];
-//     console.log(commentID);
-//      $(`#comment-${commentID}-reply-form`).submit();
-// }
-
 window.addEventListener( "pageshow", function ( event ) {
     var historyTraversal = event.persisted || 
                            ( typeof window.performance != "undefined" && 
                                 window.performance.navigation.type === 2 );
     if ( historyTraversal ) {
-      // Handle page restore.
       window.location.reload();
     }
-  });
+});
 

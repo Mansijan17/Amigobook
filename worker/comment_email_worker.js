@@ -4,7 +4,7 @@ const commentsMailer=require('../mailer/comments_mailer');
 queue.process("emails",function(job,done)
 {
   //  console.log("comment email workers is processing the job ",job.data);
-    commentsMailer.newComment(job.data);
+    commentsMailer.newCommentandReply(job.data);
     done();
 });
 

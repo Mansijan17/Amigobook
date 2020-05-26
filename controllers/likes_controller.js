@@ -80,7 +80,7 @@ module.exports.toggleLike=async function(req,res)
             likeable.save();
             //if(req.query.type=="Post")
             //{
-                let likeOnPostandComments={
+                let likeOnPostandCommentsandReplies={
                     name:likeable.user.name,
                     email:likeable.user.email,
                     content:likeable.content,
@@ -92,19 +92,24 @@ module.exports.toggleLike=async function(req,res)
                     
                     if(likeable.sharedFromPost)
                     {
-                        likeOnPostandComments.content=likeable.content.newContent;
+                        likeOnPostandCommentsandReplies.content=likeable.content.newContent;
                     }
+                }
+                if(req.query.type=="CommentReply")
+                {
+                    likeOnPostandCommentsandReplies.type="Reply";
+                    likeOnPostandCommentsandReplies.content=likeable.content.content;
                 }
                 if(likeable.user.id!=user.id)
                 {
-                    let job=queue.create("likeOnPostsandComments",likeOnPostandComments).save(function(err)
+                    let job=queue.create("likeOnPostsandCommentsandReplies",likeOnPostandCommentsandReplies).save(function(err)
                     {
                         if(err)
                         {
                             console.log("error in creating a queue ",err);
                             return;
                         }
-                        console.log("post job enqueued " ,job.id);
+                        console.log("like job enqueued ",job.id);
         
                     });
                 }
