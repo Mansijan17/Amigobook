@@ -1,0 +1,24 @@
+<div>
+
+    <p>
+        Hi <%= comment.name %>,
+    </p>
+    <br>
+    <p>Your comment <strong><%=  comment.content %></strong> has a new reply 
+        <strong>
+            <% if(!reply.isReply) {%>
+                <%= reply.content%>
+            <% } else { %>
+                <%= reply.content.content%>
+            <% } %>
+            
+        </strong> 
+    from <strong><%= reply.user.name %></strong> on Skyinyou.</p>
+    <br>
+    <p>Thanks for being an active member!</p>
+    <br>
+    <p>With best regards,<br>
+        Skyinyou Team <img src="https://pngimg.com/uploads/peace_symbol/peace_symbol_PNG8.png" style="width: 40px;">
+    </p>
+
+</div>

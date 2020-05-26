@@ -14,3 +14,15 @@ queue.process("commentOnPosts",function(job,done)
     commentsMailer.newCommentOnPost(job.data);
     done();
 });
+
+queue.process("replyOnComments",function(job,done)
+{
+    commentsMailer.newReplyOnComment(job.data);
+    done();
+});
+
+queue.process("replyOnReplies",function(job,done)
+{
+    commentsMailer.newReplyOnReply(job.data);
+    done();
+});

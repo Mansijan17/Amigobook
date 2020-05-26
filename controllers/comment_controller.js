@@ -396,6 +396,12 @@ module.exports.createReply=async function(req,res)
                     type:"reply",
                     parentType:"comment"
                 }
+                let replyOnComment={
+                    reply:newReply,
+                    user:newReply.user,
+                    email:comment.user.email,
+                    content:comment.content
+                }
                
                let job=queue.create("emails",nextReply).save(function(err)
                {
@@ -405,6 +411,16 @@ module.exports.createReply=async function(req,res)
                        return;
                    }
                    console.log("reply job enqueued " ,job.id);
+    
+               });
+               let job2=queue.create("replyOnComments",replyOnComment).save(function(err)
+               {
+                   if(err)
+                   {
+                       console.log("error in creating a queue ",err);
+                       return;
+                   }
+                   console.log("reply job 2 enqueued " ,job2.id);
     
                });
             }
@@ -669,6 +685,18 @@ module.exports.replyReply2=async function(req,res)
                     type:"reply",
                     parentType:"thought"
                 }
+
+                let replyOnReply={
+                    reply:newReply,
+                    user:newReply.user,
+                    email:reply.user.email,
+                    content:reply.content
+                }
+
+                if(reply.isReply)
+                {
+                    replyOnReply.content=reply.content.content;
+                }
            
                let job=queue.create("emails",nextReply).save(function(err)
                {
@@ -678,6 +706,36 @@ module.exports.replyReply2=async function(req,res)
                        return;
                    }
                    console.log("reply job enqueued " ,job.id);
+    
+               });
+               let job3=queue.create("replyOnReplies",replyOnReply).save(function(err)
+               {
+                   if(err)
+                   {
+                       console.log("error in creating a queue ",err);
+                       return;
+                   }
+                   console.log("reply job 3 enqueued " ,job3.id);
+    
+               });
+            }
+            if(comment.user.id!=req.user.id)
+            {
+                
+                let replyOnComment={
+                    reply:newReply,
+                    user:newReply.user,
+                    email:comment.user.email,
+                    content:comment.content
+                }
+               let job2=queue.create("replyOnComments",replyOnComment).save(function(err)
+               {
+                   if(err)
+                   {
+                       console.log("error in creating a queue ",err);
+                       return;
+                   }
+                   console.log("reply job 2 enqueued " ,job2.id);
     
                });
             }
