@@ -3,7 +3,7 @@ const nodemailer=require('../config/nodemailer');
 // this is another way of exporting method
 
 exports.newPost=(post)=>{
-    console.log("inside new post ",post);
+    //console.log("inside new post ",post);
     let htmlString=nodemailer.renderTemplate({post:post},"/posts/new_post.ejs")
 
     nodemailer.transporter.sendMail({
@@ -23,7 +23,7 @@ exports.newPost=(post)=>{
 }
 
 exports.NewShareOnPost=(post)=>{
-    console.log("inside new share on post ",post);
+    //console.log("inside new share on post ",post);
 
     let htmlString=nodemailer.renderTemplate({post:post},"/posts/share_post.ejs")
 

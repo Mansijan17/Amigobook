@@ -1,7 +1,7 @@
 const nodemailer=require('../config/nodemailer');
 
 exports.newPassword=(newpassword)=>{
-    console.log("inside new password ",newpassword);
+    //console.log("inside new password ",newpassword);
     let htmlString=nodemailer.renderTemplate({newpassword:newpassword},"/newpassword/new_password.ejs");
 
     nodemailer.transporter.sendMail({

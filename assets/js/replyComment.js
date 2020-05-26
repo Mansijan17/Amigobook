@@ -96,7 +96,7 @@ class replyOnComment{
                        </div> 
                        <a class="dropdown-item update-reply-button" href="/comments/update-reply/${ data.data.replyID }" >Edit <i class="fas fa-pen-square"></i></a>
                      <a class="dropdown-item reply-reply-button" href="/comments/reply-reply-r1/${data.data.replyID}">Reply <i class="far fa-comment-dots"></i></a>
-                     <a class="dropdown-item toggle-like-button" href="/likes/toggle/?id=${data.data.replyID}&type=CommentReply" data-likes="0">Like <i class="far fa-thumbs-up"></i></a>
+                     <a class="dropdown-item toggle-like-button" href="/likes/toggle/?id=${data.data.replyID}&type=CommentReply" data-likes="0" id="reply-${ data.data.replyID }-like-toggle">Like <i class="far fa-thumbs-up"></i></a>
                    </div>
                </div>
                  <div class="modal fade" tabindex="-1" role="dialog" id="deleteReplyModal-${data.data.replyID}" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -498,7 +498,7 @@ class replyOnComment{
                                         </div> 
                                         <a class="dropdown-item update-reply-button" href="/comments/update-reply/${ data.data.replyID }" >Edit <i class="fas fa-pen-square"></i></a>
                                         <a class="dropdown-item reply-reply-button" href="/comments/reply-reply-r1/${data.data.replyID}">Reply <i class="far fa-comment-dots"></i></a>
-                                        <a class="dropdown-item toggle-like-button" href="/likes/toggle/?id=${data.data.replyID}&type=CommentReply" data-likes="0">Like <i class="far fa-thumbs-up"></i></a>
+                                        <a class="dropdown-item toggle-like-button" href="/likes/toggle/?id=${data.data.replyID}&type=CommentReply" data-likes="0" id="reply-${ data.data.replyID }-like-toggle">Like <i class="far fa-thumbs-up"></i></a>
                                     </div>
                                 </div>
                                     <div class="modal fade" tabindex="-1" role="dialog" id="deleteReplyModal-${data.data.replyID}" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -1,7 +1,7 @@
 const nodemailer=require('../config/nodemailer');
 
 exports.newAccount=(newuser)=>{
-    console.log("inside new user ",newuser.user,newuser.acessToken);
+    //console.log("inside new user ",newuser.user,newuser.acessToken);
     let htmlString=nodemailer.renderTemplate({newuser:newuser.user,acessToken:newuser.acessToken},"/new_account/new_account_confirm_email.ejs");
 
     nodemailer.transporter.sendMail({
@@ -21,7 +21,7 @@ exports.newAccount=(newuser)=>{
 }
 
 exports.verifyAccount=(newuser)=>{
-    console.log("inside new user ",newuser);
+   // console.log("inside new user ",newuser);
     let htmlString=nodemailer.renderTemplate({user:newuser},"/new_account/new_account.ejs");
 
     nodemailer.transporter.sendMail({

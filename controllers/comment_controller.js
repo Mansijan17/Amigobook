@@ -317,22 +317,28 @@ module.exports.showReply=async function(req,res)
             }
         }).populate("user");
         let replies=comment.replies;
+        
         for(reply of replies)
         {
-            console.log(reply.likes);
+            reply.liked=false;
+            for(like of reply.likes)
+            {
+                if(like.user.id==req.user.id)
+                {
+                    reply.liked=true;
+                }
+            }
             reply.update=false;
             reply.save();
         }
         comment.update=false;
         comment.save();
-        
         let post=await Post.findById(comment.post);
         post.populate("user");
-
         return res.render("replyCommentContent",{
             title:"Skyinyou | Comment Replies",
             comment:comment,
-            i:post
+            i:post,
         });
 
     }

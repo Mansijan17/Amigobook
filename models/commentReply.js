@@ -42,6 +42,9 @@ const commentReply=new mongoose.Schema({
         type:Boolean,
         required:true,
     },
+    liked:{
+        type:Boolean,
+    }
 
 },{
     timestamps:true

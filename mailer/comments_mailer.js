@@ -3,7 +3,7 @@ const nodemailer=require('../config/nodemailer');
 // this is another way of exporting method
 
 exports.newComment=(comment)=>{
-    console.log("inside new comment ",comment);
+    //console.log("inside new comment ",comment);
     let htmlString=nodemailer.renderTemplate({comment:comment},"/comments/new_comment.ejs")
 
     nodemailer.transporter.sendMail({
@@ -23,7 +23,7 @@ exports.newComment=(comment)=>{
 }
 
 exports.newCommentOnPost=(post)=>{
-    console.log("inside new comment on post ",post);
+   // console.log("inside new comment on post ",post);
 
     let htmlString=nodemailer.renderTemplate({post:post,comment:post.comment},"/posts/new_comment_on_post.ejs")
 

@@ -59,7 +59,13 @@
             <a class="dropdown-item update-reply-button" href="/comments/update-reply/<%= reply._id %>" >Edit <i class="fas fa-pen-square"></i></a>
           <% } %>
           <a class="dropdown-item reply-reply-button" href="/comments/reply-reply-r1/<%= reply._id%>">Reply <i class="far fa-comment-dots"></i></a>
-          <a class="dropdown-item toggle-like-button" href="/likes/toggle/?id=<%=reply._id%>&type=CommentReply" data-likes="<%= reply.likes.length %>">Like <i class="far fa-thumbs-up"></i></a>
+          <a class="dropdown-item toggle-like-button" href="/likes/toggle/?id=<%=reply._id%>&type=CommentReply" data-likes="<%= reply.likes.length %>" id="reply-<%= reply._id%>-like-toggle">
+            <% if(!reply.liked) {%>
+              Like <i class="far fa-thumbs-up"></i>
+            <% } else { %>
+              Unlike <i class="far fa-thumbs-up"></i>
+            <% } %>
+          </a>
         </div>
     </div>
     <% if(locals.user.id==comment.user.id || locals.user.id==i.user || locals.user.id==reply.user.id) {%>

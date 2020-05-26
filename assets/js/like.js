@@ -27,6 +27,10 @@ class ToggleLike{
                 if(data.data.deleted==true)
                 {
                     likesCount-=1;
+                    if(data.data.type=="commentreply")
+                    {
+                        $(`#reply-${ data.data.id }-like-toggle`).html(`Like <i class="far fa-thumbs-up"></i>`);
+                    }
                     $(`#like-${data.data.likeID}`).remove();
                 }
                 else
@@ -36,6 +40,10 @@ class ToggleLike{
                             <img src=${data.data.userImage}>
                             <span>${data.data.name}</span>
                             </a></li>`)  
+                    if(data.data.type=="commentreply")
+                    {
+                        $(`#reply-${ data.data.id }-like-toggle`).html(`Unlike <i class="far fa-thumbs-up"></i>`);
+                    }
                 }
                 
                 $(self).attr("data-likes",likesCount);
