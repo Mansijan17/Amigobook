@@ -1,6 +1,175 @@
 body {
-  background-color: lightblue;
-  text-align: left; }
+  overflow-x: hidden !important;
+  background: linear-gradient(to bottom, #243A63, #1D6396, #00A5CF, #E3C9A6, #D89A73) !important; }
+
+.heading-background {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  color: #89b6d1;
+  text-shadow: 2px 2px 2px #1c6b89;
+  font-style: italic;
+  font-family: Haettenschweiler; }
+  .heading-background > div {
+    display: flex;
+    position: relative;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    min-width: 410px;
+    width: auto; }
+    .heading-background > div .cloud {
+      width: 350px;
+      height: 120px;
+      background: #f2f9fe;
+      background: linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
+      background: -webkit-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
+      background: -moz-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
+      background: -ms-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
+      background: -o-linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
+      transform: scale(0.2);
+      border-radius: 100px;
+      -webkit-border-radius: 100px;
+      -moz-border-radius: 100px;
+      position: absolute; }
+
+@keyframes move {
+  0% {
+    left: -48px;
+    opacity: 1; }
+  100% {
+    left: -200px;
+    opacity: 0; } }
+
+@keyframes move2 {
+  0% {
+    left: 16px;
+    opacity: 1; }
+  100% {
+    left: -200px;
+    opacity: 0; } }
+
+@keyframes move3 {
+  0% {
+    left: 56px;
+    opacity: 1; }
+  100% {
+    left: -200px;
+    opacity: 0; } }
+
+@keyframes move4 {
+  0% {
+    left: 101px;
+    opacity: 1; }
+  100% {
+    left: -200px;
+    opacity: 0; } }
+
+@keyframes move5 {
+  0% {
+    left: 78px;
+    opacity: 1; }
+  100% {
+    left: 45%;
+    opacity: 0; } }
+
+@keyframes move6 {
+  0% {
+    left: 65px;
+    opacity: 1; }
+  100% {
+    left: 45%;
+    opacity: 0; } }
+
+@keyframes move7 {
+  0% {
+    left: -11px;
+    opacity: 1; }
+  100% {
+    left: 45%;
+    opacity: 0; } }
+
+@keyframes move8 {
+  0% {
+    left: 131px;
+    opacity: 1; }
+  100% {
+    left: 45%;
+    opacity: 0; } }
+    .heading-background > div .cloud:after, .heading-background > div .cloud:before {
+      content: '';
+      position: absolute;
+      background: linear-gradient(to bottom, white 60%, #d6f0fd);
+      z-index: -1; }
+    .heading-background > div .cloud:after {
+      width: 100px;
+      height: 100px;
+      top: -50px;
+      left: 50px;
+      border-radius: 100px;
+      -webkit-border-radius: 100px;
+      -moz-border-radius: 100px; }
+    .heading-background > div .cloud:before {
+      width: 180px;
+      height: 180px;
+      top: -90px;
+      right: 50px;
+      border-radius: 200px;
+      -webkit-border-radius: 200px;
+      -moz-border-radius: 200px; }
+    .heading-background > div #first-cloud {
+      left: -48px;
+      top: -28px;
+      transform: scale(0.09);
+      animation: move 15s 1  ease-in-out forwards; }
+    .heading-background > div #second-cloud {
+      left: 16px;
+      top: 4px;
+      transform: scale(0.35);
+      animation: move2 20s 1 1.8s ease-in-out forwards; }
+    .heading-background > div #third-cloud {
+      left: 56px;
+      top: 23px;
+      transform: scale(0.05);
+      animation: move3 16s 1 1s ease-in-out forwards; }
+    .heading-background > div #four-cloud {
+      left: 101px;
+      top: 0px;
+      transform: scale(0.25);
+      animation: move4 18s 1 2.0s ease-in-out forwards; }
+    .heading-background > div #five-cloud {
+      left: 78px;
+      top: -8px;
+      transform: scale(0.2);
+      animation: move5 21s 1 0.5s ease-in-out forwards; }
+    .heading-background > div #six-cloud {
+      left: 65px;
+      top: -13px;
+      transform: scale(0.2);
+      animation: move6 14s 1 2s ease-in-out forwards; }
+    .heading-background > div #seven-cloud {
+      left: -11px;
+      top: -3px;
+      transform: scale(0.38);
+      animation: move7 23s 1 2.2s ease-in-out forwards; }
+    .heading-background > div #eight-cloud {
+      left: 131px;
+      top: -7px;
+      transform: scale(0.15);
+      animation: move8 22s 1 2.4s ease-in-out forwards; }
+  .heading-background .heading-image {
+    width: 62px;
+    height: 62px;
+    border-radius: 32%; }
 
 #user-chat-box:target {
   visibility: visible; }
+
+@media (max-width: 550px) {
+  .heading-background {
+    margin-top: 125px !important; }
+    .heading-background > div {
+      font-size: 20.5px; } }

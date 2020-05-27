@@ -1,8 +1,22 @@
 <link rel="stylesheet" href="/css/userProfile.css">
 <link rel="stylesheet"  href="/css/chat.css">
 
-    <h1>
-        Skyinyou/User Profile
+    <h1 class="heading-background">
+        <div>
+            <div class="cloud" id="first-cloud"></div>
+            <div class="cloud" id="second-cloud"></div>
+            <div class="cloud" id="third-cloud"></div>
+        <% if(user.id==profileUser.id) {%>
+            <span>Your's Azure!</span>     
+        <% } else {%>
+            <span><%= profileUser.name %>'s Azure!</span>
+        <% } %>
+            <div class="cloud" id="four-cloud"></div>
+            <div class="cloud" id="five-cloud"></div>
+            <div class="cloud" id="six-cloud"></div>
+            <div class="cloud" id="seven-cloud"></div>
+            <div class="cloud" id="eight-cloud"></div>
+        </div>
     </h1>
 
     <% if(profileUser.avatar) {%>

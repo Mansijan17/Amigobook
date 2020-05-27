@@ -6,4 +6,4 @@ body {
   body #notification {
     margin-top: 75px; }
   body #layout-main {
-    height: 100%; }
+    min-height: 90vh; }

@@ -608,11 +608,18 @@
 
 @media (max-width: 500px) {
   .commentReplyClass {
-    margin-top: 120px; }
+    margin-top: 120px;
+    margin-bottom: 85px; }
     .commentReplyClass .comment-reply-form button {
       font-size: 12px; }
     .commentReplyClass .dropdown-menu {
       left: 78% !important; } }
+
+@media (max-width: 460px) {
+  .commentReplyClass .reply-content {
+    margin-top: 50px !important; }
+  .commentReplyClass .commentreply-like-box {
+    margin-top: 24px; } }
 
 @media (max-width: 370px) {
   .commentReplyClass .reply-header {
