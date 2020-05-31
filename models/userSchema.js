@@ -34,6 +34,9 @@ const userSchema=new mongoose.Schema({
             autopopulate:true
         }
     ],
+    info:{
+        type:Object
+    }
 },{
     timestamps:true
 });

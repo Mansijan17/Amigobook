@@ -1,6 +1,9 @@
 <link rel="stylesheet" href="/css/userProfile.css">
 <link rel="stylesheet"  href="/css/chat.css">
-
+<div id="stars-group-1"></div>
+<div id="stars-group-2"></div>
+<div id="stars-group-3"></div>
+<div id="stars-group-4"></div>
     <h1 class="heading-background">
         <div>
             <div class="cloud" id="first-cloud"></div>
@@ -19,21 +22,76 @@
         </div>
     </h1>
 
-    <% if(profileUser.avatar) {%>
-        <img src="<%= profileUser.avatar %>" alt="<%= profileUser.name %>" width="100" height="100">
-    <% } else if (profileUser.gender=="male"){%>
-        <img src="https://i.stack.imgur.com/HQwHI.jpg" width="100" height="100">
-    <% }  else {%>
-        <img src="/images/femaleProfile.png" width="100" height="100">
-    <% } %>
+    <div class="profile-intro">
+      <div class="first">
+        <div class="accordion" id="accordionExample">
+          <div class="card">
+              <div class="card-header" id="headingOne">
+                  <h2 class="mb-0">
+                      <button type="button" class="collapsed" data-toggle="collapse" data-target="#collapseOne">What is HTML?</button>									
+                  </h2>
+              </div>
+              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                  <div class="card-body">
+                      <p>HTML stands for HyperText Markup Language. HTML is the standard markup language for describing the structure of web pages. </p>
+                  </div>
+              </div>
+          </div>
+          <div class="card">
+              <div class="card-header" id="headingTwo">
+                  <h2 class="mb-0">
+                      <button type="button" class="collapsed"  data-toggle="collapse" data-target="#collapseTwo">What is Bootstrap?</button>
+                  </h2>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                  <div class="card-body">
+                      <p>Bootstrap is a sleek, intuitive, and powerful front-end framework for faster and easier web development. It is a collection of CSS and HTML conventions. </p>
+                  </div>
+              </div>
+          </div>
+          <div class="card">
+              <div class="card-header" id="headingThree">
+                  <h2 class="mb-0">
+                      <button type="button" class="collapsed" data-toggle="collapse" data-target="#collapseThree">What is CSS?</button>                     
+                  </h2>
+              </div>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                  <div class="card-body">
+                      <p>CSS stands for Cascading Style Sheet. CSS allows you to specify various style properties for a given HTML element such as colors, backgrounds, fonts etc. </p>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
+
+      <div class="middle">
+        <% if(profileUser.avatar) {%>
+            <img src="<%= profileUser.avatar %>" alt="<%= profileUser.name %>" width="100" height="100">
+        <% } else if (profileUser.gender=="male"){%>
+            <img src="https://i.stack.imgur.com/HQwHI.jpg" width="100" height="100">
+        <% }  else {%>
+            <img src="/images/femaleProfile.png" width="100" height="100">
+        <% } %>
+        <p class="profile-name"><%= profileUser.name %></p>
+        <p class="profile-about">
+            <span class="about-tag">About-</span>
+            <q><%= profileUser.info.about%></q>
+        </p>
+        <% if(profileUser.id==user.id) {%>
+            <span class="editprofile-tag">Edit Profile</span>
+        <% } %>
+      </div>
+
+      <div></div>
+    </div>
     <% if(user.id==profileUser.id) { %> 
        
-        <form action="/users/update/<%= profileUser.id %>" method="post" enctype="multipart/form-data">
+        <!-- <form action="/users/update/<%= profileUser.id %>" method="post" enctype="multipart/form-data">
             <input type="text" required placeholder="Your Name..." value="<%= profileUser.name %>" name="name">
             <input type="email" required placeholder="Your Email..." value="<%= profileUser.email %>" name="email">
             <input type="file" name="avatar" placeholder="Profile Picture...">
             <button type="submit">Update</button>
-        </form>
+        </form> -->
         <br>
         <br><br>
         <form id="new-post-form" method="post" action="/posts/create-post">
@@ -42,50 +100,50 @@
             <button type="submit">Post</button>
         </form>
         <br><br>
-            <% if(posts.length!=0) { %>
-                <h3 style="text-align: center;"> Your feeds</h3>
-                <br>
-                <div id="posts-list-container">
-                    <ul>
-                        <% for(i of posts) { %>
-            
-                            <%- include('_post') -%>
-                                        
-                        <% } %>
-                    </ul>
-                </div>
-            <% } else { %>
-                <h3 style="text-align: center;">No posts published!</h3>
-            <% } %>
+    
+        <% if(posts.length!=0) { %>
+            <h3 style="text-align: center;">The Sky In You!</h3>
+            <br>
+            <div id="posts-list-container">
+                <ul>
+                    <% for(i of posts) { %>
+                        <%- include('_post') -%>
+                                    
+                    <% } %>
+                </ul>
+            </div>
         <% } else { %>
+            <h3 style="text-align: center;">You have yet to ascent!</h3>
+        <% } %>
+            
+    <% } else { %>
 
-            <p><%= profileUser.name %></p>
-            <p><%= profileUser.email %></p>
-            <p><form action="/users/friends/?from=<%=user._id%>&to=<%=profileUser._id%>" class="add-friend-button" method="post">
+            <form action="/users/friends/?from=<%=user._id%>&to=<%=profileUser._id%>" class="add-friend-button" method="post">
                 <button type="submit">Add /Remove Friend</button>
-            </form></p>
+            </form>
             <p><a href="#user-chat-box">Chat with <%= profileUser.name  %></a></p>
             <br>
             <br>
+        
             <% if(posts.length!=0) { %>
-                <h3 style="text-align: center;"><%= profileUser.name%>'s Posts</h3>
+                <h3 style="text-align: center;">The Sky In <%= profileUser.name%>!</h3>
                 <br>
                 <div id="posts-list-container">
                     <ul>
                         <% for(i of posts) { %>
-            
                             <%- include('_post') -%>
                                         
                         <% } %>
                     </ul>
                 </div>
             <% } else { %>
-                <h3 style="text-align: center;">No posts published!</h3>
+                <h3 style="text-align: center;">This amazing person has yet to ascent!</h3>
             <% } %>
+
             <%- include("_chat"); %>
     <% } %>
-    <br>
-    <br>
+  
+
     
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>

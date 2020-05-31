@@ -6,4 +6,5 @@ body {
   body #notification {
     margin-top: 75px; }
   body #layout-main {
-    min-height: 90vh; }
+    min-height: 90vh;
+    margin-bottom: 88px; }

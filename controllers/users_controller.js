@@ -54,8 +54,8 @@ module.exports.profile = async function (req, res) {
                 comment.save();
             }
         }
-       
-
+        
+        console.log(postLists)
         return res.render('userProfile', {
             title: `${user.name} | Skyinyou`,
             profileUser: user,
@@ -471,6 +471,11 @@ module.exports.verifyAccount=async function(req,res)
             
             //console.log(account.user.name);
             newuser=await User.create(account.user);
+            newuser2=await User.findById(newuser._id);
+            newuser2.info={
+               about: `Hi, I am ${newuser2.name}. Nice to meet you!`
+            };
+            newuser2.save();
         }
         req.flash("success","Successfully verified!");
         return res.redirect("/users/sign-in");

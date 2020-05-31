@@ -106,5 +106,45 @@ window.addEventListener( "pageshow", function ( event ) {
     }
 });
 
+// setTimeout(function(){
+//   let top;
+//   if(window.innerWidth>=550)
+//   {
+//     top=0;
+//   }
+//   else
+//   {
+//     top=125;
+//   }
+//   console.log(top)
+//   function marginTop()
+//   {
+//     if(window.innerWidth>=550)
+//     {
+//       console.log("width greater")
+//       if(top==-18)
+//       {
+//         clearInterval(id);
+//         return;
+//       }
+//       top--;
+//       $(".heading-background").attr("style",`margin-top:${top}px !important;`);
+//     }
+//     else
+//     {
+//       console.log("width lesser")
+//       if(top==84)
+//       {
+//         clearInterval(id);
+//         return;
+//       }
+//       top--;
+//       $(".heading-background").attr("style",`margin-top:${top}px !important;`); 
+//     }
+     
+//   }
 
+//   let id=setInterval(marginTop,150);
+  
+// },25000);
 
