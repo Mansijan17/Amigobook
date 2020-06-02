@@ -2,16 +2,13 @@ class ToggleLike{
     constructor(toggleElement)
     {
         this.toggler=toggleElement;
-        console.log(this.toggler);
         this.toggleLike();
     }
 
     toggleLike()
     {
-        console.log(this.toggler);
         $(this.toggler).click(function(e)
         {
-            console.log($(this.toggler))
             e.preventDefault();
             let self=this;
 

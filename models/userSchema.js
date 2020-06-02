@@ -36,7 +36,8 @@ const userSchema=new mongoose.Schema({
     ],
     info:{
         type:Object
-    }
+    },
+ 
 },{
     timestamps:true
 });

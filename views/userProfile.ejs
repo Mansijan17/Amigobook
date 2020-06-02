@@ -54,11 +54,11 @@
                             </p>
                       <% } else {%>
                             <% if(user.id!=profileUser.id) {%>
-                                <p>Well, Looks like you have to make the first move xD!</p>
+                                <div>Well, Looks like you have to make the first move xD!</div>
                             <% } else { %>
-                                <p>
+                                <div>
                                     Are you ready for it?
-                                </p>
+                                </div>
                             <% } %>
                       <% } %>
                   </div>
@@ -109,9 +109,28 @@
             <span class="editprofile-tag">Edit Profile</span>
         <% } else {%>   
             <div class="add-chat-friend-group">
-                <a href="/users/friends/?from=<%=user._id%>&to=<%=profileUser._id%>" class="add-friend-button">
-                    Add Friend
-                </a>
+                <% if(!friended) {%>
+                    <% if(!pendingFrom && !pendingTo) {%>
+                        <a href="/users/friends-pending-form/?from=<%=user._id%>&to=<%=profileUser._id%>" class="add-friend-button">
+                                Add Friend
+                        </a>
+                    <% } else if(pendingFrom) {%>
+                        <span class="pending-from">Friend Request Pending</span>
+                        <a href="/users/friends-cancel-form/?from=<%=user._id%>&to=<%=profileUser._id%>" class="cancel-friend-button">
+                            Want to cancel it?
+                        </a>
+                    <% } else { %>
+                        <span class="pending-form-present">Want to accept this friend request?</span>
+                        <div class="pending-form-options">
+                            <a href="/users/make-friends/?to=<%=user._id%>&from=<%=profileUser._id%>" class="confirm-friend-button">Confirm</a>
+                            <a href="/users/friends-cancel-form/?to=<%=user._id%>&from=<%=profileUser._id%>" class="no-friend-button">Not Yet</a>
+                        </div>
+                    <% } %>
+                <% } else {%>
+                    <a href="/users/destroy-friends/?from=<%=user._id%>&to=<%=profileUser._id%>" class="remove-friend-button">
+                        Remove Friend
+                    </a>
+                <% } %>
                 <a href="#user-chat-box" class="chat-button">Chat with <%= profileUser.name  %></a>
             </div>
         <% } %>
@@ -148,69 +167,53 @@
             </div>
             </div>
         </div>
-        <% for (friend of friends) {%>
-            <div class="modal fade delete-friend-warning" id="deleteFriendModal-<%= friend._id %>" data-backdrop="static" >
+        <% if(user.id==profileUser.id) { %>
+            <% for (friend of friends) {%>
+                <div class="modal fade delete-friend-warning" id="deleteFriendModal-<%= friend._id %>" data-backdrop="static" >
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h2 class="modal-title"><i class="fas fa-trash-alt"></i> <%=friend.name%>?</h2>
+                        </div>
+                        <div class="modal-body">
+                        <p>Are you sure you want to remove <%= friend.name%>? </p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="/users/destroy-friends/?from=<%=user._id%>&to=<%=friend._id%>" class="remove-friend-button">
+                                <i class="fas fa-handshake-slash"></i>
+                        </a>
+                        <a data-dismiss="modal" class="discard-friend">Discard</a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            <% } %>
+        <% } else {%>
+            <div class="modal fade" id="mutualfriendModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                    <h2 class="modal-title"><i class="fas fa-trash-alt"></i> <%=friend.name%>?</h2>
+                    <h2 class="modal-title" id="exampleModalLabel">
+                        <%= mutualfriends.length%>
+                        <% if(mutualfriends.length==1) {%>
+                            Mutual Connection 
+                        <%} else {%>
+                            Mutual 
+                            Connections
+                        <% } %> 
+                    </h2>
                     </div>
                     <div class="modal-body">
-                    <p>Are you sure you want to remove <%= friend.name%>? </p>
+                            <ul>
+                                <% for(friend of mutualfriends) {%>
+                                    <li id="user-<%=friend._id%>" class="friend-list">
+                                        <%- include("_friendDisplay"); %>
+                                    </li>
+                                    
+                                <% } %>
+                            </ul>
                     </div>
-                    <div class="modal-footer">
-                        <a href="/users/friends/?from=<%=user._id%>&to=<%=friend._id%>" class="add-friend-button">
-                            <i class="fas fa-handshake-slash"></i>
-                    </a>
-                    <a data-dismiss="modal" class="discard-friend">Discard</a>
-                    </div>
-                </div>
-                </div>
-            </div>
-        <% } %>
-        <div class="modal fade" id="mutualfriendModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h2 class="modal-title" id="exampleModalLabel">
-                    <%= mutualfriends.length%>
-                    <% if(mutualfriends.length==1) {%>
-                        Connection 
-                    <%} else {%>
-                        Connections
-                    <% } %> 
-                </h2>
-                </div>
-                <div class="modal-body">
-                        <ul>
-                            <% for(mutualfriend of mutualfriends) {%>
-                                <li id="user-<%= mutualfriend._id%>" class="friend-list">
-                                    <%- include("_friendDisplay"); %>
-                                </li>
-                                
-                            <% } %>
-                        </ul>
-                </div>
-                
-            </div>
-            </div>
-        </div>
-        <% for (mutualfriend of mutualfriends) {%>
-            <div class="modal fade delete-friend-warning" id="deleteFriendModal-<%= mutualfriend._id %>" data-backdrop="static" >
-                <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h2 class="modal-title"><i class="fas fa-trash-alt"></i> <%=mutualfriend.name%>?</h2>
-                    </div>
-                    <div class="modal-body">
-                    <p>Are you sure you want to remove <%= mutualfriend.name%>? </p>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="/users/friends/?from=<%=user._id%>&to=<%=mutualfriend._id%>" class="add-friend-button">
-                            <i class="fas fa-handshake-slash"></i>
-                    </a>
-                    <a data-dismiss="modal" class="discard-friend">Discard</a>
-                    </div>
+                    
                 </div>
                 </div>
             </div>
@@ -272,12 +275,10 @@
 
             <%- include("_chat"); %>
     <% } %>
-  
- 
-    
+
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-    
+    <script src="/js/friends.js"></script>
     <script>
         new ChatEngine('user-chat-box','<%= locals.user.email %>');
     </script>

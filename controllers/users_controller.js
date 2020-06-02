@@ -8,6 +8,7 @@ const queue=require('../config/kue');
 const newpasswordEmailWorker=require('../worker/newpassword_email_worker');
 const crypto=require('crypto');
 const Friendship=require('../models/friendship');
+const FriendshipForm=require('../models/pend_friend_forms');
 const newAccount=require('../models/newAccountSchema');
 const newaccountEmailWorker=require('../worker/newaccount_email_worker');
 //making function async
@@ -66,9 +67,14 @@ module.exports.profile = async function (req, res) {
             }
             
         }
+        let friended;
+        let pendingFrom;
+        let pendingTo;
         if(req.user.id!=req.params.id)
         {
-            console.log("other user")
+            friended=false;
+            pendingFrom=false;
+            pendingTo=false;
             let loggeduser=await User.findById(req.user.id);
             let friendships=loggeduser.friendships;
             for(friendship of friendships)
@@ -78,21 +84,44 @@ module.exports.profile = async function (req, res) {
                 {
                     for(friend of friends)
                     {
-                        if(friend.id==ship.toUser.id)
+                        if(friend.id!=req.user.id && friend.id==ship.toUser.id)
                         {
                             mutualfriends.push(friend);
                         }
                     }
                 }
-               
+            }
+            let findFriendship=await Friendship.findOne({fromUser:req.user.id,toUser:req.params.id});
+            if(findFriendship)
+            {
+                friended=true;
+            }
+            else
+            {
+                let pendingFriend=await FriendshipForm.findOne({fromUser:req.user.id,toUser:req.params.id});
+                if(pendingFriend)
+                {
+                    pendingFrom=true;
+                }
+                let pendingFriend2=await FriendshipForm.findOne({fromUser:req.params.id,toUser:req.user.id});
+                if(pendingFriend2)
+                {
+                    pendingTo=true;
+                }
+                console.log(pendingFrom,pendingTo)
             }
         }
+        
+
         return res.render('userProfile', {
             title: `${user.name} | Skyinyou`,
             profileUser: user,
             posts:postLists,
             friends:friends,
-            mutualfriends:mutualfriends
+            mutualfriends:mutualfriends,
+            friended:friended,
+            pendingFrom:pendingFrom,
+            pendingTo:pendingTo
         })
 
     }
@@ -404,12 +433,92 @@ module.exports.resetPassword=async function(req,res)
     
 }
 
-module.exports.toggleFriendship=async function(req,res)
+module.exports.sendFriendshipForms=async function(req,res)
+{
+    try{
+         FriendshipForm.create({
+             isFormSent:true,
+             fromUser:req.query.from,
+             toUser:req.query.to
+         });
+         return res.json(200,{
+             data:{
+                from:req.query.from,
+                to:req.query.to
+             },
+             message:"Form put successfully!"
+         })
+        //  req.flash("success","Friend Request Sent Successfully!");
+        //  return res.redirect("back");
+    }
+    catch(err)
+    {
+        console.log("error in sending friendship form ",err);
+        return;
+    }
+}
+
+module.exports.destroyFriendshipForms=async function(req,res)
+{
+    try{
+        console.log(req.query);
+        let form=await FriendshipForm.findOneAndDelete({fromUser:req.query.from,toUser:req.query.to});
+        return res.json(200,{
+            data:{
+               from:req.query.to,
+               to:req.query.from
+            },
+            message:"Form removed successfully!"
+        })
+        req.flash("success","Friend Request Cancelled!")
+        return res.redirect("back");
+    }
+    catch(err)
+    {
+        console.log("error in sending friendship form ",err);
+        return;
+    }
+}
+
+module.exports.makeFriendShip=async function(req,res)
+{
+    try{
+        let fromUser=await User.findById(req.query.from);
+        let toUser=await User.findById(req.query.to);
+        let newFriendshipFrom=await Friendship.create({
+            fromUser:req.query.from,
+            toUser:req.query.to
+        });
+        let newFriendshipTo=await Friendship.create({
+            fromUser:req.query.to,
+            toUser:req.query.from
+        });
+        fromUser.friendships.push(newFriendshipFrom);
+        fromUser.save();
+        toUser.friendships.push(newFriendshipTo);
+        toUser.save();
+        await FriendshipForm.findOneAndDelete({fromUser:req.query.from,toUser:req.query.to});
+        return res.json(200,{
+            data:{
+               from:req.query.from,
+               to:req.query.to
+            },
+            message:"Friend request accepted successfully!"
+        })
+        return res.redirect("back");
+    }
+    catch(err)
+    {
+        console.log("error in making friendship ",err);
+        return;
+    }
+}
+
+
+module.exports.destroyFriendship=async function(req,res)
 {
     try
     {
-        //users/add-friends/?from=user.id&to=friend.id
-        let deleted=false;
         let existingFriendshipFrom=await Friendship.findOne({
             fromUser:req.query.from,
             toUser:req.query.to
@@ -420,49 +529,26 @@ module.exports.toggleFriendship=async function(req,res)
         });
         let fromUser=await User.findById(req.query.from);
         let toUser=await User.findById(req.query.to);
-        if(existingFriendshipFrom)
-        {
-            existingFriendshipFrom.remove();
-            existingFriendshipTo.remove();
-            fromUser.friendships.pull(existingFriendshipFrom._id);
-            fromUser.save();
-            toUser.friendships.pull(existingFriendshipTo._id);
-            toUser.save();
-            deleted=true;
-        }
-        else
-        {
-            let newFriendshipFrom=await Friendship.create({
-                fromUser:req.query.from,
-                toUser:req.query.to
-            });
-            let newFriendshipTo=await Friendship.create({
-                fromUser:req.query.to,
-                toUser:req.query.from
-            });
-           // console.log(newFriendship);
-            fromUser.friendships.push(newFriendshipFrom);
-            fromUser.save();
-            toUser.friendships.push(newFriendshipTo);
-            toUser.save();
-        }
+        existingFriendshipFrom.remove();
+        existingFriendshipTo.remove();
+        fromUser.friendships.pull(existingFriendshipFrom._id);
+        fromUser.save();
+        toUser.friendships.pull(existingFriendshipTo._id);
+        toUser.save();
+        return res.json(200,{
+            data:{
+               from:req.query.from,
+               to:req.query.to
+            },
+            message:"Friendship removed!"
+        })
+        req.flash("success","Sorry about that, Hope you guys reconcile soon!")
         return res.redirect("back");
-        // return res.json(500,{
-        //     message:"Request successfull!",
-        //     data:
-        //     {
-        //         deleted:deleted,
-        //         friendship:fromUser.friendships
-        //     }
-        // })
     }
     catch(err)
     {
-        //console.log(err);
-        // req.flash("error ",err);
-         return res.json(500,{
-             message:"Interval Server Error",
-         });
+        console.log("error in destroying friendship ",err);
+        return;
     }
 }
 

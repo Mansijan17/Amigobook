@@ -29,7 +29,10 @@ router.post("/reset-password",usersController.resetPasswordEmailLink);
 router.get("/resetting-password/:id",usersController.newPassword);
 router.post("/resetting-password/:id",usersController.resetPassword);
 
-router.get("/friends",passport.checkAuthentication,usersController.toggleFriendship);
+router.get("/friends-pending-form",passport.checkAuthentication,usersController.sendFriendshipForms);
+router.get("/friends-cancel-form",passport.checkAuthentication,usersController.destroyFriendshipForms);
+router.get("/make-friends",passport.checkAuthentication,usersController.makeFriendShip);
+router.get("/destroy-friends",passport.checkAuthentication,usersController.destroyFriendship);
 
 router.get("/newaccount/:id",usersController.confirmAccount);
 router.post("/newaccount/:id",usersController.verifyAccount);
