@@ -54,12 +54,45 @@ module.exports.profile = async function (req, res) {
                 comment.save();
             }
         }
-        
-        console.log(postLists)
+        let friendships=user.friendships;
+        let friends=[];
+        let mutualfriends=[]
+        for(friendship of friendships)
+        {
+            let ship=await Friendship.findById(friendship._id);
+            if(ship.toUser!=null)
+            {
+                friends.push(ship.toUser);
+            }
+            
+        }
+        if(req.user.id!=req.params.id)
+        {
+            console.log("other user")
+            let loggeduser=await User.findById(req.user.id);
+            let friendships=loggeduser.friendships;
+            for(friendship of friendships)
+            {
+                let ship=await Friendship.findById(friendship._id);
+                if(ship.toUser!=null)
+                {
+                    for(friend of friends)
+                    {
+                        if(friend.id==ship.toUser.id)
+                        {
+                            mutualfriends.push(friend);
+                        }
+                    }
+                }
+               
+            }
+        }
         return res.render('userProfile', {
             title: `${user.name} | Skyinyou`,
             profileUser: user,
-            posts:postLists
+            posts:postLists,
+            friends:friends,
+            mutualfriends:mutualfriends
         })
 
     }
@@ -376,7 +409,6 @@ module.exports.toggleFriendship=async function(req,res)
     try
     {
         //users/add-friends/?from=user.id&to=friend.id
-        //console.log(req.query);
         let deleted=false;
         let existingFriendshipFrom=await Friendship.findOne({
             fromUser:req.query.from,
@@ -390,7 +422,6 @@ module.exports.toggleFriendship=async function(req,res)
         let toUser=await User.findById(req.query.to);
         if(existingFriendshipFrom)
         {
-            console.log("Exits");
             existingFriendshipFrom.remove();
             existingFriendshipTo.remove();
             fromUser.friendships.pull(existingFriendshipFrom._id);
@@ -415,11 +446,7 @@ module.exports.toggleFriendship=async function(req,res)
             toUser.friendships.push(newFriendshipTo);
             toUser.save();
         }
-
-       console.log("from " ,fromUser);
-       console.log("to " ,toUser);
-       
-        return res.redirect("/");
+        return res.redirect("back");
         // return res.json(500,{
         //     message:"Request successfull!",
         //     data:
