@@ -1,11 +1,11 @@
 const nodemailer=require('../config/nodemailer');
-
+const env=require('../config/environment');
 exports.newPassword=(newpassword)=>{
     //console.log("inside new password ",newpassword);
     let htmlString=nodemailer.renderTemplate({newpassword:newpassword},"/newpassword/new_password.ejs");
 
     nodemailer.transporter.sendMail({
-        from:"manjarijain98@gmail.com",
+        from:env.email,
         to:newpassword.user.email,
         subject:"Reset Password Link",
         html:htmlString
@@ -24,7 +24,7 @@ exports.updatedPassword=(user)=>{
     let htmlString=nodemailer.renderTemplate({user:user},"/newpassword/confirm_password.ejs");
 
     nodemailer.transporter.sendMail({
-        from:"manjarijain98@gmail.com",
+        from:env.email,
         to:user.email,
         subject:"Password Updated Successfully!",
         html:htmlString
