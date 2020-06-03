@@ -134,3 +134,138 @@ function togglePassword(x)
         }
     }
 }
+
+let submitSignForm=function()
+{
+   console.log($(".display-signUp-form #sign-up-form"));
+   $(".display-signUp-form #sign-up-form").submit(function(e)
+   {
+      e.preventDefault();
+      $.ajax({
+        type:"post",
+        url:$(".display-signUp-form #sign-up-form").prop("action"),
+        data:$(".display-signUp-form #sign-up-form").serialize(),
+        success:function(data)
+        {
+            console.log(data.data);
+            if(data.data.error)
+            {
+                  new Noty({
+                    theme:"relax",
+                    text:`${data.data.message}`,
+                    type:"error",
+                    layput:"topRight",
+                    timeout:1500
+                }).show();
+            }
+            else
+            {
+                    new Noty({
+                      theme:"relax",
+                      text:`${data.data.message}`,
+                      type:"success",
+                      layput:"topRight",
+                      timeout:1500
+                  }).show();
+            }
+           
+        },
+        error:function(err)
+        {
+          console.log(err.responseText);
+        }
+      })
+
+   })
+}
+submitSignForm();
+
+let submitForgetPassEmailForm=function()
+{
+   console.log($(".forget-email-password"));
+   $(".forget-email-password").submit(function(e)
+   {
+      e.preventDefault();
+      $.ajax({
+        type:"post",
+        url:$(".forget-email-password").prop("action"),
+        data:$(".forget-email-password").serialize(),
+        success:function(data)
+        {
+            console.log(data.data);
+            if(data.data.error)
+            {
+                  new Noty({
+                    theme:"relax",
+                    text:`${data.data.message}`,
+                    type:"error",
+                    layput:"topRight",
+                    timeout:1500
+                }).show();
+            }
+            else
+            {
+                    new Noty({
+                      theme:"relax",
+                      text:`${data.data.message}`,
+                      type:"success",
+                      layput:"topRight",
+                      timeout:1500
+                  }).show();
+            }
+           
+        },
+        error:function(err)
+        {
+          console.log(err.responseText);
+        }
+      })
+
+   })
+}
+submitForgetPassEmailForm();
+
+let submitNewPassForm=function()
+{
+   console.log($("#new-password-form"));
+   $("#new-password-form").submit(function(e)
+   {
+      e.preventDefault();
+      $.ajax({
+        type:"post",
+        url:$("#new-password-form").prop("action"),
+        data:$("#new-password-form").serialize(),
+        success:function(data)
+        {
+            console.log(data.data);
+            if(data.data.error)
+            {
+                  new Noty({
+                    theme:"relax",
+                    text:`${data.data.message}`,
+                    type:"error",
+                    layput:"topRight",
+                    timeout:1500
+                }).show();
+            }
+            else
+            {
+                    new Noty({
+                      theme:"relax",
+                      text:`${data.data.message}`,
+                      type:"success",
+                      layput:"topRight",
+                      timeout:1500
+                  }).show();
+            }
+           
+        },
+        error:function(err)
+        {
+          console.log(err.responseText);
+        }
+      })
+
+   })
+}
+submitNewPassForm();

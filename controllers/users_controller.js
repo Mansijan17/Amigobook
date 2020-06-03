@@ -219,72 +219,107 @@ module.exports.signIn = function (req, res) {
 
 // get the sign up data
 module.exports.create = async function (req, res) {
-    if (req.body.password != req.body.confirm_password) {
-        req.flash("error", "These two passwords don't see eye to eye!");
-        return res.redirect('back');
-    }
-    if(req.body.password.length<8)
-    {
-        console.log("len")
-        req.flash("error", "Come on, give some length to the password!");
-        return res.redirect('back');verified=false;
-    }
-    let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-    let specialCharacter=false;
-    let number=false;
-    let letter=false;
-    let captial=false;
-    for(let i=0;i<req.body.password.length;i++)
-    {
-        console.log(format.test(req.body.password.charAt(i)));
-        if(format.test(req.body.password.charAt(i)))
-        {
-            specialCharacter=true;
-        }
-        else
-        {
-            if(isNaN(req.body.password.charAt(i)))
-            {
-                letter=true;
-                if(req.body.password.charAt(i)==req.body.password.charAt(i).toUpperCase())
-                {
-                    captial=true;
-                }
-            }
-            else
-            {
-                number=true;
-            }
-        }
-    }
-    if(!specialCharacter)
-    {
-        console.log("sp")
-        req.flash("error", "Oh, you missed special characters in password!");
-        return res.redirect('back');
-    }
-    if(!number)
-    {
-        console.log("no")
-        req.flash("error", "A number makes your password stronger!");
-        return res.redirect('back');
-    }
-    if(!letter)
-    {
-        console.log("letter")
-        req.flash("error", "The password can't be spelled without letters!");
-        return res.redirect('back');
-    }
-    if(!captial)
-    {
-        console.log("cap")
-        req.flash("error", "At least one letter of your password needs respect!");
-        return res.redirect('back');
-    }
     try {
         let user = await User.findOne({ email: req.body.email });
         if (!user) {
             //await User.create(req.body);
+            if (req.body.password != req.body.confirm_password) {
+                return res.json(200,{
+                    data:{
+                        message:"These two passwords don't see eye to eye!",
+                        error:true
+                    }
+                })
+                req.flash("error", "These two passwords don't see eye to eye!");
+                return res.redirect('back');
+            }
+            if(req.body.password.length<8)
+            {
+                console.log("len");
+                return res.json(200,{
+                    data:{
+                        message:"Come on, give some length to the password!",
+                        error:true
+                    }
+                })
+                req.flash("error", "Come on, give some length to the password!");
+                return res.redirect('back');
+            }
+            let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+            let specialCharacter=false;
+            let number=false;
+            let letter=false;
+            let captial=false;
+            for(let i=0;i<req.body.password.length;i++)
+            {
+                if(format.test(req.body.password.charAt(i)))
+                {
+                    specialCharacter=true;
+                }
+                else
+                {
+                    if(isNaN(req.body.password.charAt(i)))
+                    {
+                        letter=true;
+                        if(req.body.password.charAt(i)==req.body.password.charAt(i).toUpperCase())
+                        {
+                            captial=true;
+                        }
+                    }
+                    else
+                    {
+                        number=true;
+                    }
+                }
+            }
+            if(!specialCharacter)
+            {
+                console.log("sp");
+                return res.json(200,{
+                    data:{
+                        message:"Oh, you missed special characters in password!",
+                        error:true
+                    }
+                })
+                req.flash("error", "Oh, you missed special characters in password!");
+                return res.redirect('back');
+            }
+            if(!number)
+            {
+                console.log("no");
+                return res.json(200,{
+                    data:{
+                        message:"A number makes your password stronger!",
+                        error:true
+                    }
+                })
+                req.flash("error", "A number makes your password stronger!");
+                return res.redirect('back');
+            }
+            if(!letter)
+            {
+                console.log("letter");
+                return res.json(200,{
+                    data:{
+                        message:"The password can't be spelled without letters!",
+                        error:true
+                    }
+                })
+                req.flash("error", "The password can't be spelled without letters!");
+                return res.redirect('back');
+            }
+            if(!captial)
+            {
+                console.log("cap");
+                return res.json(200,{
+                    data:{
+                        message:"At least one letter of your password needs respect!",
+                        error:true
+                    }
+                })
+                req.flash("error", "At least one letter of your password needs respect!");
+                return res.redirect('back');
+            }
             let name=req.body.name;
             let name2=[];
             name=name.split(" ");
@@ -325,10 +360,22 @@ module.exports.create = async function (req, res) {
                 }
                 console.log("job enqueued ",job.id);
             });
+            return res.json(200,{
+                data:{
+                    message:"Your @ chariot awaits!",
+                    error:false
+                }
+            })
             req.flash("success", "Your @ chariot awaits!");
             return res.redirect('/');
         }
         else {
+            return res.json(200,{
+                data:{
+                    message:"This @ is already among the skies!",
+                    error:true
+                }
+            })
             req.flash("error", "This @ is already among the skies!");
             return res.redirect('back');
         }
@@ -339,9 +386,9 @@ module.exports.create = async function (req, res) {
     }
 }
 
-
 // sign in and create a session for the user
 module.exports.createSession = function (req, res) {
+ 
     req.flash("success", "Ascented Chivalrously!");
     return res.redirect('/');
 }
@@ -366,6 +413,12 @@ module.exports.resetPasswordEmailLink=async function(req,res)
         //console.log(req.body);
         let userFound = await User.findOne({ email: req.body.email });
         if (!userFound) {
+            return res.json(200,{
+                data:{
+                    message:"This @ is still on earth!",
+                    error:true
+                }
+            })
             req.flash("error","This @ is still on earth!");
             return res.redirect('/users/sign-in');
         }
@@ -398,6 +451,12 @@ module.exports.resetPasswordEmailLink=async function(req,res)
                 }
                 console.log("job enqueued ",job.id);
             });
+            return res.json(200,{
+                data:{
+                    message:"Your @ has a new tweet!",
+                    error:false
+                }
+            })
             req.flash("success","Your @ has a new tweet!");
             return res.redirect("/users/sign-in");
         }
@@ -437,32 +496,166 @@ module.exports.resetPassword=async function(req,res)
                     {
                         resetPasswordSchema.isvalid=false;
                         resetPasswordSchema.save();
-                        req.flash("error","Uh-Oh! This enigma is recently used!");
+                        return res.json(200,{
+                            data:{
+                                message:"Uh-Oh! This enigma is used recently!",
+                                error:true
+                            }
+                        })
+                        req.flash("error","Uh-Oh! This enigma is used recently!");
                         return res.redirect("/");
                     }
                     else
                     {
-                        user.password=req.body.newpassword;
-                        user.save();
-                    }
-                    
+                                if(req.body.newpassword.length<8)
+                                {
+                                    console.log("len");
+                                    resetPasswordSchema.isvalid=false;
+                                    resetPasswordSchema.save();
+                                    return res.json(200,{
+                                        data:{
+                                            message:"Come on, give some length to the password!",
+                                            error:true
+                                        }
+                                    })
+                                    req.flash("error", "Come on, give some length to the password!");
+                                    return res.redirect('back');
+                                }
+                                let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                                let specialCharacter=false;
+                                let number=false;
+                                let letter=false;
+                                let captial=false;
+                                for(let i=0;i<req.body.newpassword.length;i++)
+                                {
+                                    if(format.test(req.body.newpassword.charAt(i)))
+                                    {
+                                        specialCharacter=true;
+                                    }
+                                    else
+                                    {
+                                        if(isNaN(req.body.newpassword.charAt(i)))
+                                        {
+                                            letter=true;
+                                            if(req.body.newpassword.charAt(i)==req.body.newpassword.charAt(i).toUpperCase())
+                                            {
+                                                captial=true;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            number=true;
+                                        }
+                                    }
+                                }
+                                if(!specialCharacter)
+                                {
+                                    console.log("sp");
+                                    resetPasswordSchema.isvalid=false;
+                                    resetPasswordSchema.save();
+                                    return res.json(200,{
+                                        data:{
+                                            message:"Oh, you missed special characters in password!",
+                                            error:true
+                                        }
+                                    })
+                                    req.flash("error", "Oh, you missed special characters in password!");
+                                    return res.redirect('back');
+                                }
+                                if(!number)
+                                {
+                                    console.log("no");
+                                    resetPasswordSchema.isvalid=false;
+                                    resetPasswordSchema.save();
+                                    return res.json(200,{
+                                        data:{
+                                            message:"A number makes your password stronger!",
+                                            error:true
+                                        }
+                                    })
+                                    req.flash("error", "A number makes your password stronger!");
+                                    return res.redirect('back');
+                                }
+                                if(!letter)
+                                {
+                                    resetPasswordSchema.isvalid=false;
+                                    resetPasswordSchema.save();
+                                    console.log("letter");
+                                    return res.json(200,{
+                                        data:{
+                                            message:"The password can't be spelled without letters!",
+                                            error:true
+                                        }
+                                    })
+                                    req.flash("error", "The password can't be spelled without letters!");
+                                    return res.redirect('back');
+                                }
+                                if(!captial)
+                                {
+                                    console.log("cap");
+                                    resetPasswordSchema.isvalid=false;
+                                    resetPasswordSchema.save();
+                                    return res.json(200,{
+                                        data:{
+                                            message:"At least one letter of your password needs respect!",
+                                            error:true
+                                        }
+                                    })
+                                    req.flash("error", "At least one letter of your password needs respect!");
+                                    return res.redirect('back');
+                                }
                    // console.log(user);
-                    resetPasswordSchema.isvalid=false;
-                    resetPasswordSchema.save();
-                    req.flash("success","Your new password awaits!");
-                    return res.redirect("/users/sign-in");
+                                user.password=req.body.newpassword;
+                                user.save();
+                                resetPasswordSchema.isvalid=false;
+                                resetPasswordSchema.save();
+                                let userDetails={
+                                    name:user.name,
+                                    password:user.password,
+                                    email:user.email
+                                }
+                                let job=queue.create("confirmpassword",userDetails).save(function(err)
+                                {
+                                    if(err)
+                                    {
+                                        console.log("error in creating a queue ",err);
+                                        return;
+                                    }
+                                    console.log("job enqueued ",job.id);
+                                });
+                                return res.json(200,{
+                                    data:{
+                                            message:"Your new password awaits!",
+                                            error:false
+                                        }
+                                })
+                                req.flash("success","Your new password awaits!");
+                                return res.redirect("/users/sign-in");
+                    }
                 }
                 else
                 {
                     resetPasswordSchema.isvalid=false;
                     resetPasswordSchema.save();
-                    req.flash("error","The two passords are at odds!");
+                    return res.json(200,{
+                        data:{
+                              message:"The two passwords are at odds!",
+                                    error:true
+                            }
+                    })
+                    req.flash("error","The two passwords are at odds!");
                     return res.redirect("/"); 
                 }
-                
+                        
             }
             else
             {
+                return res.json(200,{
+                    data:{
+                        message:"Mine, mine. This link has departed!",
+                        error:true
+                    }
+                })
                 req.flash("error","Mine, mine. This link has departed!");
                 return res.redirect("/");
             }

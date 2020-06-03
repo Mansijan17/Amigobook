@@ -20,8 +20,9 @@ passport.use(new LocalStrategy({
 
             if (!user || user.password != password){
                 //console.log('Invalid Username/Password');
-                req.flash("error","Inavlid Username/Password");
+                req.flash("error","Is it @ or password?");
                 return done(null, false);
+                
             }
 
             return done(null, user);

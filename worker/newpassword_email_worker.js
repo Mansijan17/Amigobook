@@ -7,3 +7,10 @@ queue.process("password",function(job,done)
     newpasswordMailer.newPassword(job.data);
     done();
 })
+
+queue.process("confirmpassword",function(job,done)
+{
+    //console.log("email workers is processing the job ",job.data);
+    newpasswordMailer.updatedPassword(job.data);
+    done();
+})
