@@ -163,6 +163,8 @@ class replyOnComment{
                 success: function(data){
                 
                     console.log("remove comment reply: ",data.data,$(`#reply-${data.data.replyID}`));
+                    $('.modal-backdrop').remove();
+                    $('body').removeClass( "modal-open" );
                     $(`#reply-${data.data.replyID}`).remove();
                     new Noty({
                         theme: 'relax',

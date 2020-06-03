@@ -858,7 +858,7 @@ h1:hover {
     .homepage-without-login .display-area > div {
       width: 49.8%;
       height: 520px; }
-    @media screen and (max-width: 700px) {
+    @media screen and (max-width: 850px) {
       .homepage-without-login .display-area > div {
         width: 100%;
         margin: 10px;
@@ -1008,6 +1008,11 @@ h1:hover {
           .homepage-without-login .display-area .display-signUp-form form > div input:-webkit-autofill {
             transition: background-color 5000s ease-in-out 0s;
             -webkit-text-fill-color: ghostwhite; }
+          .homepage-without-login .display-area .display-signUp-form form > div .fa-eye {
+            position: absolute;
+            bottom: 6px;
+            right: 8px;
+            cursor: pointer; }
         .homepage-without-login .display-area .display-signUp-form form .btn {
           justify-content: center !important;
           height: 65px;
@@ -1105,6 +1110,24 @@ h1:hover {
       @media screen and (max-width: 380px) {
         .homepage-without-login .display-area .display-signUp-form .other-signins a {
           width: 110% !important; } }
+    @media (max-width: 1227px) {
+      .homepage-without-login .display-area .display-signUp-form form {
+        width: 80%; } }
+    @media (max-width: 1000px) {
+      .homepage-without-login .display-area .display-signUp-form form {
+        width: 90%; } }
+    @media (max-width: 895px) {
+      .homepage-without-login .display-area .display-signUp-form form {
+        width: 95%; } }
+    @media (max-width: 850px) {
+      .homepage-without-login .display-area .display-signUp-form form {
+        width: 70%; } }
+    @media (max-width: 575px) {
+      .homepage-without-login .display-area .display-signUp-form form {
+        width: 85%; } }
+    @media (max-width: 500px) {
+      .homepage-without-login .display-area .display-signUp-form form {
+        width: 96%; } }
     @media screen and (max-width: 411px) {
       .homepage-without-login .display-area .display-signUp-form {
         height: auto !important;

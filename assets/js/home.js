@@ -106,45 +106,31 @@ window.addEventListener( "pageshow", function ( event ) {
     }
 });
 
-// setTimeout(function(){
-//   let top;
-//   if(window.innerWidth>=550)
-//   {
-//     top=0;
-//   }
-//   else
-//   {
-//     top=125;
-//   }
-//   console.log(top)
-//   function marginTop()
-//   {
-//     if(window.innerWidth>=550)
-//     {
-//       console.log("width greater")
-//       if(top==-18)
-//       {
-//         clearInterval(id);
-//         return;
-//       }
-//       top--;
-//       $(".heading-background").attr("style",`margin-top:${top}px !important;`);
-//     }
-//     else
-//     {
-//       console.log("width lesser")
-//       if(top==84)
-//       {
-//         clearInterval(id);
-//         return;
-//       }
-//       top--;
-//       $(".heading-background").attr("style",`margin-top:${top}px !important;`); 
-//     }
-     
-//   }
-
-//   let id=setInterval(marginTop,150);
-  
-// },25000);
-
+let pwd1=document.getElementById("pwd");
+let pwd2=document.getElementById("pwd2");
+function togglePassword(x)
+{
+  let id=$(x).prop("id");
+    if(id=="pwd-eye")
+    {
+      if(pwd1.type==="password")
+      {
+        pwd1.type="text";
+      }
+      else
+      {
+        pwd1.type="password";
+      }
+    }
+    else
+    {
+        if(pwd2.type==="password")
+        {
+          pwd2.type="text";
+        }
+        else
+        {
+          pwd2.type="password";
+        }
+    }
+}

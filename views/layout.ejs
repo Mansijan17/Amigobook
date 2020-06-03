@@ -29,7 +29,11 @@
         <main id="layout-main" style="margin-top: 0;">
           
     <% } else { %>
-        <main id="layout-main">
+        <% if(locals.user) {%>
+            <main id="layout-main" style="margin-bottom: 88px;">
+        <% } else { %>
+            <main id="layout-main">
+        <% } %>
     <% } %> 
         
             <%- body %>
