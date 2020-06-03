@@ -974,7 +974,8 @@ h1:hover {
         text-align: center;
         font-size: 28px;
         text-decoration: underline;
-        margin-top: 20px; }
+        margin-top: 20px;
+        margin-bottom: 15px; }
         .homepage-without-login .display-area .display-signUp-form p .acc-icon {
           margin-right: 10px;
           font-weight: bolder; }
@@ -1012,7 +1013,7 @@ h1:hover {
           height: 65px;
           width: 125px;
           border-radius: 20px;
-          margin-top: 25px; }
+          margin-top: 10px; }
           .homepage-without-login .display-area .display-signUp-form form .btn button {
             color: white;
             border-radius: inherit;

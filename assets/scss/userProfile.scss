@@ -428,20 +428,21 @@ body
             display: flex;
             flex-direction: column;
             text-align: center;
-            a{
+            a,.remove-friend-button-1{
                 margin: 5px;
                 background: seashell;
                 padding: 5px;
                 border-radius: 20px;
+                cursor: pointer;
             }
-            .add-friend-button,.remove-friend-button
+            .add-friend-button,.remove-friend-button-1
             {
                 background: #ba4269;
                 width: 150px;
                 align-self: center;
                 color: thistle;
             }
-            .add-friend-button:hover,.remove-friend-button:hover
+            .add-friend-button:hover,.remove-friend-button-1:hover
             {
                 box-shadow: 0px 0px 6px 0.5px #9b2f2f;
             }
@@ -575,6 +576,7 @@ body
             align-items: center;
             width: 100%;
             justify-content: center;
+            text-align: center;
             ul
             {
                 width: 92%;
@@ -626,6 +628,42 @@ body
         }
     }
 }
+
+.remove-friend-warning
+{
+    .modal-header
+    {
+        background: #ad2121 !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .modal-footer
+    {
+        color: white;
+        .discard-friend
+        {
+            background: #33a98d;
+            border-color: darkgreen;
+        }
+        .discard-friend:hover
+        {
+            background: #2d927a;
+            color: white;
+        }
+        .btn-primary
+        {
+            background: #8D6E63;
+            border-color: saddlebrown;
+        }
+        .btn-primary:hover
+        {
+            background: #745d54;
+        }
+    }
+    
+}
+
 
 .delete-friend-warning
 {

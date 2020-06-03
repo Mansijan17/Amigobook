@@ -20,7 +20,7 @@ let pendingFrom=function()
                  cancelPendingForm();
                  new Noty({
                     theme:"relax",
-                    text:"Friend Request Sent Successfully!",
+                    text:"The ball is now on the other side!",
                     type:"success",
                     layput:"topRight",
                     timeout:1500
@@ -56,7 +56,7 @@ let cancelPendingForm=function()
                 pendingFrom();
                  new Noty({
                     theme:"relax",
-                    text:"Friend Request Cancelled Successfully!",
+                    text:"Yes, maybe this was not the right moment!",
                     type:"success",
                     layput:"topRight",
                     timeout:1500
@@ -92,7 +92,7 @@ let noFriendshipAnswer=function()
                 pendingFrom();
                  new Noty({
                     theme:"relax",
-                    text:"Friend Request Cancelled Successfully!",
+                    text:"Yes, maybe this was not the right moment!",
                     type:"success",
                     layput:"topRight",
                     timeout:1500
@@ -121,14 +121,48 @@ let confirmFriendshipAnswer=function()
                 console.log(data.data);
                 $(".pending-form-options").remove();
                 $(".pending-form-present").remove();
-                let newFriend=$(`<a href="/users/destroy-friends/?from=${data.data.to}&to=${data.data.from}" class="remove-friend-button">
-                Remove Friend
-                </a>`)
+                let newFriend=$(`<div data-toggle="modal" data-target="#removeFriendModal" class="remove-friend-button-1">
+                    Remove Friend
+                </div>`);
+                $("main").append(` <div class="modal fade remove-friend-warning" id="removeFriendModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="removeFriendModalLabel"><i class="fas fa-trash-alt"></i> Buddy?</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to remove <b>${data.data.name}</b> from your sky? </p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="/users/destroy-friends/false/?from=${data.data.to}&to=${data.data.from}" class="btn btn-primary remove-friend-button">
+                                Remove Friend
+                        </a>
+                        <button type="button" class="btn discard-friend" data-dismiss="modal">Discard</button>
+                    </div>
+                  </div>
+                </div>
+              </div>`)
                 $(".add-chat-friend-group").prepend(newFriend);
-                destroyFriendshipAnswer(newFriend);
+                if(data.data.length==1)
+                {
+                    $(`#collapseOne .card-body .normal-connections`).html(`${data.data.length} Connection`);
+                    $(`#friendModal .modal-title`).html(`${data.data.length} Connection`)
+                }
+                else
+                {
+                    $(`#collapseOne .card-body .normal-connections`).html(`${data.data.length} Connections`);
+                    $(`#friendModal .modal-title`).html(`${data.data.length} Connections`)
+                }
+                $(`#friendModal .modal-body ul`).prepend(` <li id="user-${data.data.to}" class="friend-list">
+                        <a href="/users/profile/${data.data.from}">
+                            <img src=${data.data.img}> 
+                            <span>${data.data.friendName}</span>
+                       </a>
+                </li>`)
+                destroyFriendshipAnswer($("main .remove-friend-warning .remove-friend-button"));
                  new Noty({
                     theme:"relax",
-                    text:"Congrats, you are buddies!",
+                    text:"Congrats, one more friendship blossomed!",
                     type:"success",
                     layput:"topRight",
                     timeout:1500
@@ -156,12 +190,55 @@ let destroyFriendshipAnswer=function(removeButton)
             success:function(data)
             {
                 console.log(data.data);
-                $(".add-chat-friend-group .remove-friend-button").remove();
-                $(".add-chat-friend-group").prepend(`
-                <a href="/users/friends-pending-form/?from=${data.data.from}&to=${data.data.to}" class="add-friend-button">
-                Add Friend
-                </a>`);
-                pendingFrom();
+                
+                if(data.data.length>0)
+                {
+                    if(data.data.length==1)
+                    {
+                        $(`#friendModal .modal-title`).html(`${data.data.length} Connection`);
+                        $(`#collapseOne .normal-connections`).html(`${data.data.length} Connection`)
+                    }
+                    else
+                    {
+                        $(`#friendModal .modal-title`).html(`${data.data.length} Connections`)
+                        $(`#collapseOne .normal-connections`).html(`${data.data.length} Connections`)
+                    }
+                }
+                else
+                {
+                    $(`#friendModal`).modal('hide');
+                    $(`#friendModal`).remove();
+                    $(`#collapseOne .card-body p`).remove();
+                    if(data.data.loggedUserPage)
+                    {
+                        $(`#collapseOne .card-body`).append(`<div>Are you ready for it?</div>`);
+                    }
+                    else
+                    {
+                        $(`#collapseOne .card-body`).append(`<div>Well, Looks like you have to make the first move xD!</div>`);
+                    }
+                   
+                }
+                $('.modal-backdrop').remove();
+                $('body').removeClass( "modal-open" );
+                if(data.data.loggedUserPage)
+                {
+                    $(`#deleteFriendModal-${data.data.to}`).modal('hide');
+                    $(`#deleteFriendModal-${data.data.to}`).remove();
+                    $(`#friendModal .modal-body ul #user-${data.data.to}`).remove();
+                }
+                else
+                {
+                    $(".add-chat-friend-group .remove-friend-button-1").remove();
+                    $(`main .remove-friend-warning`).modal('hide');
+                    $("main .remove-friend-warning").remove();
+                    $(".add-chat-friend-group").prepend(`
+                    <a href="/users/friends-pending-form/?from=${data.data.from}&to=${data.data.to}" class="add-friend-button">
+                    Add Friend
+                    </a>`);
+                    pendingFrom();
+                    $(`#friendModal .modal-body ul #user-${data.data.from}`).remove();
+                }
                  new Noty({
                     theme:"relax",
                     text:"Hope to see you guys back!",

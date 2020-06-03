@@ -44,7 +44,7 @@
                                     <% } %> 
                                 </p>
                             <% } %>
-                            <p  data-toggle="modal" data-target="#friendModal" style="cursor: pointer;">
+                            <p  data-toggle="modal" data-target="#friendModal" style="cursor: pointer;" class="normal-connections">
                                 <%= friends.length%>
                                 <% if(friends.length==1) {%>
                                     Connection 
@@ -127,15 +127,19 @@
                         </div>
                     <% } %>
                 <% } else {%>
-                    <a href="/users/destroy-friends/?from=<%=user._id%>&to=<%=profileUser._id%>" class="remove-friend-button">
+                   
+                    <div data-toggle="modal" data-target="#removeFriendModal" class="remove-friend-button-1">
                         Remove Friend
-                    </a>
+                    </div>
+                 
                 <% } %>
+                
                 <a href="#user-chat-box" class="chat-button">Chat with <%= profileUser.name  %></a>
             </div>
+       
         <% } %>
       </div>
-     
+    
 
       <div></div>
     </div>
@@ -173,13 +177,13 @@
                     <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h2 class="modal-title"><i class="fas fa-trash-alt"></i> <%=friend.name%>?</h2>
+                        <h2 class="modal-title"><i class="fas fa-trash-alt"></i> Buddy?</h2>
                         </div>
                         <div class="modal-body">
-                        <p>Are you sure you want to remove <%= friend.name%>? </p>
+                        <p>Are you sure you want to remove <b><%= friend.name%></b> from your sky? </p>
                         </div>
                         <div class="modal-footer">
-                            <a href="/users/destroy-friends/?from=<%=user._id%>&to=<%=friend._id%>" class="remove-friend-button">
+                            <a href="/users/destroy-friends/true/?from=<%=user._id%>&to=<%=friend._id%>" class="remove-friend-button">
                                 <i class="fas fa-handshake-slash"></i>
                         </a>
                         <a data-dismiss="modal" class="discard-friend">Discard</a>
@@ -219,6 +223,26 @@
             </div>
         <% } %>
       
+    <% } %>
+    <% if(user.id!=profileUser.id && friended) {%>
+      <div class="modal fade remove-friend-warning" id="removeFriendModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="removeFriendModalLabel"><i class="fas fa-trash-alt"></i> Buddy?</h5>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to remove <b><%= profileUser.name%></b> from your sky? </p>
+            </div>
+            <div class="modal-footer">
+                <a href="/users/destroy-friends/false/?from=<%= user._id %>&to=<%= profileUser._id %>" class="btn btn-primary remove-friend-button">
+                        Remove Friend
+                </a>
+                <button type="button" class="btn discard-friend" data-dismiss="modal">Discard</button>
+            </div>
+          </div>
+        </div>
+      </div>
     <% } %>
     <% if(user.id==profileUser.id) { %> 
        
@@ -275,7 +299,6 @@
 
             <%- include("_chat"); %>
     <% } %>
-
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
     <script src="/js/friends.js"></script>

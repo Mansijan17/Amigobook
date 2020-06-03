@@ -6,6 +6,7 @@ const ResetPassword=require('../models/resetPasswordSchema');
 //const newpasswordMailer=require('../mailer/resetpassword_mailer');
 const queue=require('../config/kue');
 const newpasswordEmailWorker=require('../worker/newpassword_email_worker');
+const newFriendReqWorker=require('../worker/friend_request_email_worker');
 const crypto=require('crypto');
 const Friendship=require('../models/friendship');
 const FriendshipForm=require('../models/pend_friend_forms');
@@ -57,16 +58,13 @@ module.exports.profile = async function (req, res) {
         }
         let friendships=user.friendships;
         let friends=[];
-        let mutualfriends=[]
+        let mutualfriends=[];
         for(friendship of friendships)
         {
             let ship=await Friendship.findById(friendship._id);
-            if(ship.toUser!=null)
-            {
-                friends.push(ship.toUser);
-            }
-            
+            friends.push(ship.toUser);
         }
+        friends.reverse();
         let friended;
         let pendingFrom;
         let pendingTo;
@@ -91,6 +89,7 @@ module.exports.profile = async function (req, res) {
                     }
                 }
             }
+            mutualfriends.reverse()
             let findFriendship=await Friendship.findOne({fromUser:req.user.id,toUser:req.params.id});
             if(findFriendship)
             {
@@ -221,24 +220,67 @@ module.exports.signIn = function (req, res) {
 // get the sign up data
 module.exports.create = async function (req, res) {
     if (req.body.password != req.body.confirm_password) {
-        req.flash("error", "Invalid passwords!");
+        req.flash("error", "These two passwords don't see eye to eye!");
         return res.redirect('back');
     }
-
-    // User.findOne({email: req.body.email}, function(err, user){
-    //     if(err){console.log('error in finding user in signing up'); return}
-
-    //     if (!user){
-    //         User.create(req.body, function(err, user){
-    //             if(err){console.log('error in creating user while signing up'); return}
-    //             console.log("new user",user);
-    //             return res.redirect('/users/sign-in');
-    //         })
-    //     }else{
-    //         return res.redirect('back');
-    //     }
-
-    // });
+    if(req.body.password.length<8)
+    {
+        console.log("len")
+        req.flash("error", "Come on, give some length to the password!");
+        return res.redirect('back');verified=false;
+    }
+    let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+    let specialCharacter=false;
+    let number=false;
+    let letter=false;
+    let captial=false;
+    for(let i=0;i<req.body.password.length;i++)
+    {
+        console.log(format.test(req.body.password.charAt(i)));
+        if(format.test(req.body.password.charAt(i)))
+        {
+            specialCharacter=true;
+        }
+        else
+        {
+            if(isNaN(req.body.password.charAt(i)))
+            {
+                letter=true;
+                if(req.body.password.charAt(i)==req.body.password.charAt(i).toUpperCase())
+                {
+                    captial=true;
+                }
+            }
+            else
+            {
+                number=true;
+            }
+        }
+    }
+    if(!specialCharacter)
+    {
+        console.log("sp")
+        req.flash("error", "Oh, you missed special characters in password!");
+        return res.redirect('back');
+    }
+    if(!number)
+    {
+        console.log("no")
+        req.flash("error", "A number makes your password stronger!");
+        return res.redirect('back');
+    }
+    if(!letter)
+    {
+        console.log("letter")
+        req.flash("error", "The password can't be spelled without letters!");
+        return res.redirect('back');
+    }
+    if(!captial)
+    {
+        console.log("cap")
+        req.flash("error", "At least one letter of your password needs respect!");
+        return res.redirect('back');
+    }
     try {
         let user = await User.findOne({ email: req.body.email });
         if (!user) {
@@ -253,6 +295,7 @@ module.exports.create = async function (req, res) {
             name2=name2.trim();
             console.log(name2);
             req.body.name=name2;
+           
             let newuser={
                 user:req.body,
                 acessToken:crypto.randomBytes(20).toString("hex")
@@ -268,6 +311,7 @@ module.exports.create = async function (req, res) {
             else
             {
                 newAccountSchema.acessToken=newuser.acessToken;
+                newAccountSchema.user=req.body;
                 newAccountSchema.save();
             }
             // let newaccountUser=await newAccount.create(newuser);
@@ -281,11 +325,11 @@ module.exports.create = async function (req, res) {
                 }
                 console.log("job enqueued ",job.id);
             });
-            req.flash("success", "Check your email for verification!");
+            req.flash("success", "Your @ chariot awaits!");
             return res.redirect('/');
         }
         else {
-            req.flash("error", "Email id already exists!");
+            req.flash("error", "This @ is already among the skies!");
             return res.redirect('back');
         }
     }
@@ -298,14 +342,14 @@ module.exports.create = async function (req, res) {
 
 // sign in and create a session for the user
 module.exports.createSession = function (req, res) {
-    req.flash("success", "Logged in Successfully");
+    req.flash("success", "Ascented Chivalrously!");
     return res.redirect('/');
 }
 
 
 module.exports.destroySession = function (req, res) {
     req.logout();
-    req.flash("success", "You are logged out");
+    req.flash("success", "Descented Reminiscently!");
     return res.redirect("/");
 }
 
@@ -322,7 +366,7 @@ module.exports.resetPasswordEmailLink=async function(req,res)
         //console.log(req.body);
         let userFound = await User.findOne({ email: req.body.email });
         if (!userFound) {
-            req.flash("error","No email found!");
+            req.flash("error","This @ is still on earth!");
             return res.redirect('/users/sign-in');
         }
         else {
@@ -354,7 +398,7 @@ module.exports.resetPasswordEmailLink=async function(req,res)
                 }
                 console.log("job enqueued ",job.id);
             });
-            req.flash("success","Reset link send to the email!");
+            req.flash("success","Your @ has a new tweet!");
             return res.redirect("/users/sign-in");
         }
     }
@@ -393,7 +437,7 @@ module.exports.resetPassword=async function(req,res)
                     {
                         resetPasswordSchema.isvalid=false;
                         resetPasswordSchema.save();
-                        req.flash("error","You have used this password recently!");
+                        req.flash("error","Uh-Oh! This enigma is recently used!");
                         return res.redirect("/");
                     }
                     else
@@ -405,21 +449,21 @@ module.exports.resetPassword=async function(req,res)
                    // console.log(user);
                     resetPasswordSchema.isvalid=false;
                     resetPasswordSchema.save();
-                    req.flash("success","Password Updated!");
+                    req.flash("success","Your new password awaits!");
                     return res.redirect("/users/sign-in");
                 }
                 else
                 {
                     resetPasswordSchema.isvalid=false;
                     resetPasswordSchema.save();
-                    req.flash("error","Passwords dont match!");
+                    req.flash("error","The two passords are at odds!");
                     return res.redirect("/"); 
                 }
                 
             }
             else
             {
-                req.flash("error","Token expire!");
+                req.flash("error","Mine, mine. This link has departed!");
                 return res.redirect("/");
             }
         }
@@ -440,6 +484,28 @@ module.exports.sendFriendshipForms=async function(req,res)
              isFormSent:true,
              fromUser:req.query.from,
              toUser:req.query.to
+         });
+         let fromUser=await User.findById(req.query.from);
+         let toUser=await User.findById(req.query.to);
+         let frndreq={
+             sender:{
+                 id:fromUser.id,
+                 name:fromUser.name,
+             },
+             reciever:{
+                 id:toUser.id,
+                 name:toUser.name,
+                 email:toUser.email
+             }
+         }
+         let job=queue.create("friendrequestrecieved",frndreq).save(function(err)
+         {
+             if(err)
+             {
+                 console.log("error in creating a queue ",err);
+                 return;
+             }
+             console.log("friend req job enqueued ",job.id);
          });
          return res.json(200,{
              data:{
@@ -497,11 +563,32 @@ module.exports.makeFriendShip=async function(req,res)
         fromUser.save();
         toUser.friendships.push(newFriendshipTo);
         toUser.save();
+        let imgURL;
+        if(toUser.avatar)
+        {
+            imgURL=toUser.avatar;
+        }
+        else
+        {
+            if(toUser.gender=="male")
+            {
+                imgURL="https://i.stack.imgur.com/HQwHI.jpg"
+            }
+            else
+            {
+                imgURL="/images/femaleProfile.png"
+            }
+        }
         await FriendshipForm.findOneAndDelete({fromUser:req.query.from,toUser:req.query.to});
         return res.json(200,{
             data:{
                from:req.query.from,
-               to:req.query.to
+               to:req.query.to,
+               name:fromUser.name,
+               length:fromUser.friendships.length,
+               img:imgURL,
+               friendName:toUser.name
+               
             },
             message:"Friend request accepted successfully!"
         })
@@ -519,6 +606,7 @@ module.exports.destroyFriendship=async function(req,res)
 {
     try
     {
+        console.log(req.query);
         let existingFriendshipFrom=await Friendship.findOne({
             fromUser:req.query.from,
             toUser:req.query.to
@@ -529,20 +617,35 @@ module.exports.destroyFriendship=async function(req,res)
         });
         let fromUser=await User.findById(req.query.from);
         let toUser=await User.findById(req.query.to);
+        console.log(fromUser,toUser);
         existingFriendshipFrom.remove();
         existingFriendshipTo.remove();
         fromUser.friendships.pull(existingFriendshipFrom._id);
         fromUser.save();
         toUser.friendships.pull(existingFriendshipTo._id);
         toUser.save();
+        let length;
+        let loggedUserPage=false;
+        console.log(req.params);
+        if(req.params.loggedUserPage=='true')
+        {
+            loggedUserPage=true;
+            length=fromUser.friendships.length;
+        }
+        else
+        {
+            length=toUser.friendships.length;
+        }
         return res.json(200,{
             data:{
                from:req.query.from,
-               to:req.query.to
+               to:req.query.to,
+               length:length,
+               loggedUserPage:loggedUserPage,
             },
             message:"Friendship removed!"
         })
-        req.flash("success","Sorry about that, Hope you guys reconcile soon!")
+        // req.flash("success","Sorry about that, Hope you guys reconcile soon!")
         return res.redirect("back");
     }
     catch(err)
@@ -583,6 +686,8 @@ module.exports.verifyAccount=async function(req,res)
             });
             
             //console.log(account.user.name);
+           
+
             newuser=await User.create(account.user);
             newuser2=await User.findById(newuser._id);
             newuser2.info={
@@ -590,7 +695,18 @@ module.exports.verifyAccount=async function(req,res)
             };
             newuser2.save();
         }
-        req.flash("success","Successfully verified!");
+        if(newuser.gender=="male")
+        {
+            req.flash("success","Welcome to the family, handsome!");
+        }
+        else if(newuser.gender=="female")
+        {
+            req.flash("success","Welcome to the family, beautiful!");
+        }
+        else
+        {
+            req.flash("success","Welcome to the family, stunner!")
+        }
         return res.redirect("/users/sign-in");
     }
     catch(err)

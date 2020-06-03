@@ -41,7 +41,7 @@
                 <% if(title=="Skyinyou | Forget Password" ) { %>
 
                     <li>
-                        <a href="/users/sign-in" class="links hvr-icon-forward">Sign In
+                        <a href="/" class="links hvr-icon-forward">Sign In
                             <i class="fas fa-arrow-circle-right hvr-icon"></i>
                         </a>
                     </li>
@@ -53,17 +53,17 @@
                 
                 <% } else { %>
 
-                    <% if(title=="Skyinyou" || title=="Skyinyou | Sign Up" || title=="Skyinyou | New Password" || title=="Skyinyou | Confirm Account"){%>
+                    <% if(title=="Skyinyou" || title=="Skyinyou | Sign In"){%>
                         <li>
-                            <a href="/users/sign-in" class="links hvr-icon-forward">Sign In
-                                <i class="fas fa-arrow-circle-right hvr-icon"></i>
+                            <a href="/users/sign-up" class="links hvr-icon-forward">Sign Up
+                                <i class="fas fa-sign-in-alt hvr-icon"></i>
                             </a>
                         </li>
                     <% }else { %>
                     
                         <li>
-                            <a href="/" class="links hvr-icon-forward">Sign Up
-                                <i class="fas fa-sign-in-alt hvr-icon"></i>
+                            <a href="/" class="links hvr-icon-forward">Sign In
+                                <i class="fas fa-arrow-circle-right hvr-icon"></i>
                             </a>
                         </li>
                     <%}%>

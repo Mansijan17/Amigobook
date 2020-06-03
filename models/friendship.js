@@ -14,7 +14,9 @@ const friendshipSchema=new mongoose.Schema({
         autopopulate:true,
         required:true
     },
-    
+},
+{
+    timestamps:true
 });
 friendshipSchema.plugin(require('mongoose-autopopulate'));
 const Friendship=mongoose.model("Friendship",friendshipSchema);
