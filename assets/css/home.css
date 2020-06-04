@@ -11,9 +11,12 @@
 
 h1 {
   text-align: center;
-  margin: 80px 0px 30px !important;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif !important;
-  font-size: 26.4px !important; }
+  margin: 35px auto 30px !important;
+  font-family: 'Bentham', serif !important;
+  font-size: 26.4px !important;
+  word-spacing: 6px;
+  display: block;
+  width: 81%; }
   h1 .emoji {
     display: inline-block;
     height: 35px;
@@ -32,7 +35,7 @@ h1 {
       left: 8px; }
     h1 .emoji #right-eye {
       right: 8px;
-      animation: wink 2s ease-in-out 1; }
+      animation: wink 1.5s 3.6s ease-in-out 1; }
     h1 .emoji .smile {
       width: 17px;
       height: 9px;
@@ -113,11 +116,10 @@ h1:hover {
   .home-container #feed-posts {
     width: 70%;
     text-align: center;
-    /*border-right: 1px solid lightgrey;*/
+    margin: auto;
     height: 100%; }
     .home-container #feed-posts #posts-list-container {
-      height: auto;
-      margin-bottom: 50px; }
+      height: auto; }
       .home-container #feed-posts #posts-list-container > ul {
         height: auto;
         padding: 20px 0px;
@@ -845,11 +847,12 @@ h1:hover {
   .homepage-without-login p {
     font-size: 25.6px;
     text-align: center;
-    margin-bottom: 40px;
-    font-family: 'Bellota', cursive; }
+    font-family: 'Bellota', cursive;
+    width: 90%;
+    margin: 0px auto 45px; }
   @media screen and (max-width: 411px) {
     .homepage-without-login .headingintro {
-      margin-top: 90px !important; } }
+      margin-top: 105px !important; } }
   .homepage-without-login .display-area {
     display: flex;
     flex-wrap: wrap;

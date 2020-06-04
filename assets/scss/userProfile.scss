@@ -1,7 +1,5 @@
 body
 {
-    overflow-x: hidden !important;
-    background: linear-gradient(to bottom,#243A63,#1D6396, #00A5CF,#E3C9A6,#D89A73) !important;
     @function generate-random-stars ($screen-width, $color, $density){
   
         $h-shadow: random($screen-width);
@@ -28,7 +26,7 @@ body
           animation-iteration-count:2;
           animation-direction: alternate;
           animation-timing-function: linear;
-          animation-delay: $delay+26.5+s;
+          animation-delay: $delay+25+s;
           
   }
 
@@ -807,13 +805,20 @@ body
 {
     .heading-background
     {
-        margin-top: -25px !important;
+        margin-top: 7px !important;
+        margin-bottom: 45px !important;
+
     }
    
 }
 
 @media (max-width:665px)
 {
+    .heading-background
+    {
+        margin-top: 20px !important;
+
+    }
     .profile-intro
     {
         .accordion

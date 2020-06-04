@@ -1,4 +1,8 @@
 
+<div id="stars-group-1"></div>
+<div id="stars-group-2"></div>
+<div id="stars-group-3"></div>
+<div id="stars-group-4"></div>
 <h1>Welcome <%= locals.user.name %> 
     <span class="emoji">
         <div class="eyes" id="left-eye"></div> <div class="eyes" id="right-eye"></div>
@@ -19,38 +23,6 @@
                 <% } %>
 
             </ul>
-        </div>
-    </section>
-
-    <section id="user-friends" >
-        <div id="friends">
-            <h4>Friends</h4>
-            <div id="user-friends-<%= user._id %>">
-                <% for(u of user.friendships) { %> 
-                    <p>
-                        
-                          
-                                <a href="/users/profile/<%= u.toUser._id %>">
-                                    <%= u.toUser.name %>
-                                </a>
-                           
-                        
-                    </p>
-
-                <% } %>
-            </div>
-        </div>
-        <div id="all-users">
-            <h4>All Users</h4>
-            <% for(u of all_users) { %>
-                <% if(locals.user.id!=u.id ) { %> 
-                    <p>
-                        <a href="/users/profile/<%= u.id %>">
-                            <%= u.name %>
-                        </a>
-                    </p>
-                <% } %>
-            <% } %>
         </div>
     </section>
     <%- include("_chat"); %>

@@ -126,11 +126,48 @@ module.exports.home = async function(req, res){
    
 }
 
-
-// module.exports.userProfile=function(req,res)
-// {
-//     return res.render("user_profile",{
-//         title:"User"
-//     });
-//     //return res.end("<h1>Express2 is up for Codeial</h1>")
-// }
+module.exports.searchFunction=async function(req,res)
+{
+    try{
+        let searchItem=req.query.search;
+        if(searchItem.length>1)
+        {
+            regExpression=new RegExp(searchItem,'i');
+            let usersFound=await User.find({name:regExpression});
+            let found=[];
+            for(user of usersFound)
+            {
+                let img;
+                if(user.avatar)
+                {
+                    img=user.avatar;
+                }
+                else if(user.gender=="male")
+                {
+                    img="https://i.stack.imgur.com/HQwHI.jpg"
+                }
+                else
+                {
+                    img="/images/femaleProfile.png"
+                }
+                let data={
+                    name:user.name,
+                    id:user._id,
+                    avatar:img
+                }
+                found.push(data)
+            }
+            return res.json(200,{
+                data:{
+                    usersFound:found
+                },
+                message:"Users found successfully!"
+            })
+        }
+    }
+    catch(err)
+    {
+        console.log(err);
+        return;
+    }
+}

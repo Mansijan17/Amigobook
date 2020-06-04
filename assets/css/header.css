@@ -126,7 +126,11 @@
 @media screen and (max-width: 750px) {
   #layout-header {
     justify-content: space-around;
-    align-items: center; } }
+    align-items: center; }
+    #layout-header .search-bar input {
+      width: 220px; }
+    #layout-header .search-bar ul {
+      width: 220px; } }
 
 @media (max-width: 700px) {
   #layout-header .userprofilelink {

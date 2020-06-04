@@ -119,8 +119,6 @@
         align-items: center;
         font-size: 19.2px;
         height: 40px;
-
-        
     }
 
     ul
@@ -185,6 +183,17 @@
   {
     justify-content: space-around;
     align-items: center;
+    .search-bar
+    {
+        input
+        {
+          width: 220px;
+        }
+        ul
+        {
+          width: 220px;
+        }
+    }
     // .userprofilelink{
     //   margin: auto;
     // }

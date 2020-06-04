@@ -1,8 +1,80 @@
 body{
     margin: 45px 0px 0px 0px !important;
     height:auto;
-    color:white !important;
-    background: #013B50 !important;
+    // background: #013B50 !important;
+    color: white !important;
+    overflow-x: hidden !important;
+    background: linear-gradient(to bottom,#243A63,#1D6396, #00A5CF,#E3C9A6,#D89A73) !important;
+    @function generate-random-stars ($screen-width, $color, $density){
+  
+        $h-shadow: random($screen-width);
+        $v-shadow: random($screen-width);
+        
+        $stars: '#{$h-shadow}px #{$v-shadow}px #{$color}';
+          @for $i from 2 through $density {
+            $h-shadow: random($screen-width);
+            $v-shadow: random($screen-width);
+          
+          $stars: '#{$stars}, #{$h-shadow}px #{$v-shadow}px #{$color}';
+          }
+          @return unquote($stars);
+      }
+      
+      @mixin stars-content($screen-width, $color, $density, $speed, $delay) {
+          width: 2px;
+          height: 2px;
+          border-radius: 50%;
+          opacity: 1;
+          box-shadow: generate-random-stars($screen-width, $color, $density);
+          animation-name: glow;
+          animation-duration: $speed+s;
+          animation-iteration-count:2;
+          animation-direction: alternate;
+          animation-timing-function: linear;
+          animation-delay: $delay+10+s;
+          
+  }
+
+      @keyframes glow{
+          0%{
+              opacity: 0;
+              
+          }
+          50%{
+              opacity: 1;
+          }
+          100%{
+              opacity: 0;
+          }
+
+      }
+      
+      #stars-group-1{
+          @include stars-content(1800, #fff, 200, 1, 0);
+      }
+      
+      #stars-group-2{
+          @include stars-content(1800, #fff, 200, 1, 0.1);
+      }
+      
+      #stars-group-3{
+          @include stars-content(1800, #fff, 200, 1, 0.2);
+      }
+      
+      #stars-group-4{
+          @include stars-content(1800, #fff, 200, 1, 0.3);
+      }
+      
+    //   #stars-group-5{
+    //       @include stars-content(1800, #fff, 200, 1, 0.4);
+    //   }
+      
+    //   #stars-group-6{
+    //       @include stars-content(1800, #fff, 200, 1, 0.5);
+    //   }
+      z-index: -2;
+
+
 
     #notification
     {
@@ -13,7 +85,7 @@ body{
     {
         
         min-height: 90vh;
-        margin-bottom: 0px;
+        margin-bottom: 52px;
         
     }
 
@@ -24,15 +96,23 @@ body{
 {
     #layout-main
     {
-        margin-top: 125px;
+        margin-top: 60px;
     }
 }
 
+
+@media (max-width:650px)
+{
+    #layout-main
+    {
+        margin-top: 85px;
+    }
+}
 
 @media (max-width:425px)
 {
     #layout-main
     {
-        margin-top: 170px;
+        margin-top: 145px;
     }
 }

@@ -269,3 +269,44 @@ let submitNewPassForm=function()
    })
 }
 submitNewPassForm();
+
+let searchFunction= function()
+{
+      let text=$("#search-input-field").val();
+      if(text.length<=1)
+      {
+        $(".search-bar ul a").remove()
+        return;
+      }
+      $.ajax({
+        type:"get",
+        url:`/search/?search=${text}`,
+        success:function(data)
+        {
+          let ul=$(".search-bar ul");
+          ul.empty();
+          for(let user of data.data.usersFound)
+          {
+              ul.append($(`<a href="/users/profile/${user.id}" target="_blank">
+                    <img src=${user.avatar}>
+                    ${user.name}
+                </a>`));
+          }
+        },
+        error:function(err)
+        {
+          console.log(err.responseText);
+        }
+      })
+}
+
+let appendSearchList=function(user)
+{
+  return $(`<li>
+  <a href="/users/profile/${user.id}>
+        <img src=${user.avatar}>
+        ${user.name}
+  </a>
+</li>`)
+
+}

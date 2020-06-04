@@ -2,7 +2,7 @@
   color: black;
   border-radius: 20px;
   width: 80%;
-  margin: 75px auto 70px;
+  margin: 60px auto 70px;
   background: linear-gradient(to top, #13547a, #4daea3);
   border: 2px dotted forestgreen;
   padding: 20px 20px 40px;
@@ -597,8 +597,9 @@
 
 @media screen and (max-width: 549px) {
   .commentReplyClass {
-    margin-top: 102px;
-    width: 98%; }
+    margin-top: 60px;
+    width: 98%;
+    margin-bottom: 85px; }
     .commentReplyClass .comment-update-tag {
       top: 46px;
       left: 14px; }
@@ -608,13 +609,10 @@
       padding: 0; } }
 
 @media (max-width: 500px) {
-  .commentReplyClass {
-    margin-top: 120px;
-    margin-bottom: 85px; }
-    .commentReplyClass .comment-reply-form button {
-      font-size: 12px; }
-    .commentReplyClass .dropdown-menu {
-      left: 78% !important; } }
+  .commentReplyClass .comment-reply-form button {
+    font-size: 12px; }
+  .commentReplyClass .dropdown-menu {
+    left: 78% !important; } }
 
 @media (max-width: 460px) {
   .commentReplyClass .reply-content {
