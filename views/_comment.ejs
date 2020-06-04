@@ -4,7 +4,12 @@
 
     <div class="comment-like-box">
         <div class="comment-likes-number" id="comment-<%= comment._id %>-likes-number">
-            <span data-target="#comment-<%= comment._id %>-likes" data-toggle="modal">
+            <% if(comment.likes.length>=2) { %>
+                <span data-target="#comment-<%= comment._id %>-likes" data-toggle="modal" style="margin-left: -4px;">
+            <%} else {%>
+                <span data-target="#comment-<%= comment._id %>-likes" data-toggle="modal">
+            <% } %>
+            
                 <% if(comment.likes.length>0) {%>
                     <%= comment.likes.length %>
                 <% } %>

@@ -393,12 +393,10 @@ h1:hover
                     {
                         font-size: 25px;
                         color: #76C398;
-                        margin-left: 55%;
-                        margin-bottom: 10px;
-                        width: 50px;
+                        margin: 0px auto 10px;
                         font-weight: 600;
                         cursor: pointer;
-                        
+                        width: 60px;
                     }
                     .post-comment-number:hover
                     {
@@ -426,6 +424,7 @@ h1:hover
                             span
                             {
                                 transition: all 0.4s ease-in;
+                                font-size: 21px;
                             }
                             img
                             {
@@ -657,19 +656,20 @@ h1:hover
 
                                  .comment-list{
                                     position: relative;
-                                    width: 48%;
+                                    width: 60%;
                                     min-height: 30px;
-                                    margin:2px;
+                                    margin: 2px;
+                                    margin-bottom: 25px;
                                     border: 1px solid lightgrey;
-                                    overflow-wrap:break-word;
-                                    padding:5px;
+                                    overflow-wrap: break-word;
+                                    padding: 5px;
                                     border-radius: 15px;
-                                    box-sizing:border-box;
+                                    box-sizing: border-box;
 
                                     .comment-like-box
                                     {
                                         top: 3px;
-                                        left: 86%;
+                                        left: 87%;
                                         position: relative;
                                         margin-bottom: 15px;
                                       
@@ -868,17 +868,17 @@ h1:hover
                                     .update-comment-button
                                     {
                                         position: absolute;
-                                        top: 8px;
-                                        left: 12%;
+                                        top: 6px;
+                                        left: 7%;
                                         color: #1a4766;
                                         font-size: 15px;
                                     }
                                     .comment-editedTag
                                     {
                                         position: absolute;
-                                        top: 9px;
+                                        top: 7.5px;
                                         font-size: 13px;
-                                        left: 20%;
+                                        left: 42%;
                                         font-style: oblique;
                                         color: #4bd4a1;
                                         font-weight: bolder;
@@ -911,12 +911,12 @@ h1:hover
                                             overflow-wrap: break-word;
                                             .comment-text
                                             {
-                                                margin-bottom: 5px;
+                                                margin-bottom: 10px;
                                                 display: inline-block;
                                                 overflow-wrap: break-word;
                                                 width: 80%;
-                                                font-size: 17px;
-                                                text-align: justify;
+                                                font-size: 16px;
+                                                text-align: left;
 
                                                 .comment-update-form
                                                 {
@@ -964,14 +964,16 @@ h1:hover
 
                                             .author-comment-name
                                             {
+                                                margin-bottom: 5px;
                                                 a
                                                 {
                                                     color:#043726;
                                                     font-weight: bolder;
+                                                    font-size: 13.5px;
                                                     
                                                     img{
-                                                        height: 20px;
-                                                        width: 20px;
+                                                        height: 32px;
+                                                        width: 32px;
                                                         border-radius: 50%;
                                                     }
                                                     img:hover{
@@ -993,9 +995,9 @@ h1:hover
 
                                             .comment-timestamps
                                             {
-                                                font-size: 10px;
+                                                font-size: 13px;
                                                 background-color: darkgray;
-                                                padding-top: 2px;
+                                                padding: 3px;
                                                 width: 110px;
                                                 margin: auto;
 
@@ -1008,7 +1010,7 @@ h1:hover
                                 .comment-list:nth-child(2n)
                                 {
                                     
-                                    left:50.5%;
+                                    left:39.5%;
                                     .comment-view-likes
                                     {
                                         left: -37%;
@@ -1679,6 +1681,8 @@ h1:hover
                 }
             }
 
+          
+
             @media screen and (max-width:800px)
             {
                 .display-signUp-form 
@@ -1822,13 +1826,182 @@ h1:hover
                 }
             }
         }
+    }
+}
 
-        
+@media (max-width:1295px)
+{
+    .comment-list
+    {
+        width: 80% !important;
+    }
+    .comment-list:nth-child(2n) {
+        left: 18.5% !important;
+    }
+}
 
-                
+@media (max-width:1200px)
+{
+    .comment-like-box
+    {
+        left: 87% !important;
+    }
+}
+@media (max-width:1065px)
+{
+    #feed-posts
+    {
+        width: 85% !important;
+    }
+}
+@media (max-width:950px)
+{
+    .post-comments-list
+    {
+        margin-left: 10% !important;
+    }
+    .update-post-button
+    {
+        left: 2% !important;
+        top: 53px !important;
+    }
+    .post-editedTag
+    {
+        left: 6% !important;
+    }
+}
+@media (max-width:800px)
+{
+    #feed-posts
+    {
+        width: 95% !important;
+    }
+}
+@media (max-width:700px)
+{
+    #posts-list-container
+    {
+        ul{
+            padding-left: 0px !important;
+        }
+    }
+    .post-editedTag
+    {
+        left: 8% !important;
+    }
+   
+}
+@media (max-width:600px)
+{
+    .update-comment-button
+    {
+        top: 26px !important;
+        left: 3% !important;
+    }
+    .comment-like-box
+    {
+        left:85% !important;
+    }
+}
+@media (max-width:550px)
+{
+    .post-editedTag
+    {
+        left: 10% !important;
+    }
+    .update-post-button
+    {
+        left: 3% !important;
+    }
+    .post-comments-list
+    {
+        margin-left: 0 !important;
+    }
+}
+@media (max-width:500px)
+{
+    .post-comments
+    {
+        textarea
+        {
+            width: 67% !important;
+        }
+    }
+    .comment-like-box
+    {
+        left: 83% !important;
+    }
+    #feed-posts
+    {
+        width: 100% !important;
+    }
+    .author-post-name
+    {
+        a{
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            img{
+                align-self: center !important;
+                margin-bottom: 10px !important;
+            }
+        }
+    }
+    .post-like-box
+    {
+        .post-likes-number
+        {
+            span,a{
+                color:#85ccbc !important;
+            }
+        }
+    }
+}
+@media (max-width:425px)
+{
+    .comment-like-box
+    {
+        left: 81% !important;
+    }
+    .post-text
+    {
+        span{
+        width: 96% !important;
+        }
+    }
+    .comment-list
+    {
+        width: 98% !important;
+    }
+    .comment-list:nth-child(2n) {
+        left: 0 !important;
+    }
+}
 
-                
+@media (max-width:380px)
+{
+    .post-comments-list {
+        margin-left: -25px !important;
+    }
+    .post-comments
+    {
+        button{
+            width: 70px !important;
+        }
+    }
+}
+@media (max-width:340px)
+{
+    .post-comments-list {
+        margin-left: -43px !important;
+    }
+}
 
+@media (max-width:320px)
+{
+    #feed-posts {
+        width: 105% !important;
+        overflow-x: hidden;
     }
 }
 
