@@ -398,7 +398,8 @@
             width: 30%;
             display: block;
             height: auto;
-            word-break: break-word; }
+            word-break: break-word;
+            margin-right: 10px; }
           .commentReplyClass .reply-body ul li .reply-content .authorarrow {
             display: flex;
             flex-direction: column;

@@ -11,7 +11,7 @@
 
 h1 {
   text-align: center;
-  margin: 65px 0px 30px !important;
+  margin: 80px 0px 30px !important;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif !important;
   font-size: 26.4px !important; }
   h1 .emoji {
@@ -845,7 +845,8 @@ h1:hover {
   .homepage-without-login p {
     font-size: 25.6px;
     text-align: center;
-    margin-bottom: 40px; }
+    margin-bottom: 40px;
+    font-family: 'Bellota', cursive; }
   @media screen and (max-width: 411px) {
     .homepage-without-login .headingintro {
       margin-top: 90px !important; } }
@@ -864,7 +865,9 @@ h1:hover {
         margin: 10px;
         height: auto !important; }
       .homepage-without-login .display-area .display-images {
-        height: 300px !important; } }
+        height: 300px !important; }
+      .homepage-without-login .display-area .display-signUp-form .other-signins a {
+        width: 45% !important; } }
     .homepage-without-login .display-area .display-images {
       display: flex;
       justify-content: space-evenly;
@@ -975,7 +978,8 @@ h1:hover {
         font-size: 28px;
         text-decoration: underline;
         margin-top: 20px;
-        margin-bottom: 15px; }
+        margin-bottom: 15px;
+        font-family: serif; }
         .homepage-without-login .display-area .display-signUp-form p .acc-icon {
           margin-right: 10px;
           font-weight: bolder; }
@@ -1090,9 +1094,7 @@ h1:hover {
         .homepage-without-login .display-area .display-signUp-form .display-signUp-form form {
           margin-bottom: 9px !important; }
         .homepage-without-login .display-area .display-signUp-form .other-signins {
-          margin-bottom: 10px; }
-          .homepage-without-login .display-area .display-signUp-form .other-signins a {
-            width: 80% !important; } }
+          margin-bottom: 10px; } }
       @media screen and (max-width: 700px) {
         .homepage-without-login .display-area .display-signUp-form .other-signins {
           margin-bottom: 10px; }

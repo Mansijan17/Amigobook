@@ -242,7 +242,8 @@ class SharePost{
                                     $(`#share-${data.data.shareID}`).remove();
 
                                 }
-                                
+                                $('.modal-backdrop').remove();
+                                $('body').removeClass( "modal-open" );
                                 new Noty({
                                     theme:"relax",
                                     text:"Post and associated comments are deleted!",

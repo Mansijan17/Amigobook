@@ -1,17 +1,33 @@
-<% if(title=="Skyinyou" || title=="Skyinyou | Sign In" || title=="Skyinyou | New Password" || title=="Skyinyou | Confirm Account") {%>
-<header style="flex-direction: row;" id="layout-header">
+<% if(locals.user) {%>
+    <header id="layout-header">
 <% } else { %>
-<header id="layout-header">
-<% } %>  
+    <% if(title=="Skyinyou" || title=="Skyinyou | Sign In" || title=="Skyinyou | Sign Up") {%>
+        <header id="layout-header" style="flex-direction: row;justify-content: space-between;">
+    <% } else {%>
+        <header id="layout-header" style="flex-direction: row;justify-content:space-between;">
+    <% } %>
+<% } %>
 
-    <div id="layout-title" >
+
+    <div id="layout-title">
 
         <a href="/" class="hvr-grow-shadow ">
             Skyinyou
         </a>
     </div>
 
-    <div class="userprofilelink" >
+    <% if(locals.user) {%>
+        <div class="search-bar">
+            <input type="text" name="search" placeholder="Are you curious?" oninput="searchFunction()" id="search-input-field">
+        </div>
+    <% } %>
+
+    <% if(locals.user) {%>
+        <div class="userprofilelink" >
+    <% } else {%>
+        <div class="userprofilelink">
+    <% } %>
+
  
         <ul>
             <% if(locals.user) { %>
@@ -40,12 +56,12 @@
 
                 <% if(title=="Skyinyou | Forget Password" ) { %>
 
-                    <li>
+                    <li style="min-width: 0;">
                         <a href="/" class="links hvr-icon-forward">Sign In
                             <i class="fas fa-arrow-circle-right hvr-icon"></i>
                         </a>
                     </li>
-                    <li>
+                    <li style="min-width: 0;">
                         <a href="/" class="links hvr-icon-forward">Sign Up
                             <i class="fas fa-sign-in-alt hvr-icon"></i>
                         </a>
@@ -54,14 +70,14 @@
                 <% } else { %>
 
                     <% if(title=="Skyinyou" || title=="Skyinyou | Sign In"){%>
-                        <li>
+                        <li style="min-width: 0;">
                             <a href="/users/sign-up" class="links hvr-icon-forward">Sign Up
                                 <i class="fas fa-sign-in-alt hvr-icon"></i>
                             </a>
                         </li>
                     <% }else { %>
                     
-                        <li>
+                        <li style="min-width: 0;">
                             <a href="/" class="links hvr-icon-forward">Sign In
                                 <i class="fas fa-arrow-circle-right hvr-icon"></i>
                             </a>

@@ -84,7 +84,7 @@ body
     font-style: italic;
     font-family: Haettenschweiler !important;
     font-weight: 550;
-    margin-top: 20px !important;
+    margin-top: 15px !important;
     
     >div{
         display: flex;
@@ -293,6 +293,14 @@ body
         width: 62px;
         height: 62px;
         border-radius: 32%
+    }
+
+    span
+    {
+        
+            display: block;
+            word-break: break-word;
+            width: 100%;
     }
 
       
@@ -795,6 +803,15 @@ body
     }
 }
 
+@media (max-width:700px)
+{
+    .heading-background
+    {
+        margin-top: -25px !important;
+    }
+   
+}
+
 @media (max-width:665px)
 {
     .profile-intro
@@ -838,18 +855,6 @@ body
    
 }
 
-@media (max-width:550px)
-{
-    .heading-background
-    {
-        margin-top: 70px !important;
-        >div{
-            font-size: 24.5px;
-        }
-    }
-   
-}
-
 @media (max-width:450px)
 {
     #friendModal
@@ -864,4 +869,21 @@ body
             }
         }
     }
+    .heading-background{
+        span{
+            width: 70%;
+        }
+    }
+}
+
+
+@media (max-width:425px)
+{
+    .heading-background
+    {
+        >div{
+            font-size: 24.5px;
+        }
+    }
+   
 }

@@ -10,9 +10,10 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding: 0px 30px;
+    padding: 5px 30px;
     box-sizing: border-box;
     z-index: 50;
+    border: none;
 
     @-webkit-keyframes hvr-icon-sink-away {
       0% {
@@ -101,7 +102,7 @@
     #layout-title
     {
         font-weight: bolder;
-        font-family: sans-serif;
+        font-family: 'Merienda One', cursive;
         font-size: 22.4px;
         a
         {
@@ -111,7 +112,6 @@
         }
         
     }
-
     div
     {
         display: flex;
@@ -132,16 +132,13 @@
         {
             display: inline-block;
             list-style: none;
-            margin-right: 20px;
+            margin-right: 5px;
             position: relative;
 
             img{
               width: 30px;
               height: 30px;
               border-radius: 50%;
-              position: absolute;
-              left: -35px;
-              top: 0px;
           
             }
 
@@ -174,29 +171,66 @@
     }
 }
 
-@media screen and (max-width:550px)
+@media (max-width:880px)
+{
+  .search-bar
+  {
+    margin-left: 0 !important;
+  }
+}
+
+@media screen and (max-width:750px)
 {
   #layout-header
   {
     justify-content: space-around;
     align-items: center;
-    .userprofilelink{
-      margin-left: 11%;
-      margin-bottom: 12px;
-    }
+    // .userprofilelink{
+    //   margin: auto;
+    // }
 
+  }
+}
+
+@media (max-width:700px)
+{
+  #layout-header
+  {
+      .userprofilelink
+      {
+        margin-top: 8px;
+      }
+  }
+}
+
+@media (max-width:425px)
+{
+  #layout-header
+  {
+    flex-direction: column;
+    #layout-title
+    {
+      margin: auto;
+    }
+    .userprofilelink
+    {
+      margin: 10px auto;
+    }
   }
 }
 
 @media (max-width:375px)
 {
-  #layout-header
-  {
-    .userprofilelink{
-      margin-top: 10px;
-      margin-left: 13.5%;
-    }
-  }
+  // #layout-header
+  // {
+  //   .userprofilelink{
+  //     ul{
+  //       li{
+  //         margin-right: 2px;
+  //       }
+  //     }
+  //   }
+  // }
 }
 
 @media screen and (max-width:330px)
@@ -204,12 +238,16 @@
   #layout-header
   {
     justify-content: center;
-
-   
-
-    
+    .userprofilelink
+    {
+      margin: 10px auto;
+    }
     ul{
       text-align: center;
+      li{
+        margin-right: 2px !important;
+        min-width: 242px;
+      }
     }
   }
 }

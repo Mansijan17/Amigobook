@@ -9,9 +9,10 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 0px 30px;
+  padding: 5px 30px;
   box-sizing: border-box;
-  z-index: 50; }
+  z-index: 50;
+  border: none; }
 
 @-webkit-keyframes hvr-icon-sink-away {
   0% {
@@ -82,7 +83,7 @@
     transform: translateX(4px); }
   #layout-header #layout-title {
     font-weight: bolder;
-    font-family: sans-serif;
+    font-family: 'Merienda One', cursive;
     font-size: 22.4px; }
     #layout-header #layout-title a {
       color: white;
@@ -100,15 +101,12 @@
     #layout-header ul li {
       display: inline-block;
       list-style: none;
-      margin-right: 20px;
+      margin-right: 5px;
       position: relative; }
       #layout-header ul li img {
         width: 30px;
         height: 30px;
-        border-radius: 50%;
-        position: absolute;
-        left: -35px;
-        top: 0px; }
+        border-radius: 50%; }
       #layout-header ul li img:hover {
         filter: drop-shadow(1px 3px 5px #ABDEE5); }
       #layout-header ul li a {
@@ -121,21 +119,34 @@
       #layout-header ul li #userName:hover {
         opacity: 0.7; }
 
-@media screen and (max-width: 550px) {
+@media (max-width: 880px) {
+  .search-bar {
+    margin-left: 0 !important; } }
+
+@media screen and (max-width: 750px) {
   #layout-header {
     justify-content: space-around;
-    align-items: center; }
-    #layout-header .userprofilelink {
-      margin-left: 11%;
-      margin-bottom: 12px; } }
+    align-items: center; } }
 
-@media (max-width: 375px) {
+@media (max-width: 700px) {
   #layout-header .userprofilelink {
-    margin-top: 10px;
-    margin-left: 13.5%; } }
+    margin-top: 8px; } }
+
+@media (max-width: 425px) {
+  #layout-header {
+    flex-direction: column; }
+    #layout-header #layout-title {
+      margin: auto; }
+    #layout-header .userprofilelink {
+      margin: 10px auto; } }
 
 @media screen and (max-width: 330px) {
   #layout-header {
     justify-content: center; }
+    #layout-header .userprofilelink {
+      margin: 10px auto; }
     #layout-header ul {
-      text-align: center; } }
+      text-align: center; }
+      #layout-header ul li {
+        margin-right: 2px !important;
+        min-width: 242px; } }

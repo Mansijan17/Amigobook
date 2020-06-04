@@ -19,7 +19,7 @@
 h1
 {
     text-align: center;
-    margin: 65px 0px 30px !important;
+    margin: 80px 0px 30px !important;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif !important;
     font-size: 26.4px !important;
 
@@ -1357,6 +1357,7 @@ h1:hover
         font-size: 25.6px;
         text-align: center;
         margin-bottom: 40px;
+        font-family: 'Bellota', cursive; 
     }
 
     @media screen and (max-width:411px)
@@ -1394,6 +1395,16 @@ h1:hover
             .display-images
             {
                 height: 300px !important;
+            }
+            .display-signUp-form
+            {
+                .other-signins
+                {
+                    a{
+                        width: 45% !important;
+                    }
+                }
+               
             }
         }
 
@@ -1483,6 +1494,8 @@ h1:hover
                 text-decoration: underline;
                 margin-top: 20px;
                 margin-bottom: 15px;
+                font-family: serif;
+                
                 .acc-icon
                 {
                     margin-right: 10px;   
@@ -1675,10 +1688,6 @@ h1:hover
                 .other-signins
                 {
                     margin-bottom: 10px;
-                    a{
-                        width:80% !important;
-                    
-                    }
                     
                 }
 
@@ -1697,6 +1706,7 @@ h1:hover
                     }
                     
                 }
+               
             }
 
             @media screen and (max-width:600px)

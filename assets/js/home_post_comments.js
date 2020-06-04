@@ -222,6 +222,8 @@ class PostComments{
                         $(`#post-${data.data.postID}-comment-number`).removeAttr("data-toggle");
                         $(`#post-${data.data.postID}-comment-number`).html(`<span></span> <i class="fas fa-comments"></i>`);
                     }
+                    $('.modal-backdrop').remove();
+                    $('body').removeClass( "modal-open" );
                     new Noty({
                         theme: 'relax',
                         text: "Comment Deleted!",

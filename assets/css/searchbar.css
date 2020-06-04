@@ -1,0 +1,22 @@
+.search-bar {
+  align-self: center;
+  margin-left: 165px; }
+  .search-bar input {
+    width: 220px;
+    height: 70%;
+    font-size: 15.5px;
+    align-self: center;
+    padding-left: 10px;
+    color: grey;
+    font-weight: 550;
+    border-radius: 25px;
+    border: 2px solid grey;
+    background: #f3f3f3;
+    padding-bottom: 4px; }
+  .search-bar input:focus {
+    outline: none; }
+  .search-bar input::placeholder {
+    font-size: 17.5px;
+    padding-left: 2px;
+    font-family: 'Marck Script', cursive;
+    font-weight: 600; }
