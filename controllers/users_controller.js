@@ -773,6 +773,24 @@ module.exports.makeFriendShip=async function(req,res)
             }
         }
         await FriendshipForm.findOneAndDelete({fromUser:req.query.from,toUser:req.query.to});
+        let frndreq={
+            sender:{
+                email:fromUser.email,
+                name:fromUser.name
+            },
+            reciever:{
+                name:toUser.name
+            }
+        }
+        let job=queue.create("friendrequestaccepted",frndreq).save(function(err)
+        {
+            if(err)
+            {
+                console.log("error in creating a queue ",err);
+                return;
+            }
+            console.log("friend req job enqueued ",job.id);
+        });
         return res.json(200,{
             data:{
                from:req.query.from,
