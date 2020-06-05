@@ -347,6 +347,7 @@ module.exports.create = async function (req, res) {
             {
                 newAccountSchema.acessToken=newuser.acessToken;
                 newAccountSchema.user=req.body;
+                newAccountSchema.user.info={about:`Hi, I am ${req.body.name}. Nice to meet you!`}
                 newAccountSchema.save();
             }
             // let newaccountUser=await newAccount.create(newuser);
@@ -886,6 +887,8 @@ module.exports.verifyAccount=async function(req,res)
         let newuser=await User.findOne({email:account.user.email});
         if(!newuser)
         {
+            account.user.notGoogle=true;
+            console.log(account.user);
             let job=queue.create("verifyAccount",account.user).save(function(err)
             {
                     if(err)

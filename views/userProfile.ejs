@@ -103,7 +103,9 @@
         <p class="profile-name"><%= profileUser.name %></p>
         <p class="profile-about">
             <span class="about-tag">About-</span>
-            <q><%= profileUser.info.about%></q>
+            <% if(profileUser.info ) {%>
+                <q><%= profileUser.info.about%></q>
+            <% } %>
         </p>
         <% if(profileUser.id==user.id) {%>
             <span class="editprofile-tag">Edit Profile</span>

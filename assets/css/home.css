@@ -1229,7 +1229,15 @@ h1:hover {
   .post-comments-list {
     margin-left: 0px !important; }
   .post-comments button {
-    width: 70px !important; } }
+    width: 70px !important; }
+  #gender {
+    flex-direction: column;
+    justify-content: center; }
+    #gender span {
+      margin-left: 12%;
+      margin-bottom: 5px; }
+    #gender #female-gender-span {
+      margin-top: 7px; } }
 
 @media (max-width: 340px) {
   .post-comments-list {
