@@ -126,6 +126,7 @@
         margin-top: 10px !important;
         text-align: center;
         padding: 0;
+        display: flex;
         li
         {
             display: inline-block;
@@ -133,14 +134,19 @@
             margin-right: 5px;
             position: relative;
 
-            img{
+            img,.concealed-image{
               width: 30px;
               height: 30px;
               border-radius: 50%;
           
             }
-
-            img:hover
+            .concealed-image
+            {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+            img:hover,.concealed-image:hover
             {
               filter: drop-shadow(1px 3px 5px #ABDEE5);
               
@@ -150,6 +156,12 @@
             {
                 text-decoration: none;
                 color: white;
+                display: flex;
+                justify-content: center;
+                >div{
+                  margin-right: 5px;
+                  font-family: 'Pacifico', cursive;
+                }
 
             }
 
@@ -253,6 +265,7 @@
     }
     ul{
       text-align: center;
+      display: block !important;
       li{
         margin-right: 2px !important;
         min-width: 242px;

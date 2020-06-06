@@ -37,24 +37,8 @@ class PostComments{
                 url: '/comments/create-comment',
                 data: $(self).serialize(),
                 success: function(data){
-                    //console.log("creating comment ",data.data);
+                    console.log("creating comment ",data.data);
                     let commentData=data.data.comment;
-                    if(!data.data.comment.user.avatar)
-                    {
-                        if(data.data.comment.user.gender=="male")
-                        {
-                            //console.log("m");
-                            commentData.imageURL="https://i.stack.imgur.com/HQwHI.jpg";
-                        }
-                        else
-                        {
-                            commentData.imageURL="/images/femaleProfile.png";
-                        }
-                    }
-                    else
-                    {
-                        commentData.imageURL=data.data.comment.user.avatar;
-                    }
                     //console.log(data.data.comment.user._id,data.data.post.user._id);
                     if(data.data.comment.user._id==data.data.post.user._id)
                     {
@@ -72,6 +56,14 @@ class PostComments{
                     commentData.createdAt=ts.toLocaleString();
                     //console.log(commentData);
                     let newComment = pSelf.newCommentDom(commentData);
+                    if(!data.data.comment.user.avatar)
+                    {
+                        $(" .author-comment-name a",newComment).prepend(`<div class="concealed-image" style="background:${data.data.comment.user.info.bgColor}"><span>${data.data.comment.user.name.split(" ")[0].charAt(0)}</span></div>`)
+                    }
+                    else
+                    {
+                        $(" .author-comment-name a",newComment).prepend(`<img src=${data.data.comment.user.avatar}>`)
+                    }
                     $(`#post-comments-${postId}`).prepend(newComment);
                     let commentsCount=parseInt($(`#post-${postId}-comment-number`).attr("data-comments"));
                     commentsCount+=1;
@@ -178,7 +170,7 @@ class PostComments{
                 <br>
                 <small class="author-comment-name">
                 <a href="/users/profile/${comment.user._id }">
-                    <img src="${comment.imageURL}">
+                    
                     ${comment.user.name}<span class="${comment.authorTag}" style="width:45px;"> ${comment.author}</span>
                 </a>
                 </small>

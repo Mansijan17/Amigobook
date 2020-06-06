@@ -35,7 +35,7 @@ module.exports.createPost= async function(req,res)
                 edited:false,
                 likesLength:0
             });
-            post=await post.populate("user","name email avatar").execPopulate();
+            post=await post.populate("user","name email avatar info").execPopulate();
             let job=queue.create("posts",post).save(function(err)
             {
                     if(err)
@@ -295,7 +295,7 @@ module.exports.sharePost=async function(req,res)
             req.flash("error","Empty Caption!");
             return res.redirect("back");
         }
-        let post=await Post.findById(req.body.post).populate("user","name email gender avatar").populate("shares");
+        let post=await Post.findById(req.body.post).populate("user","name email gender avatar info").populate("shares");
         //console.log(post);
         let valid=true;
     
@@ -317,34 +317,24 @@ module.exports.sharePost=async function(req,res)
                 //console.log(post);
                 let userName=user.name;
                 let userImage=user.avatar;
+                let userBgColor;
                 if(!userImage)
                 {
-                    if(user.gender=="male")
-                    {
-                        userImage="https://i.stack.imgur.com/HQwHI.jpg";
-                    }
-                    else
-                    {
-                        userImage="/images/femaleProfile.png"
-                    }
+                   userBgColor=user.info.bgColor
                 }
                 let originalPostAuthImage=post.user.avatar;
+                let prevAuthBgColor;
                 if(!originalPostAuthImage)
                 {
-                    if(post.user.gender=="male")
-                    {
-                        originalPostAuthImage="https://i.stack.imgur.com/HQwHI.jpg";
-                    }
-                    else
-                    {
-                        originalPostAuthImage="/images/femaleProfile.png"
-                    }
+                    prevAuthBgColor=post.user.info.bgColor;
+                    
                 }
                 newcreatedPost=await Post.create({
                         content:{
                             prevAuthName:post.user.name,
                             prevAuthID:post.user.id,
                             prevAuthImage:originalPostAuthImage,
+                            prevAuthBgColor:prevAuthBgColor,
                             prevAuthContent:post.content,
                             prevPostId:req.body.post,
                             newContent:req.body.content,
@@ -394,6 +384,7 @@ module.exports.sharePost=async function(req,res)
                         newUserName:userName,
                         newUserID:req.user._id,
                         newUserImage:userImage,
+                        newUserBgColor:userBgColor,
                         newUserContent:req.body.content,
                         newWholePost:newcreatedPost,
                         shareID:shareID,

@@ -97,21 +97,31 @@
   #layout-header ul {
     margin-top: 10px !important;
     text-align: center;
-    padding: 0; }
+    padding: 0;
+    display: flex; }
     #layout-header ul li {
       display: inline-block;
       list-style: none;
       margin-right: 5px;
       position: relative; }
-      #layout-header ul li img {
+      #layout-header ul li img, #layout-header ul li .concealed-image {
         width: 30px;
         height: 30px;
         border-radius: 50%; }
-      #layout-header ul li img:hover {
+      #layout-header ul li .concealed-image {
+        display: flex;
+        justify-content: center;
+        align-items: center; }
+      #layout-header ul li img:hover, #layout-header ul li .concealed-image:hover {
         filter: drop-shadow(1px 3px 5px #ABDEE5); }
       #layout-header ul li a {
         text-decoration: none;
-        color: white; }
+        color: white;
+        display: flex;
+        justify-content: center; }
+        #layout-header ul li a > div {
+          margin-right: 5px;
+          font-family: 'Pacifico', cursive; }
       #layout-header ul li #userName {
         position: relative;
         transition: border-bottom,opacity 1s ease-in-out;
@@ -150,7 +160,8 @@
     #layout-header .userprofilelink {
       margin: 10px auto; }
     #layout-header ul {
-      text-align: center; }
+      text-align: center;
+      display: block !important; }
       #layout-header ul li {
         margin-right: 2px !important;
         min-width: 242px; } }

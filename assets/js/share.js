@@ -25,7 +25,7 @@ class SharePost{
                 {
                     new Noty({
                         theme:"relax",
-                        text:"Original Post Deleted. Hence can't be shared!",
+                        text:"The original post now resides in heaven!",
                         type:"error",
                         layput:"topRight",
                         timeout:1500
@@ -33,20 +33,15 @@ class SharePost{
                     return;
                 }
                 let sharesCount=parseInt(newSharePostForm.attr("data-shares"));
-                console.log(sharesCount);
+                
                 sharesCount+=1;
+                
                 let i=data.data.newWholePost;
-                console.log(i);
-                newSharePostForm.attr("data-shares",sharesCount);
-                $(`#post-${ data.data.originalPostID }-shares-list`).prepend(`<li id="share-${data.data.shareID}"><a href="/users/profile/${data.data.userID}">
-                            <img src=${data.data.newUserImage}>
-                            <span>${data.data.newUserName}</span>
-                    </a></li>`) 
                 $(`#post-${ data.data.originalPostID}-shares-number .post-shares-no-display`).html(`${sharesCount}`);
                 $(`#post-${ data.data.originalPostID}-share-title span`).html(`${sharesCount} <i class="fas fa-share-square"></i>`);
                 new Noty({
                     theme:"relax",
-                    text:"Post shared!",
+                    text:"They say, sharing is caring!",
                     type:"success",
                     layput:"topRight",
                     timeout:1500
@@ -114,7 +109,7 @@ class SharePost{
                 </small>
                 <small class="author-post-name">
                     <a href="/users/profile/${data.data.newUserID}">
-                        <img src="${ data.data.newUserImage}"> 
+                       
                         <span>${data.data.newUserName }</span>
                     </a>
                 </small>
@@ -127,7 +122,7 @@ class SharePost{
                                 <div class="copiedAuthIntro">
                                     <a href="/users/profile/${i.content.prevAuthID}">
                                         <span>${ i.content.prevAuthName}</span>
-                                        <img  src="${i.content.prevAuthImage}">
+                                       
                                     </a>
                                 </div>
                                 <p>${i.content.prevAuthContent}</p>
@@ -159,55 +154,41 @@ class SharePost{
                 <div class="post-share-box">
               
                 <div class="post-shares-number" id="post- ${i._id }-shares-number">
-                    <span data-toggle="modal" data-target="#post-${i._id}-share-modal">
+                    <span data-toggle="modal" data-target="#post-${i.content.prevPostId}-share-modal">
                        
                         <i class="fas fa-share-square"></i>
                     </span>
                 </div>
-                
-        
-                <div class="modal post-share-modal fade" id="post-${i._id}-share-modal" role="dialog" >
-                    <div class="modal-dialog">
-                    
-                      <!-- Modal content-->
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h4 class="modal-title" id="#post-${i._id}-title">Share this Post?
-                              <br></h4>
-                        </div>
-                        <div class=" modal-body"  >
-                        <form action="/posts/share-post/" method="post" class="toggle-share-button" data-shares="${i.content.prevPostShares}" id="post-${i.content.prevPostId }-share-form">
-                        <input type="text" name="content" required value="Add some thoughts to it!!!">
-                        <input type="hidden" name="post" value="${i.content.prevPostId}">
-                        
-                    
-                        <div class="shared-post-form">
-                            <p>
-                                <a href="/users/profile/${i.content.prevAuthID}">
-                                    
-                                        <img src="${i.content.prevAuthImage}"> 
-                                        <span>${i.content.prevAuthName}</span>
-                                </a>
-                            </p>
-                            <p class="share-content">
-                            ${i.content.prevAuthContent}
-                            </p>
-                        </div>
-                        <div class="modal-footer">
-                            <button onclick="submitForm(this)" class="btn btn-secondary" data-dismiss="modal" name="${ i.content.prevPostId}">Submit</button>
-                        </div>
-                    </form>
-                    
-                            
-                        </div>
-                      
-                    </div>
-                  </div>
-           
-            
-                </div>
                 </li>`);
+                newSharePostForm.attr("data-shares",sharesCount);
+               
+                let newShareFromUser=$(`<li id="share-${data.data.shareID}"><a href="/users/profile/${data.data.userID}">
+                    <span>${data.data.newUserName}</span>
+                </a></li>`)
+                if(!data.data.newUserImage)
+                {
+                    $(" .author-post-name a",newPost).prepend(`<span class="concealed-image" style="background:${data.data.newUserBgColor}"><span>${data.data.newUserName.split(" ")[0].charAt(0)}</span></span>`)
+                    $(" a",newShareFromUser).prepend(` <div class="concealed-image" style="background:${data.data.newUserBgColor};"><span>${ data.data.newUserName.split(" ")[0].charAt(0)}</span></div>`)
+                }
+                else
+                {
+                    $(" .author-post-name a",newPost).prepend(`<img src=${data.data.newUserImage}>`)
+                    $(" a",newShareFromUser).prepend(`<img src=${data.data.newUserImage}`)
+                     
+                }
+                if(!i.content.prevAuthImage)
+                {
+                    $(" .copiedPost a",newPost).append(`<div class="concealed-image" style="background:${i.content.prevAuthBgColor}"><span>${i.content.prevAuthName.split(" ")[0].charAt(0)}</span></div>`);
+
+                }
+                else
+                {
+                    $(" .copiedPost a",newPost).append(`<img src="${ i.content.prevAuthImage}"> `)
+
+                }
+                $(`#post-${ data.data.originalPostID }-shares-list`).prepend(newShareFromUser); 
                 $("#posts-list-container>ul").prepend(newPost);
+                $(`#post-${data.data.originalPostID}-share-title span`).html(`${shareCounts}  <i class="fas fa-share"></i>`)
                 new ToggleLike($(" .toggle-like-button", newPost));
                 new SharePost($(" .toggle-share-button", newPost));
                 new PostComments(data.data.newWholePost._id);
@@ -227,11 +208,16 @@ class SharePost{
                                 if(data.data.shareID!=undefined)
                                 {
                                     let shareCounts=parseInt($(`#post-${data.data.originalPostID}-share-form`).attr("data-shares"));
+                                    console.log("del share post",shareCounts);
                                     shareCounts-=1;
+                                    console.log("del share 2",shareCounts)
                                     $(`#post-${data.data.originalPostID}-share-form`).attr("data-shares",shareCounts);
+                                    console.log("del share form attr", $(`#post-${data.data.originalPostID}-share-form`).attr("data-shares"))
                                     if(shareCounts>0)
                                     {
                                         $(`#post-${data.data.originalPostID}-shares-number .post-shares-no-display`).html(`${shareCounts}`);
+                                        $(`#post-${data.data.originalPostID}-share-title span`).html(`${shareCounts}  <i class="fas fa-share"></i>`)
+                                        
                                     }
                                     else
                                     {
@@ -246,7 +232,7 @@ class SharePost{
                                 $('body').removeClass( "modal-open" );
                                 new Noty({
                                     theme:"relax",
-                                    text:"Post and associated comments are deleted!",
+                                    text:"This post and its company needs a funeral!",
                                     type:"success",
                                     layput:"topRight",
                                     timeout:1500
@@ -254,7 +240,7 @@ class SharePost{
                             },
                             error:function(err)
                             {
-                                console.log(err.responseText);
+                                console.log("share post delete",err.responseText);
                             }
                         })
                     })
@@ -300,7 +286,7 @@ class SharePost{
                             },
                             error:function(err)
                             {
-                                console.log(err.responseText);
+                                console.log("share update erro",err.responseText);
                             }
                         })
                     })
@@ -343,7 +329,7 @@ class SharePost{
                                     $(`#post-${data.data.postID}-content .post-text`).prepend(`<span>${data.data.content}</span>`);
                                     new Noty({
                                         theme:"relax",
-                                        text:"Post updated successfully!",
+                                        text:"Post had a successful affair of words!",
                                         type:"success",
                                         layput:"topRight",
                                         timeout:1500
@@ -351,7 +337,7 @@ class SharePost{
                                 },
                                 error:function(err)
                                 {
-                                    console.log(err.responseText);
+                                    console.log("update share ",err.responseText);
                                     return;
                                 }
                             })

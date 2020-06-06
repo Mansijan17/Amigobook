@@ -33,10 +33,18 @@ class ToggleLike{
                 else
                 {
                     likesCount+=1;
-                    $(`#${data.data.type}-${ data.data.id }-likes-list`).prepend(`<li id="like-${data.data.likeID}"><a href="/users/profile/${data.data.userID}">
-                            <img src=${data.data.userImage}>
-                            <span>${data.data.name}</span>
-                            </a></li>`)  
+                    let newList=$(`<li id="like-${data.data.likeID}"><a href="/users/profile/${data.data.userID}">
+                    <span>${data.data.name}</span>
+                    </a></li>`)
+                    if(data.data.userImage)
+                    {
+                        $(" a",newList).prepend(`<img src=${data.data.userImage}>`)
+                    }
+                    else
+                    {
+                        $(" a",newList).prepend(`<div class="concealed-image" style="background:${data.data.userBgColor}"><span>${ data.data.name.split(" ")[0].charAt(0)}</span></div>`)
+                    }
+                    $(`#${data.data.type}-${ data.data.id }-likes-list`).prepend(newList);
                     if(data.data.type=="commentreply")
                     {
                         $(`#reply-${ data.data.id }-like-toggle`).html(`Unlike <i class="far fa-thumbs-up"></i>`);

@@ -1,10 +1,8 @@
 <a href="/users/profile/<%= share.user._id %>">
     <% if(share.user.avatar) {%>
         <img src="<%= share.user.avatar %>"> 
-    <% } else if (i.user.gender=="female"){%>
-        <img src="https://i.stack.imgur.com/HQwHI.jpg" width="100" height="100">
     <% }  else {%>
-        <img src="/images/femaleProfile.png" width="100" height="100">
+        <div class="concealed-image" style="background:<%=share.user.info.bgColor%>;"><span><%= share.user.name.split(" ")[0].charAt(0)%></span></div>
     <% } %>
 
     <span><%= share.user.name %></span>

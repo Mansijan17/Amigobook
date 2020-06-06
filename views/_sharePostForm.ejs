@@ -1,57 +1,25 @@
-<% if(!i.sharedFromPost) {%>
-    <form action="/posts/share-post/" method="post" class="toggle-share-button" data-shares="<%= i.shares.length %>" id="post-<%= i._id %>-share-form">
-<% } else {%>
-    <form action="/posts/share-post/" method="post" class="toggle-share-button" data-shares="<%= i.content.prevPostShares %>" id="post-<%= i.content.prevPostId %>-share-form">
-<% } %>
+<form action="/posts/share-post/" method="post" class="toggle-share-button" data-shares="<%= i.shares.length %>" id="post-<%= i._id %>-share-form">
+
     <input type="text" name="content" required value="Add some thoughts to it!!!">
-    <% if(!i.sharedFromPost) {%>
         <input type="hidden" name="post" value="<%= i._id%>">
-    <% } else { %>
-        
-        <input type="hidden" name="post" value="<%= i.content.prevPostId%>">
-    <% } %>
-    
 
     <div class="shared-post-form">
-        <% if(!i.sharedFromPost) {%>
             <p>
                 <a href="/users/profile/<%= i.user._id %>">
                     <% if(i.user.avatar) {%>
                         <img src="<%= i.user.avatar %>"> 
-                    <% } else if (i.user.gender=="male"){%>
-                        <img src="https://i.stack.imgur.com/HQwHI.jpg" width="100" height="100">
                     <% }  else {%>
-                        <img src="/images/femaleProfile.png" width="100" height="100">
+                        <span class="concealed-image" style="background:<%=i.user.info.bgColor%>;"><span><%= i.user.name.split(" ")[0].charAt(0)%></span></span>
                     <% } %>
-                        <span><%= i.user.name %></span>
+                        <span style="align-self: center;" class="author-name"><%= i.user.name %></span>
                 </a>
             </p>
             <p class="share-content">
                 <%= i.content%>
             </p>
-        <% } else { %>
-            <p>
-                <a href="/users/profile/<%= i.content.prevAuthID %>">
-                    <% if(i.content.prevAuthImage ) {%>
-                        <img src="<%= i.content.prevAuthImage %>"> 
-                    <% } else if (i.user.gender=="male"){%>
-                        <img src="https://i.stack.imgur.com/HQwHI.jpg" width="100" height="100">
-                    <% }  else {%>
-                        <img src="/images/femaleProfile.png" width="100" height="100">
-                    <% } %>
-                        <span><%= i.content.prevAuthName %></span>
-                </a>
-            </p>
-            <p class="share-content">
-                <%= i.content.prevAuthContent%>
-            </p>
-        <% } %>
+       
     </div>
     <div class="modal-footer">
-        <% if(!i.sharedFromPost) {%>
             <button onclick="submitForm(this)" class="btn btn-secondary" data-dismiss="modal" name="<%= i._id %>">Submit</button>
-        <% } else {%>
-            <button onclick="submitForm(this)" class="btn btn-secondary" data-dismiss="modal" name="<%= i.content.prevPostId %>">Submit</button>
-        <% } %>
     </div>
 </form>

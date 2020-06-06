@@ -12,6 +12,11 @@ const Friendship=require('../models/friendship');
 const FriendshipForm=require('../models/pend_friend_forms');
 const newAccount=require('../models/newAccountSchema');
 const newaccountEmailWorker=require('../worker/newaccount_email_worker');
+
+
+let colors=["#e558e5","#e55886","#4952be","#285874","#6d721b","#99611b","#686561","#E91E63","#C62828",
+           "#F57F17","#00ACC1","#512DA8","#FB8C00","#039BE5","#00b7d5"]
+
 //making function async
 module.exports.profile = async function (req, res) {
     try
@@ -178,6 +183,22 @@ module.exports.update = async function (req, res) {
                     //console.log(user);   
                 }
                 user.save();
+                Post.find({"content.prevAuthID":req.params.id},function(err,posts)
+                {
+                    if(err)
+                    {
+                        console.log("error in finding posts of user update ",err);
+                        return;
+                    }
+                    for(post of posts)
+                    {
+                        console.log(post.content);
+                        post.content.prevAuthName=req.body.name;
+                        post.content.prevAuthImage=user.avatar;
+                        post.save();
+                    }
+                });
+              
                 req.flash("success", "Updated!");
                 return res.redirect("back");
             })
@@ -345,9 +366,13 @@ module.exports.create = async function (req, res) {
             }
             else
             {
+                let randomBgColor=colors[Math.floor(Math.random()*colors.length)];
+                console.log(randomBgColor);
                 newAccountSchema.acessToken=newuser.acessToken;
                 newAccountSchema.user=req.body;
-                newAccountSchema.user.info={about:`Hi, I am ${req.body.name}. Nice to meet you!`}
+                newAccountSchema.user.info={about:`Hi, I am ${req.body.name}. Nice to meet you!`,
+                bgColor:randomBgColor}
+                console.log(newAccountSchema.user.info)
                 newAccountSchema.save();
             }
             // let newaccountUser=await newAccount.create(newuser);
@@ -883,7 +908,6 @@ module.exports.verifyAccount=async function(req,res)
     {
         let acessToken=req.params.id;
         let account=await newAccount.findOne({acessToken:acessToken});
-        console.log(account);
         let newuser=await User.findOne({email:account.user.email});
         if(!newuser)
         {
@@ -899,14 +923,9 @@ module.exports.verifyAccount=async function(req,res)
                     console.log("job enqueued ",job.id);
             });
             
-            //console.log(account.user.name);
-           
-
             newuser=await User.create(account.user);
             newuser2=await User.findById(newuser._id);
-            newuser2.info={
-               about: `Hi, I am ${newuser2.name}. Nice to meet you!`
-            };
+            newuser2.info=newuser.info;
             newuser2.save();
         }
         if(newuser.gender=="male")

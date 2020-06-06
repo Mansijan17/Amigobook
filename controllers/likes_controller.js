@@ -36,16 +36,10 @@ module.exports.toggleLike=async function(req,res)
         let user=await User.findById(req.user.id);
         let userName=user.name;
         let userImage=user.avatar;
+        let userBgColor;
         if(!userImage)
         {
-            if(user.gender=="male")
-            {
-                userImage="https://i.stack.imgur.com/HQwHI.jpg";
-            }
-            else
-            {
-                userImage="/images/femaleProfile.png"
-            }
+            userBgColor=user.info.bgColor
         }
         
         //console.log("liking user name ",userName);
@@ -124,7 +118,8 @@ module.exports.toggleLike=async function(req,res)
                 id:req.query.id,
                 likeID:likeID,
                 userID:req.user._id,
-                userImage:userImage
+                userImage:userImage,
+                userBgColor:userBgColor
             }
         })
     }

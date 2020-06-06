@@ -92,9 +92,11 @@ function removetagInvisible(){
 
   $('.removetag').css("display","none");
 }
+
 $(document).ready(function()
 {
   removetagInvisible();
+  
 })
 
 window.addEventListener( "pageshow", function ( event ) {
@@ -310,3 +312,4 @@ let appendSearchList=function(user)
 </li>`)
 
 }
+

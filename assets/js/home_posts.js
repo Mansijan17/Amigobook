@@ -17,6 +17,16 @@
                 {
                     console.log(data.data.post);
                     let newPost=newDomPost(data.data.post);
+                    if(!data.data.post.user.avatar)
+                    {
+                        $(" .author-post-name a",newPost).prepend(`<span class="concealed-image" style="background:${data.data.post.user.info.bgColor}"><span>${data.data.post.user.name.split(" ")[0].charAt(0)}</span></span>`)
+                        $(" .shared-post-form p a",newPost).prepend(`<span class="concealed-image" style="background:${data.data.post.user.info.bgColor}"><span>${data.data.post.user.name.split(" ")[0].charAt(0)}</span></span>`)
+                    }
+                    else
+                    {
+                        $(" .author-post-name a",newPost).prepend(`<img src=${data.data.post.user.avatar}>`)
+                        $(" .shared-post-form a",newPost).prepend(`<img src=${data.data.post.user.avatar}>`)
+                    }
                     $("#posts-list-container>ul").prepend(newPost);
                     deletePost($(" .delete-post-button",newPost));
                     updatePost($(" .update-post-button",newPost));
@@ -26,7 +36,7 @@
                     new SharePost($(" .toggle-share-button", newPost));
                     new Noty({
                         theme:"relax",
-                        text:"Post published!",
+                        text:"So, now you write too. What can't you do?",
                         type:"success",
                         layput:"topRight",
                         timeout:1500
@@ -109,7 +119,7 @@
         </small>
         <small class="author-post-name">
             <a href="/users/profile/${i.user._id}">
-                <img src="${ i.user.avatar}"> 
+               
                 <span>${i.user.name }</span>
             </a>
         </small>
@@ -194,8 +204,8 @@
                     <p>
                         <a href="/users/profile/${i.user._id}">
                             
-                                <img src="${ i.user.avatar}"> 
-                                <span>${i.user.name}</span>
+                              
+                                <span class="author-name">${i.user.name}</span>
                         </a>
                     </p>
                     <p class="share-content">
@@ -233,14 +243,18 @@
                     
                     if(data.data.shareID!=undefined)
                     {
-                        console.log("defined");
+                        
                         let shareCounts=parseInt($(`#post-${data.data.originalPostID}-share-form`).attr("data-shares"));
+                      
                         shareCounts-=1;
-                        $(`#post-${data.data.originalPostID}-share-form`).attr("data-shares",shareCounts);
+                        
+              
+                        $(`#post-${data.data.originalPostID}-share-form`).attr("data-shares",shareCounts)
+      
                         if(shareCounts>0)
                         {
                             $(`#post-${data.data.originalPostID}-shares-number .post-shares-no-display`).html(`${shareCounts}`);
-                            $(`#post-${ data.data.originalPostID}-share-title span`).html(`${sharesCount} <i class="fas fa-share-square"></i>`);
+                            $(`#post-${ data.data.originalPostID}-share-title span`).html(`${shareCounts} <i class="fas fa-share-square"></i>`);
                         }
                         else
                         {
@@ -269,7 +283,7 @@
                     $('body').removeClass( "modal-open" );
                     new Noty({
                         theme:"relax",
-                        text:"Post and associated comments are deleted!",
+                        text:"This post and its company needs a funeral!",
                         type:"success",
                         layput:"topRight",
                         timeout:1500
@@ -390,7 +404,7 @@
                     $(`#post-${data.data.postID}-content .post-text`).prepend(`<span>${data.data.content}</span>`);
                     new Noty({
                         theme:"relax",
-                        text:"Post updated successfully!",
+                        text:"This post had a successful affair of words!",
                         type:"success",
                         layput:"topRight",
                         timeout:1500

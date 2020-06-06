@@ -301,21 +301,38 @@ h1:hover
 
                                 a{
                                     color: #006881;
-                                    img{
+                                    display: flex;
+                                    img,.concealed-image{
                                         height: 40px;
                                         width: 40px;
                                         border-radius: 50%;
                                         margin-right: 5px;
                                     }
+                                    .concealed-image
+                                    {
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                        font-family: 'Pacifico', cursive;
+                                        color: mistyrose;
+                                        >span
+                                        {
+                                            color: inherit !important;
+                                        }
+                                        >span:hover{
+                                            font-weight: normal;
+                                        }
+                                    }
                                     span{
                                         
                                         font-variant: small-caps;
+                                        align-self: center;
                                     }
                                     span:hover
                                     {
                                         font-weight: bold;
                                     }
-                                    img:hover
+                                    img:hover,.concealed-image:hover
                                     {
                                         filter: brightness(0.8);
                                     }
@@ -428,12 +445,26 @@ h1:hover
                                 width: 90%;
                                 align-self: center;
                             }
-                            img
+                            img,.concealed-image
                             {
                                 width:75px;
                                 height:75px;
                             }
-                            img:hover
+                            .concealed-image
+                            {
+                                display: inline-block;
+                                justify-content: center;
+                                align-items: center;
+                                font-family: 'Pacifico', cursive;
+                                color: mistyrose;
+                                padding-top: 20px;
+                                >span
+                                {
+                                    color: inherit !important;
+                                    text-shadow: none;
+                                }
+                            }
+                            img:hover,.concealed-image:hover
                             {
                                 filter: contrast(0.7);
                             }
@@ -500,17 +531,23 @@ h1:hover
                                         font-style: oblique;
                                         color: #154646;
                                         text-align: center;
+                                        display: flex;
                                         span
                                         {
                                             background: #4eb380;
-                                            padding: 2px;
                                             overflow-wrap: break-word;
-                                            
+                                            height: 22px;
+                                            align-self: center;
+                                            margin-right: 5px;
+                                            display: flex;
+                                            padding: 2px;
+                                            align-items: center;
                                         }
+
                                         span:hover{
                                            border: 1px dashed darkgreen;
                                         }
-                                        img:hover
+                                        img:hover,.concealed-image:hover
                                         {
                                             filter: contrast(1.5);
                                         }
@@ -521,10 +558,29 @@ h1:hover
                                         margin-right: 10px;
                                         
                                     }
-                                    img{
+                                    img,.concealed-image{
                                         width: 40px;
                                         height: 40px;
                                         border-radius: 50%;
+                                    }
+                                    .concealed-image
+                                    {
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                        font-family: 'Pacifico', cursive;
+                                        color: mistyrose;
+                                    
+                                        >span
+                                        {
+                                            color: inherit !important;
+                                            text-shadow: none;
+                                            background: none;
+                                        }
+                                        >span:hover
+                                        {
+                                            border: none;
+                                        }
                                     }
                                    
                                 }
@@ -785,21 +841,38 @@ h1:hover
 
                                                 a{
                                                     color: #006881;
-                                                    img{
+                                                    display: flex;
+                                                    img,.concealed-image{
                                                         height: 40px;
                                                         width: 40px;
                                                         border-radius: 50%;
                                                         margin-right: 5px;
                                                     }
+                                                    .concealed-image
+                                                    {
+                                                        display: flex;
+                                                        justify-content: center;
+                                                        align-items: center;
+                                                        font-family: 'Pacifico', cursive;
+                                                        color: mistyrose;
+                                                        >span
+                                                        {
+                                                            color: inherit !important;
+                                                        }
+                                                        >span:hover{
+                                                            font-weight: normal;
+                                                        }
+                                                    }
                                                     span{
                                         
                                                         font-variant: petite-caps;
+                                                        align-self: center;
                                                     }
                                                     span:hover
                                                     {
                                                         font-weight: bold;
                                                     }
-                                                    img:hover
+                                                    img:hover,.concealed-image:hover
                                                     {
                                                         filter: brightness(0.8);
                                                     }
@@ -973,12 +1046,21 @@ h1:hover
                                                     font-weight: bolder;
                                                     font-size: 13.5px;
                                                     
-                                                    img{
+                                                    img,.concealed-image{
                                                         height: 32px;
                                                         width: 32px;
                                                         border-radius: 50%;
                                                     }
-                                                    img:hover{
+                                                    .concealed-image
+                                                    {
+                                                        margin: 0px auto 10px;
+                                                        display: flex;
+                                                        justify-content: center;
+                                                        align-items: center;
+                                                        font-family: 'Pacifico', cursive;
+                                                        color: mistyrose;
+                                                    }
+                                                    img:hover,.concealed-image:hover{
                                                         filter: contrast(1.5);
                                                     }
                                                     .author-tag
@@ -1000,8 +1082,9 @@ h1:hover
                                                 font-size: 13px;
                                                 background-color: darkgray;
                                                 padding: 3px;
-                                                width: 110px;
-                                                margin: auto;
+                                                width: 135px;
+                                                display: block;
+                                                margin: 10px auto 0px;
 
                                             }
                                             
@@ -1164,21 +1247,40 @@ h1:hover
                                     color: #006881;
                                     font-size: 16px;
                                     font-variant-caps: all-petite-caps;
-                                    img{
+                                    display: flex;
+                                        img,.concealed-image{
                                         height: 32px;
                                         width: 32px;
                                         border-radius: 50%;
                                         margin-right: 5px;
                                         }
+                                        .concealed-image
+                                        {
+                                            display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                            font-family: 'Pacifico', cursive;
+                                            color: mistyrose;
+                                            
+                                            >span
+                                            {
+                                                color: inherit !important;
+                                                text-shadow: none;
+                                            }
+                                            >span:hover
+                                            {
+                                                border: none;
+                                            }
+                                        }
                                     span{
-                                                                
+                                        align-self: center;            
                                         transition: all 0.5s ease-in;
                                         }
                                     span:hover
                                     {
                                         border-bottom: 1px dotted #4a93c5;;
                                     }
-                                    img:hover
+                                    img:hover,.concealed-image:hover
                                     {
                                         filter: contrast(1.2);
                                     }
@@ -1242,23 +1344,40 @@ h1:hover
                                             a{
                                                 font-size: 18px;
                                                 color: #0e4657;
+                                                display: flex;
+                                                justify-content: center;
 
                                                 span,img
                                                 {
                                                     transition: all 0.4s ease-in;
                                                 }
-                                                span:hover
+                                                .author-name:hover
                                                 {
                                                     border-bottom: 1px solid #0e4657;;
                                                 }
-                                                img:hover{
+                                                img:hover,.concealed-image:hover{
                                                     box-shadow: 0px 0px 4px 1px darkgrey;
                                                 }
                                             }
-                                            img{
+                                            img,.concealed-image{
                                                 height: 40px;
                                                 width: 40px;
                                                 border-radius: 50%;
+                                                margin-right: 5px;
+                                            }
+                                            .concealed-image
+                                            {
+                                                display:flex;
+                                                justify-content: center;
+                                                align-items: center;
+                                                font-family: 'Pacifico', cursive;
+                                                color: mistyrose;
+                                                
+                                                >span
+                                                {
+                                                    color: inherit !important;
+                                                    text-shadow: none;
+                                                }
                                             }
                                         }
                                         .share-content
@@ -1943,7 +2062,7 @@ h1:hover
             display: flex !important;
             flex-direction: column !important;
             justify-content: center !important;
-            img{
+            img,.concealed-image{
                 align-self: center !important;
                 margin-bottom: 10px !important;
             }

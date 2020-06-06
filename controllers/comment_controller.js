@@ -55,7 +55,7 @@ module.exports.createComment=async function(req,res)
             let length=post.comments.length;
             console.log("length ",length);
             //console.log(post);
-            newcomment=await newcomment.populate("user","name email avatar gender").execPopulate();
+            newcomment=await newcomment.populate("user","name email avatar gender info").execPopulate();
             let commentOnPost={
                 name:post.user.name,
                 email:post.user.email,
