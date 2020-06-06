@@ -30,7 +30,7 @@ exports.newCommentOnPost=(post)=>{
     nodemailer.transporter.sendMail({
         from:env.mail,
         to:post.email,
-        subject:`${post.comment.user.name} posted new comment on your post!`,
+        subject:`${post.comment.user.name} added new comment on your post!`,
         html:htmlString
     }, (err,info)=>{
         if(err)
@@ -51,7 +51,7 @@ exports.newReplyOnComment=(comment)=>{
      nodemailer.transporter.sendMail({
          from:env.email,
          to:comment.email,
-         subject:`${comment.reply.user.name} posted new reply on your comment!`,
+         subject:`${comment.reply.user.name} added a new reply on your comment!`,
          html:htmlString
      }, (err,info)=>{
          if(err)
@@ -72,7 +72,7 @@ exports.newReplyOnComment=(comment)=>{
      nodemailer.transporter.sendMail({
          from:env.email,
          to:thought.email,
-         subject:`${thought.reply.user.name} posted new reply on your thought!`,
+         subject:`${thought.reply.user.name} added a new reply on your thought!`,
          html:htmlString
      }, (err,info)=>{
          if(err)

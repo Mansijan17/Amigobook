@@ -21,6 +21,20 @@ class SharePost{
             }).done(function(data)
             {
                 console.log(data.data);
+                if(data.error)
+                {
+                    new Noty({
+                        theme:"relax",
+                        text:"An empty content is rebellion!",
+                        type:"error",
+                        layput:"topRight",
+                        timeout:1500
+                    }).show();
+                    return;
+                }
+                $('.modal-backdrop').remove();
+                $('body').removeClass( "modal-open" );
+                $(`#post-${data.data.originalPostID}-share-modal`).modal('hide');
                 if(!data.data.valid)
                 {
                     new Noty({
@@ -30,6 +44,7 @@ class SharePost{
                         layput:"topRight",
                         timeout:1500
                     }).show();
+                    
                     return;
                 }
                 let sharesCount=parseInt(newSharePostForm.attr("data-shares"));
@@ -188,7 +203,7 @@ class SharePost{
                 }
                 $(`#post-${ data.data.originalPostID }-shares-list`).prepend(newShareFromUser); 
                 $("#posts-list-container>ul").prepend(newPost);
-                $(`#post-${data.data.originalPostID}-share-title span`).html(`${shareCounts}  <i class="fas fa-share"></i>`)
+                $(`#post-${data.data.originalPostID}-share-title span`).html(`${sharesCount}  <i class="fas fa-share"></i>`)
                 new ToggleLike($(" .toggle-like-button", newPost));
                 new SharePost($(" .toggle-share-button", newPost));
                 new PostComments(data.data.newWholePost._id);

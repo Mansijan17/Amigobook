@@ -22,17 +22,31 @@
             background:#edcd35;
             padding: 2px;
             padding-left: 9px;
-            font-size: 15px;
             word-break: break-word;
             text-align: left;
-            color: ghostwhite;
+            color:#737381;
             font-family: 'Bentham', serif;
             text-decoration: none;
-            display: block;
-            img{
+            display: flex;
+            img,.concealed-image{
                 width: 40px;
                 height: 40px;
                 border-radius: 50%;
+            }
+            .concealed-image
+            {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: mistyrose;
+                font-family: 'Pacifico', cursive;
+                font-size: 12px !important;
+            }
+            span{
+                align-self: center;
+                margin-left: 5px;
+                font-size: 16px;
+                font-weight: bold;
             }
         }
         a:hover

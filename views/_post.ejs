@@ -19,7 +19,12 @@
               <!-- Modal content-->
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title" id="post-<%=i._id%>-like-title">Post Reactions  
+                  <h4 class="modal-title" id="post-<%=i._id%>-like-title">Post 
+                    <% if(i.likes.length==0 || i.likes.length==1) {%>  
+                    Reaction
+                    <%} else {%>
+                        Reactions
+                    <% } %>
                       
                       <span>
                         <% if(i.likes.length>0) { %>

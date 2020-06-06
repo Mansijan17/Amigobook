@@ -292,6 +292,10 @@ module.exports.sharePost=async function(req,res)
         console.log(req.body);
         if(req.body.content=="")
         {
+            return res.json(200,{
+                error:true,
+                message:"An empty content is rebellion"
+            })
             req.flash("error","Empty Caption!");
             return res.redirect("back");
         }
@@ -391,7 +395,8 @@ module.exports.sharePost=async function(req,res)
                         originalPostID:req.body.post,
                         newPostDate:timestamps,
                         valid:valid
-                    }
+                    },
+                    error:false
                 })
         }
         

@@ -252,7 +252,22 @@ h1:hover
 
                             .modal-dialog
                             {
+                                margin: 50px auto;
                                 width: 500px;
+
+                                .modal-header
+                                {
+                                    background: #b59dd5;
+                                    font-family: 'Cedarville Cursive', cursive;
+                                    width: 100.1%;
+                                    .modal-title
+                                    {
+                                        color: whitesmoke;
+                                        font-size: 21px;
+                                        font-weight: bolder;
+                                    }
+                                }
+                                
                                 .modal-content
                                 {
                                     width: 100%;
@@ -284,7 +299,7 @@ h1:hover
                             flex-direction: column;
                             justify-content: center;
                             align-items: center;
-                            width: 60%;
+                            width: 75%;
                             padding-left: 0;
                             max-height: 300px;
                             overflow: auto;
@@ -327,6 +342,8 @@ h1:hover
                                         
                                         font-variant: small-caps;
                                         align-self: center;
+                                        color:#88a1a7;
+                                        text-align:left;
                                     }
                                     span:hover
                                     {
@@ -380,6 +397,15 @@ h1:hover
                         .modal-dialog
                         {
                             width: 100%;
+                            .modal-header
+                            {
+                                background: #a22a2a;
+                                width: 100.1%;
+                                .modal-title
+                                {
+                                    color: #78bbc5 !important;
+                                }
+                            }
                             .modal-body
                             {
                                 font-size: 14px;
@@ -494,6 +520,7 @@ h1:hover
                                 background: #2e7682;
                                 color: lightblue;
                                 padding: 9px;
+                                min-height: 40px;
                                 
                             }
                           
@@ -601,7 +628,7 @@ h1:hover
                                         border-radius: 10px;
                                         border: 1.5px dashed darkgreen;
                                         width: 80%;
-                                        max-height: 100px;
+                                        min-height: 50px;
                                         background: #2e7682;
                                         color: lightblue;
                                         font-size: 21px;
@@ -730,6 +757,25 @@ h1:hover
                                         left: 87%;
                                         position: relative;
                                         margin-bottom: 15px;
+
+                                        .modal-dialog
+                                        {
+                                            margin: 50px auto;
+                                            width: 500px;
+            
+                                            .modal-header
+                                            {
+                                                background: #b59dd5;
+                                                font-family: 'Cedarville Cursive', cursive;
+                                                width: 100.1%;
+                                                .modal-title
+                                                {
+                                                    color: whitesmoke;
+                                                    font-size: 21px;
+                                                    font-weight: bolder;
+                                                }
+                                            }
+                                        }
                                       
                                         .comment-likes-number
                                         {
@@ -790,7 +836,7 @@ h1:hover
 
                                             .modal-dialog
                                             {
-                                                width: 500px;
+                                            
                                                 .modal-content
                                                 {
                                                     width: 100%;
@@ -824,7 +870,7 @@ h1:hover
                                             flex-direction: column;
                                             justify-content: center;
                                             align-items: center;
-                                            width: 60%;
+                                            width: 75%;
                                             padding-left: 0;
                                             max-height: 300px;
                                             overflow: auto;
@@ -867,6 +913,7 @@ h1:hover
                                         
                                                         font-variant: petite-caps;
                                                         align-self: center;
+                                                        text-align: left;
                                                     }
                                                     span:hover
                                                     {
@@ -920,6 +967,15 @@ h1:hover
                                             {
                                                 width: 100%;
                                                 text-align: center;
+                                                .modal-header
+                                                {
+                                                    background: #a22a2a;
+                                                    width: 100.1%;
+                                                    .modal-title
+                                                    {
+                                                        color: #78bbc5 !important;
+                                                    }
+                                                }
                                                 .modal-body
                                                 {
                                                     font-size: 14px;
@@ -1167,6 +1223,8 @@ h1:hover
                         font-size: 22px;
                         color: indigo;
 
+                        
+
                         .post-shares-number
                         {
                             a{
@@ -1192,19 +1250,34 @@ h1:hover
 
                             .modal-dialog
                             {
-                                width: 500px;
+                                    margin: 50px auto;
+                                    width: 500px;
+    
+                                    .modal-header
+                                    {
+                                        background:wheat;
+                                        font-family: 'Cedarville Cursive', cursive;
+                                        width: 100.1%;
+                                        .modal-title
+                                        {
+                                            color: whitesmoke;
+                                            font-size: 21px;
+                                            font-weight: bolder;
+                                        }
+                                    }
+                                
                                 .modal-content
                                 {
                                     width: 100%;
                                     .modal-title
                                     {
                                         text-align: center;
-                                        color: black;
+                                        color: tomato;
                                         span{
                                             display: block;
                                             margin-top: 5px;
                                             font-size: 21px;
-                                            color: teal;
+                                            color:#7ba4a4;
                                         }
                                     }
                                     .modal-body
@@ -1227,7 +1300,7 @@ h1:hover
                             flex-direction: column;
                             justify-content: center;
                             align-items: center;
-                            width: 60%;
+                            width: 75%;
                             padding-left: 0;
                             max-height: 300px;
                             overflow: auto;
@@ -1275,6 +1348,7 @@ h1:hover
                                     span{
                                         align-self: center;            
                                         transition: all 0.5s ease-in;
+                                        text-align: left;
                                         }
                                     span:hover
                                     {
@@ -1293,7 +1367,7 @@ h1:hover
                                 font-weight: 900;
                                 font-family: "Font Awesome 5 Free";
                                 display: inline-block;
-                                color:darkblue;
+                                color:#ff9a44;
                             }
                         }
                         .post-share-username-list::-webkit-scrollbar {
@@ -1302,6 +1376,22 @@ h1:hover
                         
                         .post-share-modal
                         {
+                            .modal-dialog
+                            {
+                                width: 500px;
+                                margin: 50px auto;
+                            }
+                            
+                            .modal-header
+                            {
+                                background: #F57C00;
+                                font-family: 'Special Elite', cursive;
+                                width: 100.1%;
+                                .modal-title
+                                {
+                                    color:#651717 !important; 
+                                }
+                            }
                             .modal-body
                             {
                                 
@@ -1309,7 +1399,7 @@ h1:hover
                                     height: auto;
                                     display: flex;
                                     flex-direction: column;
-                                    input
+                                    textarea
                                     {
                                         width: 95%;
                                         border: none;
@@ -1320,13 +1410,20 @@ h1:hover
                                         height: auto;
                                         margin-bottom: 10px;
                                     }
-                                    input:focus
+                                    textarea:focus
                                     {
                                         outline: none;
                                     }
-                                    input::placeholder
+                                    textarea::placeholder
                                     {
                                         color: lightslategray;
+                                    }
+                                    textarea:-webkit-autofill {
+                                        transition: background-color 5000s ease-in-out 0s;
+                                        -webkit-text-fill-color:lightslategray;
+                                    }
+                                    textarea::-webkit-scrollbar {
+                                        display: none;
                                     }
                                     .shared-post-form
                                     {
@@ -1350,6 +1447,7 @@ h1:hover
                                                 span,img
                                                 {
                                                     transition: all 0.4s ease-in;
+                                                    
                                                 }
                                                 .author-name:hover
                                                 {
@@ -1377,6 +1475,7 @@ h1:hover
                                                 {
                                                     color: inherit !important;
                                                     text-shadow: none;
+                                                    font-size: 13.5px;
                                                 }
                                             }
                                         }
@@ -2038,6 +2137,27 @@ h1:hover
     {
         margin-left: 8% !important;
     }
+    .post-share-modal
+    {
+        .modal-dialog
+        {
+            width: 380px !important;
+        }
+    }
+    .post-like-box,.comment-like-box,.post-share-box
+    {
+        .modal
+        {
+            .modal-dialog
+            {
+                width: 380px !important;
+                .post-like-username-list,.comment-like-username-list,.post-share-username-list
+                {
+                    width: 95% !important;
+                }
+            }
+        }
+    }
 }
 @media (max-width:500px)
 {
@@ -2101,7 +2221,32 @@ h1:hover
     {
         margin-left: 0% !important;
     }
+    .post-like-box,.comment-like-box,.post-share-box
+    {
+        .modal
+        {
+            .modal-dialog
+            {
+                width: 300px !important;
+            }
+        }
+    }
 
+}
+
+@media (max-width:400px)
+{
+    .deletecommentmodal,.post-delete-modal
+    {
+        width: 312px !important;
+    }
+    .post-share-modal
+    {
+        .modal-dialog
+        {
+            width: 312px !important;
+        }
+    }
 }
 
 @media (max-width:380px)
@@ -2127,6 +2272,13 @@ h1:hover
         #female-gender-span
         {
             margin-top: 7px;
+        }
+    }
+    .post-share-modal
+    {
+        .modal-dialog
+        {
+            width: 280px !important;
         }
     }
 }

@@ -138,22 +138,20 @@ module.exports.searchFunction=async function(req,res)
             for(user of usersFound)
             {
                 let img;
+                let bgColor;
                 if(user.avatar)
                 {
                     img=user.avatar;
                 }
-                else if(user.gender=="male")
-                {
-                    img="https://i.stack.imgur.com/HQwHI.jpg"
-                }
                 else
                 {
-                    img="/images/femaleProfile.png"
+                    bgColor=user.info.bgColor
                 }
                 let data={
                     name:user.name,
                     id:user._id,
-                    avatar:img
+                    avatar:img,
+                    bgColor:bgColor
                 }
                 found.push(data)
             }

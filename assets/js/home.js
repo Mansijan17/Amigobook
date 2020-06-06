@@ -289,10 +289,18 @@ let searchFunction= function()
           ul.empty();
           for(let user of data.data.usersFound)
           {
-              ul.append($(`<a href="/users/profile/${user.id}" target="_blank">
-                    <img src=${user.avatar}>
-                    ${user.name}
-                </a>`));
+              let newList=$(`<a href="/users/profile/${user.id}" target="_blank">
+              <span>${user.name}</span>
+              </a>`)
+              if(user.avatar)
+              {
+                  newList.prepend(`<img src=${user.avatar}>`)
+              }
+              else
+              {
+                newList.prepend(`<div class="concealed-image" style="background:${user.bgColor}">${user.name.split(" ")[0].charAt(0)}</div>`)
+              }
+              ul.append(newList);
           }
         },
         error:function(err)

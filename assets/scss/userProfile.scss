@@ -503,12 +503,21 @@ body
             }
         }
     
-    img{
+    img,.concealed-image{
         height: 155px;
         width: 155px;
         border-radius: 20%;
         margin-bottom: 10px;
         box-shadow: 0px 2px 8px 0px;
+    }
+    .concealed-image
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Pacifico', cursive;
+        color: mistyrose;
+        font-size: 37px;
     }
 
 }

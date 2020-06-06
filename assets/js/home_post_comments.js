@@ -81,10 +81,10 @@ class PostComments{
                     new ToggleLike($(" .toggle-like-button", newComment));
                     new Noty({
                         theme: 'relax',
-                        text: "Comment published!",
+                        text: "Congrats, now you are the parent of this baby!",
                         type: 'success',
                         layout: 'topRight',
-                        timeout: 1500
+                        timeout: 1800
                         
                     }).show();
 
@@ -218,7 +218,7 @@ class PostComments{
                     $('body').removeClass( "modal-open" );
                     new Noty({
                         theme: 'relax',
-                        text: "Comment Deleted!",
+                        text: "See you, till the next time!",
                         type: 'success',
                         layout: 'topRight',
                         timeout: 1500
@@ -264,8 +264,8 @@ class PostComments{
                         button.css("pointer-events","none");
                     })
                    
-                    $(`#comment-${ data.data.commentID}-content div .comment-text`).remove();
-                    $(`#comment-${ data.data.commentID}-content div`).prepend(`<span class="comment-text" style="width:100%"><form action="/comments/update-comment-c2" method="post" class="comment-update-form">
+                    $(`#comment-${ data.data.commentID}-content > div .comment-text`).remove();
+                    $(`#comment-${ data.data.commentID}-content > div`).prepend(`<span class="comment-text" style="width:100%"><form action="/comments/update-comment-c2" method="post" class="comment-update-form">
                     <textarea required  name="content" onkeydown="autosize1(this)">${ data.data.content}</textarea>
                     <input type="hidden" name="comment" value="${ data.data.commentID}">
                     <button type="submit">U</button>
@@ -320,10 +320,10 @@ class PostComments{
                                     $(`#comment-${data.data.commentID}-reply-content`).html(`${data.data.content}`);
                                     new Noty({
                                         theme:"relax",
-                                        text:"Comment updated successfully!",
+                                        text:"This comment had a successful affair of words!",
                                         type:"success",
                                         layput:"topRight",
-                                        timeout:1500
+                                        timeout:1800
                                     }).show();
                                 },
                                 error:function(err)

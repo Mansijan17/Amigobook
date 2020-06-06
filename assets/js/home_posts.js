@@ -196,7 +196,7 @@
                 </div>
                 <div class=" modal-body"  >
                 <form action="/posts/share-post/" method="post" class="toggle-share-button" data-shares="0" id="post-${i._id }-share-form">
-                <input type="text" name="content" required value="Add some thoughts to it!!!">
+                <textarea name="content" required onkeydown="autosize1(this)">Add some thoughts to it!!!</textarea> 
                 <input type="hidden" name="post" value="${i._id}">
                 
             

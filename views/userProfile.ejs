@@ -95,10 +95,8 @@
       <div class="middle">
         <% if(profileUser.avatar) {%>
             <img src="<%= profileUser.avatar %>" alt="<%= profileUser.name %>" width="100" height="100">
-        <% } else if (profileUser.gender=="male"){%>
-            <img src="https://i.stack.imgur.com/HQwHI.jpg" width="100" height="100">
         <% }  else {%>
-            <img src="/images/femaleProfile.png" width="100" height="100">
+            <div class="concealed-image" style="background:<%=profileUser.info.bgColor%>;"><span><%= profileUser.name.split(" ")[0].charAt(0)%></span></div>
         <% } %>
         <p class="profile-name"><%= profileUser.name %></p>
         <p class="profile-about">

@@ -25,7 +25,12 @@
               <!-- Modal content-->
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title" id="comment-<%=comment._id%>-like-title">Comment Reactions  
+                  <h4 class="modal-title" id="comment-<%=comment._id%>-like-title">Comment 
+                    <% if(comment.likes.length==0 || comment.likes.length==1) {%>  
+                        Reaction
+                        <%} else {%>
+                            Reactions
+                        <% } %>
                     <span>
                         <% if(comment.likes.length>0) { %>
                             <%= comment.likes.length%>
