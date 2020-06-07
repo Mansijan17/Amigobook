@@ -1,0 +1,210 @@
+.post-like-box
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40%;
+
+    span
+    {
+        color:#006881;
+        cursor: pointer;
+    }
+
+    .post-likes-number
+    {
+        top: 13px;
+        position: absolute;
+        right: 13px;
+        font-size: 22.4px;
+        transition: all 1s ease-in-out;
+
+
+        a{
+            color:#006881 !important;
+        }
+        
+        .toggle-like-button i:hover
+        {
+           
+            
+            transform: scale(1.2);
+        }
+        span:hover{
+
+            text-decoration: underline;
+        }
+        
+    }
+
+
+    .modal
+    {
+        
+        color: black;
+        padding-right: 16px;
+
+        .modal-dialog
+        {
+            margin: 50px auto;
+            width: 500px;
+
+            .modal-header
+            {
+                background: #b59dd5;
+               
+                width: 100.1%;
+                .modal-title
+                {
+                    color: whitesmoke;
+                    font-size: 21px;
+                    font-weight: bolder;
+                    font-family: 'Cedarville Cursive', cursive !important;
+                    span
+                    {
+                        display: block;
+                        color: mediumvioletred;
+                        margin-top: 5px;
+                        font-family: serif;
+                        font-weight: 550;
+                    }
+                }
+            }
+            
+            .modal-content
+            {
+                width: 100%;
+                .modal-body
+                {
+                    height: auto;
+                    display: flex;
+                    justify-content: center;
+                    width: 100%;
+                   
+                }
+            }
+
+        }
+    }
+
+    .post-like-username-list
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 75%;
+        padding-left: 0;
+        max-height: 300px;
+        overflow: auto;
+
+        li
+        {
+            min-height: 30px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            text-align: right;
+            align-items: center;
+            margin: 5px auto !important;
+
+            a{
+                color: #006881;
+                display: flex;
+                img,.concealed-image{
+                    height: 40px;
+                    width: 40px;
+                    border-radius: 50%;
+                    margin-right: 5px;
+                }
+                .concealed-image
+                {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-family: 'Pacifico', cursive;
+                    color: mistyrose;
+                    >span
+                    {
+                        color: mistyrose !important;
+                    }
+                    >span:hover{
+                        font-weight: normal;
+                        color:mistyrose !important;
+                    }
+                }
+                span{
+                    
+                    font-variant: small-caps;
+                    align-self: center;
+                    color:#88a1a7;
+                    text-align:left;
+                }
+                span:hover
+                {
+                    font-weight: bold;
+                    color:#88a1a7 !important;
+                }
+                img:hover,.concealed-image:hover
+                {
+                    filter: brightness(0.8);
+                }
+            }
+        }
+
+        li::after
+        {
+            content: '\f21e';
+            font-weight: 900;
+            font-family: "Font Awesome 5 Free";
+            display: inline-block;
+            color:#BF0A30;
+        }
+    }
+ 
+}
+
+@media (max-width:550px)
+{
+    .post-like-box
+    {
+        .modal
+        {
+            .modal-dialog
+            {
+                width: 380px !important;
+                .post-like-username-list,.comment-like-username-list,.post-share-username-list
+                {
+                    width: 95% !important;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:500px)
+{
+    .post-like-box
+    {
+        .post-likes-number
+        {
+            span,a{
+                color:#85ccbc !important;
+            }
+        }
+    }
+}
+
+@media (max-width:425px)
+{
+    .post-like-box
+    {
+        .modal
+        {
+            .modal-dialog
+            {
+                width: 300px !important;
+            }
+        }
+    }
+}

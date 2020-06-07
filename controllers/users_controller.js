@@ -32,14 +32,23 @@ module.exports.profile = async function (req, res) {
                     path:"likes",
                     populate:{
                         path:"user"
+                    },
+                    options:{
+                        sort:"-createdAt"
                     }
                   
+                },
+                options:{
+                    sort:"-createdAt"
                 },
             
         }).populate({
             path:"likes",
             populate:{
                 path:"user"
+            },
+            options:{
+                sort:"-createdAt"
             }
         }).populate({
             path:"shares",

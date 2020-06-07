@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-con" href="/images/peace-symbol.png">
-    <link href="https://fonts.googleapis.com/css2?family=Bentham&family=Bellota:wght@700&family=Cabin+Sketch:wght@700&family=Courgette&family=Dancing+Script&family=Kaushan+Script&family=Marck+Script&family=Merienda+One&family=Parisienne&family=Rufina&family=Satisfy&family=VT323&family=Pacifico&family=Special+Elite&family=Cedarville+Cursive&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bentham&family=Bellota:wght@700&family=Cabin+Sketch:wght@700&family=Courgette&family=Dancing+Script&family=Kaushan+Script&family=Marck+Script&family=Merienda+One&family=Parisienne&family=Rufina&family=Satisfy&family=VT323&family=Pacifico&family=Special+Elite&family=Cedarville+Cursive&family=Cinzel&display=swap" rel="stylesheet">
     <title><%= title %></title>
     <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
     <script src="https://kit.fontawesome.com/a5a7a79d9a.js" crossorigin="anonymous"></script>
@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="/css/like.css">
     <link rel="stylesheet"  href="/css/home.css">
     <link rel="stylesheet" href="/css/searchbar.css">
+    <link rel="stylesheet" href="/css/postlike.css">
+    <link rel="stylesheet" href="/css/comment.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <%- style %> 
@@ -22,12 +24,17 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
-
-
     <%- include("_header"); %>
-          
         <% if(locals.user) {%>
-            <main id="layout-main" style="margin-bottom: 88px;">
+            <div id="stars-group-1"></div>
+            <div id="stars-group-2"></div>
+            <div id="stars-group-3"></div>
+            <div id="stars-group-4"></div>
+            <% if(title!="Skyinyou | Comment Replies") {%>
+                <main id="layout-main" style="margin-bottom: 0px;">
+            <% } else {%>
+                <main id="layout-main" style="margin-bottom: 0px;">
+            <% } %>
         <% } else { %>
             <% if(title=="Skyinyou | New Password" || title=="Skyinyou | Forget Password" || title=="Skyinyou | Confirm Account") {%>
                 <main id="layout-main" style="margin-top: 75px;margin-bottom: 0px;">
@@ -43,9 +50,6 @@
         
 
     <%- include("_footer"); %>
-   
-
-
   
     <script>
         <% if(flash.success && flash.success.length>0) { %>
@@ -54,7 +58,7 @@
                 text:"<%= flash.success %>",
                 type:"success",
                 layput:"topRight",
-                timeout:1500
+                timeout:1700
             }).show();
         <% } %>
 
@@ -64,7 +68,7 @@
                 text:"<%= flash.error %>",
                 type:"error",
                 layput:"topRight",
-                timeout:1500
+                timeout:1700
             }).show();
         <% } %>
 

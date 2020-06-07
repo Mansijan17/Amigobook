@@ -204,169 +204,7 @@ h1:hover
                         text-decoration: none;
                     }
 
-                    .post-like-box
-                    {
-                        position: absolute;
-                        top: 0;
-                        right: 0;
-                        width: 40%;
 
-                        span
-                        {
-                            color:#006881;
-                            cursor: pointer;
-                        }
-
-                        .post-likes-number
-                        {
-                            top: 13px;
-                            position: absolute;
-                            right: 13px;
-                            font-size: 22.4px;
-                            transition: all 1s ease-in-out;
-
-
-                            a{
-                                color:#006881;
-                            }
-                            
-                            .toggle-like-button i:hover
-                            {
-                               
-                                
-                                transform: scale(1.2);
-                            }
-                            span:hover{
-
-                                text-decoration: underline;
-                            }
-                            
-                        }
-
-
-                        .modal
-                        {
-                            
-                            color: black;
-                            padding-right: 16px;
-
-                            .modal-dialog
-                            {
-                                margin: 50px auto;
-                                width: 500px;
-
-                                .modal-header
-                                {
-                                    background: #b59dd5;
-                                    font-family: 'Cedarville Cursive', cursive;
-                                    width: 100.1%;
-                                    .modal-title
-                                    {
-                                        color: whitesmoke;
-                                        font-size: 21px;
-                                        font-weight: bolder;
-                                    }
-                                }
-                                
-                                .modal-content
-                                {
-                                    width: 100%;
-                                    .modal-title
-                                    {
-                                        span
-                                        {
-                                            display: block;
-                                            color: mediumvioletred;
-                                            margin-top: 5px;
-                                        }
-                                    }
-                                    .modal-body
-                                    {
-                                        height: auto;
-                                        display: flex;
-                                        justify-content: center;
-                                        width: 100%;
-                                       
-                                    }
-                                }
-
-                            }
-                        }
-
-                        .post-like-username-list
-                        {
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: center;
-                            align-items: center;
-                            width: 75%;
-                            padding-left: 0;
-                            max-height: 300px;
-                            overflow: auto;
-
-                            li
-                            {
-                                min-height: 30px;
-                                width: 100%;
-                                display: flex;
-                                justify-content: space-between;
-                                text-align: right;
-                                align-items: center;
-                                margin: 1px;
-
-                                a{
-                                    color: #006881;
-                                    display: flex;
-                                    img,.concealed-image{
-                                        height: 40px;
-                                        width: 40px;
-                                        border-radius: 50%;
-                                        margin-right: 5px;
-                                    }
-                                    .concealed-image
-                                    {
-                                        display: flex;
-                                        justify-content: center;
-                                        align-items: center;
-                                        font-family: 'Pacifico', cursive;
-                                        color: mistyrose;
-                                        >span
-                                        {
-                                            color: inherit !important;
-                                        }
-                                        >span:hover{
-                                            font-weight: normal;
-                                        }
-                                    }
-                                    span{
-                                        
-                                        font-variant: small-caps;
-                                        align-self: center;
-                                        color:#88a1a7;
-                                        text-align:left;
-                                    }
-                                    span:hover
-                                    {
-                                        font-weight: bold;
-                                    }
-                                    img:hover,.concealed-image:hover
-                                    {
-                                        filter: brightness(0.8);
-                                    }
-                                }
-                            }
-
-                            li::after
-                            {
-                                content: '\f21e';
-                                font-weight: 900;
-                                font-family: "Font Awesome 5 Free";
-                                display: inline-block;
-                                color:#BF0A30;
-                            }
-                        }
-                     
-                    }
 
                     
                     .delete-post-modal
@@ -404,6 +242,7 @@ h1:hover
                                 .modal-title
                                 {
                                     color: #78bbc5 !important;
+                                    font-family: 'Gill Sans' !important;
                                 }
                             }
                             .modal-body
@@ -751,401 +590,6 @@ h1:hover
                                     border-radius: 15px;
                                     box-sizing: border-box;
 
-                                    .comment-like-box
-                                    {
-                                        top: 3px;
-                                        left: 87%;
-                                        position: relative;
-                                        margin-bottom: 15px;
-
-                                        .modal-dialog
-                                        {
-                                            margin: 50px auto;
-                                            width: 500px;
-            
-                                            .modal-header
-                                            {
-                                                background: #b59dd5;
-                                                font-family: 'Cedarville Cursive', cursive;
-                                                width: 100.1%;
-                                                .modal-title
-                                                {
-                                                    color: whitesmoke;
-                                                    font-size: 21px;
-                                                    font-weight: bolder;
-                                                }
-                                            }
-                                        }
-                                      
-                                        .comment-likes-number
-                                        {
-                                            font-size: 17.5px;
-                                            span
-                                            {
-                                                color: darkmagenta;
-                                                display: inline-block;
-                                                cursor: pointer;
-                                                margin-left: 5px;
-                                            }
-                                            a{
-                                                
-                                                color:#145556;
-                                                position: absolute;
-                                                left: 21px;
-                                            }
-                                            span:hover
-                                            {
-                                                color: #113a3b;
-                                            }
-                                        }
-
-                                        .comment-view-likes
-                                        {
-                                            position: absolute;
-                                            top: 0px;
-                                            right: 105%;
-                                            cursor: pointer;
-                                            font-size: 12px;
-                                            width: 65px;
-                                            color: aquamarine;
-                                            font-family: monospace;
-                                            word-spacing: -1px;
-                                        }
-                
-                                        .like-thumbs:hover
-                                        {
-                                            color:#4D2E42;
-                                        }
-                
-                                        .comment-view-likes{
-                                            transition: all 0.2s ease-in;
-                                        }
-                
-                                        .comment-view-likes:hover
-                                        {
-                                            
-                                            border-bottom:1px solid darkgreen;
-                                            
-                                        }
-                                    
-                                        .modal
-                                        {
-                                            
-                                            color: black;
-                                            padding-right: 16px;
-
-                                            .modal-dialog
-                                            {
-                                            
-                                                .modal-content
-                                                {
-                                                    width: 100%;
-                                                    .modal-title
-                                                    {
-                                                        text-align: center;
-                                                        span
-                                                        {
-                                                            display: block;
-                                                            margin-top: 5px;
-                                                            color: mediumvioletred;
-                                                        }
-                                                    }
-                                                    .modal-body
-                                                    {
-                                                        height: auto;
-                                                        display: flex;
-                                                        justify-content: center;
-                                                        width: 100%;
-                                                    
-                                                    }
-                                                }
-
-                                            }
-                                        }
-
-                                                    
-                                        .comment-like-username-list
-                                        {
-                                            display: flex;
-                                            flex-direction: column;
-                                            justify-content: center;
-                                            align-items: center;
-                                            width: 75%;
-                                            padding-left: 0;
-                                            max-height: 300px;
-                                            overflow: auto;
-
-                                            li
-                                            {
-                                                min-height: 30px;
-                                                width: 100%;
-                                                display: flex;
-                                                justify-content: space-between;
-                                                text-align: right;
-                                                align-items: center;
-                                                margin: 1px;
-
-                                                a{
-                                                    color: #006881;
-                                                    display: flex;
-                                                    img,.concealed-image{
-                                                        height: 40px;
-                                                        width: 40px;
-                                                        border-radius: 50%;
-                                                        margin-right: 5px;
-                                                    }
-                                                    .concealed-image
-                                                    {
-                                                        display: flex;
-                                                        justify-content: center;
-                                                        align-items: center;
-                                                        font-family: 'Pacifico', cursive;
-                                                        color: mistyrose;
-                                                        >span
-                                                        {
-                                                            color: inherit !important;
-                                                        }
-                                                        >span:hover{
-                                                            font-weight: normal;
-                                                        }
-                                                    }
-                                                    span{
-                                        
-                                                        font-variant: petite-caps;
-                                                        align-self: center;
-                                                        text-align: left;
-                                                    }
-                                                    span:hover
-                                                    {
-                                                        font-weight: bold;
-                                                    }
-                                                    img:hover,.concealed-image:hover
-                                                    {
-                                                        filter: brightness(0.8);
-                                                    }
-                                                }
-                                        }
-
-                                        li::after
-                                        {
-                                            content: '\f21e';
-                                            font-weight: 900;
-                                            font-family: "Font Awesome 5 Free";
-                                            display: inline-block;
-                                            color:#BF0A30;
-                                        }
-                                    }
-                                    .comment-like-username-list::-webkit-scrollbar {
-                                        display: none;
-                                    }
-                                }
-
-                                    .comment-deletion
-                                    {
-                                        position: absolute;
-                                        left: 9px;
-                                        top: 7px;
-
-                                        span i{
-                                            font-weight: bolder;
-                                            font-size: 15px;
-                                            translate: all 0.4s ease-in;
-                                            cursor: pointer;
-                                        }
-
-                                        span i:hover
-                                        {
-                                            color:#90212a;
-                                        }
-                                        .deletecommentmodal
-                                        {
-                                            width: 400px;
-                                            margin: auto;
-                                            margin-top: 150px;
-                                            color:black;
-                                            .modal-dialog
-                                            {
-                                                width: 100%;
-                                                text-align: center;
-                                                .modal-header
-                                                {
-                                                    background: #a22a2a;
-                                                    width: 100.1%;
-                                                    .modal-title
-                                                    {
-                                                        color: #78bbc5 !important;
-                                                    }
-                                                }
-                                                .modal-body
-                                                {
-                                                    font-size: 14px;
-                                                    color: #8F9BA8;
-                                                    width: 87%;
-                                                    margin: auto;
-                                                }
-                                                .modal-footer
-                                                {
-                                                    a{
-                                                        color: white;
-                                                    }
-                                                    button:focus{
-                                                        outline: none;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                    .update-comment-button
-                                    {
-                                        position: absolute;
-                                        top: 6px;
-                                        left: 7%;
-                                        color: #1a4766;
-                                        font-size: 15px;
-                                    }
-                                    .comment-editedTag
-                                    {
-                                        position: absolute;
-                                        top: 7.5px;
-                                        font-size: 13px;
-                                        left: 42%;
-                                        font-style: oblique;
-                                        color: #4bd4a1;
-                                        font-weight: bolder;
-                                    }
-                                    .comment-reply
-                                    {
-                                        position: absolute;
-                                        right: 6px;
-                                        bottom: 3px;
-                                        font-size: 18px;
-                                        cursor: pointer;
-                                        color: powderblue;
-                                        filter: blur(0.8px);
-
-                                        
-                                    }
-                                    .comment-reply:hover
-                                    {
-                                        filter: blur(0px);
-                                    }
-                                    
-                                    .comment-content
-                                    {
-                                        margin-bottom:20px;
-                                        text-align: center;
-                                        margin-left: 0;
-
-                                        >div
-                                        {
-                                            overflow-wrap: break-word;
-                                            .comment-text
-                                            {
-                                                margin-bottom: 10px;
-                                                display: inline-block;
-                                                overflow-wrap: break-word;
-                                                width: 80%;
-                                                font-size: 16px;
-                                                text-align: left;
-
-                                                .comment-update-form
-                                                {
-                                                    display: flex;
-                                                    justify-content: space-around;
-                                                    width: 100%;
-                                                    height: auto;
-                                                    min-height: 50px;
-
-                                                    textarea
-                                                    {
-                                                        padding-left: 10px;
-                                                        background: none;
-                                                        resize: none;
-                                                        border: 1.5px solid darkgreen;
-                                                        border-radius: 10px;
-                                                        overflow: auto;
-                                                        width: 75%;
-                                                        height: auto;
-                                                        min-height: 40px;
-                                                    }
-                                                    textarea:focus,button:focus
-                                                    {
-                                                        outline: none;
-                                                    }
-                                                    textarea::-webkit-scrollbar {
-                                                        display: none;
-                                                    }
-                                                    button{
-                                                        height: 50%;
-                                                        align-self: center;
-                                                        background: lightseagreen;
-                                                        border: none;
-                                                        cursor: pointer;
-                                                        transition: all 0.5s ease-in-out;
-                                                        padding-top: 3px;
-                                                    }
-                                                    button:hover
-                                                    {
-                                                        border-radius: 10px;
-                                                    }
-                                                }
-
-                                            }
-
-                                            .author-comment-name
-                                            {
-                                                margin-bottom: 5px;
-                                                a
-                                                {
-                                                    color:#043726;
-                                                    font-weight: bolder;
-                                                    font-size: 13.5px;
-                                                    
-                                                    img,.concealed-image{
-                                                        height: 32px;
-                                                        width: 32px;
-                                                        border-radius: 50%;
-                                                    }
-                                                    .concealed-image
-                                                    {
-                                                        margin: 0px auto 10px;
-                                                        display: flex;
-                                                        justify-content: center;
-                                                        align-items: center;
-                                                        font-family: 'Pacifico', cursive;
-                                                        color: mistyrose;
-                                                    }
-                                                    img:hover,.concealed-image:hover{
-                                                        filter: contrast(1.5);
-                                                    }
-                                                    .author-tag
-                                                    {
-                                                        background-color: lightseagreen;
-                                                        margin-left: 5px;
-                                                        padding: 2px;
-                                                        color: white;
-                                                    }
-                                                }
-                                                a:hover
-                                                {
-                                                    color: darkslategrey;
-                                                }
-                                            }
-
-                                            .comment-timestamps
-                                            {
-                                                font-size: 13px;
-                                                background-color: darkgray;
-                                                padding: 3px;
-                                                width: 135px;
-                                                display: block;
-                                                margin: 10px auto 0px;
-
-                                            }
-                                            
-                                        }
-                                    }
                                 }
 
                                 .comment-list:nth-child(2n)
@@ -1263,23 +707,24 @@ h1:hover
                                             color: whitesmoke;
                                             font-size: 21px;
                                             font-weight: bolder;
+                                            text-align: center;
+                                            color: tomato;
+                                            font-family: 'Cedarville Cursive', cursive !important;
+                                            span{
+                                                display: block;
+                                                margin-top: 5px;
+                                                font-size: 21px;
+                                                color:#7ba4a4;
+                                                font-family: sans-serif;
+                                                font-weight: 550;
+                                            }
+                                                
                                         }
                                     }
                                 
                                 .modal-content
                                 {
                                     width: 100%;
-                                    .modal-title
-                                    {
-                                        text-align: center;
-                                        color: tomato;
-                                        span{
-                                            display: block;
-                                            margin-top: 5px;
-                                            font-size: 21px;
-                                            color:#7ba4a4;
-                                        }
-                                    }
                                     .modal-body
                                     {
                                         height: auto;
@@ -1314,10 +759,10 @@ h1:hover
                                 justify-content: space-between;
                                 text-align: right;
                                 align-items: center;
-                                margin: 1px;
+                                margin: 5px auto !important;
 
                                 a{
-                                    color: #006881;
+                                    color:#648a93 !important;
                                     font-size: 16px;
                                     font-variant-caps: all-petite-caps;
                                     display: flex;
@@ -1337,12 +782,13 @@ h1:hover
                                             
                                             >span
                                             {
-                                                color: inherit !important;
+                                                color: mistyrose !important;
                                                 text-shadow: none;
                                             }
                                             >span:hover
                                             {
                                                 border: none;
+                                                color: mistyrose !important;
                                             }
                                         }
                                     span{
@@ -1352,7 +798,8 @@ h1:hover
                                         }
                                     span:hover
                                     {
-                                        border-bottom: 1px dotted #4a93c5;;
+                                        border-bottom: 1px dotted #4a93c5;
+                                        color: #648a93 !important;
                                     }
                                     img:hover,.concealed-image:hover
                                     {
@@ -1384,12 +831,13 @@ h1:hover
                             
                             .modal-header
                             {
-                                background: #F57C00;
-                                font-family: 'Special Elite', cursive;
+                                background: #F57C00 !important;
+                                font-family: 'Special Elite', cursive !important;
                                 width: 100.1%;
                                 .modal-title
                                 {
                                     color:#651717 !important; 
+                                    font-family: 'Special Elite', cursive !important;
                                 }
                             }
                             .modal-body
@@ -1399,6 +847,9 @@ h1:hover
                                     height: auto;
                                     display: flex;
                                     flex-direction: column;
+                                    form{
+                                        width: 100%;
+                                    }
                                     textarea
                                     {
                                         width: 95%;
@@ -1574,7 +1025,7 @@ h1:hover
 .homepage-without-login
 {
     margin-top: 60px;
-    margin-bottom: 70px;
+    margin-bottom: 0px;
     height: auto;
     p
     {
@@ -1616,7 +1067,6 @@ h1:hover
                 height: auto !important;
                 
             }
-
             .display-images
             {
                 height: 300px !important;
@@ -2062,10 +1512,13 @@ h1:hover
 
 @media (max-width:1200px)
 {
-    .comment-like-box
-    {
-        left: 87% !important;
-    }
+    // .comment-list
+    // {
+    //     .comment-like-box
+    //     {
+    //         left: 87% !important;
+    //     }
+    // }
 }
 @media (max-width:1065px)
 {
@@ -2090,6 +1543,16 @@ h1:hover
         left: 6% !important;
     }
 }
+
+@media (max-width:850px)
+{
+    .homepage-without-login
+    {
+        margin-bottom: 25px !important;
+    }
+
+}
+
 @media (max-width:800px)
 {
     #feed-posts
@@ -2118,10 +1581,14 @@ h1:hover
         top: 26px !important;
         left: 3% !important;
     }
-    .comment-like-box
-    {
-        left:85% !important;
-    }
+    // .comment-list
+    // {
+    //     .comment-like-box
+    //     {
+    //         left:85% !important;
+    //     }
+    // }
+   
 }
 @media (max-width:550px)
 {
@@ -2144,14 +1611,14 @@ h1:hover
             width: 380px !important;
         }
     }
-    .post-like-box,.comment-like-box,.post-share-box
+    .comment-like-box,.post-share-box
     {
         .modal
         {
             .modal-dialog
             {
                 width: 380px !important;
-                .post-like-username-list,.comment-like-username-list,.post-share-username-list
+                .comment-like-username-list,.post-share-username-list
                 {
                     width: 95% !important;
                 }
@@ -2168,10 +1635,14 @@ h1:hover
             width: 67% !important;
         }
     }
-    .comment-like-box
-    {
-        left: 83% !important;
-    }
+    // .comment-list
+    // {
+    //     .comment-like-box
+    //     {
+    //         left: 83% !important;
+    //     }
+    // }
+  
     #feed-posts
     {
         width: 100% !important;
@@ -2188,31 +1659,24 @@ h1:hover
             }
         }
     }
-    .post-like-box
-    {
-        .post-likes-number
-        {
-            span,a{
-                color:#85ccbc !important;
-            }
-        }
-    }
+  
 }
 @media (max-width:425px)
 {
-    .comment-like-box
+    .comment-list
     {
-        left: 81% !important;
+        width: 98% !important;
+    //     .comment-like-box
+    //     {
+    //         left: 81% !important;
+    //     }
     }
+  
     .post-text
     {
         span{
         width: 96% !important;
         }
-    }
-    .comment-list
-    {
-        width: 98% !important;
     }
     .comment-list:nth-child(2n) {
         left: 0 !important;
@@ -2221,7 +1685,7 @@ h1:hover
     {
         margin-left: 0% !important;
     }
-    .post-like-box,.comment-like-box,.post-share-box
+    .comment-like-box,.post-share-box
     {
         .modal
         {
@@ -2305,9 +1769,13 @@ h1:hover
         width: 105% !important;
         overflow-x: hidden;
     }
-    .comment-like-box {
-        left: 79% !important;
-    }
+    // .comment-list
+    // {
+    //     .comment-like-box {
+    //         left: 79% !important;
+    //     }
+    // }
+ 
 }
 
 .bckgd-dark

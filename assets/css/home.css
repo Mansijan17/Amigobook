@@ -137,101 +137,6 @@ h1:hover {
           .home-container #feed-posts #posts-list-container > ul .post-list a {
             color: #e3debf;
             text-decoration: none; }
-          .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 40%; }
-            .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box span {
-              color: #006881;
-              cursor: pointer; }
-            .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-likes-number {
-              top: 13px;
-              position: absolute;
-              right: 13px;
-              font-size: 22.4px;
-              transition: all 1s ease-in-out; }
-              .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-likes-number a {
-                color: #006881; }
-              .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-likes-number .toggle-like-button i:hover {
-                transform: scale(1.2); }
-              .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-likes-number span:hover {
-                text-decoration: underline; }
-            .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .modal {
-              color: black;
-              padding-right: 16px; }
-              .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .modal .modal-dialog {
-                margin: 50px auto;
-                width: 500px; }
-                .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .modal .modal-dialog .modal-header {
-                  background: #b59dd5;
-                  font-family: 'Cedarville Cursive', cursive;
-                  width: 100.1%; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .modal .modal-dialog .modal-header .modal-title {
-                    color: whitesmoke;
-                    font-size: 21px;
-                    font-weight: bolder; }
-                .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .modal .modal-dialog .modal-content {
-                  width: 100%; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .modal .modal-dialog .modal-content .modal-title span {
-                    display: block;
-                    color: mediumvioletred;
-                    margin-top: 5px; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .modal .modal-dialog .modal-content .modal-body {
-                    height: auto;
-                    display: flex;
-                    justify-content: center;
-                    width: 100%; }
-            .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list {
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
-              width: 75%;
-              padding-left: 0;
-              max-height: 300px;
-              overflow: auto; }
-              .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list li {
-                min-height: 30px;
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-                text-align: right;
-                align-items: center;
-                margin: 1px; }
-                .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list li a {
-                  color: #006881;
-                  display: flex; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list li a img, .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list li a .concealed-image {
-                    height: 40px;
-                    width: 40px;
-                    border-radius: 50%;
-                    margin-right: 5px; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list li a .concealed-image {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    font-family: 'Pacifico', cursive;
-                    color: mistyrose; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list li a .concealed-image > span {
-                      color: inherit !important; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list li a .concealed-image > span:hover {
-                      font-weight: normal; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list li a span {
-                    font-variant: small-caps;
-                    align-self: center;
-                    color: #88a1a7;
-                    text-align: left; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list li a span:hover {
-                    font-weight: bold; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list li a img:hover, .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list li a .concealed-image:hover {
-                    filter: brightness(0.8); }
-              .home-container #feed-posts #posts-list-container > ul .post-list .post-like-box .post-like-username-list li::after {
-                content: '\f21e';
-                font-weight: 900;
-                font-family: "Font Awesome 5 Free";
-                display: inline-block;
-                color: #BF0A30; }
           .home-container #feed-posts #posts-list-container > ul .post-list .delete-post-modal {
             position: absolute;
             top: 13px;
@@ -254,7 +159,8 @@ h1:hover {
                 background: #a22a2a;
                 width: 100.1%; }
                 .home-container #feed-posts #posts-list-container > ul .post-list .post-delete-modal .modal-dialog .modal-header .modal-title {
-                  color: #78bbc5 !important; }
+                  color: #78bbc5 !important;
+                  font-family: 'Gill Sans' !important; }
               .home-container #feed-posts #posts-list-container > ul .post-list .post-delete-modal .modal-dialog .modal-body {
                 font-size: 14px;
                 color: #8F9BA8;
@@ -482,251 +388,6 @@ h1:hover {
                   padding: 5px;
                   border-radius: 15px;
                   box-sizing: border-box; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box {
-                    top: 3px;
-                    left: 87%;
-                    position: relative;
-                    margin-bottom: 15px; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .modal-dialog {
-                      margin: 50px auto;
-                      width: 500px; }
-                      .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .modal-dialog .modal-header {
-                        background: #b59dd5;
-                        font-family: 'Cedarville Cursive', cursive;
-                        width: 100.1%; }
-                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .modal-dialog .modal-header .modal-title {
-                          color: whitesmoke;
-                          font-size: 21px;
-                          font-weight: bolder; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-likes-number {
-                      font-size: 17.5px; }
-                      .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-likes-number span {
-                        color: darkmagenta;
-                        display: inline-block;
-                        cursor: pointer;
-                        margin-left: 5px; }
-                      .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-likes-number a {
-                        color: #145556;
-                        position: absolute;
-                        left: 21px; }
-                      .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-likes-number span:hover {
-                        color: #113a3b; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-view-likes {
-                      position: absolute;
-                      top: 0px;
-                      right: 105%;
-                      cursor: pointer;
-                      font-size: 12px;
-                      width: 65px;
-                      color: aquamarine;
-                      font-family: monospace;
-                      word-spacing: -1px; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .like-thumbs:hover {
-                      color: #4D2E42; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-view-likes {
-                      transition: all 0.2s ease-in; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-view-likes:hover {
-                      border-bottom: 1px solid darkgreen; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .modal {
-                      color: black;
-                      padding-right: 16px; }
-                      .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .modal .modal-dialog .modal-content {
-                        width: 100%; }
-                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .modal .modal-dialog .modal-content .modal-title {
-                          text-align: center; }
-                          .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .modal .modal-dialog .modal-content .modal-title span {
-                            display: block;
-                            margin-top: 5px;
-                            color: mediumvioletred; }
-                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .modal .modal-dialog .modal-content .modal-body {
-                          height: auto;
-                          display: flex;
-                          justify-content: center;
-                          width: 100%; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-like-username-list {
-                      display: flex;
-                      flex-direction: column;
-                      justify-content: center;
-                      align-items: center;
-                      width: 75%;
-                      padding-left: 0;
-                      max-height: 300px;
-                      overflow: auto; }
-                      .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-like-username-list li {
-                        min-height: 30px;
-                        width: 100%;
-                        display: flex;
-                        justify-content: space-between;
-                        text-align: right;
-                        align-items: center;
-                        margin: 1px; }
-                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-like-username-list li a {
-                          color: #006881;
-                          display: flex; }
-                          .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-like-username-list li a img, .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-like-username-list li a .concealed-image {
-                            height: 40px;
-                            width: 40px;
-                            border-radius: 50%;
-                            margin-right: 5px; }
-                          .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-like-username-list li a .concealed-image {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            font-family: 'Pacifico', cursive;
-                            color: mistyrose; }
-                            .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-like-username-list li a .concealed-image > span {
-                              color: inherit !important; }
-                            .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-like-username-list li a .concealed-image > span:hover {
-                              font-weight: normal; }
-                          .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-like-username-list li a span {
-                            font-variant: petite-caps;
-                            align-self: center;
-                            text-align: left; }
-                          .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-like-username-list li a span:hover {
-                            font-weight: bold; }
-                          .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-like-username-list li a img:hover, .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-like-username-list li a .concealed-image:hover {
-                            filter: brightness(0.8); }
-                      .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-like-username-list li::after {
-                        content: '\f21e';
-                        font-weight: 900;
-                        font-family: "Font Awesome 5 Free";
-                        display: inline-block;
-                        color: #BF0A30; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-like-box .comment-like-username-list::-webkit-scrollbar {
-                      display: none; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion {
-                    position: absolute;
-                    left: 9px;
-                    top: 7px; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion span i {
-                      font-weight: bolder;
-                      font-size: 15px;
-                      translate: all 0.4s ease-in;
-                      cursor: pointer; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion span i:hover {
-                      color: #90212a; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion .deletecommentmodal {
-                      width: 400px;
-                      margin: auto;
-                      margin-top: 150px;
-                      color: black; }
-                      .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion .deletecommentmodal .modal-dialog {
-                        width: 100%;
-                        text-align: center; }
-                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion .deletecommentmodal .modal-dialog .modal-header {
-                          background: #a22a2a;
-                          width: 100.1%; }
-                          .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion .deletecommentmodal .modal-dialog .modal-header .modal-title {
-                            color: #78bbc5 !important; }
-                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion .deletecommentmodal .modal-dialog .modal-body {
-                          font-size: 14px;
-                          color: #8F9BA8;
-                          width: 87%;
-                          margin: auto; }
-                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion .deletecommentmodal .modal-dialog .modal-footer a {
-                          color: white; }
-                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-deletion .deletecommentmodal .modal-dialog .modal-footer button:focus {
-                          outline: none; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .update-comment-button {
-                    position: absolute;
-                    top: 6px;
-                    left: 7%;
-                    color: #1a4766;
-                    font-size: 15px; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-editedTag {
-                    position: absolute;
-                    top: 7.5px;
-                    font-size: 13px;
-                    left: 42%;
-                    font-style: oblique;
-                    color: #4bd4a1;
-                    font-weight: bolder; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-reply {
-                    position: absolute;
-                    right: 6px;
-                    bottom: 3px;
-                    font-size: 18px;
-                    cursor: pointer;
-                    color: powderblue;
-                    filter: blur(0.8px); }
-                  .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-reply:hover {
-                    filter: blur(0px); }
-                  .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content {
-                    margin-bottom: 20px;
-                    text-align: center;
-                    margin-left: 0; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content > div {
-                      overflow-wrap: break-word; }
-                      .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content > div .comment-text {
-                        margin-bottom: 10px;
-                        display: inline-block;
-                        overflow-wrap: break-word;
-                        width: 80%;
-                        font-size: 16px;
-                        text-align: left; }
-                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content > div .comment-text .comment-update-form {
-                          display: flex;
-                          justify-content: space-around;
-                          width: 100%;
-                          height: auto;
-                          min-height: 50px; }
-                          .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content > div .comment-text .comment-update-form textarea {
-                            padding-left: 10px;
-                            background: none;
-                            resize: none;
-                            border: 1.5px solid darkgreen;
-                            border-radius: 10px;
-                            overflow: auto;
-                            width: 75%;
-                            height: auto;
-                            min-height: 40px; }
-                          .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content > div .comment-text .comment-update-form textarea:focus, .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content > div .comment-text .comment-update-form button:focus {
-                            outline: none; }
-                          .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content > div .comment-text .comment-update-form textarea::-webkit-scrollbar {
-                            display: none; }
-                          .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content > div .comment-text .comment-update-form button {
-                            height: 50%;
-                            align-self: center;
-                            background: lightseagreen;
-                            border: none;
-                            cursor: pointer;
-                            transition: all 0.5s ease-in-out;
-                            padding-top: 3px; }
-                          .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content > div .comment-text .comment-update-form button:hover {
-                            border-radius: 10px; }
-                      .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content > div .author-comment-name {
-                        margin-bottom: 5px; }
-                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content > div .author-comment-name a {
-                          color: #043726;
-                          font-weight: bolder;
-                          font-size: 13.5px; }
-                          .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content > div .author-comment-name a img, .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content > div .author-comment-name a .concealed-image {
-                            height: 32px;
-                            width: 32px;
-                            border-radius: 50%; }
-                          .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content > div .author-comment-name a .concealed-image {
-                            margin: 0px auto 10px;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            font-family: 'Pacifico', cursive;
-                            color: mistyrose; }
-                          .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content > div .author-comment-name a img:hover, .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content > div .author-comment-name a .concealed-image:hover {
-                            filter: contrast(1.5); }
-                          .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content > div .author-comment-name a .author-tag {
-                            background-color: lightseagreen;
-                            margin-left: 5px;
-                            padding: 2px;
-                            color: white; }
-                        .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content > div .author-comment-name a:hover {
-                          color: darkslategrey; }
-                      .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list .comment-content > div .comment-timestamps {
-                        font-size: 13px;
-                        background-color: darkgray;
-                        padding: 3px;
-                        width: 135px;
-                        display: block;
-                        margin: 10px auto 0px; }
                 .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list:nth-child(2n) {
                   left: 39.5%; }
                   .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list ul .comment-list:nth-child(2n) .comment-view-likes {
@@ -800,17 +461,19 @@ h1:hover {
                   .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .modal .modal-dialog .modal-header .modal-title {
                     color: whitesmoke;
                     font-size: 21px;
-                    font-weight: bolder; }
-                .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .modal .modal-dialog .modal-content {
-                  width: 100%; }
-                  .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .modal .modal-dialog .modal-content .modal-title {
+                    font-weight: bolder;
                     text-align: center;
-                    color: tomato; }
-                    .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .modal .modal-dialog .modal-content .modal-title span {
+                    color: tomato;
+                    font-family: 'Cedarville Cursive', cursive !important; }
+                    .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .modal .modal-dialog .modal-header .modal-title span {
                       display: block;
                       margin-top: 5px;
                       font-size: 21px;
-                      color: #7ba4a4; }
+                      color: #7ba4a4;
+                      font-family: sans-serif;
+                      font-weight: 550; }
+                .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .modal .modal-dialog .modal-content {
+                  width: 100%; }
                   .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .modal .modal-dialog .modal-content .modal-body {
                     height: auto;
                     display: flex;
@@ -833,9 +496,9 @@ h1:hover {
                 justify-content: space-between;
                 text-align: right;
                 align-items: center;
-                margin: 1px; }
+                margin: 5px auto !important; }
                 .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .post-share-username-list li a {
-                  color: #006881;
+                  color: #648a93 !important;
                   font-size: 16px;
                   font-variant-caps: all-petite-caps;
                   display: flex; }
@@ -851,16 +514,18 @@ h1:hover {
                     font-family: 'Pacifico', cursive;
                     color: mistyrose; }
                     .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .post-share-username-list li a .concealed-image > span {
-                      color: inherit !important;
+                      color: mistyrose !important;
                       text-shadow: none; }
                     .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .post-share-username-list li a .concealed-image > span:hover {
-                      border: none; }
+                      border: none;
+                      color: mistyrose !important; }
                   .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .post-share-username-list li a span {
                     align-self: center;
                     transition: all 0.5s ease-in;
                     text-align: left; }
                   .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .post-share-username-list li a span:hover {
-                    border-bottom: 1px dotted #4a93c5; }
+                    border-bottom: 1px dotted #4a93c5;
+                    color: #648a93 !important; }
                   .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .post-share-username-list li a img:hover, .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .post-share-username-list li a .concealed-image:hover {
                     filter: contrast(1.2); }
               .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .post-share-username-list li::after {
@@ -875,16 +540,19 @@ h1:hover {
               width: 500px;
               margin: 50px auto; }
             .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .post-share-modal .modal-header {
-              background: #F57C00;
-              font-family: 'Special Elite', cursive;
+              background: #F57C00 !important;
+              font-family: 'Special Elite', cursive !important;
               width: 100.1%; }
               .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .post-share-modal .modal-header .modal-title {
-                color: #651717 !important; }
+                color: #651717 !important;
+                font-family: 'Special Elite', cursive !important; }
             .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .post-share-modal .modal-body {
               width: 100%;
               height: auto;
               display: flex;
               flex-direction: column; }
+              .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .post-share-modal .modal-body form {
+                width: 100%; }
               .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .post-share-modal .modal-body textarea {
                 width: 95%;
                 border: none;
@@ -990,7 +658,7 @@ h1:hover {
 
 .homepage-without-login {
   margin-top: 60px;
-  margin-bottom: 70px;
+  margin-bottom: 0px;
   height: auto; }
   .homepage-without-login p {
     font-size: 25.6px;
@@ -1296,10 +964,6 @@ h1:hover {
   .comment-list:nth-child(2n) {
     left: 18.5% !important; } }
 
-@media (max-width: 1200px) {
-  .comment-like-box {
-    left: 87% !important; } }
-
 @media (max-width: 1065px) {
   #feed-posts {
     width: 85% !important; } }
@@ -1312,6 +976,10 @@ h1:hover {
     top: 53px !important; }
   .post-editedTag {
     left: 6% !important; } }
+
+@media (max-width: 850px) {
+  .homepage-without-login {
+    margin-bottom: 25px !important; } }
 
 @media (max-width: 800px) {
   #feed-posts {
@@ -1326,9 +994,7 @@ h1:hover {
 @media (max-width: 600px) {
   .update-comment-button {
     top: 26px !important;
-    left: 3% !important; }
-  .comment-like-box {
-    left: 85% !important; } }
+    left: 3% !important; } }
 
 @media (max-width: 550px) {
   .post-editedTag {
@@ -1339,16 +1005,14 @@ h1:hover {
     margin-left: 8% !important; }
   .post-share-modal .modal-dialog {
     width: 380px !important; }
-  .post-like-box .modal .modal-dialog, .comment-like-box .modal .modal-dialog, .post-share-box .modal .modal-dialog {
+  .comment-like-box .modal .modal-dialog, .post-share-box .modal .modal-dialog {
     width: 380px !important; }
-    .post-like-box .modal .modal-dialog .post-like-username-list, .post-like-box .modal .modal-dialog .comment-like-username-list, .post-like-box .modal .modal-dialog .post-share-username-list, .comment-like-box .modal .modal-dialog .post-like-username-list, .comment-like-box .modal .modal-dialog .comment-like-username-list, .comment-like-box .modal .modal-dialog .post-share-username-list, .post-share-box .modal .modal-dialog .post-like-username-list, .post-share-box .modal .modal-dialog .comment-like-username-list, .post-share-box .modal .modal-dialog .post-share-username-list {
+    .comment-like-box .modal .modal-dialog .comment-like-username-list, .comment-like-box .modal .modal-dialog .post-share-username-list, .post-share-box .modal .modal-dialog .comment-like-username-list, .post-share-box .modal .modal-dialog .post-share-username-list {
       width: 95% !important; } }
 
 @media (max-width: 500px) {
   .post-comments textarea {
     width: 67% !important; }
-  .comment-like-box {
-    left: 83% !important; }
   #feed-posts {
     width: 100% !important; }
   .author-post-name a {
@@ -1357,22 +1021,18 @@ h1:hover {
     justify-content: center !important; }
     .author-post-name a img, .author-post-name a .concealed-image {
       align-self: center !important;
-      margin-bottom: 10px !important; }
-  .post-like-box .post-likes-number span, .post-like-box .post-likes-number a {
-    color: #85ccbc !important; } }
+      margin-bottom: 10px !important; } }
 
 @media (max-width: 425px) {
-  .comment-like-box {
-    left: 81% !important; }
-  .post-text span {
-    width: 96% !important; }
   .comment-list {
     width: 98% !important; }
+  .post-text span {
+    width: 96% !important; }
   .comment-list:nth-child(2n) {
     left: 0 !important; }
   .post-comments-list {
     margin-left: 0% !important; }
-  .post-like-box .modal .modal-dialog, .comment-like-box .modal .modal-dialog, .post-share-box .modal .modal-dialog {
+  .comment-like-box .modal .modal-dialog, .post-share-box .modal .modal-dialog {
     width: 300px !important; } }
 
 @media (max-width: 400px) {
@@ -1408,9 +1068,7 @@ h1:hover {
 @media (max-width: 320px) {
   #feed-posts {
     width: 105% !important;
-    overflow-x: hidden; }
-  .comment-like-box {
-    left: 79% !important; } }
+    overflow-x: hidden; } }
 
 .bckgd-dark {
   background-color: #6aa6a1 !important; }

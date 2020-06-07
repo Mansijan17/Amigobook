@@ -1,9 +1,6 @@
 <link rel="stylesheet" href="/css/userProfile.css">
 <link rel="stylesheet"  href="/css/chat.css">
-<div id="stars-group-1"></div>
-<div id="stars-group-2"></div>
-<div id="stars-group-3"></div>
-<div id="stars-group-4"></div>
+
     <h1 class="heading-background">
         <div>
             <div class="cloud" id="first-cloud"></div>
@@ -262,15 +259,19 @@
         <br><br>
     
         <% if(posts.length!=0) { %>
-            <h3 style="text-align: center;">The Sky In You!</h3>
-            <br>
-            <div id="posts-list-container">
-                <ul>
-                    <% for(i of posts) { %>
-                        <%- include('_post') -%>
-                                    
-                    <% } %>
-                </ul>
+            <div class="home-container">
+                <section id="feed-posts">
+                    <h3 style="text-align: center;">The Sky In You!</h3>
+                    <br>
+                    <div id="posts-list-container">
+                        <ul>
+                            <% for(i of posts) { %>
+                                <%- include('_post') -%>
+                                            
+                            <% } %>
+                        </ul>
+                    </div>
+                </section>
             </div>
         <% } else { %>
             <h3 style="text-align: center;">You have yet to ascent!</h3>

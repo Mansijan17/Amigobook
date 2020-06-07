@@ -1,8 +1,5 @@
 <link rel="stylesheet"  href="/css/replyComment.css">   
-<div id="stars-group-1"></div>
-<div id="stars-group-2"></div>
-<div id="stars-group-3"></div>
-<div id="stars-group-4"></div>
+
 <div id="comment-<%=comment._id%>-reply" onmouseup="removetagInvisible()">
 
       <div class="commentReplyClass">
@@ -26,7 +23,12 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h4 class="modal-title" id="comment-<%=comment._id%>-like-title">Comment Reactions  
+                    <h4 class="modal-title" id="comment-<%=comment._id%>-like-title">Comment 
+                      <% if(comment.likes.length==0 || comment.likes.length==1) {%>  
+                        Reaction
+                        <%} else {%>
+                            Reactions
+                        <% } %>
                       <span>
                           <% if(comment.likes.length>0) { %>
                               <%= comment.likes.length%>
@@ -97,11 +99,9 @@
               <p>Comment Replies</p>
               <a href="/users/profile/<%= comment.user._id %>">
                 <% if(comment.user.avatar) {%>
-                        <img src="<%= comment.user.avatar %>"> 
-                <% } else if (comment.user.gender=="male"){%>
-                            <img src="https://i.stack.imgur.com/HQwHI.jpg" width="100" height="100">
+                        <img src="<%= comment.user.avatar %>">
                 <% }  else {%>
-                            <img src="/images/femaleProfile.png" width="100" height="100">
+                  <div class="concealed-image" style="background:<%=comment.user.info.bgColor%>;"><span><%= comment.user.name.split(" ")[0].charAt(0)%></span></div>
                 <% } %>
                 <% if(comment.user.id==i.user) { %>
                     <span class="effect-underline"><%= comment.user["name"] %></span><span class="author-tag" > Author</span>
