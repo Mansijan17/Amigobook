@@ -1,5 +1,5 @@
 
-.comment-like-box
+.comment-like-box,.commentreply-like-box
 {
     top: 6px;
     right: 8px;
@@ -109,7 +109,7 @@
                                         }
 
                                                     
-                                        .comment-like-username-list
+                                        .comment-like-username-list,.commentreply-like-username-list
                                         {
                                             display: flex;
                                             flex-direction: column;
@@ -129,7 +129,7 @@
                                                 text-align: right;
                                                 align-items: center;
                                                 margin: 5px auto !important;
-
+                                                background: transparent !important;
                                                 a{
                                                     color: #006881 !important;
                                                     display: flex;
@@ -183,8 +183,9 @@
                                             display: inline-block;
                                             color:#BF0A30 !important;
                                         }
+                                       
                                     }
-                                    .comment-like-username-list::-webkit-scrollbar {
+                                    .comment-like-username-list::-webkit-scrollbar ,.commentreply-like-username-list::-webkit-scrollbar{
                                         display: none;
                                     }
                                 }

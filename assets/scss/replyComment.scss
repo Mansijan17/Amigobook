@@ -67,22 +67,24 @@
         position: absolute;
         left: 49px;
         font-size: 18px;
-        top: 19px;
+        top: 11px;
 
         a{
-            color: #e7d6d6;;
+            font-size: 18px !important;
+            color: #e7d6d6 !important;
         }
         a:hover{
-            color: #a8b2b1;
+            color: #a8b2b1 !important;
         }
     }
 
     .comment-editedTag
     {
+        top: 18px;
         position: absolute;
-        left: 81px;
-        font-size: 15px;
-        color:#d7e9eb;
+        left: 78px;
+        font-size: 16px;
+        color: #d7e9eb !important;
         font-variant-caps: unicase;
     }
 
@@ -122,8 +124,7 @@
                 justify-content: center;
                 align-items: center;
                 color: mistyrose;
-                
-                              
+                   
                 >span
                 {
                     color: inherit !important;
@@ -300,7 +301,7 @@
                 margin-bottom: 20px;
                 border-radius: 25px;
                 padding: 5px;
-                background-color: #eafafa;
+                background-color:#e1bbe2;
                 position: relative;
 
                 .commentreply-like-box{
@@ -309,112 +310,14 @@
                     top: 8px;
                     font-size: 12px;
                     font-weight: 600;
-                    cursor: pointer;
-
-                    .commentreplylikemodal
-                    {
-                        
-                        color: black;
-                   
-                        
-
-                        .modal-dialog
-                        {
-                            max-height:400px;
-                            .modal-content
-                            {
-                               max-height:inherit;
-                                .modal-title
-                                {
-                                    text-align: center;
-                                    span
-                                    {
-                                        display: block;
-                                        margin-top: 5px;
-                                        color: mediumvioletred;
-                                    }
-                                }
-                                .modal-body
-                                {
-                                    height: auto;
-                                    display: flex;
-                                    justify-content: center;
-                                    width: 100%;
-                                    max-height: inherit;
-                                
-                                }
-                            }
-
-                        }
-                    }
-                                
-                    .commentreply-like-username-list
-                    {
-                        width: 90%;
-                        padding-left: 0;
-                        max-height: 285px;
-                        overflow-y: auto;
-                        font-size: 15px;
-
-                        li
-                        {
-                            
-                            min-height: 30px;
-                            width: 95%;
-                            display: flex;
-                            justify-content: space-between;
-                            text-align: right;
-                            align-items: center;
-                            margin: 2px auto;
-                            background: transparent;
-
-                            a{
-                                color: #006881;
-                                img,.concealed-image{
-                                    height: 40px;
-                                    width: 40px;
-                                    border-radius: 50%;
-                                    margin-right: 5px;
-                                }
-                                .concealed-image
-                                {
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                    font-family: 'Pacifico', cursive;
-                                }
-                                span{
-                    
-                                    font-variant: petite-caps;
-                                    font-weight: normal;
-                                }
-                                span:hover
-                                {
-                                    font-weight: bold;
-                                }
-                                img:hover,.concealed-image:hover
-                                {
-                                    filter: brightness(0.8);
-                                }
-                            }
-                        }
-
-                        li::after
-                        {
-                            content: '\f21e';
-                            font-weight: 900;
-                            font-family: "Font Awesome 5 Free";
-                            display: inline-block;
-                            color:#BF0A30;
-                        }
-                        li:before{
-                            display: none;
-                        }
-
-                    }
-                    .commentreply-like-username-list::-webkit-scrollbar {
-                        display: none;
-                    }
+                    cursor: pointer;           
+                   .commentreply-like-username-list
+                   {
+                       li::before
+                       {
+                           content: none;
+                       }
+                   }
                 }
 
                 .commentreply-like-box:hover{
@@ -474,19 +377,42 @@
                     }
                 }
 
-                .replydeletemodaldialog
+                .replydeletemodal-2
                 {
-                    width: 350px;
-                    margin-top: 175px;
-                    text-align: center;
-                    .modal-title{
-                        font-family: 'Gill Sans';
-                        color: #5E99A2;
-                        font-size: 27.2px !important;
-                    }
-
-                    button:focus{
-                        outline: none;
+                    width: 400px;
+                    margin: auto;
+                    margin-top: 150px;
+                    color:black;
+                    .modal-dialog
+                    {
+                        width: 100%;
+                        text-align: center;
+                        .modal-header
+                        {
+                            background: #a22a2a !important;
+                            width: 100.1%;
+                            .modal-title
+                            {
+                                color: #78bbc5 !important;
+                                font-family: 'Gill Sans' !important;
+                            }
+                        }
+                        .modal-body
+                        {
+                            font-size: 14px;
+                            color: #8F9BA8 !important;
+                            width: 87%;
+                            margin: auto;
+                        }
+                        .modal-footer
+                        {
+                            a{
+                                color: white !important;
+                            }
+                            button:focus{
+                                outline: none;
+                            }
+                        }
                     }
                 }
 
@@ -497,26 +423,50 @@
                     padding: 5px;
                     left: 5px;
                     height: 25px;
-                                                    
+                    a{
+                        display: flex;
+                        >span{
+                            font-size: 12.5px;
+                            color: #244582;
+                            font-variant-caps: petite-caps;
+                            font-weight: 600;
+                            margin-left: 5px;
+                            align-self: center;
+                        }
+                    }                 
 
-                    img{
+                    img,.concealed-image{
                         height:20px;
                         width:20px;
                         border-radius:15px;
                     }
-                    span{
-                        font-size: 11.5px;
-                        color: #244582;
-                        font-variant-caps: petite-caps;
-                        font-weight: 600;
+                    .concealed-image
+                    {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        color: mistyrose;
+                           
+                        >span
+                        {
+                            font-size: 7.5px !important;
+                            color: mistyrose !important;
+                            font-family: 'Pacifico', cursive;
+                            
+                        }
+                        
                     }
+                   
                     .Author-tag
                     {
                         background: #73bbbc;
                         color: white;
+                        text-align: center;
+                        height: 18px;
+                        font-size: 11px;
                         margin-left: 5px;
                         font-variant-caps: normal;
-                        padding: 3px;
+                        padding: 2px;
                     }
                 }
                 .reply-content{
@@ -531,7 +481,7 @@
                     word-break: break-all;
                     overflow-wrap: break-word;
                     display: flex;
-                    text-align: justify;
+                    text-align: left;
                     a{
                         width: 30%;
                         display: block;
@@ -540,70 +490,7 @@
                         margin-right: 10px;
                     }
                     
-                    .authorarrow{
-                        display: flex;
-                        flex-direction: column;
-                        margin-bottom: 30px;
-                        margin-right: 6px;
-
-                        .pointarrows{
-                            position: absolute;
-                            left: 15%;
-                            height: 25px;
-                            width: 50px;
-                            top: 25px;
-                            align-self: center;
-                            align-items: center;
-                            justify-content: space-evenly;
-                            display: flex;
-                            // background: linear-gradient(45deg, #C8EEDB, #9BE0BD, #48C686, #5ACB92);
-                            // background-size: 400% 400%;
-                            // animation: gradient 5s ease-in-out infinite;
-
-
-                            .circle{
-                                width: 5px;
-                                height: 5px;
-                                border-radius: 50%;
-                                margin: 1px;
-                                background: linear-gradient(45deg, #C8EEDB, #9BE0BD, #48C686, #5ACB92);
-                                background-size: 400% 400%;
-                                animation: gradient 5s ease-in-out infinite;
-                            }
-                            .topright{
-                                position: absolute;
-                                top: 2px;
-                                right: 7px;
-                            }
-                            .topright2{
-                                position: absolute;
-                                top: -4px;
-                                right: 13px;
-                            }
-                            .bottomright{
-                                position: absolute;
-                                bottom: 2px;
-                                right: 7px;
-                            }
-                            .bottomright2{
-                                position: absolute;
-                                bottom: -4px;
-                                right: 13px;
-                            }
-
-                        }
-
-                        @keyframes gradient {
-                            0% {
-                                background-position: 0% 50%;
-                            }
-                            50% {
-                                background-position: 100% 50%;
-                            }
-                            100% {
-                                background-position: 0% 50%;
-                            }
-                        }
+                    
 
                     }
                     
@@ -612,7 +499,7 @@
                         height: auto;
                         display: inline-block;
                         word-break: break-word;
-                        text-align: justify;
+                        text-align: left;
                     
                     }
 
@@ -677,9 +564,10 @@
                         width: 85%;
                         resize: none;
                         background: transparent;
-                        border: 1px solid lightblue;
+                        border: 1px solid #87aab5;
                         border-radius: 10px;
                         padding-left: 10px;
+                        color: #6767aa;
                     }
                     textarea:focus,button:focus{
                         outline:none;
@@ -689,7 +577,7 @@
                     }
                     button{
                         width: 10%;
-                        color: thistle;
+                        color:#937c93;
                         border: none;
                     }
                     button:hover{
@@ -736,6 +624,7 @@
                         border: none;
                         border-bottom: 1.2px solid #6565a6;
                         margin-right: 5%;
+                        color: #6767aa;
                     }
                     textarea:focus,button:focus{
                         outline: none;
@@ -762,30 +651,25 @@
                 position: absolute;
                 bottom: -5px;
                 right: 17px;
-                border-top: 7px solid #eafafa;
-                border-right: 4px solid #eafafa;
+                border-top: 7px solid #e1bbe2;
+                border-right: 4px solid #e1bbe2;
                 border-left: 9px solid transparent;
             }
         }
         ul::-webkit-scrollbar {
             display: none;
         }
-    }
-}
+ }
+
 
 @media screen and (max-width:830px)
 {
     .commentReplyClass{
         width: 92%;
-        ul{
+        .comment-replies-list{
             width: 80% !important;
         }
-        .commentreplylikemodal,.commentlikemodal
-        {
-            ul{
-                width: 100% !important;
-            }
-        }
+       
     }
     .comment-reply-form{
         width: 80% !important;
@@ -796,6 +680,29 @@
     }
 }
 
+@media (max-width:700px)
+{
+    .reply-title
+    {
+        a{
+            flex-direction: column;
+            img,.concealed-image
+            {
+                margin-right: 0;
+                margin-bottom: 10px;
+                span
+                {
+                    margin-bottom: 0;
+                }
+            }
+            span{
+                margin-left: 0;
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+    }
+}
 
 @media screen and (max-width:600px)
 {
@@ -806,7 +713,7 @@
         }
         .commentReplyContent
         {
-            width: 100% !important;
+            width: 92% !important;
         }
         .comment-reply-form
         {
@@ -817,6 +724,15 @@
             width: 100% !important;
             padding: 0;
         }
+        .comment-update-tag
+        {
+            left: 21px !important;
+            top:20px !important;
+        }
+        .comment-editedTag
+        {
+            left: 58px !important;
+        }
     }
 }
 
@@ -825,7 +741,7 @@
     .commentReplyClass{
         margin-top: 60px;
         width: 98%;
-        margin-bottom: 85px;
+        margin-bottom: 39px;
         .comment-update-tag{
             top:46px;
             left:14px;
@@ -833,10 +749,7 @@
         .comment-editedTag{
             left: 45px;
         }
-        .commentreplylikemodal,.commentlikemodal
-        {
-            padding: 0;
-        }
+      
     }
 }
 
@@ -848,7 +761,7 @@
         .comment-reply-form
         {
             button{
-                font-size: 12px;
+                font-size: 15px;
             }
         }
         .dropdown-menu
@@ -866,10 +779,27 @@
         .reply-content{
             margin-top: 50px !important;
         }
-        .commentreply-like-box
+        .comment-reply-form
         {
-            margin-top: 24px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            textarea{
+                width: 93% !important;
+            }
+            button{
+                width: 100px !important;
+                margin-top: 20px !important;
+            }
         }
+    }
+}
+
+@media (max-width:400px)
+{
+    .reply-reply-form
+    {
+        margin-left: 24px !important;
     }
 }
 
@@ -888,38 +818,30 @@
     }
 }
 
-@media (min-width:320px)
+@media (max-width:345px)
 {
-    .commentReplyClass{
-        .commentreplylikemodal,.commentlikemodal
-        {
-            .modal-dialog
+    .reply-author-tag
+    {
+        a{
+            >span{
+                max-width: 67px;
+                word-break: break-word;
+            }
+            .Author-tag
             {
-                width: 320px;
-                margin: 30px auto;
-              
+                align-self: flex-start !important;
             }
         }
     }
-}
-
-@media (min-width:550px)
-{
-    .commentReplyClass{
-        .commentreplylikemodal,.commentlikemodal
+    .commentReplyClass
+    {
+        .reply-content
         {
-            .modal-dialog
-            {
-                width: 550px;
-                
-            }
+            margin-top: 60px !important;
         }
-        .comment-deletion
-        {
-            .modal-dialog
-            {
-                width: 400px;
-            }
-        }
+    }
+    .commentreply-like-box
+    {
+        left: 62% !important;
     }
 }

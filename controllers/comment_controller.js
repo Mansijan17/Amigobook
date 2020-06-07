@@ -200,7 +200,7 @@ module.exports.destroyComment=async function(req,res)
                     message:"Comment deleted"
                 });
             }
-            req.flash("success","Comment deleted!");
+            req.flash("success","See you, till the next time!");
             return res.redirect("back");
             
         }
@@ -375,16 +375,10 @@ module.exports.createReply=async function(req,res)
             }
             let user=await User.findById(req.user.id);
             let userImage=user.avatar;
+            let userBgColor;
             if(!userImage)
             {
-                if(user.gender=="male")
-                {
-                    userImage="https://i.stack.imgur.com/HQwHI.jpg";
-                }
-                else
-                {
-                    userImage="/images/femaleProfile.png";
-                }
+                userBgColor=user.info.bgColor;
             }
             comment.replies.push(newReply);
             comment.save();
@@ -428,6 +422,7 @@ module.exports.createReply=async function(req,res)
             return res.status(200).json({
                 data:{
                     replyUserImage:userImage,
+                    replyUserBgColor:userBgColor,
                     replyUserName:user.name,
                     replyContent:newReply.content,
                     replyID:newReply.id,
@@ -585,12 +580,16 @@ module.exports.destroyCommentReply=async function(req,res)
         {
            
             await commentReply.deleteMany({_id:{$in:comment.replies}});
+            for(reply of comment.replies)
+            {
+                await Like.deleteMany({likeable:reply._id,onModel:"CommentReply"});
+            }
             comment.remove();
             post.comments.pull(comment);
             post.save();
             //CHANGE:: delete the likes of the comments
             await Like.deleteMany({likeable:comment._id,onModel:"Comment"});
-            req.flash("success","Comment deleted!");
+            req.flash("success","See you, till the next time!");
             return res.redirect("/");
             
         }
@@ -663,16 +662,10 @@ module.exports.replyReply2=async function(req,res)
             }
             let user=await User.findById(req.user.id);
             let userImage=user.avatar;
+            let userBgColor;
             if(!userImage)
             {
-                if(user.gender=="male")
-                {
-                    userImage="https://i.stack.imgur.com/HQwHI.jpg";
-                }
-                else
-                {
-                    userImage="/images/femaleProfile.png";
-                }
+                userBgColor=user.info.bgColor;
             }
             comment.replies.push(newReply);
             comment.save();
@@ -742,6 +735,7 @@ module.exports.replyReply2=async function(req,res)
             return res.status(200).json({
                 data:{
                     replyUserImage:userImage,
+                    replyUserBgColor:userBgColor,
                     replyUserName:user.name,
                     replyContent:newReply.content,
                     replyID:newReply.id,

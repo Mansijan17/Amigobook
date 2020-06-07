@@ -1005,9 +1005,9 @@ h1:hover {
     margin-left: 8% !important; }
   .post-share-modal .modal-dialog {
     width: 380px !important; }
-  .comment-like-box .modal .modal-dialog, .post-share-box .modal .modal-dialog {
+  .comment-like-box .modal .modal-dialog, .post-share-box .modal .modal-dialog, .commentreply-like-box .modal .modal-dialog {
     width: 380px !important; }
-    .comment-like-box .modal .modal-dialog .comment-like-username-list, .comment-like-box .modal .modal-dialog .post-share-username-list, .post-share-box .modal .modal-dialog .comment-like-username-list, .post-share-box .modal .modal-dialog .post-share-username-list {
+    .comment-like-box .modal .modal-dialog .comment-like-username-list, .comment-like-box .modal .modal-dialog .post-share-username-list, .comment-like-box .modal .modal-dialog .commentreply-like-username-list, .post-share-box .modal .modal-dialog .comment-like-username-list, .post-share-box .modal .modal-dialog .post-share-username-list, .post-share-box .modal .modal-dialog .commentreply-like-username-list, .commentreply-like-box .modal .modal-dialog .comment-like-username-list, .commentreply-like-box .modal .modal-dialog .post-share-username-list, .commentreply-like-box .modal .modal-dialog .commentreply-like-username-list {
       width: 95% !important; } }
 
 @media (max-width: 500px) {
@@ -1032,11 +1032,11 @@ h1:hover {
     left: 0 !important; }
   .post-comments-list {
     margin-left: 0% !important; }
-  .comment-like-box .modal .modal-dialog, .post-share-box .modal .modal-dialog {
+  .comment-like-box .modal .modal-dialog, .post-share-box .modal .modal-dialog, .commentreply-like-box .modal .modal-dialog {
     width: 300px !important; } }
 
 @media (max-width: 400px) {
-  .deletecommentmodal, .post-delete-modal {
+  .deletecommentmodal, .post-delete-modal, .replydeletemodal-2 {
     width: 312px !important; }
   .post-share-modal .modal-dialog {
     width: 312px !important; } }

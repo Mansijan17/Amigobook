@@ -1510,16 +1510,6 @@ h1:hover
     }
 }
 
-@media (max-width:1200px)
-{
-    // .comment-list
-    // {
-    //     .comment-like-box
-    //     {
-    //         left: 87% !important;
-    //     }
-    // }
-}
 @media (max-width:1065px)
 {
     #feed-posts
@@ -1611,14 +1601,14 @@ h1:hover
             width: 380px !important;
         }
     }
-    .comment-like-box,.post-share-box
+    .comment-like-box,.post-share-box,.commentreply-like-box
     {
         .modal
         {
             .modal-dialog
             {
                 width: 380px !important;
-                .comment-like-username-list,.post-share-username-list
+                .comment-like-username-list,.post-share-username-list,.commentreply-like-username-list
                 {
                     width: 95% !important;
                 }
@@ -1685,7 +1675,7 @@ h1:hover
     {
         margin-left: 0% !important;
     }
-    .comment-like-box,.post-share-box
+    .comment-like-box,.post-share-box,.commentreply-like-box
     {
         .modal
         {
@@ -1700,7 +1690,7 @@ h1:hover
 
 @media (max-width:400px)
 {
-    .deletecommentmodal,.post-delete-modal
+    .deletecommentmodal,.post-delete-modal,.replydeletemodal-2
     {
         width: 312px !important;
     }

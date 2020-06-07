@@ -117,8 +117,6 @@ class replyOnComment{
                  </div>
                    <div class="reply-author-tag">
                        <a href="/users/profile/${data.data.replyUserID}">
-                         
-                           <img src="${data.data.replyUserImage}">
                            <span>${data.data.replyUserName}</span>
                            <span class="${data.data.authorTag}-tag" style="width: 45px;"> ${data.data.authorTag}</span>
                            
@@ -128,6 +126,14 @@ class replyOnComment{
                    <div class="reply-content" id="reply-${data.data.replyUserID}-content">${ data.data.replyContent}</div>
                    
                   </li>`);
+                  if(data.data.replyUserImage)
+                  {
+                      $(" .reply-author-tag a",newReply).prepend(`<img src=${data.data.replyUserImage}>`);
+                  }
+                  else
+                  {
+                    $(" .reply-author-tag a",newReply).prepend(`<div class="concealed-image" style="background:${data.data.replyUserBgColor};"><span>${ data.data.replyUserName.split(" ")[0].charAt(0)}</span></div>`);
+                  }
                    $(`#comment-${data.data.commentID}-reply-list`).prepend(newReply);
 
                   cSelf.deleteReply($(" .delete-reply-button",newReply));
@@ -137,7 +143,7 @@ class replyOnComment{
                   new ToggleLike($(" .toggle-like-button", newReply));
                     new Noty({
                         theme:"relax",
-                        text:"Reply Added Successfully!",
+                        text:"Ahem, even comments need comments!",
                         type:"success",
                         layput:"topRight",
                         timeout:1500
@@ -168,7 +174,7 @@ class replyOnComment{
                     $(`#reply-${data.data.replyID}`).remove();
                     new Noty({
                         theme: 'relax',
-                        text: "Reply Deleted Successfully!",
+                        text: "Can we have 1 min of silence?",
                         type: 'success',
                         layout: 'topRight',
                         timeout: 1500
@@ -280,7 +286,7 @@ class replyOnComment{
                 
                                     new Noty({
                                         theme:"relax",
-                                        text:"Reply updated successfully!",
+                                        text:"What should it's ancestors have all the fun?",
                                         type:"success",
                                         layput:"topRight",
                                         timeout:1500
@@ -371,7 +377,7 @@ class replyOnComment{
                                   </div>`);
                                     new Noty({
                                         theme:"relax",
-                                        text:"Comment updated successfully!",
+                                        text:"This comment had a successful affair of words!",
                                         type:"success",
                                         layput:"topRight",
                                         timeout:1500
@@ -522,7 +528,7 @@ class replyOnComment{
                                     <div class="reply-author-tag">
                                         <a href="/users/profile/${data.data.replyUserID}">
                                             
-                                            <img src="${data.data.replyUserImage}">
+                                            
                                             <span>${data.data.replyUserName}</span>
                                             <span class="${data.data.authorTag}-tag" style="width: 45px;"> ${data.data.authorTag}</span>
                                             
@@ -541,6 +547,14 @@ class replyOnComment{
                                     </div>
                                     
                                     </li>`);
+                                    if(data.data.replyUserImage)
+                                    {
+                                        $(" .reply-author-tag a",newReply).prepend(`<img src=${data.data.replyUserImage}>`)
+                                    }
+                                    else
+                                    {
+                                        $(" .reply-author-tag a",newReply).prepend(`<div class="concealed-image" style="background:${data.data.replyUserBgColor};"><span>${data.data.replyUserName.split(" ")[0].charAt(0)}</span></div>`)
+                                    }
                                     $(`#comment-${data.data.commentID}-reply-list`).prepend(newReply);
                                     cSelf.deleteReply($(" .delete-reply-button",newReply));
                                     cSelf.updateReply($(' .update-reply-button', newReply));
@@ -590,7 +604,7 @@ class replyOnComment{
                     $(`#reply-${data.data.replyID} .reply-content .removetag`).remove();
                     new Noty({
                         theme: 'relax',
-                        text: "Removed Tag Successfully!",
+                        text: "This tag have fallen for you!",
                         type: 'success',
                         layout: 'topRight',
                         timeout: 1500
