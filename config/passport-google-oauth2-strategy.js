@@ -6,6 +6,8 @@ const env=require('./environment')
 const queue=require('../config/kue');
 const userEmailWorker=require('../worker/newaccount_email_worker');
 
+let colors=["#e558e5","#e55886","#4952be","#285874","#6d721b","#99611b","#686561","#E91E63","#C62828",
+           "#F57F17","#00ACC1","#512DA8","#FB8C00","#039BE5","#00b7d5"]
 //tell passport to use new strategy using google login
 passport.use(new googleStrategy({
     clientID:env.google_client_id,
@@ -31,14 +33,17 @@ passport.use(new googleStrategy({
             //if not found, create the user then set req.user as user
             else
             {
+                let randomBgColor=colors[Math.floor(Math.random()*colors.length)];
+               
                 User.create({
                     name:profile.displayName,
                     email:profile.emails[0].value,
                     password:crypto.randomBytes(20).toString("hex"),
+                    confirm_password:crypto.randomBytes(20).toString("hex"),
                     info:{
-                        about:`Hi, I am ${profile.displayName}. Nice to meet you!`
-                    },
-                    avatar:profile.photos[0].value
+                        about:`Hi, I am ${profile.displayName}. Nice to meet you!`,
+                        bgColor:randomBgColor
+                    }
                 },function(err,user)
                 {
                     if(err)

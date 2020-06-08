@@ -36,6 +36,12 @@ const userSchema=new mongoose.Schema({
     info:{
         type:Object
     },
+    works:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"Work"
+        }
+    ]
  
 },{
     timestamps:true

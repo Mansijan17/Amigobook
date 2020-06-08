@@ -12,7 +12,7 @@ const Friendship=require('../models/friendship');
 const FriendshipForm=require('../models/pend_friend_forms');
 const newAccount=require('../models/newAccountSchema');
 const newaccountEmailWorker=require('../worker/newaccount_email_worker');
-
+const Work=require('../models/workExp');
 
 let colors=["#e558e5","#e55886","#4952be","#285874","#6d721b","#99611b","#686561","#E91E63","#C62828",
            "#F57F17","#00ACC1","#512DA8","#FB8C00","#039BE5","#00b7d5"]
@@ -22,7 +22,27 @@ module.exports.profile = async function (req, res) {
     try
     {
        // console.log(req.params.id);
-        let user=await User.findById(req.params.id);
+        let user=await User.findById(req.params.id).populate({
+            path:"works",
+            options:{
+                sort:"-sortDate"
+            }
+        });
+        console.log(user.works)
+        // let works=user.works;
+        // function compare_sortDate(a,b)
+        // {
+        //     if(a.sortDate>b.sortDate)
+        //     {
+        //         return 1;
+        //     }
+        //     else if(a.sortDate<b.sortDate)
+        //     {
+        //         return -1;
+        //     }
+        //     return 0;
+        // }
+        // console.log(works.sort(compare_sortDate))
         let postLists=await Post.find({user:user.id}).sort("-createdAt").populate("user").populate({
             //populating the comments of the post schema
             //Change:: populate the likes of the posts and comments
@@ -134,7 +154,8 @@ module.exports.profile = async function (req, res) {
             mutualfriends:mutualfriends,
             friended:friended,
             pendingFrom:pendingFrom,
-            pendingTo:pendingTo
+            pendingTo:pendingTo,
+            works:user.works
         })
 
     }
@@ -370,19 +391,25 @@ module.exports.create = async function (req, res) {
             //console.log(newAccountSchema);
             if(!newAccountSchema)
             {
-                console.log(newuser);
-                await newAccount.create(newuser);
+                console.log("new account schema",newuser);
+                let randomBgColor=colors[Math.floor(Math.random()*colors.length)];
+                console.log("new color",randomBgColor);
+                newuser.user.info={about:`Hi, I am ${req.body.name}. Nice to meet you!`,
+                bgColor:randomBgColor}
+                console.log(newuser)
+                let necoount=await newAccount.create(newuser);
+                console.log(necoount)
             }
             else
             {
-                let randomBgColor=colors[Math.floor(Math.random()*colors.length)];
-                console.log(randomBgColor);
+                
                 newAccountSchema.acessToken=newuser.acessToken;
+                let info=newAccountSchema.user.info;
+                info.about=`Hi, I am ${req.body.name}. Nice to meet you!`;
                 newAccountSchema.user=req.body;
-                newAccountSchema.user.info={about:`Hi, I am ${req.body.name}. Nice to meet you!`,
-                bgColor:randomBgColor}
-                console.log(newAccountSchema.user.info)
+                newAccountSchema.user.info=info;
                 newAccountSchema.save();
+                console.log("exists ",newAccountSchema.user,info)
             }
             // let newaccountUser=await newAccount.create(newuser);
             // console.log(newaccountUser);
@@ -957,4 +984,73 @@ module.exports.verifyAccount=async function(req,res)
         return;
     }
     
+}
+
+module.exports.addWork=async function(req,res)
+{
+    try{
+        console.log(req.body)
+        if(req.user.id)
+        {
+            if(req.body.check!="on")
+            {   console.log("not check")
+                if(req.body.toYear.length!=4 || req.body.fromYear.length!=4 || req.body.toMonth.length!=2 || req.body.fromMonth.length!=2)
+                {
+                    req.flash("error","Year or maybe month's length is quarrelsome!");
+                    return res.redirect("back");
+                }
+                let fromYear=parseInt(req.body.fromYear);
+                let toYear=parseInt(req.body.toYear);
+                let fromMonth=parseInt(req.body.fromMonth);
+                let toMonth=parseInt(req.body.toMonth);
+                if(fromYear>2020 || toYear>2020 || fromYear<1940 || toYear<1940 || fromMonth<0 || fromMonth>12 || toMonth<0 || toMonth>12 || fromYear>toYear)
+                {
+                    req.flash("error","Wow, your exp must be out of this world!");
+                    return res.redirect("back");
+                }
+                if(fromYear==toYear)
+                {
+                    if(fromMonth>toMonth)
+                    {
+                        console.log("f>tm")
+                        req.flash("error","Wow, your exp must be out of this world!");
+                        return res.redirect("back");
+                    }
+                }
+            }
+            else
+            {
+                if(req.body.fromYear.length!=4 || req.body.fromMonth.length!=2)
+                {
+                    req.flash("error","Year or maybe month's length is quarrelsome!");
+                    return res.redirect("back");
+                }
+                let fromYear=parseInt(req.body.fromYear);
+                let fromMonth=parseInt(req.body.fromMonth);
+
+                if(fromYear>2020 || fromYear<1940 || fromMonth<0 || fromMonth>12)
+                {
+                    req.flash("error","Wow, your exp must be out of this world!");
+                    return res.redirect("back");
+                }
+            }
+           
+            let user=await User.findById(req.user.id);
+            req.body.sortDate=parseInt(req.body.fromMonth+req.body.fromYear);
+            req.body.user=req.user.id;
+            let newWork=await Work.create(req.body);
+            user.works.push(newWork);
+            user.save()
+            console.log(user.work);
+          //  let user1=await User.updateOne({_id:req.user.id},{'$set':{"info.work":work}})
+            // user.info.work.push(req.body);
+            // user.save();
+           // console.log(user1)
+            return res.redirect("back");
+        }
+    }
+    catch(err)
+    {
+        console.log("Error in adding work",err);
+    }
 }

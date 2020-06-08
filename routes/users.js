@@ -37,4 +37,6 @@ router.get("/destroy-friends/:loggedUserPage",passport.checkAuthentication,users
 router.get("/newaccount/:id",usersController.confirmAccount);
 router.post("/newaccount/:id",usersController.verifyAccount);
 
+router.post("/add-work",passport.checkAuthentication,usersController.addWork)
+
 module.exports = router;

@@ -1,9 +1,8 @@
-let pendingFrom=function()
-{
-    console.log($(".add-friend-button"));
+let pendingFrom=function(){
+
     $(".add-friend-button").click(function(e)
     {
-        console.log($(".add-friend-button"));
+       
         e.preventDefault();
         $.ajax({
             type:"get",
@@ -36,10 +35,10 @@ let pendingFrom=function()
 pendingFrom()
 let cancelPendingForm=function()
 {
-    console.log($(".cancel-friend-button"));
+
     $(".cancel-friend-button").click(function(e)
     {
-        console.log($(".cancel-friend-button"));
+
         e.preventDefault();
         $.ajax({
             type:"get",
@@ -72,10 +71,10 @@ let cancelPendingForm=function()
 cancelPendingForm();
 let noFriendshipAnswer=function()
 {
-    console.log($(".no-friend-button"));
+
     $(".no-friend-button").click(function(e)
     {
-        console.log($(".no-friend-button"));
+
         e.preventDefault();
         $.ajax({
             type:"get",
@@ -108,10 +107,10 @@ let noFriendshipAnswer=function()
 noFriendshipAnswer();
 let confirmFriendshipAnswer=function()
 {
-    console.log($(".confirm-friend-button"));
+
     $(".confirm-friend-button").click(function(e)
     {
-        console.log($(".confirm-friend-button"));
+
         e.preventDefault();
         $.ajax({
             type:"get",
@@ -179,10 +178,10 @@ confirmFriendshipAnswer()
 
 let destroyFriendshipAnswer=function(removeButton)
 {
-    console.log($(removeButton));
+
     $(removeButton).click(function(e)
     {
-        console.log($(removeButton));
+
         e.preventDefault();
         $.ajax({
             type:"get",

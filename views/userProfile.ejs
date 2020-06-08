@@ -64,12 +64,20 @@
           <div class="card">
               <div class="card-header" id="headingTwo">
                   <h2 class="mb-0">
-                      <button type="button" class="collapsed"  data-toggle="collapse" data-target="#collapseTwo">What is Bootstrap?</button>
+                      <button type="button" class="collapsed"  data-toggle="collapse" data-target="#collapseTwo"><i class="fas fa-briefcase"></i> Experience</button>
                   </h2>
               </div>
               <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                   <div class="card-body">
-                      <p>Bootstrap is a sleek, intuitive, and powerful front-end framework for faster and easier web development. It is a collection of CSS and HTML conventions. </p>
+                    <% if(works.length!=0) {%>
+                    <% } else {%>
+                        <% if(profileUser.id==user.id) {%>
+                              <p data-toggle="modal" data-target="#addWorkFormModal" style="cursor: pointer;">Want to brag about it?</p>
+                        <% } else {%>
+                            <p><%= profileUser.name.split(" ")[0]%> is employed at "None of your business" Co.</p>
+                        <% }%>
+                    <% }%>
+                     
                   </div>
               </div>
           </div>
@@ -138,7 +146,7 @@
       </div>
     
 
-      <div></div>
+      <div class="third"></div>
     </div>
     <% if(friends.length>0) {%>
         <div class="modal fade" id="friendModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -189,6 +197,58 @@
                     </div>
                 </div>
             <% } %>
+            <div class="modal fade" id="addWorkFormModal" data-backdrop="static" >
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" style="background: #00BCD4;">
+                    <h2 class="modal-title">Add <i class="fas fa-briefcase"></i>?</h2>
+                    </div>
+                    <form action="/users/add-work" method="POST">
+                        <div class="modal-body">
+                            <div class="three-g">
+                                <div>
+                                    <span>Title:</span>
+                                    <input type="text" name="title" required>
+                                </div>
+                                <div>
+                                    <span>Company:</span>
+                                    <input type="text" name="company" required>
+                                </div>
+                                <div>
+                                    <span>Description:</span>
+                                    <textarea name="descrpt" onkeydown="autosize1(this)"></textarea>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" name="check"><span>I am currently working in this role</span>
+                                </div>
+                            </div>
+                            <div class="one-g">
+                                <span>Date:</span>
+                                <div>
+                                    <div class="from-date">
+                                     <input type="number" name="fromMonth" required placeholder="01">
+                                     <input type="number" name="fromYear" required placeholder="2020">
+                                    </div>
+                                    <div class="to-div">
+                                     to  
+                                    </div> 
+                                    <div class="to-date">
+                                        <input type="number" name="toMonth" required placeholder="01">
+                                        <input type="number" name="toYear" required placeholder="2020">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="add-work-button btn btn-info">
+                                    Submit
+                            </button>
+                            <button data-dismiss="modal" class="btn btn-secondary">Dismiss</button>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
         <% } else {%>
             <div class="modal fade" id="mutualfriendModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -303,6 +363,7 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
     <script src="/js/friends.js"></script>
+    <script src="/js/user_profile.js"></script>
     <script>
         new ChatEngine('user-chat-box','<%= locals.user.email %>');
     </script>
