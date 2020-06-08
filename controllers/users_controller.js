@@ -28,21 +28,7 @@ module.exports.profile = async function (req, res) {
                 sort:"-sortDate"
             }
         });
-        console.log(user.works)
-        // let works=user.works;
-        // function compare_sortDate(a,b)
-        // {
-        //     if(a.sortDate>b.sortDate)
-        //     {
-        //         return 1;
-        //     }
-        //     else if(a.sortDate<b.sortDate)
-        //     {
-        //         return -1;
-        //     }
-        //     return 0;
-        // }
-        // console.log(works.sort(compare_sortDate))
+        
         let postLists=await Post.find({user:user.id}).sort("-createdAt").populate("user").populate({
             //populating the comments of the post schema
             //Change:: populate the likes of the posts and comments

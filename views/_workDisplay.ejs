@@ -1,0 +1,25 @@
+<div class="two-g">
+    <div style="width: 70%;">
+        <div class="title">
+            <%= work.title%>
+        </div>
+        <div class="company">
+            <%= work.company%>
+        </div>
+    </div>
+    <div class="one-g">
+        <%= work.fromMonth%>/<%= work.fromYear %> to
+        <% if(work.check) {%>
+            Present
+        <%} else {%>
+            <%= work.toMonth%>/<%= work.toYear%> 
+        <% }%>
+    </div>
+</div>
+<% if(work.descrpt) {%>
+    <div class="work-descrpt">
+            <%= work.descrpt%>
+    </div>
+<% } %>
+
+   

@@ -551,6 +551,9 @@ body
             #collapseOne p:hover{
                 text-decoration: underline;
             }
+            #collapseTwo p:hover{
+                color: black;
+            }
 
         }
     
@@ -641,6 +644,9 @@ body
                     }
                 }
             }
+        }
+        .modal-body::-webkit-scrollbar {
+            display: none;
         }
     }
 }
@@ -864,6 +870,97 @@ body
         button:focus
         {
             outline: none;
+        }
+    }
+}
+
+#viewWorkModal
+{
+    .modal-dialog
+    {
+        height: 500px;
+        max-height: 500px;
+        .modal-content
+        {
+            height: 100%;
+        }
+    }
+    .modal-header
+    {
+        height: 15%;
+        .modal-title{
+            font-family: 'Dancing Script',cursive;
+        }
+    }
+    .modal-body
+    {
+        
+        min-height: 85%;
+        max-height: 85%;
+        overflow: unset;
+        ul{
+            height: auto;
+            width: 100%;
+            overflow: auto;
+            li{
+                min-height: 100px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                border: 1.5px solid orange;
+                padding: 25px;
+                width: 92%;
+                position: relative;
+                >div{
+                    min-height: 100px;
+
+                }
+                .two-g{
+                    width: 100%;
+                    min-height: 40px;
+                    margin-bottom: 12px;
+                    text-align: left;
+                    display: flex;
+                    justify-content: space-between;
+                    .title
+                    {
+                        color: #e24e16;
+                        text-transform: capitalize;
+                        font-size: 20px;
+                        font-family: 'Slabo 27px', serif;
+                    }
+                    .company
+                    {
+                        font-family: serif;
+                        text-transform: capitalize;
+                        font-size: 17px;
+                        color: white;
+                        padding: 1px 7px;
+                        display: inline-block;
+                        background: maroon;
+                    }
+                    .one-g{
+                        min-height: 40px;
+                        justify-content: center;
+                        align-items: center;
+                        display: flex;
+                        color: #9e9a9a;
+                        font-family: courier;
+                        font-weight: 600;
+                        width: 30%;
+                    }
+                }
+                .work-descrpt
+                {
+                    text-align: left;
+                    width: 100%; 
+                    font-size: 13px;
+                }
+               
+            }
+        }
+        ul::-webkit-scrollbar {
+            display: none;
         }
     }
 }
@@ -1101,6 +1198,28 @@ body
             width: 70%;
         }
     }
+
+    #addWorkFormModal
+    {
+        .modal-body
+        {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            max-height: unset;
+            .three-g
+            {
+                width: 90%;
+            }
+            .one-g
+            {
+                align-self: center;
+                width: 50%;
+                margin-bottom: 20px;
+                padding-top: 0;
+            }
+        }
+    }
 }
 
 
@@ -1113,4 +1232,56 @@ body
         }
     }
    
+}
+
+@media (max-width:365px)
+{
+    #addWorkFormModal
+    {
+        .modal-body
+        {
+            .three-g
+            {
+                width: 100%;
+                padding: 15px;
+            }
+            .one-g
+            {
+                width: 65%;
+            }
+        }
+    }
+}
+
+@media (max-width:340px)
+{
+    #viewWorkModal{
+        .modal-body
+        {
+            li{
+                .two-g
+                {
+                    flex-direction: column;
+                    justify-content: center;
+                    margin-bottom: 0;
+                    >div{
+                        margin-bottom: 10px;
+                        .title
+                        {
+                            text-align: left;
+                        }
+                        .company
+                        {
+                            text-align: left;
+                            max-width: fit-content;
+                        }
+                    }
+                }
+                .one-g
+                {
+                    align-self: flex-end;
+                }
+            }
+        }
+    }
 }

@@ -70,14 +70,15 @@
               <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                   <div class="card-body">
                     <% if(works.length!=0) {%>
-                    <% } else {%>
-                        <% if(profileUser.id==user.id) {%>
-                              <p data-toggle="modal" data-target="#addWorkFormModal" style="cursor: pointer;">Want to brag about it?</p>
-                        <% } else {%>
-                            <p><%= profileUser.name.split(" ")[0]%> is employed at "None of your business" Co.</p>
-                        <% }%>
+                        <p data-toggle="modal" data-target="#viewWorkModal" style="cursor: pointer;">
+                            Workalholicness
+                        </p>
+                    <% }else if(profileUser.id!=user.id){%>
+                        <p><%= profileUser.name.split(" ")[0]%> is employed at "None of your business" Co.</p>
                     <% }%>
-                     
+                    <% if(profileUser.id==user.id) {%>
+                        <p data-toggle="modal" data-target="#addWorkFormModal" style="cursor: pointer;">Want to brag about it?</p>
+                    <% } %>
                   </div>
               </div>
           </div>
@@ -280,6 +281,30 @@
             </div>
         <% } %>
       
+    <% } %>
+    <% if(works.length!=0) {%>
+        <div class="modal fade" id="viewWorkModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background: #D84315;">
+                <h2 class="modal-title" id="exampleModalLabel">
+                    Workalholicness
+                </h2>
+                </div>
+                <div class="modal-body">
+                        <ul>
+                            <% for(work of works) {%>
+                                <li id="work-<%=work._id%>" class="work-list">
+                                    <%- include("_workDisplay") %>
+                                </li>
+                                
+                            <% } %>
+                        </ul>
+                </div>
+                
+            </div>
+            </div>
+        </div>
     <% } %>
     <% if(user.id!=profileUser.id && friended) {%>
       <div class="modal fade remove-friend-warning" id="removeFriendModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
