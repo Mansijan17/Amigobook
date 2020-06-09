@@ -691,7 +691,8 @@ body
 {
     .modal-dialog
     {
-        height: 185px !important;
+        min-height: 150px;
+        height: auto !important;
         margin: 12% auto;
         width: 300px !important;    
         .modal-content
@@ -708,18 +709,19 @@ body
             }
             .modal-body
             {
-                height: 40%;
+                height: auto !important;
                 p{
                     padding-left: 15px;
                 }
             }
             .modal-footer
             {
-                margin-top: -22px;
+                margin-top: -9px;
                 padding: 0;
-                padding-top: 7px;
+                padding-top: 13px;
                 padding-right: 5px;
                 cursor: pointer;
+                margin-bottom: 12px;
                 a{
                     display: inline-block;
                 }
@@ -760,7 +762,7 @@ body
     }
 }
 
-#addWorkFormModal
+#addWorkFormModal,.update-work-modal
 {
     .modal-dialog
     {
@@ -777,6 +779,7 @@ body
         justify-content: space-between;
         align-items: center;
         flex-direction: row;
+        max-height: unset;
         >div{
             display: flex;
             flex-direction: column;
@@ -824,6 +827,9 @@ body
                 margin-top: 10px;
                 input{
                     width: auto;
+                }
+                span{
+                    text-align: left;
                 }
             }
         }
@@ -882,7 +888,8 @@ body
         max-height: 500px;
         .modal-content
         {
-            height: 100%;
+            height: auto;
+            min-height: 40%;
         }
     }
     .modal-header
@@ -895,11 +902,11 @@ body
     .modal-body
     {
         
-        min-height: 85%;
+        min-height: 40%;
         max-height: 85%;
         overflow: unset;
         ul{
-            height: auto;
+            max-height: 400px;
             width: 100%;
             overflow: auto;
             li{
@@ -914,6 +921,13 @@ body
                 >div{
                     min-height: 100px;
 
+                }
+                .edit-work
+                {
+                    position: absolute;
+                    top: 11px;
+                    right: 9px;
+                    font-size: 18px;
                 }
                 .two-g{
                     width: 100%;
@@ -947,7 +961,7 @@ body
                         color: #9e9a9a;
                         font-family: courier;
                         font-weight: 600;
-                        width: 30%;
+                        width: 175px;
                     }
                 }
                 .work-descrpt
@@ -955,12 +969,46 @@ body
                     text-align: left;
                     width: 100%; 
                     font-size: 13px;
+                    min-height: 30px;
                 }
                
             }
         }
         ul::-webkit-scrollbar {
             display: none;
+        }
+    }
+}
+
+.update-work-modal
+{
+    .modal-dialog
+    {
+        .modal-content
+        {
+            .modal-header
+            {
+                background: slategrey;
+                .modal-title
+                {
+                    font-family: 'Marck Script', cursive;
+                }
+            }
+            .modal-body
+            {
+                padding: 0;
+                max-height: unset;
+                .three-g
+                {
+                    width: 95%;
+                }
+                .one-g
+                {
+                    align-self: center;
+                    width: 44%;
+                    margin-bottom: 20px;
+                }
+            }
         }
     }
 }
@@ -1179,6 +1227,22 @@ body
    
 }
 
+@media (max-width:550px)
+{
+    #viewWorkModal
+    {
+        .modal-body
+        {
+            li{
+                .one-g
+                {
+                    width: 30% !important;
+                }
+            }
+        }
+    }
+}
+
 @media (max-width:450px)
 {
     #friendModal
@@ -1231,30 +1295,6 @@ body
             font-size: 24.5px;
         }
     }
-   
-}
-
-@media (max-width:365px)
-{
-    #addWorkFormModal
-    {
-        .modal-body
-        {
-            .three-g
-            {
-                width: 100%;
-                padding: 15px;
-            }
-            .one-g
-            {
-                width: 65%;
-            }
-        }
-    }
-}
-
-@media (max-width:340px)
-{
     #viewWorkModal{
         .modal-body
         {
@@ -1284,4 +1324,29 @@ body
             }
         }
     }
+   
+}
+
+@media (max-width:365px)
+{
+    #addWorkFormModal
+    {
+        .modal-body
+        {
+            .three-g
+            {
+                width: 100%;
+                padding: 15px;
+            }
+            .one-g
+            {
+                width: 65%;
+            }
+        }
+    }
+}
+
+@media (max-width:340px)
+{
+
 }

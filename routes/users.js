@@ -38,5 +38,7 @@ router.get("/newaccount/:id",usersController.confirmAccount);
 router.post("/newaccount/:id",usersController.verifyAccount);
 
 router.post("/add-work",passport.checkAuthentication,usersController.addWork)
+router.get("/update-work-modal",passport.checkAuthentication,usersController.updateWorkModal)
+router.post("/update-work",passport.checkAuthentication,usersController.updateWork)
 
 module.exports = router;

@@ -305,6 +305,70 @@
             </div>
             </div>
         </div>
+        <% for(work of works) {%>
+            <div class="modal fade update-work-modal" id="workUpdateModal-<%=work._id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Wanna Update this?</h5>
+                    </div>
+                    <form action="/users/update-work" method="post">
+                        <div class="modal-body">
+                                <input type="hidden" name="workID" value="<%= work._id %>">
+                                <div class="three-g">
+                                    <div>
+                                        <span>Title:</span>
+                                        <input type="text" name="title" value="<%=work.title %>" required>
+                                    </div>
+                                    <div>
+                                        <span>Company:</span>
+                                        <input type="text" name="company" required value="<%=work.company%>">
+                                    </div>
+                                    <div>
+                                        <span>Description:</span>
+                                        <textarea name="descrpt" onkeydown="autosize1(this)"><%= work.descrpt %></textarea>
+                                    </div>
+                                    <div class="checkbox">
+                                        <% if(work.check) {%>
+                                            <input type="checkbox" name="check" checked>
+                                        <% } else {%>
+                                            <input type="checkbox" name="check">
+                                        <% } %>
+                                        <span>I am currently working in this role</span>
+                                    </div>
+                                </div>
+                                <div class="one-g">
+                                    <span>Date:</span>
+                                    <div>
+                                        <div class="from-date">
+                                        <input type="number" name="fromMonth" required value="<%=work.fromMonth%>">
+                                        <input type="number" name="fromYear" required value="<%=work.fromYear%>">
+                                        </div>
+                                        <div class="to-div">
+                                        to  
+                                        </div> 
+                                        <div class="to-date">
+                                            <% if(work.check) {%>
+                                                Present
+                                            <%} else {%>
+                                                <input type="number" name="toMonth" required value="<%=work.toMonth%>">
+                                                <input type="number" name="toYear" required value="<%=work.toYear%>">
+                                            <% }%>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                                <button type="submit" class="add-work-button btn btn-info">
+                                        Submit
+                                </button>
+                                <button data-dismiss="modal" class="btn btn-secondary">Dismiss</button>
+                        </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+        <% } %>
     <% } %>
     <% if(user.id!=profileUser.id && friended) {%>
       <div class="modal fade remove-friend-warning" id="removeFriendModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

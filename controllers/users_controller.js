@@ -22,13 +22,36 @@ module.exports.profile = async function (req, res) {
     try
     {
        // console.log(req.params.id);
-        let user=await User.findById(req.params.id).populate({
-            path:"works",
-            options:{
-                sort:"-sortDate"
+        let user=await User.findById(req.params.id).populate("works");
+        let works=user.works;
+        function sortLatestExp(a,b)
+        {
+            console.log(a,b)
+            if(a.fromYear>b.fromYear)
+            {
+                return -1;
             }
-        });
-        
+            else if(a.fromYear<b.fromYear)
+            {
+                return 1;
+            }
+            else{
+                if(a.fromMonth>b.fromMonth)
+                {
+                    return -1;
+                }
+                else if(a.fromMonth<b.fromMonth)
+                {
+                    return 1;
+                }
+                return 0;
+            }
+        }
+        works.sort(sortLatestExp);
+        for(work of works)
+        {
+            console.log(work.fromMonth+" "+work.fromYear)
+        }
         let postLists=await Post.find({user:user.id}).sort("-createdAt").populate("user").populate({
             //populating the comments of the post schema
             //Change:: populate the likes of the posts and comments
@@ -141,7 +164,7 @@ module.exports.profile = async function (req, res) {
             friended:friended,
             pendingFrom:pendingFrom,
             pendingTo:pendingTo,
-            works:user.works
+            works:works
         })
 
     }
@@ -975,13 +998,20 @@ module.exports.verifyAccount=async function(req,res)
 module.exports.addWork=async function(req,res)
 {
     try{
-        console.log(req.body)
+        console.log(req.body);
+        let date=new Date()
+        let year=date.getFullYear();
+        let month=date.getMonth()
         if(req.user.id)
         {
             if(req.body.check!="on")
             {   console.log("not check")
                 if(req.body.toYear.length!=4 || req.body.fromYear.length!=4 || req.body.toMonth.length!=2 || req.body.fromMonth.length!=2)
                 {
+                    return res.json(200,{
+                        message:"Year or maybe month's length is quarrelsome!",
+                        error:true,
+                    })
                     req.flash("error","Year or maybe month's length is quarrelsome!");
                     return res.redirect("back");
                 }
@@ -989,8 +1019,12 @@ module.exports.addWork=async function(req,res)
                 let toYear=parseInt(req.body.toYear);
                 let fromMonth=parseInt(req.body.fromMonth);
                 let toMonth=parseInt(req.body.toMonth);
-                if(fromYear>2020 || toYear>2020 || fromYear<1940 || toYear<1940 || fromMonth<0 || fromMonth>12 || toMonth<0 || toMonth>12 || fromYear>toYear)
+                if(fromYear>year || toYear>year || fromYear<1940 || toYear<1940 || fromMonth<0 || fromMonth>12 || toMonth<0 || toMonth>month || fromYear>toYear)
                 {
+                    return res.json(200,{
+                        message:"Wow, your exp must be out of this world!",
+                        error:true,
+                    })
                     req.flash("error","Wow, your exp must be out of this world!");
                     return res.redirect("back");
                 }
@@ -999,6 +1033,10 @@ module.exports.addWork=async function(req,res)
                     if(fromMonth>toMonth)
                     {
                         console.log("f>tm")
+                        return res.json(200,{
+                            message:"Wow, your exp must be out of this world!",
+                            error:true,
+                        })
                         req.flash("error","Wow, your exp must be out of this world!");
                         return res.redirect("back");
                     }
@@ -1008,16 +1046,34 @@ module.exports.addWork=async function(req,res)
             {
                 if(req.body.fromYear.length!=4 || req.body.fromMonth.length!=2)
                 {
+                    return res.json(200,{
+                        message:"Year or maybe month's length is quarrelsome!",
+                        error:true,
+                    })
                     req.flash("error","Year or maybe month's length is quarrelsome!");
                     return res.redirect("back");
                 }
                 let fromYear=parseInt(req.body.fromYear);
                 let fromMonth=parseInt(req.body.fromMonth);
 
-                if(fromYear>2020 || fromYear<1940 || fromMonth<0 || fromMonth>12)
+                if(fromYear>year || fromYear<1940 || fromMonth<0 || fromMonth>12)
                 {
+                    return res.json(200,{
+                        message:"Wow, your exp must be out of this world!",
+                        error:true,
+                    })
                     req.flash("error","Wow, your exp must be out of this world!");
                     return res.redirect("back");
+                }
+                if(fromYear==year)
+                {
+                    if(fromMonth>month)
+                    {
+                        return res.json(200,{
+                            message:"Wow, your exp must be out of this world!",
+                            error:true,
+                        })   
+                    }
                 }
             }
            
@@ -1027,16 +1083,162 @@ module.exports.addWork=async function(req,res)
             let newWork=await Work.create(req.body);
             user.works.push(newWork);
             user.save()
-            console.log(user.work);
-          //  let user1=await User.updateOne({_id:req.user.id},{'$set':{"info.work":work}})
-            // user.info.work.push(req.body);
-            // user.save();
-           // console.log(user1)
+            
+            return res.json(200,{
+                data:{
+                    work:newWork,
+                    length:user.works.length
+                },
+                error:false
+            })
             return res.redirect("back");
         }
     }
     catch(err)
     {
         console.log("Error in adding work",err);
+    }
+}
+
+module.exports.updateWorkModal=async function(req,res)
+{
+    try{
+        let id=req.query.id;
+        let work=await Work.findById(id);
+        if(work.user==req.user.id)
+        {
+            return res.json(200,{
+                data:{
+                    work:work
+                }
+            })
+        }
+        return res.redirect("back");
+    }
+    catch(err)
+    {
+        console.log("error in calling update work modal ",err);
+        return;
+    }
+}
+
+module.exports.updateWork=async function(req,res)
+{
+    try{
+        let workID=req.body.workID;
+        let work=await Work.findById(workID);
+        console.log(work);
+        let date=new Date();
+        let year=date.getFullYear();
+        let month=date.getMonth();
+        if(work.user==req.user.id)
+        {
+            if(req.body.check!="on")
+            {   console.log("not check")
+                if(req.body.toYear.length!=4 || req.body.fromYear.length!=4 || req.body.toMonth.length!=2 || req.body.fromMonth.length!=2)
+                {
+                    return res.json(200,{
+                        message:"Year or maybe month's length is quarrelsome!",
+                        error:true,
+                    })
+                    req.flash("error","Year or maybe month's length is quarrelsome!");
+                    return res.redirect("back");
+                }
+                let fromYear=parseInt(req.body.fromYear);
+                let toYear=parseInt(req.body.toYear);
+                let fromMonth=parseInt(req.body.fromMonth);
+                let toMonth=parseInt(req.body.toMonth);
+                if(fromYear>year || toYear>year || fromYear<1940 || toYear<1940 || fromMonth<0 || fromMonth>12 || toMonth<0 || toMonth>month || fromYear>toYear)
+                {
+                    return res.json(200,{
+                        message:"Wow, your exp must be out of this world!",
+                        error:true,
+                    })
+                    req.flash("error","Wow, your exp must be out of this world!");
+                    return res.redirect("back");
+                }
+                if(fromYear==toYear)
+                {
+                    if(fromMonth>toMonth)
+                    {
+                        console.log("f>tm")
+                        return res.json(200,{
+                            message:"Wow, your exp must be out of this world!",
+                            error:true,
+                        })
+                        req.flash("error","Wow, your exp must be out of this world!");
+                        return res.redirect("back");
+                    }
+                }
+                if(work.check)
+                {
+                   work.check="";
+                }
+                work.toMonth=req.body.toMonth;
+                work.toYear=req.body.toYear;
+            }
+            else
+            {
+                if(req.body.fromYear.length!=4 || req.body.fromMonth.length!=2)
+                {
+                    return res.json(200,{
+                        message:"Year or maybe month's length is quarrelsome!",
+                        error:true,
+                    })
+                    req.flash("error","Year or maybe month's length is quarrelsome!");
+                    return res.redirect("back");
+                }
+                let fromYear=parseInt(req.body.fromYear);
+                let fromMonth=parseInt(req.body.fromMonth);
+
+                if(fromYear>year || fromYear<1940 || fromMonth<0 || fromMonth>12)
+                {
+                    return res.json(200,{
+                        message:"Wow, your exp must be out of this world!",
+                        error:true,
+                    })
+                    req.flash("error","Wow, your exp must be out of this world!");
+                    return res.redirect("back");
+                }
+                if(fromYear==year)
+                {
+                    if(fromMonth>month)
+                    {
+                        return res.json(200,{
+                            message:"Wow, your exp must be out of this world!",
+                            error:true,
+                        }) 
+                        req.flash("error","Wow, your exp must be out of this world!");
+                        return res.redirect("back");  
+                    }
+                }
+                if(!work.check)
+                {
+                    work.check="on"
+                }
+                work.toMonth="",
+                work.toYear="";
+            }
+            work.fromMonth=req.body.fromMonth;
+            work.fromYear=req.body.fromYear;
+            work.title=req.body.title;
+            work.company=req.body.company;
+            work.descrpt=req.body.descrpt;
+            work.sortDate=parseInt(req.body.fromMonth+req.body.fromYear);
+            console.log(work);
+            work.save();   
+            return res.json(200,{
+                data:{
+                    work:work
+                },
+                error:false
+            })
+        }
+        return res.redirect("back")
+    }
+    catch(err)
+    {
+        console.log("error in updating work ",err);
+        return;
     }
 }
