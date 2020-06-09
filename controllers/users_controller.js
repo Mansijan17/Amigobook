@@ -3,7 +3,6 @@ const Post=require('../models/post');
 const fs = require('fs');
 const path = require('path');
 const ResetPassword=require('../models/resetPasswordSchema');
-//const newpasswordMailer=require('../mailer/resetpassword_mailer');
 const queue=require('../config/kue');
 const newpasswordEmailWorker=require('../worker/newpassword_email_worker');
 const newFriendReqWorker=require('../worker/friend_request_email_worker');
@@ -1019,14 +1018,25 @@ module.exports.addWork=async function(req,res)
                 let toYear=parseInt(req.body.toYear);
                 let fromMonth=parseInt(req.body.fromMonth);
                 let toMonth=parseInt(req.body.toMonth);
-                if(fromYear>year || toYear>year || fromYear<1940 || toYear<1940 || fromMonth<0 || fromMonth>12 || toMonth<0 || toMonth>month || fromYear>toYear)
+                if(fromYear>year || toYear>year || fromYear<1940 || toYear<1940 || fromMonth<0 || fromMonth>12 || toMonth<0 || fromYear>toYear)
                 {
+                    console.log("1")
                     return res.json(200,{
                         message:"Wow, your exp must be out of this world!",
                         error:true,
                     })
                     req.flash("error","Wow, your exp must be out of this world!");
                     return res.redirect("back");
+                }
+                if(toYear==year)
+                {
+                    if(toMonth>month)
+                    {
+                        return res.json(200,{
+                            message:"Wow, your exp must be out of this world!",
+                            error:true,
+                        })
+                    }
                 }
                 if(fromYear==toYear)
                 {
@@ -1148,7 +1158,7 @@ module.exports.updateWork=async function(req,res)
                 let toYear=parseInt(req.body.toYear);
                 let fromMonth=parseInt(req.body.fromMonth);
                 let toMonth=parseInt(req.body.toMonth);
-                if(fromYear>year || toYear>year || fromYear<1940 || toYear<1940 || fromMonth<0 || fromMonth>12 || toMonth<0 || toMonth>month || fromYear>toYear)
+                if(fromYear>year || toYear>year || fromYear<1940 || toYear<1940 || fromMonth<0 || fromMonth>12 || toMonth<0 || fromYear>toYear)
                 {
                     return res.json(200,{
                         message:"Wow, your exp must be out of this world!",
@@ -1156,6 +1166,16 @@ module.exports.updateWork=async function(req,res)
                     })
                     req.flash("error","Wow, your exp must be out of this world!");
                     return res.redirect("back");
+                }
+                if(toYear==year)
+                {
+                    if(toMonth>month)
+                    {
+                        return res.json(200,{
+                            message:"Wow, your exp must be out of this world!",
+                            error:true,
+                        })
+                    }
                 }
                 if(fromYear==toYear)
                 {
@@ -1239,6 +1259,55 @@ module.exports.updateWork=async function(req,res)
     catch(err)
     {
         console.log("error in updating work ",err);
+        return;
+    }
+}
+
+module.exports.deleteWorkModal=async function(req,res)
+{
+    try{
+        let id=req.query.id;
+        let work=await Work.findById(id);
+        if(work.user==req.user.id)
+        {
+            return res.json(200,{
+                data:{
+                    work:work
+                }
+            })
+        }
+        return res.redirect("back");
+    }
+    catch(err)
+    {
+        console.log("error in calling update work modal ",err);
+        return;
+    }
+}
+
+module.exports.deleteWork=async function(req,res)
+{
+    try{
+        let id=req.query.id;
+        let work=await Work.findById(id);
+        if(work.user==req.user.id)
+        {
+            let user=await User.findById(req.user.id);
+            user.works.pull(work._id);
+            user.save();
+            work.remove();
+            return res.json(200,{
+                data:{
+                    work:work,
+                    length:user.works.length
+                }
+            })
+        }
+        return res.redirect("back");
+    }
+    catch(err)
+    {
+        console.log("error in deleting work ",err);
         return;
     }
 }

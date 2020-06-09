@@ -77,7 +77,6 @@ let addWorkFunction=function()
                     $('body').removeClass( "modal-open" );
                     if(data.data.length==1)
                     {
-                        console.log("1",$(".profile-intro .first .accordion #collapseTwo"),$("body"));
                         $(".profile-intro .first .accordion #collapseTwo .card-body").prepend(` <p data-toggle="modal" data-target="#viewWorkModal" style="cursor: pointer;">
                             Workalholicness
                         </p>`);
@@ -130,7 +129,11 @@ let addWorkFunction=function()
                     }
                     $("body").append(newUpdateWorkDOMModal)
                     let editButton=$(" .edit-work-calling",newList);
-                    updateWorkModal(editButton)
+                    updateWorkModal(editButton);
+                    let newDeleteWorkModalDOM=deleteWorkModalDOM(data.data.work);
+                    $("body").append(newDeleteWorkModalDOM);
+                    let deleteButton=$(" .delete-work-calling",newList);
+                    deleteWorkModal(deleteButton)
                     new Noty({
                         theme:"relax",
                         text:`Yay, Go for "Workalholicness"!`,
@@ -155,6 +158,11 @@ let newListDOM=function(work)
     return $(`<li id="work-${work._id}" class="work-list">
     <div class="edit-work">
     <a href="/users/update-work-modal/?id=${work._id}" class="edit-work-calling"><i class="fas fa-pen-square"></i></a>
+    </div>
+    <div class="delete-work">
+        <a href="/users/delete-work-modal/?id=${work._id }" class="delete-work-calling">
+            <i class="fas fa-minus-square"></i>
+        </a>
     </div>
     <div class="two-g">
     <div style="width: 70%;">
@@ -186,12 +194,13 @@ let updateWorkModal=function(link)
                 console.log(data.data.work._id);
                 if(data.data.work.check)
                 {
-                    $(`#workUpdateModal-${data.data.work._id} .modal-dialog .modal-content .modal-body .three-g .checkbox input`).attr("checked",true);
+                    console.log("check",$(`#workUpdateModal-${data.data.work._id} .modal-dialog .modal-content .modal-body .three-g .checkbox input`))
+                    $(`#workUpdateModal-${data.data.work._id} .modal-dialog .modal-content .modal-body .three-g .checkbox input`).prop("checked",true);
                     $(`#workUpdateModal-${data.data.work._id} .modal-dialog .modal-content .modal-body .one-g .to-date`).html(`Present`);
                 }
                 else
                 {
-                    $(`#workUpdateModal-${data.data.work._id} .modal-dialog .modal-content .modal-body .three-g .checkbox input`).attr("checked",false);
+                    $(`#workUpdateModal-${data.data.work._id} .modal-dialog .modal-content .modal-body .three-g .checkbox input`).prop("checked",false);
                     $(`#workUpdateModal-${data.data.work._id} .modal-dialog .modal-content .modal-body .one-g .to-date`).html(`<input type="number" name="toMonth" required value=${data.data.work.toMonth}>
                     <input type="number" name="toYear" required value=${data.data.work.toYear}>`);
                 }
@@ -308,7 +317,103 @@ let updateModalFormSubmit=function(form)
                         </div>`)
                     }
                     $(`#work-${data.data.work._id}`).html(newList.html())
+                    let editButton=$(`#work-${data.data.work._id} .edit-work-calling`);
+                    updateWorkModal(editButton);
+                    let deleteButton=$(`#work-${data.data.work._id} .delete-work-calling`);
+                    deleteWorkModal(deleteButton)
                 }
+            },
+            error:function(err)
+            {
+                console.log(err.responseText);
+            }
+        })
+    })
+}
+
+let deleteWorkModal=function(link)
+{
+    console.log($(link));
+    $(link).click(function(e)
+    {
+        e.preventDefault();
+        $.ajax({
+            type:"get",
+            url:$(link).prop("href"),
+            success:function(data)
+            {
+                console.log(data.data.work._id);
+                $(`#workDeleteModal-${data.data.work._id}`).modal('show');
+                deleteWork($(`#workDeleteModal-${data.data.work._id} .delete-work-button`));
+            },
+            error:function(err)
+            {
+                console.log(err.responseText);
+            }
+        })
+    })
+}
+
+let deleteWorkModalDOM=function(work)
+{
+    return $(`<div class="modal fade delete-work-warning" id="workDeleteModal-${work._id}" data-backdrop="static" >
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h2 class="modal-title">Withdraw this <i class="fas fa-mail-bulk"></i>?</h2>
+        </div>
+        <div class="modal-body">
+        <p>Are you sure you want to quit this information? </p>
+        </div>
+        <div class="modal-footer">
+            <a href="/users/delete-work/?id=${work._id}" class="delete-work-button">
+                Delete
+            </a>
+            <a data-dismiss="modal" class="discard-button">Discard</a>
+        </div>
+    </div>
+    </div>
+</div>`)
+}
+
+let deleteWork=function(link)
+{
+    console.log($(link));
+
+    $(link).click(function(e)
+    {
+        e.preventDefault();
+        $.ajax({
+            type:"get",
+            url:$(link).prop("href"),
+            success:function(data)
+            {
+                console.log(data.data);
+               
+                $(`body #workDeleteModal-${data.data.work._id}`).modal('hide');
+                $(`body #workDeleteModal-${data.data.work._id}`).remove();
+                $('.modal-backdrop').remove();
+                $('body').removeClass( "modal-open");
+                $(`#work-${data.data.work._id}`).remove();
+                if(data.data.length==0)
+                {
+                    $(`body #viewWorkModal`).modal('hide');
+                    $(`body #viewWorkModal`).remove();
+                    $('.modal-backdrop').remove();
+                    $('body').removeClass( "modal-open" );
+                    $("body .delete-work-warning").remove();
+                    $("body .update-work-modal").remove();
+                    $("#collapseTwo .card-body p").remove();
+                    $("#collapseTwo .card-body").prepend(`<p data-toggle="modal" data-target="#addWorkFormModal" style="cursor: pointer;">Want to brag about it?</p>`)
+                    
+                }
+                new Noty({
+                    theme:"relax",
+                    text:`Instructions do come true!`,
+                    type:"success",
+                    layput:"topRight",
+                    timeout:1800
+                }).show();
             },
             error:function(err)
             {
@@ -324,7 +429,9 @@ let convertWorkToAjax=function()
     {
         let self=$(this);
         let updateModalButton=$(" .edit-work-calling",self);
-        updateWorkModal(updateModalButton)
+        let deleteModalButton=$(" .delete-work-calling",self);
+        updateWorkModal(updateModalButton);
+        deleteWorkModal(deleteModalButton);
     })
 }
 convertWorkToAjax()

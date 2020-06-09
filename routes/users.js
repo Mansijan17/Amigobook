@@ -40,5 +40,7 @@ router.post("/newaccount/:id",usersController.verifyAccount);
 router.post("/add-work",passport.checkAuthentication,usersController.addWork)
 router.get("/update-work-modal",passport.checkAuthentication,usersController.updateWorkModal)
 router.post("/update-work",passport.checkAuthentication,usersController.updateWork)
+router.get("/delete-work-modal",passport.checkAuthentication,usersController.deleteWorkModal)
+router.get("/delete-work",passport.checkAuthentication,usersController.deleteWork)
 
 module.exports = router;

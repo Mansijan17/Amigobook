@@ -687,7 +687,7 @@ body
 }
 
 
-.delete-friend-warning
+.delete-friend-warning,.delete-work-warning
 {
     .modal-dialog
     {
@@ -758,6 +758,37 @@ body
                     color:#63638c;
                 }
             }
+        }
+    }
+}
+
+.delete-work-warning
+{
+    .modal-header{
+        margin-top: -5px;
+    }
+    .modal-footer
+    {
+        .delete-work-button
+        {
+            background: tomato;
+            color: snow;
+            padding: 2px 9px;
+            border-radius: 20px;
+        }
+        .delete-work-button:hover
+        {
+            background:#f25e43;
+        }
+        .discard-button
+        {
+            background:#a19593;
+            color: snow;
+            padding: 2px 9px;
+            border-radius: 20px;
+        }
+        .discard-button:hover{
+            background: #807877;;
         }
     }
 }
@@ -925,9 +956,21 @@ body
                 .edit-work
                 {
                     position: absolute;
-                    top: 11px;
-                    right: 9px;
+                    top: 7px;
+                    right: 8px;
                     font-size: 18px;
+                    a{
+                        color:#c50f63;
+                    }
+                  
+                }
+                .delete-work
+                {
+                    position: absolute;
+                    top: 7px;
+                    left: 8px;
+                    font-size: 18px;
+                    
                 }
                 .two-g{
                     width: 100%;
