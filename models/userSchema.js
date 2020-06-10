@@ -41,6 +41,12 @@ const userSchema=new mongoose.Schema({
             type:mongoose.Schema.Types.ObjectId,
             ref:"Work"
         }
+    ],
+    grads:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"Graduate"
+        }
     ]
  
 },{

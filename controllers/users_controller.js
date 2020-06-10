@@ -12,6 +12,7 @@ const FriendshipForm=require('../models/pend_friend_forms');
 const newAccount=require('../models/newAccountSchema');
 const newaccountEmailWorker=require('../worker/newaccount_email_worker');
 const Work=require('../models/workExp');
+const Grad=require('../models/educat');
 
 let colors=["#e558e5","#e55886","#4952be","#285874","#6d721b","#99611b","#686561","#E91E63","#C62828",
            "#F57F17","#00ACC1","#512DA8","#FB8C00","#039BE5","#00b7d5"]
@@ -21,8 +22,9 @@ module.exports.profile = async function (req, res) {
     try
     {
        // console.log(req.params.id);
-        let user=await User.findById(req.params.id).populate("works");
+        let user=await User.findById(req.params.id).populate("works").populate("grads");
         let works=user.works;
+        let grads=user.grads;
         function sortLatestExp(a,b)
         {
             console.log(a,b)
@@ -47,10 +49,7 @@ module.exports.profile = async function (req, res) {
             }
         }
         works.sort(sortLatestExp);
-        for(work of works)
-        {
-            console.log(work.fromMonth+" "+work.fromYear)
-        }
+        grads.sort(sortLatestExp);
         let postLists=await Post.find({user:user.id}).sort("-createdAt").populate("user").populate({
             //populating the comments of the post schema
             //Change:: populate the likes of the posts and comments
@@ -163,7 +162,8 @@ module.exports.profile = async function (req, res) {
             friended:friended,
             pendingFrom:pendingFrom,
             pendingTo:pendingTo,
-            works:works
+            works:works,
+            grads:grads
         })
 
     }
@@ -994,10 +994,9 @@ module.exports.verifyAccount=async function(req,res)
     
 }
 
-module.exports.addWork=async function(req,res)
+module.exports.addWorkGrad=async function(req,res)
 {
     try{
-        console.log(req.body);
         let date=new Date()
         let year=date.getFullYear();
         let month=date.getMonth()
@@ -1088,16 +1087,49 @@ module.exports.addWork=async function(req,res)
             }
            
             let user=await User.findById(req.user.id);
-            req.body.sortDate=parseInt(req.body.fromMonth+req.body.fromYear);
             req.body.user=req.user.id;
-            let newWork=await Work.create(req.body);
-            user.works.push(newWork);
+            let newAddition;
+            let length;
+            if(req.body.type=="work")
+            {
+                newAddition=await Work.create({
+                    title:req.body.title,
+                    company:req.body.company,
+                    descrpt:req.body.descrpt,
+                    fromMonth:req.body.fromMonth,
+                    fromYear:req.body.fromYear,
+                    check:req.body.check,
+                    toMonth:req.body.toMonth,
+                    toYear:req.body.toYear,
+                    user:req.user.id
+                });
+                user.works.push(newAddition);
+                length=user.works.length;
+            }
+            else
+            {
+                newAddition=await Grad.create({
+                    grade:req.body.title,
+                    school:req.body.company,
+                    descrpt:req.body.descrpt,
+                    fromMonth:req.body.fromMonth,
+                    fromYear:req.body.fromYear,
+                    check:req.body.check,
+                    toMonth:req.body.toMonth,
+                    toYear:req.body.toYear,
+                    user:req.user.id
+                });
+                user.grads.push(newAddition);
+                length=user.grads.length;
+            }
+            
             user.save()
             
             return res.json(200,{
                 data:{
-                    work:newWork,
-                    length:user.works.length
+                    object:newAddition,
+                    length:length,
+                    type:req.body.type
                 },
                 error:false
             })
@@ -1110,16 +1142,27 @@ module.exports.addWork=async function(req,res)
     }
 }
 
-module.exports.updateWorkModal=async function(req,res)
+module.exports.updateWorkGradModal=async function(req,res)
 {
     try{
         let id=req.query.id;
-        let work=await Work.findById(id);
-        if(work.user==req.user.id)
+        console.log("update modal calling controoleer ",req.query)
+        let updatedObj;
+        if(req.query.type=="work")
+        {
+            updatedObj=await Work.findById(id);
+        }
+        else
+        {
+            updatedObj=await Grad.findById(id);
+        }
+        console.log("updatedObj ",updatedObj)
+        if(updatedObj.user==req.user.id)
         {
             return res.json(200,{
                 data:{
-                    work:work
+                    updatedObj:updatedObj,
+                    type:req.query.type
                 }
             })
         }
@@ -1127,21 +1170,29 @@ module.exports.updateWorkModal=async function(req,res)
     }
     catch(err)
     {
-        console.log("error in calling update work modal ",err);
+        console.log("error in calling update work/grad modal ",err);
         return;
     }
 }
 
-module.exports.updateWork=async function(req,res)
+module.exports.updateWorkGrad=async function(req,res)
 {
     try{
-        let workID=req.body.workID;
-        let work=await Work.findById(workID);
-        console.log(work);
+        let id=req.body.id;
+        let object;
+        if(req.body.type=="work")
+        {
+            object=await Work.findById(id);
+        }
+        else
+        {
+            object=await Grad.findById(id);
+        }
+        console.log("object found",object);
         let date=new Date();
         let year=date.getFullYear();
         let month=date.getMonth();
-        if(work.user==req.user.id)
+        if(object.user==req.user.id)
         {
             if(req.body.check!="on")
             {   console.log("not check")
@@ -1190,15 +1241,16 @@ module.exports.updateWork=async function(req,res)
                         return res.redirect("back");
                     }
                 }
-                if(work.check)
+                if(object.check=="on")
                 {
-                   work.check="";
+                   object.check="";
                 }
-                work.toMonth=req.body.toMonth;
-                work.toYear=req.body.toYear;
+                object.toMonth=req.body.toMonth;
+                object.toYear=req.body.toYear;
             }
             else
             {
+                console.log("check")
                 if(req.body.fromYear.length!=4 || req.body.fromMonth.length!=2)
                 {
                     return res.json(200,{
@@ -1232,24 +1284,32 @@ module.exports.updateWork=async function(req,res)
                         return res.redirect("back");  
                     }
                 }
-                if(!work.check)
+                if(object.check=="")
                 {
-                    work.check="on"
+                    object.check="on"
                 }
-                work.toMonth="",
-                work.toYear="";
+                object.toMonth="",
+                object.toYear="";
             }
-            work.fromMonth=req.body.fromMonth;
-            work.fromYear=req.body.fromYear;
-            work.title=req.body.title;
-            work.company=req.body.company;
-            work.descrpt=req.body.descrpt;
-            work.sortDate=parseInt(req.body.fromMonth+req.body.fromYear);
-            console.log(work);
-            work.save();   
+            object.fromMonth=req.body.fromMonth;
+            object.fromYear=req.body.fromYear;
+            if(req.body.name=="work")
+            {
+                object.title=req.body.title;
+                object.company=req.body.company;
+            }
+            else
+            {
+                object.grade=req.body.title;
+                object.school=req.body.company;
+            }
+            object.descrpt=req.body.descrpt;
+            console.log("update",object);
+            object.save();   
             return res.json(200,{
                 data:{
-                    work:work
+                    object:object,
+                    type:req.body.type
                 },
                 error:false
             })
@@ -1263,16 +1323,25 @@ module.exports.updateWork=async function(req,res)
     }
 }
 
-module.exports.deleteWorkModal=async function(req,res)
+module.exports.deleteWorkGradModal=async function(req,res)
 {
     try{
         let id=req.query.id;
-        let work=await Work.findById(id);
-        if(work.user==req.user.id)
+        let deleteItem;
+        if(req.query.type=="work")
+        {
+            deleteItem=await Work.findById(id);
+        }
+        else
+        {
+            deleteItem=await Grad.findById(id)
+        }
+        if(deleteItem.user==req.user.id)
         {
             return res.json(200,{
                 data:{
-                    work:work
+                    item:deleteItem,
+                    type:req.query.type
                 }
             })
         }
@@ -1285,21 +1354,40 @@ module.exports.deleteWorkModal=async function(req,res)
     }
 }
 
-module.exports.deleteWork=async function(req,res)
+module.exports.deleteWorkGrad=async function(req,res)
 {
     try{
         let id=req.query.id;
-        let work=await Work.findById(id);
-        if(work.user==req.user.id)
+        let obj;
+        if(req.query.type=="work")
+        {
+            obj=await Work.findById(id);
+        }
+        else
+        {
+            obj=await Grad.findById(id);
+        }
+        if(obj.user==req.user.id)
         {
             let user=await User.findById(req.user.id);
-            user.works.pull(work._id);
+            let length;
+            if(req.query.type=="work")
+            {
+                user.works.pull(obj._id);
+                length=user.works.length;
+            }
+            else
+            {
+                user.grads.pull(obj._id);
+                length=user.grads.length;
+            }
             user.save();
-            work.remove();
+            obj.remove();
             return res.json(200,{
                 data:{
-                    work:work,
-                    length:user.works.length
+                    obj:obj,
+                    length:length,
+                    type:req.query.type
                 }
             })
         }
@@ -1311,3 +1399,5 @@ module.exports.deleteWork=async function(req,res)
         return;
     }
 }
+
+

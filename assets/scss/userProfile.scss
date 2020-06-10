@@ -388,6 +388,18 @@ body
             }
         }
     }
+    .first
+    {
+        #collapseOne p:hover{
+            text-decoration: underline;
+        }
+        #collapseTwo p:hover{
+            color: black;
+        }
+        #collapseThree p:hover{
+            font-style: italic;
+        }
+    }
     .middle
     {
         height: auto;
@@ -548,12 +560,7 @@ body
                     }
                    
             }
-            #collapseOne p:hover{
-                text-decoration: underline;
-            }
-            #collapseTwo p:hover{
-                color: black;
-            }
+           
 
         }
     
@@ -687,7 +694,7 @@ body
 }
 
 
-.delete-friend-warning,.delete-work-warning
+.delete-friend-warning,.delete-work-warning,.delete-grad-warning
 {
     .modal-dialog
     {
@@ -762,21 +769,21 @@ body
     }
 }
 
-.delete-work-warning
+.delete-work-warning,.delete-grad-warning
 {
     .modal-header{
         margin-top: -5px;
     }
     .modal-footer
     {
-        .delete-work-button
+        .delete-work-button,.delete-grad-button
         {
             background: tomato;
             color: snow;
             padding: 2px 9px;
             border-radius: 20px;
         }
-        .delete-work-button:hover
+        .delete-work-button:hover,.delete-grad-button:hover
         {
             background:#f25e43;
         }
@@ -793,7 +800,7 @@ body
     }
 }
 
-#addWorkFormModal,.update-work-modal
+#addWorkFormModal,.update-work-modal,#addGradFormModal,.update-grad-modal
 {
     .modal-dialog
     {
@@ -911,7 +918,42 @@ body
     }
 }
 
-#viewWorkModal
+#addGradFormModal
+{
+    .modal-body
+    {
+        >div{
+            span{
+                color: #58194b;
+            }
+
+        }
+        .one-g
+        {
+            >div{
+                .to-date,.from-date
+                {
+                    color: #58194b;
+                
+                }
+            }
+        }
+    }
+    .modal-footer
+    {
+        .btn-info
+        {
+            background: deeppink;
+            border-color: deeppink;
+        }
+        .btn-info:hover
+        {
+            background: #e81a89;
+        }
+    }
+}
+
+#viewWorkModal,#viewGradModal
 {
     .modal-dialog
     {
@@ -953,7 +995,7 @@ body
                     min-height: 100px;
 
                 }
-                .edit-work
+                .edit-work,.edit-grad
                 {
                     position: absolute;
                     top: 7px;
@@ -964,7 +1006,7 @@ body
                     }
                   
                 }
-                .delete-work
+                .delete-work,.delete-grad
                 {
                     position: absolute;
                     top: 7px;
@@ -995,6 +1037,8 @@ body
                         padding: 1px 7px;
                         display: inline-block;
                         background: maroon;
+                        padding-bottom: 5px;
+                        width: 85%;
                     }
                     .one-g{
                         min-height: 40px;
@@ -1007,7 +1051,7 @@ body
                         width: 175px;
                     }
                 }
-                .work-descrpt
+                .work-descrpt,.grad-descrpt
                 {
                     text-align: left;
                     width: 100%; 
@@ -1023,7 +1067,42 @@ body
     }
 }
 
-.update-work-modal
+#viewGradModal
+{
+    .modal-body
+    {
+        ul{
+            li{
+                border-color: #e5b4c7;
+                .edit-grad
+                {
+                    color: #eb8585;
+                }
+                .delete-grad
+                {
+                    a{
+                        color:#c9a2a2;
+                    }
+                }
+
+                .two-g
+                {
+                    .title
+                    {
+                        color: #E91E63;
+                        display: flex;
+                    }
+                    .company
+                    {
+                        background: #cc326b;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.update-work-modal,.update-grad-modal
 {
     .modal-dialog
     {
@@ -1272,7 +1351,7 @@ body
 
 @media (max-width:550px)
 {
-    #viewWorkModal
+    #viewWorkModal,#viewGradModal
     {
         .modal-body
         {
@@ -1280,6 +1359,40 @@ body
                 .one-g
                 {
                     width: 30% !important;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:500px)
+{
+    #viewWorkModal,#viewGradModal{
+        .modal-body
+        {
+            li{
+                .two-g
+                {
+                    flex-direction: column;
+                    justify-content: center;
+                    margin-bottom: 0;
+                    >div{
+                        margin-bottom: 10px;
+                        .title
+                        {
+                            text-align: left;
+                        }
+                        .company
+                        {
+                            text-align: left;
+                            max-width: 80%;
+                            
+                        }
+                    }
+                }
+                .one-g
+                {
+                    align-self: flex-end;
                 }
             }
         }
@@ -1306,7 +1419,7 @@ body
         }
     }
 
-    #addWorkFormModal
+    #addWorkFormModal,#addGradFormModal
     {
         .modal-body
         {
@@ -1338,41 +1451,13 @@ body
             font-size: 24.5px;
         }
     }
-    #viewWorkModal{
-        .modal-body
-        {
-            li{
-                .two-g
-                {
-                    flex-direction: column;
-                    justify-content: center;
-                    margin-bottom: 0;
-                    >div{
-                        margin-bottom: 10px;
-                        .title
-                        {
-                            text-align: left;
-                        }
-                        .company
-                        {
-                            text-align: left;
-                            max-width: fit-content;
-                        }
-                    }
-                }
-                .one-g
-                {
-                    align-self: flex-end;
-                }
-            }
-        }
-    }
+    
    
 }
 
 @media (max-width:365px)
 {
-    #addWorkFormModal
+    #addWorkFormModal,#addGradFormModal
     {
         .modal-body
         {

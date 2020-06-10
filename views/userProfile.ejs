@@ -85,12 +85,23 @@
           <div class="card">
               <div class="card-header" id="headingThree">
                   <h2 class="mb-0">
-                      <button type="button" class="collapsed" data-toggle="collapse" data-target="#collapseThree">What is CSS?</button>                     
+                      <button type="button" class="collapsed" data-toggle="collapse" data-target="#collapseThree">
+                        <i class="fas fa-graduation-cap"></i> Graduation
+                      </button>                     
                   </h2>
               </div>
               <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                   <div class="card-body">
-                      <p>CSS stands for Cascading Style Sheet. CSS allows you to specify various style properties for a given HTML element such as colors, backgrounds, fonts etc. </p>
+                    <% if(grads.length!=0) {%>
+                        <p data-toggle="modal" data-target="#viewGradModal" style="cursor: pointer;">
+                            Gradenation
+                        </p>
+                    <% }else if(profileUser.id!=user.id){%>
+                        <p><%= profileUser.name.split(" ")[0]%> has graduated from "Not Concerning You" School.</p>
+                    <% }%>
+                    <% if(profileUser.id==user.id) {%>
+                        <p data-toggle="modal" data-target="#addGradFormModal" style="cursor: pointer;">Wanna take this to academic mode?</p>
+                    <% } %>
                   </div>
               </div>
           </div>
@@ -204,7 +215,8 @@
                     <div class="modal-header" style="background: #00BCD4;">
                     <h2 class="modal-title">Add <i class="fas fa-briefcase"></i>?</h2>
                     </div>
-                    <form action="/users/add-work" method="POST">
+                    <form action="/users/workgrad/add" method="POST">
+                        <input type="hidden" name="type" value="work">
                         <div class="modal-body">
                             <div class="three-g">
                                 <div>
@@ -241,7 +253,60 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="add-work-button btn btn-info">
+                            <button type="submit" class="btn btn-info">
+                                    Submit
+                            </button>
+                            <button data-dismiss="modal" class="btn btn-secondary">Dismiss</button>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+            <div class="modal fade" id="addGradFormModal" data-backdrop="static" >
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" style="background: #c31a87;">
+                    <h2 class="modal-title">Include this <i class="fas fa-user-graduate"></i>?</h2>
+                    </div>
+                    <form action="/users/workgrad/add" method="POST">
+                        <input type="hidden" name="type" value="grad">
+                        <div class="modal-body">
+                            <div class="three-g">
+                                <div>
+                                    <span>Percentage/Grade:</span>
+                                    <input type="text" name="title" required>
+                                </div>
+                                <div>
+                                    <span>School/College:</span>
+                                    <input type="text" name="company" required>
+                                </div>
+                                <div>
+                                    <span>Description:</span>
+                                    <textarea name="descrpt" onkeydown="autosize1(this)"></textarea>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" name="check"><span>I am currently enrolled here</span>
+                                </div>
+                            </div>
+                            <div class="one-g">
+                                <span>Date:</span>
+                                <div>
+                                    <div class="from-date">
+                                     <input type="number" name="fromMonth" required placeholder="01">
+                                     <input type="number" name="fromYear" required placeholder="2020">
+                                    </div>
+                                    <div class="to-div">
+                                     to  
+                                    </div> 
+                                    <div class="to-date">
+                                        <input type="number" name="toMonth" required placeholder="01">
+                                        <input type="number" name="toYear" required placeholder="2020">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-info">
                                     Submit
                             </button>
                             <button data-dismiss="modal" class="btn btn-secondary">Dismiss</button>
@@ -313,9 +378,10 @@
                         <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Wanna Update this?</h5>
                         </div>
-                        <form action="/users/update-work" method="post">
+                        <form action="/users/workgrad/update-work-grad" method="post">
                             <div class="modal-body">
-                                    <input type="hidden" name="workID" value="<%= work._id %>">
+                                    <input type="hidden" name="id" value="<%= work._id %>">
+                                    <input type="hidden" name="type" value="work">
                                     <div class="three-g">
                                         <div>
                                             <span>Title:</span>
@@ -360,7 +426,7 @@
                                     </div>
                             </div>
                             <div class="modal-footer">
-                                    <button type="submit" class="add-work-button btn btn-info">
+                                    <button type="submit" class="btn btn-info">
                                             Submit
                                     </button>
                                     <button data-dismiss="modal" class="btn btn-secondary">Dismiss</button>
@@ -379,7 +445,116 @@
                         <p>Are you sure you want to quit this information? </p>
                         </div>
                         <div class="modal-footer">
-                            <a href="/users/delete-work/?id=<%=work._id%>" class="delete-work-button">
+                            <a href="/users/workgrad/delete-work-grad/?type=work&id=<%=work._id%>" class="delete-work-button">
+                                Delete
+                            </a>
+                            <a data-dismiss="modal" class="discard-button">Discard</a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            <% } %>
+        <% } %>
+    <% } %>
+    <% if(grads.length!=0) {%>
+        <div class="modal fade" id="viewGradModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background: #8e144c;">
+                <h2 class="modal-title" id="exampleModalLabel">
+                    Gradenation
+                </h2>
+                </div>
+                <div class="modal-body">
+                        <ul>
+                            <% for(grad of grads) {%>
+                                <li id="grad-<%=grad._id%>" class="grad-list">
+                                    <%- include("_gradDisplay") %>
+                                </li>
+                                
+                            <% } %>
+                        </ul>
+                </div>
+                
+            </div>
+            </div>
+        </div>
+        <% if(profileUser.id==user.id) {%>
+            <% for(grad of grads) {%>
+                <div class="modal fade update-grad-modal" id="gradUpdateModal-<%=grad._id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Improvise this?</h5>
+                        </div>
+                        <form action="/users/workgrad/update-work-grad" method="post">
+                            <div class="modal-body">
+                                    <input type="hidden" name="id" value="<%= grad._id %>">
+                                    <input type="hidden" name="type" value="grad">
+                                    <div class="three-g">
+                                        <div>
+                                            <span>Percentage/Grade:</span>
+                                            <input type="text" name="title" value="<%=grad.grade %>" required>
+                                        </div>
+                                        <div>
+                                            <span>School/College:</span>
+                                            <input type="text" name="company" required value="<%=grad.school%>">
+                                        </div>
+                                        <div>
+                                            <span>Description:</span>
+                                            <textarea name="descrpt" onkeydown="autosize1(this)"><%= grad.descrpt %></textarea>
+                                        </div>
+                                        <div class="checkbox">
+                                            <% if(grad.check) {%>
+                                                <input type="checkbox" name="check" checked>
+                                            <% } else {%>
+                                                <input type="checkbox" name="check">
+                                            <% } %>
+                                            <span>I am currently enrolled here</span>
+                                        </div>
+                                    </div>
+                                    <div class="one-g">
+                                        <span>Date:</span>
+                                        <div>
+                                            <div class="from-date">
+                                            <input type="number" name="fromMonth" required value="<%=grad.fromMonth%>">
+                                            <input type="number" name="fromYear" required value="<%=grad.fromYear%>">
+                                            </div>
+                                            <div class="to-div">
+                                            to  
+                                            </div> 
+                                            <div class="to-date">
+                                                <% if(grad.check) {%>
+                                                    Present
+                                                <%} else {%>
+                                                    <input type="number" name="toMonth" required value="<%=grad.toMonth%>">
+                                                    <input type="number" name="toYear" required value="<%=grad.toYear%>">
+                                                <% }%>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                    <button type="submit" class="btn btn-info">
+                                            Submit
+                                    </button>
+                                    <button data-dismiss="modal" class="btn btn-secondary">Dismiss</button>
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+                <div class="modal fade delete-grad-warning" id="gradDeleteModal-<%=grad._id%>" data-backdrop="static" >
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h2 class="modal-title">Withdraw this <i class="fas fa-school"></i>?</h2>
+                        </div>
+                        <div class="modal-body">
+                        <p>Are you sure you want to quit this information? </p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="/users/workgrad/delete-work-grad/?type=grad&id=<%=grad._id%>" class="delete-grad-button">
                                 Delete
                             </a>
                             <a data-dismiss="modal" class="discard-button">Discard</a>

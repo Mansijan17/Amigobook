@@ -1,9 +1,9 @@
 <% if(profileUser.id==user.id) {%>
     <div class="edit-work">
-        <a href="/users/update-work-modal/?id=<%=work._id%>" class="edit-work-calling"><i class="fas fa-pen-square"></i></a>
+        <a href="/users/workgrad/update-modal/?type=work&id=<%=work._id%>" class="edit-work-calling"><i class="fas fa-pen-square"></i></a>
     </div>
     <div class="delete-work">
-        <a href="/users/delete-work-modal/?id=<%= work._id %>" class="delete-work-calling">
+        <a href="/users/workgrad/delete-modal/?type=work&id=<%= work._id %>" class="delete-work-calling">
             <i class="fas fa-minus-square"></i>
         </a>
     </div>

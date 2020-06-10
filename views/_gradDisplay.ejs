@@ -1,0 +1,36 @@
+<% if(profileUser.id==user.id) {%>
+    <div class="edit-grad">
+        <a href="/users/workgrad/update-modal/?type=grad&id=<%=grad._id%>" class="edit-grad-calling"><i class="fas fa-pen-square"></i></a>
+    </div>
+    <div class="delete-grad">
+        <a href="/users/workgrad/delete-modal/?type=grad&id=<%= grad._id %>" class="delete-grad-calling">
+            <i class="fas fa-minus-square"></i>
+        </a>
+    </div>
+<% } %>
+<div class="two-g">
+    <div style="width: 70%;">
+        <div class="title">
+           <b>Remarks:</b> &nbsp;
+            <%= grad.grade%>
+        </div>
+        <div class="company">
+            <%= grad.school%>
+        </div>
+    </div>
+    <div class="one-g">
+        <%= grad.fromMonth%>/<%= grad.fromYear %> to
+        <% if(grad.check) {%>
+            Present
+        <%} else {%>
+            <%= grad.toMonth%>/<%= grad.toYear%> 
+        <% }%>
+    </div>
+</div>
+<% if(grad.descrpt) {%>
+    <div class="grad-descrpt">
+            <%= grad.descrpt%>
+    </div>
+<% } %>
+
+   

@@ -6,7 +6,7 @@ const usersController = require('../controllers/users_controller');
 
 
 router.get('/profile/:id', passport.checkAuthentication,usersController.profile);
-router.post('/update/:id', passport.checkAuthentication,usersController.update);
+router.post('/update-profile/:id', passport.checkAuthentication,usersController.update);
 
 router.get('/sign-up', usersController.signUp);
 router.get('/sign-in', usersController.signIn);
@@ -37,10 +37,12 @@ router.get("/destroy-friends/:loggedUserPage",passport.checkAuthentication,users
 router.get("/newaccount/:id",usersController.confirmAccount);
 router.post("/newaccount/:id",usersController.verifyAccount);
 
-router.post("/add-work",passport.checkAuthentication,usersController.addWork)
-router.get("/update-work-modal",passport.checkAuthentication,usersController.updateWorkModal)
-router.post("/update-work",passport.checkAuthentication,usersController.updateWork)
-router.get("/delete-work-modal",passport.checkAuthentication,usersController.deleteWorkModal)
-router.get("/delete-work",passport.checkAuthentication,usersController.deleteWork)
+router.post("/workgrad/add",passport.checkAuthentication,usersController.addWorkGrad)
+router.get("/workgrad/update-modal",passport.checkAuthentication,usersController.updateWorkGradModal)
+router.post("/workgrad/update-work-grad",passport.checkAuthentication,usersController.updateWorkGrad)
+router.get("/workgrad/delete-modal",passport.checkAuthentication,usersController.deleteWorkGradModal)
+router.get("/workgrad/delete-work-grad",passport.checkAuthentication,usersController.deleteWorkGrad)
+
+
 
 module.exports = router;

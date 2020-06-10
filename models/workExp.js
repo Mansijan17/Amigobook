@@ -40,11 +40,6 @@ const workSchema=new mongoose.Schema({
     {
         type:String,
     },
-    sortDate:
-    {
-        type:Number,
-        required:true,
-    }
  
 },{
     timestamps:true
