@@ -123,7 +123,7 @@
             <% } %>
         </p>
         <% if(profileUser.id==user.id) {%>
-            <span class="editprofile-tag">Edit Profile</span>
+            <span class="editprofile-tag" data-toggle="modal" data-target="#editProfileModal">Edit Profile</span>
         <% } else {%>   
             <div class="add-chat-friend-group">
                 <% if(!friended) {%>
@@ -209,112 +209,7 @@
                     </div>
                 </div>
             <% } %>
-            <div class="modal fade" id="addWorkFormModal" data-backdrop="static" >
-                <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header" style="background: #00BCD4;">
-                    <h2 class="modal-title">Add <i class="fas fa-briefcase"></i>?</h2>
-                    </div>
-                    <form action="/users/workgrad/add" method="POST">
-                        <input type="hidden" name="type" value="work">
-                        <div class="modal-body">
-                            <div class="three-g">
-                                <div>
-                                    <span>Title:</span>
-                                    <input type="text" name="title" required>
-                                </div>
-                                <div>
-                                    <span>Company:</span>
-                                    <input type="text" name="company" required>
-                                </div>
-                                <div>
-                                    <span>Description:</span>
-                                    <textarea name="descrpt" onkeydown="autosize1(this)"></textarea>
-                                </div>
-                                <div class="checkbox">
-                                    <input type="checkbox" name="check"><span>I am currently working in this role</span>
-                                </div>
-                            </div>
-                            <div class="one-g">
-                                <span>Date:</span>
-                                <div>
-                                    <div class="from-date">
-                                     <input type="number" name="fromMonth" required placeholder="01">
-                                     <input type="number" name="fromYear" required placeholder="2020">
-                                    </div>
-                                    <div class="to-div">
-                                     to  
-                                    </div> 
-                                    <div class="to-date">
-                                        <input type="number" name="toMonth" required placeholder="01">
-                                        <input type="number" name="toYear" required placeholder="2020">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-info">
-                                    Submit
-                            </button>
-                            <button data-dismiss="modal" class="btn btn-secondary">Dismiss</button>
-                        </div>
-                    </form>
-                </div>
-                </div>
-            </div>
-            <div class="modal fade" id="addGradFormModal" data-backdrop="static" >
-                <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header" style="background: #c31a87;">
-                    <h2 class="modal-title">Include this <i class="fas fa-user-graduate"></i>?</h2>
-                    </div>
-                    <form action="/users/workgrad/add" method="POST">
-                        <input type="hidden" name="type" value="grad">
-                        <div class="modal-body">
-                            <div class="three-g">
-                                <div>
-                                    <span>Percentage/Grade:</span>
-                                    <input type="text" name="title" required>
-                                </div>
-                                <div>
-                                    <span>School/College:</span>
-                                    <input type="text" name="company" required>
-                                </div>
-                                <div>
-                                    <span>Description:</span>
-                                    <textarea name="descrpt" onkeydown="autosize1(this)"></textarea>
-                                </div>
-                                <div class="checkbox">
-                                    <input type="checkbox" name="check"><span>I am currently enrolled here</span>
-                                </div>
-                            </div>
-                            <div class="one-g">
-                                <span>Date:</span>
-                                <div>
-                                    <div class="from-date">
-                                     <input type="number" name="fromMonth" required placeholder="01">
-                                     <input type="number" name="fromYear" required placeholder="2020">
-                                    </div>
-                                    <div class="to-div">
-                                     to  
-                                    </div> 
-                                    <div class="to-date">
-                                        <input type="number" name="toMonth" required placeholder="01">
-                                        <input type="number" name="toYear" required placeholder="2020">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-info">
-                                    Submit
-                            </button>
-                            <button data-dismiss="modal" class="btn btn-secondary">Dismiss</button>
-                        </div>
-                    </form>
-                </div>
-                </div>
-            </div>
+           
         <% } else {%>
             <div class="modal fade" id="mutualfriendModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -586,13 +481,6 @@
       </div>
     <% } %>
     <% if(user.id==profileUser.id) { %> 
-       
-        <!-- <form action="/users/update/<%= profileUser.id %>" method="post" enctype="multipart/form-data">
-            <input type="text" required placeholder="Your Name..." value="<%= profileUser.name %>" name="name">
-            <input type="email" required placeholder="Your Email..." value="<%= profileUser.email %>" name="email">
-            <input type="file" name="avatar" placeholder="Profile Picture...">
-            <button type="submit">Update</button>
-        </form> -->
         <br>
         <br><br>
         <form id="new-post-form" method="post" action="/posts/create-post">
@@ -620,7 +508,228 @@
         <% } else { %>
             <h3 style="text-align: center;">You have yet to ascent!</h3>
         <% } %>
-            
+        <div class="modal fade" id="addWorkFormModal" data-backdrop="static" >
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background: #00BCD4;">
+                <h2 class="modal-title">Add <i class="fas fa-briefcase"></i>?</h2>
+                </div>
+                <form action="/users/workgrad/add" method="POST">
+                    <input type="hidden" name="type" value="work">
+                    <div class="modal-body">
+                        <div class="three-g">
+                            <div>
+                                <span>Title:</span>
+                                <input type="text" name="title" required>
+                            </div>
+                            <div>
+                                <span>Company:</span>
+                                <input type="text" name="company" required>
+                            </div>
+                            <div>
+                                <span>Description:</span>
+                                <textarea name="descrpt" onkeydown="autosize1(this)"></textarea>
+                            </div>
+                            <div class="checkbox">
+                                <input type="checkbox" name="check"><span>I am currently working in this role</span>
+                            </div>
+                        </div>
+                        <div class="one-g">
+                            <span>Date:</span>
+                            <div>
+                                <div class="from-date">
+                                 <input type="number" name="fromMonth" required placeholder="01">
+                                 <input type="number" name="fromYear" required placeholder="2020">
+                                </div>
+                                <div class="to-div">
+                                 to  
+                                </div> 
+                                <div class="to-date">
+                                    <input type="number" name="toMonth" required placeholder="01">
+                                    <input type="number" name="toYear" required placeholder="2020">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-info">
+                                Submit
+                        </button>
+                        <button data-dismiss="modal" class="btn btn-secondary">Dismiss</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+        <div class="modal fade" id="addGradFormModal" data-backdrop="static" >
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background: #c31a87;">
+                <h2 class="modal-title">Include this <i class="fas fa-user-graduate"></i>?</h2>
+                </div>
+                <form action="/users/workgrad/add" method="POST">
+                    <input type="hidden" name="type" value="grad">
+                    <div class="modal-body">
+                        <div class="three-g">
+                            <div>
+                                <span>Percentage/Grade:</span>
+                                <input type="text" name="title" required>
+                            </div>
+                            <div>
+                                <span>School/College:</span>
+                                <input type="text" name="company" required>
+                            </div>
+                            <div>
+                                <span>Description:</span>
+                                <textarea name="descrpt" onkeydown="autosize1(this)"></textarea>
+                            </div>
+                            <div class="checkbox">
+                                <input type="checkbox" name="check"><span>I am currently enrolled here</span>
+                            </div>
+                        </div>
+                        <div class="one-g">
+                            <span>Date:</span>
+                            <div>
+                                <div class="from-date">
+                                 <input type="number" name="fromMonth" required placeholder="01">
+                                 <input type="number" name="fromYear" required placeholder="2020">
+                                </div>
+                                <div class="to-div">
+                                 to  
+                                </div> 
+                                <div class="to-date">
+                                    <input type="number" name="toMonth" required placeholder="01">
+                                    <input type="number" name="toYear" required placeholder="2020">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-info">
+                                Submit
+                        </button>
+                        <button data-dismiss="modal" class="btn btn-secondary">Dismiss</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+        <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Your's <img src="/images/footprint.png"></h5>
+                </div>
+                <form action="/update-profile-info" method="POST">
+                    <input type="hidden" name="userID" value="<%= user._id%>">
+                    <div class="modal-body">
+                        <div class="intro1">
+                            <div class="intro-image">
+                                <img src="<%= user.avatar %>">
+                            </div>
+                            <div class="intro1-2">
+                                <div>
+                                    <span>Name:<sup>*</sup></span>
+                                    <input type="text" required placeholder="Your Name..." value="<%= profileUser.name %>" name="name">
+                                </div>
+                                <div>
+                                    <span class="profile-img-span">Profile Picture:<sup>*</sup></span>
+                                    <label for="file-upload" class="custom-file-upload" id="file-upload-label">
+                                        <div>
+                                            <i class="fas fa-upload"></i>&nbsp;Upload
+                                        </div>
+                                    </label>
+                                    <input type="file" id="file-upload" name="avatar" placeholder="Profile Picture...">
+                                </div>
+                                <div>
+                                    <span>About:<sup>*</sup></span>
+                                    <textarea type="text" required onkeydown="autosize1(this)" name="about"><%=user.info.about%></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="change-email">
+                            <a href="/users/change-email/?id=<%=user._id%>">Change @?</a>
+                        </div>
+                        <div class="personal-info">
+                            <div class="heading">
+                                Personal Information
+                            </div>
+                            <div class="info">
+                                <div class="first-info">
+                                    <div>
+                                        <span>Current City:</span>
+                                        <input type="text" name="currentCity" value="<%=user.info.currentCity%>">
+                                    </div>
+                                    <div>
+                                        <span>Hometown:</span>
+                                        <input type="text" name="homeTown" value="<%= user.info.homeTown%>">
+                                    </div>
+                                </div>
+                                <div class="second-info">
+                                    <span><i class="fas fa-birthday-cake"></i></span>
+                                    <input type="date" name="birthday" value="<%= user.info.bDay%>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="social-info">
+                                <div class="heading">
+                                    Social Media
+                                </div>
+                                <div class="info">
+                                
+                                        <div>
+                                            <span><i class="fab fa-facebook" style="color: #3B5998;"></i></span>
+                                            <input type="url" name="fb" value="<%= user.info.fb%>">
+                                        </div>
+                                        <div>
+                                            <span><i class="fab fa-linkedin" style="color: #0077B5;"></i></span>
+                                            <input type="url" name="linkedin" value="<%= user.info.linkedin%>">
+                                        </div>
+                                        <div>
+                                            <span><i class="fab fa-quora" style="color: #B92B27;"></i></span>
+                                            <input type="url" name="quora" value="<%= user.info.quora%>">
+                                        </div>
+                                        <div>
+                                            <span><i class="fab fa-instagram" style="color: #BC32AA;"></i></span>
+                                            <input type="url" name="insta" value="<%= user.info.insta%>">
+                                        </div>
+                                        <div>
+                                            <span><i class="fab fa-youtube" style="color:#FF0000"></i></span>
+                                            <input type="url" name="utube" value="<%= user.info.utube%>">
+                                        </div>
+                                        <div>
+                                            <span><i class="fab fa-twitter-square" style="color: #1DA1F2;"></i></span>
+                                            <input type="url" name="twitter" value="<%= user.info.twitter%>">
+                                        </div>
+                                </div>
+                        </div>
+                        
+                        <div class="contact-info">
+                            <div class="heading">
+                                Contact Information
+                            </div>
+                            <div class="info">
+                                <div class="first-info">
+                                    <div>
+                                        <span>Phone No:</span>
+                                        <input type="number" name="phone" value="<%= user.info.phone%>">
+                                    </div>
+                                    <div>
+                                        <span>Website:</span>
+                                        <input type="url" name="website" value="<%= user.info.website%>">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="submit" class="btn btn-info">Submit</button>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Discard</button>
+                    </div>
+                </form>
+              </div>
+            </div>
+          </div>
     <% } else { %>
 
           

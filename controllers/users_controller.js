@@ -198,27 +198,17 @@ module.exports.update = async function (req, res) {
                 if (err) {
                     console.log("****Multer ", err);
                 }
-                //console.log(req.file);
                 user.name = req.body.name;
-                user.email = req.body.email;
+                user.about = req.body.about;
                 console.log("file ", req.file);
-                // console.log("User: ",user);
                 if (req.file) {
                     if (user.avatar) {
                         if (fs.existsSync(path.join(__dirname, "..", user.avatar))) {
-                            //console.log("deleted!");
-                            //console.log(path.join(__dirname, "..", user.avatar));
                             fs.unlinkSync(path.join(__dirname, "..", user.avatar));
                         }
-                        user.avatar = User.avatarPath + "/" + req.file.filename;
 
-                    } else {
-                        user.avatar = User.avatarPath + "/" + req.file.filename;
                     }
-
-                    //this is saving the path of the file in the avatar field of the user
-
-                    //console.log(user);   
+                     user.avatar = User.avatarPath + "/" + req.file.filename;
                 }
                 user.save();
                 Post.find({"content.prevAuthID":req.params.id},function(err,posts)

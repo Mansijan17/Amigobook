@@ -1135,6 +1135,248 @@ body
     }
 }
 
+#editProfileModal
+{
+    .modal-dialog
+    {
+        min-height: 500px;
+        max-height: 1000px;
+        .modal-content
+        {
+            min-height: 500px;
+            .modal-header
+            {
+                height: 80px;
+                padding-bottom: 0;
+                background: #332f2f;
+                .modal-title
+                {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-family: 'Bentham',cursive;
+                    img{
+                        width: 80px;
+                        height: 55px;
+                    }
+                }
+            }
+            form{
+                min-height: 420px;
+                input:focus,textarea:focus
+                {
+                    outline:none
+                }
+                textarea::-webkit-scrollbar
+                {
+                    display: none;
+                }
+                input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
+                .modal-body
+                {
+                    max-height: unset;
+                    min-height: 340px;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+
+                    .intro1{
+                        width: 100%;
+                        min-height: 102px;
+                        height: auto;
+                        padding: 10px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 5px;
+                        .intro-image
+                        {
+                            align-self:flex-start;
+                            img{
+                                height: 120px;
+                                width: 120px;
+                                border-radius: 50%;
+                                box-shadow: 0px 0px 4px 1px black;
+                            }
+                        }
+                        
+                        .intro1-2
+                        {
+                            display: flex;
+                            width: 75%;
+                            flex-direction: column;
+                            align-items: flex-start;
+                            >div{
+                                display: flex;
+                                margin-bottom: 13px;
+                                min-height: 20px;
+                                width: 100%;
+                                justify-content: space-between;
+                                >span{
+                                    color: #424343;
+                                    font-size: 13.9px;
+                                    font-family: rufina;
+                                    font-weight: 600;
+                                }
+                                input{
+                                    width: 75%;
+                                }
+                                input[type="text"]
+                                {
+                                    border: none;
+                                    border-bottom: 1.3px solid darkgray;
+                                }
+                                textarea{
+                                    width: 75%;
+                                    border: none;
+                                    border-bottom: 1.3px solid darkgray;
+                                    resize: none;
+                                }
+                             
+                                input[type="file"]
+                                {
+                                    display: none;
+                                }
+                                #file-upload-label
+                                {
+                                    width: 75%;
+                                    max-width: 75%;
+                                    margin-bottom: 0;
+                                    cursor: pointer;
+                                    display: flex;
+                                    align-items: center;
+                                    >div{
+                                        width: 83px;
+                                        background: wheat;
+                                        padding: 2px 0px;
+                                        color: #9c9999;
+                                        border-radius: 15px;
+                                    }
+                                    >div:hover{
+                                        color: black;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .change-email
+                    {
+                        width: 115px;
+                        margin: 0px auto 15px;
+                        background: #e9d3d3;
+                        height: 27px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 25px;
+                        a{
+                            color: #578fa0;
+                            font-style: oblique;
+                        }
+                        a:hover{
+                            text-decoration: none;
+                            font-weight: 600;
+                        }
+                    }
+                    .personal-info,.contact-info,.social-info
+                    {
+                        margin-bottom: 12px;
+                        min-height: 100px;
+                        height: auto;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        padding: 0px 10px;
+                        .heading{
+                            font-family: Parisienne;
+                            font-size: 26px;
+                            font-weight: 600;
+                            margin-bottom: 10px;
+    
+                        }
+                        .info
+                        {
+                            display: flex;
+                            justify-content:center;
+                            flex-wrap: wrap;
+                            width: 100%;
+                            .first-info
+                            {
+                                width: 75%;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: flex-start;
+                                margin-bottom: 12px;
+    
+                                >div{
+                                    width: 100%;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    margin-bottom: 7px;
+                                    >span{
+                                        font-family: rufina;
+                                        text-shadow: 0px 0px 0px black;
+                                        text-align: left;
+                                    }
+                                    input{
+                                        border: none;
+                                        border-bottom: 1px solid darkgray;
+                                        width: 67%;
+                                    }
+                                
+                                }
+                            }
+                            .second-info
+                            {
+                                width: 173px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;
+                                input
+                                {
+                                    height: 27px;
+                                }
+                            }
+                        }
+                    }
+                    .social-info
+                    {
+                        .info
+                        {
+                            flex-direction: row;
+                            flex-wrap: wrap;
+                            justify-content: space-around;
+                            >div{
+                                width: 217px;
+                                display: flex;
+                                justify-content: space-between;
+                                margin-bottom: 7px;
+                                >span{
+                                    align-self: center;
+                                    font-size: 17px;
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+               
+                .modal-footer
+                {
+                    min-height: 60px;
+                    border-top: none;
+                }
+            }
+        }
+    }
+}
+
 #user-chat-box:target
 {
     visibility: visible;
@@ -1330,6 +1572,35 @@ body
     }
 }
 
+@media (max-width:625px)
+{
+    #editProfileModal{
+        .modal-dialog
+        {
+            .modal-content
+            {
+                form{
+                    .modal-body
+                    {
+                        .intro1
+                        {
+                            .intro1-2
+                            {
+                                >div{
+                                    .profile-img-span
+                                    {
+                                        width: 110px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media (max-width:575px)
 {
     .profile-intro
@@ -1399,6 +1670,44 @@ body
     }
 }
 
+@media (max-width:475px)
+{
+    #editProfileModal
+    {
+        .modal-dialog
+        {
+            .modal-content
+            {
+                form{
+                    .modal-body
+                    {
+                        .intro1
+                        {
+                            flex-direction: column;
+                            justify-content: center;
+                            .intro-image
+                            {
+                                align-self: center;
+                                margin-bottom: 12px;
+                            }
+                            .intro1-2
+                            {
+                                width: 95%;
+                                >div{
+                                    .profile-img-span
+                                    {
+                                        width: 120px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media (max-width:450px)
 {
     #friendModal
@@ -1442,6 +1751,32 @@ body
     }
 }
 
+@media (max-width:430px)
+{
+    #editProfileModal
+    {
+        .modal-dialog
+        {
+            .modal-content
+            {
+                form
+                {
+                    .modal-body
+                    {
+                        .personal-info,.contact-info
+                        {
+                            .info{
+                                .first-info{
+                                    width: 100%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 @media (max-width:425px)
 {
@@ -1453,6 +1788,35 @@ body
     }
     
    
+}
+
+@media (max-width:375px)
+{
+    #editProfileModal{
+        .modal-dialog
+        {
+            .modal-content
+            {
+                form{
+                    .modal-body
+                    {
+                        .intro1
+                        {
+                            .intro1-2
+                            {
+                                >div{
+                                    .profile-img-span
+                                    {
+                                        width: 128px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 @media (max-width:365px)
@@ -1474,7 +1838,31 @@ body
     }
 }
 
-@media (max-width:340px)
+@media (max-width:350px)
 {
-
+    #editProfileModal{
+        .modal-dialog
+        {
+            .modal-content
+            {
+                form{
+                    .modal-body
+                    {
+                        .intro1
+                        {
+                            .intro1-2
+                            {
+                                >div{
+                                    .profile-img-span
+                                    {
+                                        width: 140px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

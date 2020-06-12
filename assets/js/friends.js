@@ -211,6 +211,7 @@ let destroyFriendshipAnswer=function(removeButton)
                     if(data.data.loggedUserPage)
                     {
                         $(`#collapseOne .card-body`).append(`<div>Are you ready for it?</div>`);
+                        $("body .delete-friend-warning").remove();
                     }
                     else
                     {

@@ -38,7 +38,7 @@ app.use(SassMiddleware({
 app.use(express.urlencoded());
 
 app.use(cookieParser());
-
+//console.log(path.join(__dirname,env.asset_path))
 app.use(express.static(path.join(__dirname,env.asset_path)));
 
 //making uploads path available to the browser

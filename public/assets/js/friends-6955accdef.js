@@ -1,1 +1,0 @@
-class ToggleFriend{constructor(o){this.friend=o,console.log("constructor ",this.friend),this.toggleFriend()}toggleFriend(){$(this.friend).submit((function(o){o.preventDefault();console.log($(this).prop("action")),$.ajax({type:"post",url:$(this).prop("action"),data:$(this).serialize(),success:function(o){console.log(o.data)},error:function(o){console.log(o.responseText)}})}))}}
