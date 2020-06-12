@@ -1,3 +1,28 @@
+$(".change-email a").click(function(e)
+{
+    e.preventDefault();
+    $.ajax({
+        type:"get",
+        url:$(".change-email a").prop("href"),
+        success:function(data)
+        {
+            new Noty({
+                theme:"relax",
+                text:`${data.message}`,
+                type:"success",
+                layput:"topRight",
+                timeout:1800
+            }).show();
+        },
+        error:function(err)
+        {
+            console.log(err.responseText);
+            return;
+        }
+    })
+})
+
+
 function modalFormCheckBox(modal)
 {
     let checkbox =$(" .checkbox input",modal);

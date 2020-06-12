@@ -1,6 +1,9 @@
 <link rel="stylesheet" href="/css/userProfile.css">
 <link rel="stylesheet"  href="/css/chat.css">
-
+<div id="stars-group-1"></div>
+<div id="stars-group-2"></div>
+<div id="stars-group-3"></div>
+<div id="stars-group-4"></div>
     <h1 class="heading-background">
         <div>
             <div class="cloud" id="first-cloud"></div>
@@ -620,17 +623,20 @@
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">Your's <img src="/images/footprint.png"></h5>
                 </div>
-                <form action="/update-profile-info" method="POST">
-                    <input type="hidden" name="userID" value="<%= user._id%>">
+                <form action="/users/update-profile-info/<%= user._id%>" method="post" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="intro1">
                             <div class="intro-image">
-                                <img src="<%= user.avatar %>">
+                                <% if(user.avatar) {%>
+                                    <img src="<%= user.avatar %>">
+                                <% } else {%>
+                                    <div class="concealed-image" style="background:<%=user.info.bgColor%>;"><span><%= user.name.split(" ")[0].charAt(0)%></span></div>
+                                <% } %>
                             </div>
                             <div class="intro1-2">
                                 <div>
                                     <span>Name:<sup>*</sup></span>
-                                    <input type="text" required placeholder="Your Name..." value="<%= profileUser.name %>" name="name">
+                                    <input type="text" required value="<%= profileUser.name %>" name="name">
                                 </div>
                                 <div>
                                     <span class="profile-img-span">Profile Picture:<sup>*</sup></span>
@@ -658,16 +664,29 @@
                                 <div class="first-info">
                                     <div>
                                         <span>Current City:</span>
-                                        <input type="text" name="currentCity" value="<%=user.info.currentCity%>">
+                                        <% if(user.info.personalInfo) {%>
+                                            <input type="text" name="currentCity" value="<%=user.info.personalInfo.currentCity%>">
+                                        <% } else {%>
+                                            <input type="text" name="currentCity">
+                                        <% } %>
                                     </div>
                                     <div>
                                         <span>Hometown:</span>
-                                        <input type="text" name="homeTown" value="<%= user.info.homeTown%>">
+                                        <% if(user.info.personalInfo) {%>
+                                            <input type="text" name="homeTown" value="<%= user.info.personalInfo.homeTown%>">
+                                        <% } else {%>
+                                            <input type="text" name="homeTown">
+                                        <% } %>
                                     </div>
                                 </div>
                                 <div class="second-info">
                                     <span><i class="fas fa-birthday-cake"></i></span>
-                                    <input type="date" name="birthday" value="<%= user.info.bDay%>">
+                                    <% if(user.info.personalInfo) {%>
+                                        <input type="date" name="birthday" value="<%= user.info.personalInfo.bDay%>">
+                                    <% } else {%>
+                                        <input type="date" name="birthday">
+                                    <% } %>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -679,27 +698,55 @@
                                 
                                         <div>
                                             <span><i class="fab fa-facebook" style="color: #3B5998;"></i></span>
-                                            <input type="url" name="fb" value="<%= user.info.fb%>">
+                                            <% if(user.info.socialInfo) {%>
+                                                <input type="url" name="fb" value="<%= user.info.socialInfo.fb%>">
+                                            <% } else {%>
+                                                <input type="url" name="fb">
+                                            <% } %>
+                                            
                                         </div>
                                         <div>
                                             <span><i class="fab fa-linkedin" style="color: #0077B5;"></i></span>
-                                            <input type="url" name="linkedin" value="<%= user.info.linkedin%>">
+                                            <% if(user.info.socialInfo) {%>
+                                                <input type="url" name="linkedin" value="<%= user.info.socialInfo.linkedin%>">
+                                            <% } else {%>
+                                                <input type="url" name="linkedin">
+                                            <% } %>
+                                            
                                         </div>
                                         <div>
                                             <span><i class="fab fa-quora" style="color: #B92B27;"></i></span>
-                                            <input type="url" name="quora" value="<%= user.info.quora%>">
+                                            <% if(user.info.socialInfo) {%>
+                                                <input type="url" name="quora" value="<%= user.info.socialInfo.quora%>">
+                                            <% } else {%>
+                                                <input type="url" name="quora">
+                                            <% } %>
+                                            
                                         </div>
                                         <div>
                                             <span><i class="fab fa-instagram" style="color: #BC32AA;"></i></span>
-                                            <input type="url" name="insta" value="<%= user.info.insta%>">
+                                            <% if(user.info.socialInfo) {%>
+                                                <input type="url" name="insta" value="<%= user.info.socialInfo.insta%>">
+                                            <% } else {%>
+                                                <input type="url" name="insta" >
+                                            <% } %>
+                                            
                                         </div>
                                         <div>
                                             <span><i class="fab fa-youtube" style="color:#FF0000"></i></span>
-                                            <input type="url" name="utube" value="<%= user.info.utube%>">
+                                            <% if(user.info.socialInfo) {%>
+                                                <input type="url" name="utube" value="<%= user.info.socialInfo.utube%>">
+                                            <% } else {%>
+                                                <input type="url" name="utube" >
+                                            <% } %>
                                         </div>
                                         <div>
                                             <span><i class="fab fa-twitter-square" style="color: #1DA1F2;"></i></span>
-                                            <input type="url" name="twitter" value="<%= user.info.twitter%>">
+                                            <% if(user.info.socialInfo) {%>
+                                                <input type="url" name="twitter" value="<%= user.info.socialInfo.twitter%>">
+                                            <% } else {%>
+                                                <input type="url" name="twitter" >
+                                            <% } %>
                                         </div>
                                 </div>
                         </div>
@@ -712,11 +759,20 @@
                                 <div class="first-info">
                                     <div>
                                         <span>Phone No:</span>
-                                        <input type="number" name="phone" value="<%= user.info.phone%>">
+                                        <% if(user.info.contactInfo) {%>
+                                            <input type="number" name="phone" value="<%= user.info.contactInfo.phone%>">
+                                        <% } else {%>
+                                            <input type="number" name="phone">
+                                        <% } %>
+                                        
                                     </div>
                                     <div>
                                         <span>Website:</span>
-                                        <input type="url" name="website" value="<%= user.info.website%>">
+                                        <% if(user.info.contactInfo) {%>
+                                            <input type="url" name="website" value="<%= user.info.contactInfo.website%>">
+                                        <% } else {%>
+                                            <input type="url" name="website">
+                                        <% } %>
                                     </div>
                                 </div>
                             </div>

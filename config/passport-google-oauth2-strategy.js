@@ -42,7 +42,10 @@ passport.use(new googleStrategy({
                     confirm_password:crypto.randomBytes(20).toString("hex"),
                     info:{
                         about:`Hi, I am ${profile.displayName}. Nice to meet you!`,
-                        bgColor:randomBgColor
+                        bgColor:randomBgColor,
+                        personalInfo:{},
+                        socialInfo:{},
+                        contactInfo:{}
                     }
                 },function(err,user)
                 {

@@ -1,0 +1,31 @@
+<head>
+    <style>
+        img{
+            width: 28px;
+            height: 23px;
+        }
+        #sign-p > span{
+            
+            margin-top: 0px;
+            display: flex;
+            align-items: flex-end;
+        }
+        #sign-p >span span{
+            margin-top: 4px;
+        }
+
+
+    </style>
+</head>
+<div>
+    <p>
+        Hi <%= user.name %>,
+    </p>
+    <br> 
+    <p>Your new email address <strong><%=user.email%></strong> has been successfully register with us.</p>
+    <p>From now on, all the information will be mailed to <strong><%=user.email%></strong></p>.
+    <br><br>
+    <p id="sign-p">With best regards,<br>
+        <span> <span>Skyinyou Team</span> <img src="https://pngimg.com/uploads/peace_symbol/peace_symbol_PNG8.png"></span>
+     </p>
+</div>

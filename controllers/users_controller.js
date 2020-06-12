@@ -6,6 +6,7 @@ const ResetPassword=require('../models/resetPasswordSchema');
 const queue=require('../config/kue');
 const newpasswordEmailWorker=require('../worker/newpassword_email_worker');
 const newFriendReqWorker=require('../worker/friend_request_email_worker');
+const changeEmailWorker=require('../worker/change_email_worker');
 const crypto=require('crypto');
 const Friendship=require('../models/friendship');
 const FriendshipForm=require('../models/pend_friend_forms');
@@ -175,31 +176,44 @@ module.exports.profile = async function (req, res) {
     
 }
 
-module.exports.update = async function (req, res) {
-    // if(req.user.id==req.params.id)
-    // {
-    //     User.findByIdAndUpdate(req.params.id,req.body,function(err,user)
-    //     {
-    //         req.flash("success","Updated!");
-    //         return res.redirect("back");
-    //     })
+module.exports.updateProfile = async function (req, res) {
 
-    // }
-    // else
-    // {
-    //    req.flash("error","Unauthorized!");
-    //     return res.status(401).send("Unauthorised");
-    // }
-
+    try{
+       
     if (req.user.id == req.params.id) {
-        try {
-            let user = await User.findById(req.params.id);
+            let user = await User.findById(req.user.id);
+       
             User.uploadedAvatar(req, res, function (err) {
                 if (err) {
                     console.log("****Multer ", err);
                 }
+                console.log("body",req.body)
                 user.name = req.body.name;
-                user.about = req.body.about;
+                name=req.body.name;
+                let personalInfo={
+                    currentCity:req.body.currentCity,
+                    homeTown:req.body.homeTown,
+                    bDay:req.body.birthday
+                }
+                socialInfo={
+                    fb:req.body.fb,
+                    linkedin:req.body.linkedin,
+                    quora:req.body.quora,
+                    insta:req.body.insta,
+                    utube:req.body.utube,
+                    twitter:req.body.twitter
+                }
+                contactInfo={
+                    phone:req.body.phone,
+                    website:req.body.website
+                }
+                user.info={
+                    about:req.body.about,
+                    personalInfo:personalInfo,
+                    socialInfo:socialInfo,
+                    contactInfo:contactInfo
+                } 
+               // console.log(user.info,user.name,user._id);
                 console.log("file ", req.file);
                 if (req.file) {
                     if (user.avatar) {
@@ -208,41 +222,138 @@ module.exports.update = async function (req, res) {
                         }
 
                     }
+                    avatar=User.avatarPath + "/" + req.file.filename;
                      user.avatar = User.avatarPath + "/" + req.file.filename;
                 }
-                user.save();
-                Post.find({"content.prevAuthID":req.params.id},function(err,posts)
+                user.save();  
+            
+                console.log("updated user",user)
+                Post.find({"content.prevAuthID":req.user.id},function(err,posts)
                 {
-                    if(err)
-                    {
-                        console.log("error in finding posts of user update ",err);
-                        return;
-                    }
+                             
                     for(post of posts)
                     {
-                        console.log(post.content);
-                        post.content.prevAuthName=req.body.name;
-                        post.content.prevAuthImage=user.avatar;
-                        post.save();
-                    }
+                            post.content={
+                                prevAuthID:post.content.prevAuthID,
+                                prevAuthName:user.name,
+                                prevAuthContent:post.content.prevAuthContent,
+                                prevAuthImage:user.avatar,
+                                prevPostId:post.content.prevPostId,
+                                prevAuthBgColor:post.content.prevAuthBgColor,
+                                newContent:post.content.newContent,
+                                prevPostShares:post.content.prevPostShares
+                            };
+                            post.save();
+                            console.log("after",post.content)
+                    }  
                 });
-              
-                req.flash("success", "Updated!");
-                return res.redirect("back");
-            })
-        }
-        catch (err) {
-            req.flash("error", err);
+       
+         
+            });
+      
+            
+           
+            req.flash("success", "The avatar is sedated on new info!");
             return res.redirect("back");
         }
+        else {
+            req.flash("error", "Unauthorized!");
+            return res.status(401).send("Unauthorised");
+        }
+     
     }
-    else {
-        req.flash("error", "Unauthorized!");
-        return res.status(401).send("Unauthorised");
+    catch (err) {
+        req.flash("error", err);
+        return res.redirect("back");
     }
+  
 }
 
 
+module.exports.changeEmailMessage=async function(req,res)
+{
+    try{
+        let id=req.query.id;
+        let user=await User.findById(id);
+        let job=queue.create("changeEmail",user).save(function(err)
+        {
+            if(err)
+            {
+                console.log("error in creating a queue ",err);
+                return;
+            }
+            console.log("change email 1 job enqueued ",job.id);
+        });
+        return res.json(200,{
+            message:"Your @ awaits!"
+        })
+
+    }
+    catch(err)
+    {
+        console.log("error in sending change email message ",err);
+        return;
+    }
+}
+
+module.exports.changeEmailPage=async function(req,res)
+{
+    try{
+         let id=req.query.id;
+         let user=await User.findById(id);
+         res.locals.user=""
+         return res.render("forgetPassword",{
+             title:"Skyinyou | Change Email",
+             user:user
+         });
+    }
+    catch(err)
+    {
+        console.log("error in rendering email page");
+    }
+}
+
+module.exports.changeEmailConfirm=async function(req,res)
+{
+    try{
+         let id=req.params.id;
+         let user=await User.findById(id);
+         if(user.email==req.body.email)
+         {
+             req.flash("error","Are you getting back with ex?");
+             return res.redirect("back");
+         }
+         let emailUser=await User.findOne({"email":req.body.email});
+         if(emailUser)
+         {
+             req.flash("error","This @ is already in skies!");
+             return res.redirect("back");
+         }
+         let user1={
+             oldEmail:user.email,
+         }
+         user.email=req.body.email;
+         user.save();
+         user1.user=user;
+         console.log(user1);
+         let job=queue.create("changeEmailConfirm",user1).save(function(err)
+         {
+             if(err)
+             {
+                 console.log("error in creating a queue ",err);
+                 return;
+             }
+             console.log("change email 1 job enqueued ",job.id);
+         });
+         
+         req.flash("success","Your new @ is live!");
+         return res.redirect("/");
+    }
+    catch(err)
+    {
+        console.log("error in rendering email page");
+    }
+}
 // render the sign up page
 module.exports.signUp = function (req, res) {
     if (req.isAuthenticated()) {
@@ -393,7 +504,7 @@ module.exports.create = async function (req, res) {
                 let randomBgColor=colors[Math.floor(Math.random()*colors.length)];
                 console.log("new color",randomBgColor);
                 newuser.user.info={about:`Hi, I am ${req.body.name}. Nice to meet you!`,
-                bgColor:randomBgColor}
+                bgColor:randomBgColor,personalInfo:{},socialInfo:{},contactInfo:{}}
                 console.log(newuser)
                 let necoount=await newAccount.create(newuser);
                 console.log(necoount)

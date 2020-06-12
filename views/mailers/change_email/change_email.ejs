@@ -1,0 +1,35 @@
+<head>
+    <style>
+        img{
+            width: 28px;
+            height: 23px;
+        }
+        #sign-p > span{
+            
+            margin-top: 0px;
+            display: flex;
+            align-items: flex-end;
+        }
+        #sign-p >span span{
+            margin-top: 4px;
+        }
+
+
+    </style>
+</head>
+<div>
+    <p>
+        Hi <%= user.name %>,
+    </p>
+    <br> 
+    <p>You have applied to change your current email address.</p>
+    <p>
+        Here is the link to do that:
+        <a href="http://localhost:8000/users/reset-email/?id=<%= user._id%>">Change Email</a> 
+    </p>
+    <span>If you don't click the link, then your previous email address will be used.</span>
+    <br><br><br>
+    <p id="sign-p">With best regards,<br>
+        <span> <span>Skyinyou Team</span> <img src="https://pngimg.com/uploads/peace_symbol/peace_symbol_PNG8.png"></span>
+     </p>
+</div>
