@@ -16,7 +16,7 @@ const Work=require('../models/workExp');
 const Grad=require('../models/educat');
 
 let colors=["#e558e5","#e55886","#4952be","#285874","#6d721b","#99611b","#686561","#E91E63","#C62828",
-           "#F57F17","#00ACC1","#512DA8","#FB8C00","#039BE5","#00b7d5"]
+           "#F57F17","#22a1b1","#512DA8","#FB8C00","#039BE5","#00b7d5"]
 
 //making function async
 module.exports.profile = async function (req, res) {
@@ -189,7 +189,6 @@ module.exports.updateProfile = async function (req, res) {
                 }
                 console.log("body",req.body)
                 user.name = req.body.name;
-                name=req.body.name;
                 let personalInfo={
                     currentCity:req.body.currentCity,
                     homeTown:req.body.homeTown,
@@ -211,7 +210,8 @@ module.exports.updateProfile = async function (req, res) {
                     about:req.body.about,
                     personalInfo:personalInfo,
                     socialInfo:socialInfo,
-                    contactInfo:contactInfo
+                    contactInfo:contactInfo,
+                    bgColor:user.info.bgColor
                 } 
                // console.log(user.info,user.name,user._id);
                 console.log("file ", req.file);
@@ -275,19 +275,21 @@ module.exports.changeEmailMessage=async function(req,res)
     try{
         let id=req.query.id;
         let user=await User.findById(id);
-        let job=queue.create("changeEmail",user).save(function(err)
+        if(id==req.user.id)
         {
-            if(err)
+            let job=queue.create("changeEmail",user).save(function(err)
             {
-                console.log("error in creating a queue ",err);
-                return;
-            }
-            console.log("change email 1 job enqueued ",job.id);
-        });
-        return res.json(200,{
-            message:"Your @ awaits!"
-        })
-
+                if(err)
+                {
+                    console.log("error in creating a queue ",err);
+                    return;
+                }
+                console.log("change email 1 job enqueued ",job.id);
+            });
+            return res.json(200,{
+                message:"Your @ awaits!"
+            })
+        }
     }
     catch(err)
     {
@@ -300,12 +302,14 @@ module.exports.changeEmailPage=async function(req,res)
 {
     try{
          let id=req.query.id;
-         let user=await User.findById(id);
-         res.locals.user=""
-         return res.render("forgetPassword",{
-             title:"Skyinyou | Change Email",
-             user:user
-         });
+         if(id==req.user.id)
+         {
+            let user=await User.findById(id);
+            return res.render("forgetPassword",{
+                title:"Skyinyou | Change Email",
+                user:user
+            });
+         }
     }
     catch(err)
     {
@@ -329,24 +333,28 @@ module.exports.changeEmailConfirm=async function(req,res)
              req.flash("error","This @ is already in skies!");
              return res.redirect("back");
          }
-         let user1={
-             oldEmail:user.email,
-         }
-         user.email=req.body.email;
-         user.save();
-         user1.user=user;
-         console.log(user1);
-         let job=queue.create("changeEmailConfirm",user1).save(function(err)
+         if(id==req.user.id)
          {
-             if(err)
-             {
-                 console.log("error in creating a queue ",err);
-                 return;
-             }
-             console.log("change email 1 job enqueued ",job.id);
-         });
-         
-         req.flash("success","Your new @ is live!");
+            let user1={
+                oldEmail:user.email,
+            }
+            user.email=req.body.email;
+            user.save();
+            user1.user=user;
+            console.log(user1);
+            let job=queue.create("changeEmailConfirm",user1).save(function(err)
+            {
+                if(err)
+                {
+                    console.log("error in creating a queue ",err);
+                    return;
+                }
+                console.log("change email 1 job enqueued ",job.id);
+            });
+            
+            req.flash("success","Your new @ is live!");
+         }
+        
          return res.redirect("/");
     }
     catch(err)
@@ -354,6 +362,43 @@ module.exports.changeEmailConfirm=async function(req,res)
         console.log("error in rendering email page");
     }
 }
+
+module.exports.removeDP=async function(req,res)
+{
+    try{
+        let id=req.query.id
+        if(req.user.id==id)
+        {
+            let user=await User.findById(id);
+            user.avatar="";
+            user.save();
+            let posts=await Post.find({"content.prevAuthID":req.user.id});
+            for(post of posts)
+            {
+                post.content={
+                    prevAuthID:post.content.prevAuthID,
+                    prevAuthName:user.name,
+                    prevAuthContent:post.content.prevAuthContent,
+                    prevAuthImage:user.avatar,
+                    prevPostId:post.content.prevPostId,
+                    prevAuthBgColor:post.content.prevAuthBgColor,
+                    newContent:post.content.newContent,
+                    prevPostShares:post.content.prevPostShares
+            };
+            post.save();
+            console.log("after",post.content)
+            }  
+            req.flash("success","The DP has just collapsed!");
+            return res.redirect("back");
+        }
+    }
+    catch(err)
+    {
+        console.log("error in removing dp",err);
+        return;
+    }
+}
+
 // render the sign up page
 module.exports.signUp = function (req, res) {
     if (req.isAuthenticated()) {

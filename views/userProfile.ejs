@@ -639,7 +639,7 @@
                                     <input type="text" required value="<%= profileUser.name %>" name="name">
                                 </div>
                                 <div>
-                                    <span class="profile-img-span">Profile Picture:<sup>*</sup></span>
+                                    <span class="profile-img-span">Profile Picture:</span>
                                     <label for="file-upload" class="custom-file-upload" id="file-upload-label">
                                         <div>
                                             <i class="fas fa-upload"></i>&nbsp;Upload
@@ -653,8 +653,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="change-email">
-                            <a href="/users/change-email/?id=<%=user._id%>">Change @?</a>
+                        <div class="change-email-remove-profile">
+                            <% if(user.avatar) {%>
+                                <a href="/users/remove-dp/?id=<%=user._id%>" class="remove-dp">Remove DP</a>
+                            <% } %>
+                            <a href="/users/change-email/?id=<%=user._id%>" class="change-email">Change @?</a>
                         </div>
                         <div class="personal-info">
                             <div class="heading">

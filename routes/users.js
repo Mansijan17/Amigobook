@@ -10,6 +10,7 @@ router.post('/update-profile-info/:id', passport.checkAuthentication,usersContro
 router.get("/change-email",passport.checkAuthentication,usersController.changeEmailMessage);
 router.get("/reset-email",passport.checkAuthentication,usersController.changeEmailPage);
 router.post("/reset-email-confirm/:id",passport.checkAuthentication,usersController.changeEmailConfirm);
+router.get("/remove-dp",passport.checkAuthentication,usersController.removeDP);
 
 router.get('/sign-up', usersController.signUp);
 router.get('/sign-in', usersController.signIn);

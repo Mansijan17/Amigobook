@@ -1282,20 +1282,29 @@ body
                             }
                         }
                     }
-                    .change-email
+                    .change-email-remove-profile
                     {
-                        width: 115px;
+                        width: 60%;
                         margin: 0px auto 15px;
-                        background: #e9d3d3;
                         height: 27px;
                         display: flex;
                         justify-content: center;
+                        flex-wrap: wrap;
                         align-items: center;
                         border-radius: 25px;
                         a{
-                            color: #578fa0;
+                            width: 115px;
                             font-style: oblique;
                             text-decoration: none;
+                            margin: 5px;
+                        }
+                        .change-email{
+                            background: #e9d3d3;
+                            color: #578fa0;
+                        }
+                        .remove-dp{
+                            background: skyblue;
+                            color: ghostwhite;
                         }
                         a:hover{
                             text-decoration: none;

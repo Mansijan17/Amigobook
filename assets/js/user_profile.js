@@ -1,9 +1,10 @@
-$(".change-email a").click(function(e)
+console.log("change email",$(".change-email-remove-profile .change-email"))
+$(".change-email-remove-profile .change-email").click(function(e)
 {
     e.preventDefault();
     $.ajax({
         type:"get",
-        url:$(".change-email a").prop("href"),
+        url:$(".change-email-remove-profile .change-email").prop("href"),
         success:function(data)
         {
             new Noty({
