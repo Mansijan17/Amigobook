@@ -348,11 +348,11 @@ let updateWorkDOMModal=function(work)
                     <input type="hidden" name="type" value="work">
                     <div class="three-g">
                         <div>
-                            <span>Title:</span>
+                            <span>Title:<sup>*</sup></span>
                             <input type="text" name="title" value=${work.title} required>
                         </div>
                         <div>
-                            <span>Company:</span>
+                            <span>Company:<sup>*</sup></span>
                             <input type="text" name="company" required value=${work.company}>
                         </div>
                         <div>
@@ -365,7 +365,7 @@ let updateWorkDOMModal=function(work)
                         </div>
                     </div>
                     <div class="one-g">
-                        <span>Date:</span>
+                        <span>Date:<sup>*</sup></span>
                         <div>
                             <div class="from-date">
                             <input type="number" name="fromMonth" required value=${work.fromMonth}>
@@ -634,7 +634,7 @@ let newListGradDOM=function(grad)
     <div class="two-g">
     <div style="width: 70%;">
         <div class="title">
-            <b>Remarks:</b> &nbsp; ${grad.grade}
+            ${grad.grade}
         </div>
         <div class="company">
             ${grad.school}
@@ -661,11 +661,11 @@ let updateGradDOMModal=function(grad)
                     <input type="hidden" name="type" value="grad">
                     <div class="three-g">
                         <div>
-                            <span>Percentage/Grade:</span>
+                            <span>Degree:<sup>*</sup></span>
                             <input type="text" name="title" value=${grad.grade} required>
                         </div>
                         <div>
-                            <span>School/College:</span>
+                            <span>School/College:<sup>*</sup></span>
                             <input type="text" name="company" required value=${grad.school}>
                         </div>
                         <div>
@@ -678,7 +678,7 @@ let updateGradDOMModal=function(grad)
                         </div>
                     </div>
                     <div class="one-g">
-                        <span>Date:</span>
+                        <span>Date:<sup>*</sup></span>
                         <div>
                             <div class="from-date">
                             <input type="number" name="fromMonth" required value=${grad.fromMonth}>

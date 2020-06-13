@@ -388,15 +388,76 @@ body
             }
         }
     }
+    .third{
+        .accordion
+        {
+            .card
+            {
+                .card-body
+                {
+                    p{
+                        margin: auto;
+                        text-align: left;
+                       
+                    }
+                    >div{
+                        margin-bottom: 5px;
+                        display: flex;
+                        align-items: center;
+                        
+                        i{
+                            
+                            font-size: 17px;
+                        }
+                        >div{
+                            text-align: left;
+                            a{
+                                color: whitesmoke;
+                            }
+                            
+                        }
+                    }
+                }
+                .social-link-container
+                {
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    border-radius: 0;
+                    justify-content: space-around;
+                    p{
+                        margin: unset;
+                    }
+                    >div{
+                        margin: 5px;
+                        b{
+                            a{
+                                i{
+                                    filter: brightness(0.75);
+                                    font-size: 22px;
+                                    transition: all 0.5s;
+                                }
+                                i:hover
+                                {
+                                    font-size: 24px;
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
     .first
     {
         #collapseOne p:hover{
             text-decoration: underline;
         }
-        #collapseTwo p:hover{
+        #collapseTwo .toggle-p:hover{
             color: black;
         }
-        #collapseThree p:hover{
+        #collapseThree .toggle-p:hover{
             font-style: italic;
         }
     }
