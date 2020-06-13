@@ -180,7 +180,7 @@
                             </p>
                        <% } else {%>
                             <p>
-                                You can add this section by using Personal Information of "Edit Profile". 
+                                You can add this section by using <b><i>Personal Information</i></b> of "Edit Profile". 
                             </p>
                        <% } %>
                     <% } else { %>
@@ -232,7 +232,7 @@
                                  </p>
                             <% } else {%>
                                  <p>
-                                     You can add this section by using Contact Information of "Edit Profile". 
+                                     You can add this section by using <b><i>Contact Information</i></b> of "Edit Profile". 
                                  </p>
                             <% } %>
                          <% } else { %>
@@ -271,7 +271,6 @@
                     </h2>
                 </div>
                 <div id="collapseSix" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                    <!-- <div class="card-body social-link-container"> -->
                         <% if(!profileUser.info.socialInfo.fb && !profileUser.info.socialInfo.linkedin && !profileUser.info.socialInfo.quora && !profileUser.info.socialInfo.twitter && !profileUser.info.socialInfo.insta && !profileUser.info.socialInfo.utube) {%>
                             <div class="card-body social-link-container" style="justify-content: flex-start;">
                                 <% if(profileUser.id!=user.id)  { %>
@@ -280,7 +279,7 @@
                                     </p>
                                 <% } else {%>
                                     <p>
-                                        You can add this section by using Social Media of "Edit Profile". 
+                                        You can add this section by using <b><i>Social Media</i></b> of "Edit Profile". 
                                     </p>
                                 <% } %>
                             </div>
@@ -349,6 +348,7 @@
      
       </div>
     </div>
+</div>
 </div>
     <% if(friends.length>0) {%>
         <div class="modal fade" id="friendModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
