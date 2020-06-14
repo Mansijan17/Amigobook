@@ -373,6 +373,7 @@ module.exports.removeDP=async function(req,res)
         if(req.user.id==id)
         {
             let user=await User.findById(id);
+            fs.unlinkSync(path.join(__dirname, "..", user.avatar));
             user.avatar="";
             user.save();
             let posts=await Post.find({"content.prevAuthID":req.user.id});

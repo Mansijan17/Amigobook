@@ -4,7 +4,7 @@
   right: 0;
   width: 40%; }
   .post-like-box span {
-    color: #006881;
+    color: #882943;
     cursor: pointer; }
   .post-like-box .post-likes-number {
     top: 13px;
@@ -13,7 +13,7 @@
     font-size: 22.4px;
     transition: all 1s ease-in-out; }
     .post-like-box .post-likes-number a {
-      color: #006881 !important; }
+      color: #882943 !important; }
     .post-like-box .post-likes-number .toggle-like-button i:hover {
       transform: scale(1.2); }
     .post-like-box .post-likes-number span:hover {

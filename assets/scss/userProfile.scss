@@ -74,7 +74,8 @@ body
     font-style: italic;
     font-family: Haettenschweiler !important;
     font-weight: 550;
-    margin-top: 15px !important;
+    margin-bottom: 0 !important;
+    margin-top: 90px !important;
     background: transparent;
     
     >div{
@@ -300,19 +301,17 @@ body
 
 .profile-intro
 {
-    margin: auto;
     display: flex;
     width: 100%;
     min-height: 400px;
     justify-content: center;
     align-items: center;
-    margin-top: -35px;
-    padding: 0px 20px 20px;
     padding: 10px;
-    z-index: 100;
     background: inherit;
     flex-wrap: wrap;
-    padding-bottom: 50px;
+    padding-bottom: 90px;
+    position: relative;
+    top: 35px;
     >div
     {
         max-width: 350px;
@@ -1468,13 +1467,17 @@ body
 }
 
 #new-post-form{
-    padding-top: 10px;
-    margin: auto;
+    padding: 30px 20px 20px;
+    margin: 0px auto 130px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     width: 65%;
+    border-radius: 54px;
     height: auto;
+    border: 2px solid #a69a6e;
+    position: relative;
+    top: 125px;
     textarea{
         width: 60%;
         min-height: 70px;
@@ -1560,7 +1563,7 @@ body
                        
                     }
                     .post-comment-number{
-                        color:#b48589;
+                        color:#dbc2c4;
                     }
                     .post-comments-list{
                         ul{
@@ -1646,7 +1649,7 @@ body
 @media (max-width:900px)
 {
     #new-post-form{
-        width: 100% !important;
+        width: 90% !important;
     }
 }
 
@@ -1723,7 +1726,6 @@ body
     .heading-background
     {
         margin-top: 75px !important;
-        margin-bottom: 34px !important;
 
     }
 
@@ -1814,6 +1816,15 @@ body
                 }
             }
         }
+    }
+}
+
+
+@media (max-width:620px)
+{
+    .heading-background
+    {
+        margin-top: 145px !important;
     }
 }
 
@@ -2000,7 +2011,8 @@ body
     .heading-background
     {
 
-        margin-top: 165px !important;    
+        margin-top: 200px !important;
+        margin-bottom: 0 !important;  
         >div{
             font-size: 24.5px;
         }

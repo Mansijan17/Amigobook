@@ -19,7 +19,7 @@
 h1
 {
     text-align: center;
-    margin: 35px auto 30px !important;
+    margin: 100px auto 30px !important;
     font-family: 'Bentham', serif !important;
     font-size: 26.4px !important;
     word-spacing: 6px;
@@ -196,7 +196,8 @@ h1:hover
                     height: auto;
                     min-height: 200px;
                     padding:20px 0px;
-                    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,93,133,1) 0%, rgba(0,181,149,1) 90% );
+                    background: #13b49770;
+                    //background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,93,133,1) 0%, rgba(0,181,149,1) 90% );
 
                     a
                     {
@@ -274,7 +275,7 @@ h1:hover
                     .post-comment-number
                     {
                         font-size: 25px;
-                        color: #76C398;
+                        color: #dbc2c4;
                         margin: 0px auto 10px;
                         font-weight: 600;
                         cursor: pointer;
@@ -353,11 +354,8 @@ h1:hover
                                 display: inline-block;
                                 font-weight: bold;
                                 font-size: 19.2px;
-                                border-radius: 10px;
-                                border: 1.5px dashed darkgreen;
                                 width: 80%;
-                                background: #2e7682;
-                                color: lightblue;
+                                color: powderblue;
                                 padding: 9px;
                                 min-height: 40px;
                                 
@@ -366,12 +364,12 @@ h1:hover
                             .copiedPost
                             {
                                 margin: 15px 0px;
-                                border: 1px dashed #013b50;
+                                border: 1.2px dashed #013b50;
                                 border-left: none;
                                 border-right: none;
                                 min-height: 100px;
                                 width: 100%;
-                                padding: 5px;
+                                padding: 10px;
 
                                 .deletedOriginalPost
                                 {
@@ -533,7 +531,7 @@ h1:hover
                                 button
                                 {
                                     border-radius: 12px;
-                                    border: 2px solid darkseagreen;
+                                    border: 2px solid #465746;
                                     padding: 5px;
                                     background: transparent;
                                     font-weight: bold;
@@ -546,8 +544,7 @@ h1:hover
                                 button:hover
                                 {
                                     cursor: pointer;
-                                    background-color: darkseagreen;
-                                    opacity: 0.6;
+                                    background-color: #489494;
                                 }
                                 
                                 textarea::placeholder
@@ -1565,21 +1562,21 @@ h1:hover
     }
    
 }
+
+@media (max-width:620px)
+{
+    h1{
+        margin-top: 150px !important;
+    }
+}
+
 @media (max-width:600px)
 {
     .update-comment-button
     {
         top: 26px !important;
         left: 3% !important;
-    }
-    // .comment-list
-    // {
-    //     .comment-like-box
-    //     {
-    //         left:85% !important;
-    //     }
-    // }
-   
+    }   
 }
 @media (max-width:550px)
 {
@@ -1626,13 +1623,7 @@ h1:hover
             width: 67% !important;
         }
     }
-    // .comment-list
-    // {
-    //     .comment-like-box
-    //     {
-    //         left: 83% !important;
-    //     }
-    // }
+
   
     #feed-posts
     {
@@ -1654,15 +1645,14 @@ h1:hover
 }
 @media (max-width:425px)
 {
+    h1{
+        margin-top: 200px !important;
+    }
     .comment-list
     {
         width: 98% !important;
-    //     .comment-like-box
-    //     {
-    //         left: 81% !important;
-    //     }
+
     }
-  
     .post-text
     {
         span{
@@ -1760,13 +1750,6 @@ h1:hover
         width: 105% !important;
         overflow-x: hidden;
     }
-    // .comment-list
-    // {
-    //     .comment-like-box {
-    //         left: 79% !important;
-    //     }
-    // }
- 
 }
 
 .bckgd-dark
