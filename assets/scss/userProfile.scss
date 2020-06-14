@@ -424,6 +424,7 @@ body
                     flex-wrap: wrap;
                     border-radius: 0;
                     justify-content: space-around;
+                    filter: contrast(1.2);
                     p{
                         margin: unset;
                     }
@@ -432,7 +433,7 @@ body
                         b{
                             a{
                                 i{
-                                    filter: brightness(0.75);
+                                    filter: brightness(0.7);
                                     font-size: 22px;
                                     transition: all 0.5s;
                                 }
@@ -1515,6 +1516,9 @@ body
             ul{
                 .post-list{
                     background-image: none;
+                    .post-editedTag{
+                        color:#567e92 !important;
+                    }
                     a{
                         color: #ebe5bc;
                     }
@@ -1541,13 +1545,36 @@ body
                                 font-weight: normal;
                                 border:none;
                                 background: none;
-                                //background: #d5ad8a;
                                 color: #8D6E63;
                             }
+                            .post-update-form{
+                                textarea{
+                                    background: none !important;
+                                    color: #8D6E63 !important;
+                                }
+                                button:hover{
+                                    box-shadow: 0px 0px 10px 0px #927c5c !important;
+                                }
+                            }
                         }
+                       
                     }
                     .post-comment-number{
-                        color:#608f75;
+                        color:#b48589;
+                    }
+                    .post-comments-list{
+                        ul{
+                            li{
+                                border-color: #958a8a !important;
+                                .comment-reply{
+                                    color: #22b8cb !important;
+                                }
+                                .comment-editedTag{
+                                    color: #429475 !important;
+                                }
+                            }
+                           
+                        }
                     }
                 }
             }
@@ -1613,6 +1640,13 @@ body
                 }
             }
         }
+    }
+}
+
+@media (max-width:900px)
+{
+    #new-post-form{
+        width: 100% !important;
     }
 }
 
@@ -1745,6 +1779,11 @@ body
     {
         ul{
             padding: 0;
+        }
+    }
+    #new-post-form{
+        textarea{
+            width: 75% !important;
         }
     }
 }

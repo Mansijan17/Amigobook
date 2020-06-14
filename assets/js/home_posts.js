@@ -155,7 +155,7 @@
             </div>
         </div>
         <div class="post-timestamps">
-            ${ i.createdAt.toLocaleString() }
+            ${ i.createdAt }
         </div>
         <div class="post-share-box">
       

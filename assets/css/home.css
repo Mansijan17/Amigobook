@@ -270,7 +270,8 @@ h1:hover {
                     margin-right: 5px;
                     display: flex;
                     padding: 2px;
-                    align-items: center; }
+                    align-items: center;
+                    color: ghostwhite; }
                   .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-text .copiedPost .copiedAuthIntro a span:hover {
                     border: 1px dashed darkgreen; }
                   .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-text .copiedPost .copiedAuthIntro a img:hover, .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-text .copiedPost .copiedAuthIntro a .concealed-image:hover {
