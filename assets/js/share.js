@@ -207,6 +207,11 @@ class SharePost{
                 new ToggleLike($(" .toggle-like-button", newPost));
                 new SharePost($(" .toggle-share-button", newPost));
                 new PostComments(data.data.newWholePost._id);
+                if(data.data.len==1)
+                {
+                    console.log("1 ",$("h3"))
+                    $("h3").html(`The Sky In You!`)
+                }
                 let deletePost=function(deletelink)
                 {
                     console.log(deletelink);
@@ -245,6 +250,10 @@ class SharePost{
                                 }
                                 $('.modal-backdrop').remove();
                                 $('body').removeClass( "modal-open" );
+                                if(data.data.len==0)
+                                {
+                                    $("h3").html(`You have yet to ascent!`)
+                                }
                                 new Noty({
                                     theme:"relax",
                                     text:"This post and its company needs a funeral!",

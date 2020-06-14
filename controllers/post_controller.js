@@ -46,6 +46,9 @@ module.exports.createPost= async function(req,res)
                     console.log("job enqueued " ,job.id);
 
             });
+            let len=await Post.find({user:req.user._id});
+            len=Object.keys(len).length;
+            console.log(typeof(len))
             if(req.xhr)
             {
                  // if we want to populate just the name of the user 
@@ -55,6 +58,7 @@ module.exports.createPost= async function(req,res)
                     data:
                     {
                         post:post,
+                        len:len
                     },
                     message:"Post created"
                 })
@@ -148,7 +152,9 @@ module.exports.destroyPost=async function(req,res)
                     await Share.deleteOne({createdPost:bornpost.id});
                 }
             }
-             console.log(req.xhr);
+            let len=await Post.find({user:req.user._id});
+            len=Object.keys(len).length;
+            console.log(req.xhr);
             if(req.xhr){
                 console.log("post id ",req.params.id,shareID,post.content.prevPostId);
                 return res.json(200,{
@@ -156,7 +162,8 @@ module.exports.destroyPost=async function(req,res)
                         originalPostID:post.content.prevPostId,
                         postID:req.params.id,
                         shareID:shareID,
-                        bornPosts:postsBornFromThisPost
+                        bornPosts:postsBornFromThisPost,
+                        len:len
                         
                     },
                     message:"Post deleted successfully!"
@@ -381,6 +388,8 @@ module.exports.sharePost=async function(req,res)
 
                     });
                 }
+                let len=await Post.find({user:req.user._id});
+                len=Object.keys(len).length;
                 return res.json(200,{
                     message:"Request successful!",
                     data:{
@@ -394,7 +403,8 @@ module.exports.sharePost=async function(req,res)
                         shareID:shareID,
                         originalPostID:req.body.post,
                         newPostDate:timestamps,
-                        valid:valid
+                        valid:valid,
+                        len:len
                     },
                     error:false
                 })

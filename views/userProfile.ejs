@@ -1,9 +1,6 @@
 <link rel="stylesheet" href="/css/userProfile.css">
 <link rel="stylesheet"  href="/css/chat.css">
-<div id="stars-group-1"></div>
-<div id="stars-group-2"></div>
-<div id="stars-group-3"></div>
-<div id="stars-group-4"></div>
+<div style="width: 100%;background: linear-gradient(to bottom,transparent,#243A63,#1D6396, #00A5CF) !important;margin-top:70px;">
     <h1 class="heading-background">
         <div>
             <div class="cloud" id="first-cloud"></div>
@@ -186,7 +183,7 @@
                     <% } else { %>
                         <% if(profileUser.info.personalInfo.currentCity) {%>
                             <div>
-                                <i class="fas fa-map-marker-alt"></i> 
+                                <i class="fas fa-map-marker-alt" style="color: mediumvioletred;"></i> 
                                 <div style="margin-left: 18px;">
                                     Current City:
                                     <b><%= profileUser.info.personalInfo.currentCity%></b> 
@@ -195,7 +192,7 @@
                         <% } %>
                         <% if(profileUser.info.personalInfo.homeTown) {%>
                             <div>
-                                <i class="fas fa-home"></i> 
+                                <i class="fas fa-home" style="color: #8e4f4f;"></i> 
                                 <div style="margin-left: 12px;">
                                     Hometown:
                                     <b><%= profileUser.info.personalInfo.homeTown%></b> 
@@ -204,7 +201,7 @@
                         <% } %>
                         <% if(profileUser.info.personalInfo.bDay) {%>
                             <div>
-                                <i class="fas fa-birthday-cake"></i> 
+                                <i class="fas fa-birthday-cake" style="color: midnightblue;"></i> 
                                 <div style="margin-left: 16px;"> 
                                     Birthday:
                                     <b><%= birthday%></b> 
@@ -238,7 +235,7 @@
                          <% } else { %>
                              <% if(profileUser.info.contactInfo.phone) {%>
                                  <div>
-                                    <i class="fas fa-mobile-alt"></i>
+                                    <i class="fas fa-mobile-alt" style="color:darkviolet;"></i>
                                      <div style="margin-left: 18px;">
                                          Phone:
                                          <b><%= profileUser.info.contactInfo.phone%></b> 
@@ -247,7 +244,7 @@
                              <% } %>
                              <% if(profileUser.info.contactInfo.website) {%>
                                  <div>
-                                    <i class="far fa-window-maximize"></i>
+                                    <i class="far fa-window-maximize" style="color: purple;"></i>
                                      <div style="margin-left: 12px;">
                                          Website:
                                          <b>
@@ -348,6 +345,7 @@
      
       </div>
     </div>
+</div>
 </div>
 </div>
     <% if(friends.length>0) {%>
@@ -671,20 +669,22 @@
       </div>
     <% } %>
     <% if(user.id==profileUser.id) { %> 
-        <br>
-        <br><br>
-        <form id="new-post-form" method="post" action="/posts/create-post">
-            <textarea name="content" id="new-post-content" required cols="30" rows="3" placeholder="Type here..."></textarea>
+        <div style="background: linear-gradient(to bottom,#4CB1C1,#E3C9A6, #D89A73);
+        box-shadow: 0px 0px 10px 30px #4CB1C1;">
+            <form id="new-post-form" method="post" action="/posts/create-post">
+                <textarea name="content" id="new-post-content" required placeholder="Is something aching you?" onkeydown="autosize1(this)"></textarea>
+                <button type="submit">Fly It!</button>
+            </form>
+            <br><br>
+        
+            <% if(posts.length!=0) { %>
+                <h3 style="text-align: center;">The Sky In You!</h3>
+            <% } else { %>
+                <h3 style="text-align: center;">You have yet to ascent!</h3>
+            <% } %>
             <br>
-            <button type="submit">Post</button>
-        </form>
-        <br><br>
-    
-        <% if(posts.length!=0) { %>
             <div class="home-container">
                 <section id="feed-posts">
-                    <h3 style="text-align: center;">The Sky In You!</h3>
-                    <br>
                     <div id="posts-list-container">
                         <ul>
                             <% for(i of posts) { %>
@@ -695,9 +695,8 @@
                     </div>
                 </section>
             </div>
-        <% } else { %>
-            <h3 style="text-align: center;">You have yet to ascent!</h3>
-        <% } %>
+        </div>
+  
         <div class="modal fade" id="addWorkFormModal" data-backdrop="static" >
             <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -977,25 +976,28 @@
             </div>
           </div>
     <% } else { %>
-
-          
-                        <br>
-            <br>
-        
+        <div style="background: linear-gradient(to bottom,#4CB1C1,#E3C9A6, #D89A73);
+        box-shadow: 0px 0px 10px 30px #4CB1C1;">
             <% if(posts.length!=0) { %>
                 <h3 style="text-align: center;">The Sky In <%= profileUser.name%>!</h3>
-                <br>
-                <div id="posts-list-container">
-                    <ul>
-                        <% for(i of posts) { %>
-                            <%- include('_post') -%>
-                                        
-                        <% } %>
-                    </ul>
-                </div>
             <% } else { %>
                 <h3 style="text-align: center;">This amazing person has yet to ascent!</h3>
             <% } %>
+                <br>
+                <div class="home-container">
+                    <section id="feed-posts">
+                        <div id="posts-list-container">
+                            <ul>
+                                <% for(i of posts) { %>
+                                    <%- include('_post') -%>
+                                                
+                                <% } %>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+
+        </div>
 
             <%- include("_chat"); %>
     <% } %>

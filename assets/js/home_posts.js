@@ -15,7 +15,7 @@
                 data:newPostForm.serialize(),
                 success:function(data)
                 {
-                    console.log(data.data.post);
+                    console.log(data.data);
                     let newPost=newDomPost(data.data.post);
                     if(!data.data.post.user.avatar)
                     {
@@ -33,7 +33,12 @@
                     //call the create comment class
                     new PostComments(data.data.post._id);
                     new ToggleLike($(" .toggle-like-button", newPost));
-                    new SharePost($(" .toggle-share-button", newPost));
+                    new SharePost($(" .toggle-share-button", newPost))
+                    if(data.data.len==1)
+                    {
+                        console.log("1 ",$("h3"))
+                        $("h3").html(`The Sky In You!`)
+                    }
                     new Noty({
                         theme:"relax",
                         text:"So, now you write too. What can't you do?",
@@ -281,6 +286,10 @@
                     }
                     $('.modal-backdrop').remove();
                     $('body').removeClass( "modal-open" );
+                    if(data.data.len==0)
+                    {
+                        $("h3").html(`You have yet to ascent!`)
+                    }
                     new Noty({
                         theme:"relax",
                         text:"This post and its company needs a funeral!",
