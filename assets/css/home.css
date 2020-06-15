@@ -306,7 +306,7 @@ h1:hover {
                 border: 1.5px dashed darkgreen;
                 width: 80%;
                 min-height: 50px;
-                background: #2e7682;
+                background: none;
                 color: lightblue;
                 font-size: 21px;
                 overflow-wrap: break-word;

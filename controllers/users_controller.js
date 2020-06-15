@@ -304,15 +304,20 @@ module.exports.changeEmailMessage=async function(req,res)
 module.exports.changeEmailPage=async function(req,res)
 {
     try{
-         let id=req.query.id;
-         if(id==req.user.id)
-         {
-            let user=await User.findById(id);
-            return res.render("forgetPassword",{
-                title:"Skyinyou | Change Email",
-                user:user
-            });
-         }
+        if(req.isAuthenticated())
+        {
+            let id=req.query.id;
+            if(id==req.user.id)
+            {
+               let user=await User.findById(id);
+               return res.render("forgetPassword",{
+                   title:"Skyinyou | Change Email",
+                   user:user
+               });
+            }
+        }
+        return res.redirect("/");
+    
     }
     catch(err)
     {
@@ -323,42 +328,44 @@ module.exports.changeEmailPage=async function(req,res)
 module.exports.changeEmailConfirm=async function(req,res)
 {
     try{
-         let id=req.params.id;
-         let user=await User.findById(id);
-         if(user.email==req.body.email)
-         {
-             req.flash("error","Are you getting back with ex?");
-             return res.redirect("back");
-         }
-         let emailUser=await User.findOne({"email":req.body.email});
-         if(emailUser)
-         {
-             req.flash("error","This @ is already in skies!");
-             return res.redirect("back");
-         }
-         if(id==req.user.id)
-         {
-            let user1={
-                oldEmail:user.email,
-            }
-            user.email=req.body.email;
-            user.save();
-            user1.user=user;
-            console.log(user1);
-            let job=queue.create("changeEmailConfirm",user1).save(function(err)
+        if(req.isAuthenticated())
+        {
+            let id=req.params.id;
+            let user=await User.findById(id);
+            if(user.email==req.body.email)
             {
-                if(err)
-                {
-                    console.log("error in creating a queue ",err);
-                    return;
-                }
-                console.log("change email 1 job enqueued ",job.id);
-            });
-            
-            req.flash("success","Your new @ is live!");
-         }
-        
-         return res.redirect("/");
+                req.flash("error","Are you getting back with ex?");
+                return res.redirect("back");
+            }
+            let emailUser=await User.findOne({"email":req.body.email});
+            if(emailUser)
+            {
+                req.flash("error","This @ is already in skies!");
+                return res.redirect("back");
+            }
+            if(id==req.user.id)
+            {
+               let user1={
+                   oldEmail:user.email,
+               }
+               user.email=req.body.email;
+               user.save();
+               user1.user=user;
+               console.log(user1);
+               let job=queue.create("changeEmailConfirm",user1).save(function(err)
+               {
+                   if(err)
+                   {
+                       console.log("error in creating a queue ",err);
+                       return;
+                   }
+                   console.log("change email 1 job enqueued ",job.id);
+               });
+               
+               req.flash("success","Your new @ is live!");
+            } 
+        }        
+        return res.redirect("/");
     }
     catch(err)
     {
@@ -622,6 +629,10 @@ module.exports.destroySession = function (req, res) {
 
 module.exports.forgetPassword=function(req,res)
 {
+    if(req.isAuthenticated())
+    {
+        return res.redirect("back");
+    }
     return res.render("forgetPassword",{
         title:"Skyinyou | Forget Password"
     });
@@ -1100,6 +1111,10 @@ module.exports.verifyAccount=async function(req,res)
 {
     try
     {
+        if(req.isAuthenticated())
+        {
+            return res.redirect("/");
+        }
         let acessToken=req.params.id;
         let account=await newAccount.findOne({acessToken:acessToken});
         let newuser=await User.findOne({email:account.user.email});
