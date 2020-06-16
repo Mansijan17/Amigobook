@@ -1,10 +1,14 @@
-<% if(noty.onModel=="Post") {%>
-    <a id="noty-<%= noty._id%>" class="noty-list-item" href="/posts/?id=<%=noty.notyable._id%>">
-<% } else if(noty.onModel=="CommentReply"){%>
-    <a id="noty-<%= noty._id%>" class="noty-list-item" href="/comments/replies/<%=noty.notyable.comment%>">
+<% if(!noty.notyable) {%>  
+    <a id="noty-<%= noty._id%>" class="noty-list-item">
 <% } else {%>
-    <a id="noty-<%= noty._id%>" class="noty-list-item" href="/comments/replies/<%=noty.notyable._id%>">
-<% } %>
+    <% if(noty.onModel=="Post") {%>
+        <a id="noty-<%= noty._id%>" class="noty-list-item" href="/posts/?id=<%=noty.notyable._id%>">
+    <% } else if(noty.onModel=="CommentReply"){%>
+        <a id="noty-<%= noty._id%>" class="noty-list-item" href="/comments/replies/<%=noty.notyable.comment%>">
+    <% } else {%>
+        <a id="noty-<%= noty._id%>" class="noty-list-item" href="/comments/replies/<%=noty.notyable._id%>">
+    <% } %>
+<% }%>
     <% if(noty.user.avatar) {%>
         <img src="<%= noty.user.avatar %>"> 
     <% }  else {%>

@@ -64,3 +64,17 @@
         }
       }
 }
+
+@media (max-width:575px)
+{
+    .noty{
+        top: 20% !important;
+    }
+}
+
+@media (max-width:425px)
+{
+    .noty{
+        top: 27% !important;
+    }
+}

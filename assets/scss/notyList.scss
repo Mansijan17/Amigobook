@@ -41,7 +41,7 @@
             margin-right: 5px;
         }
     }
-    .noty-list-item:hover{
+    .noty-list-item:hover,.noty-list-item:focus,.noty-list-item:active{
         text-decoration: none;
     }
     a:visited
@@ -52,3 +52,52 @@
 // .noty-list::-webkit-scrollbar {
 //     display: none;
 // }
+
+@media (max-width:1000px)
+{
+    .noty-list
+    {
+        width: 60% !important;
+    }
+}
+
+
+@media (max-width:750px)
+{
+    .noty-list
+    {
+        width: 75% !important;
+    }
+}
+
+@media (max-width:575px)
+{
+    .noty-heading
+    {
+        margin-top: 150px !important;
+    }
+    .noty-list
+    {
+        width: 80% !important;
+    }
+}
+
+@media (max-width:425px)
+{
+    .noty-heading
+    {
+        margin-top: 200px !important;
+    }
+    .noty-list
+    {
+        width: 90% !important;
+    }
+}
+
+@media (max-width:365px)
+{
+    .noty-heading
+    {
+        margin-top: 265px !important;
+    }
+}

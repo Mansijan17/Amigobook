@@ -107,7 +107,8 @@
       #layout-header ul li img, #layout-header ul li .concealed-image {
         width: 30px;
         height: 30px;
-        border-radius: 50%; }
+        border-radius: 50%;
+        margin-right: 5px; }
       #layout-header ul li .concealed-image {
         display: flex;
         justify-content: center;

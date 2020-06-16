@@ -35,7 +35,31 @@
       color: mistyrose; }
     .noty-list .noty-list-item b {
       margin-right: 5px; }
-  .noty-list .noty-list-item:hover {
+  .noty-list .noty-list-item:hover, .noty-list .noty-list-item:focus, .noty-list .noty-list-item:active {
     text-decoration: none; }
   .noty-list a:visited {
     background: #5141b3; }
+
+@media (max-width: 1000px) {
+  .noty-list {
+    width: 60% !important; } }
+
+@media (max-width: 750px) {
+  .noty-list {
+    width: 75% !important; } }
+
+@media (max-width: 575px) {
+  .noty-heading {
+    margin-top: 150px !important; }
+  .noty-list {
+    width: 80% !important; } }
+
+@media (max-width: 425px) {
+  .noty-heading {
+    margin-top: 200px !important; }
+  .noty-list {
+    width: 90% !important; } }
+
+@media (max-width: 365px) {
+  .noty-heading {
+    margin-top: 265px !important; } }
