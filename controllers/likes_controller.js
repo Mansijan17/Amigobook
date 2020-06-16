@@ -42,8 +42,6 @@ module.exports.toggleLike=async function(req,res)
         {
             userBgColor=user.info.bgColor
         }
-        
-        //console.log("liking user name ",userName);
         // if a like already exists
         if(existingLike)
         {
@@ -68,48 +66,46 @@ module.exports.toggleLike=async function(req,res)
             });
             likeID=newLike._id;
             likeable.likes.push(newLike._id);
-            let origianlUser=await User.findById(likeable.user._id);
-            let newNoty=await Noty.create({
-                user:req.user._id,
-                notyable:likeable,
-                onModel:req.query.type,
-                action:"liked"
-            })
-            if(!origianlUser.prevNotyOpen)
-            {
-                origianlUser.oldNotyLength=origianlUser.noties.length;
-            }
-            origianlUser.noties.push(newNoty);
-            origianlUser.save();
             if(req.query.type=="Post")
             {
                 likeable.likesLength+=1;
             }
             likeable.save();
-            //if(req.query.type=="Post")
-            //{
-                let likeOnPostandCommentsandReplies={
+            let likeOnPostandCommentsandReplies={
                     name:likeable.user.name,
                     email:likeable.user.email,
                     content:likeable.content,
                     likedUser:user,
                     type:req.query.type
-                }
-                if(req.query.type=="Post")
-                {
+            }
+            if(req.query.type=="Post")
+            {
                     
                     if(likeable.sharedFromPost)
                     {
                         likeOnPostandCommentsandReplies.content=likeable.content.newContent;
                     }
-                }
-                if(req.query.type=="CommentReply")
-                {
+            }
+            if(req.query.type=="CommentReply")
+            {
                     likeOnPostandCommentsandReplies.type="Reply";
                     likeOnPostandCommentsandReplies.content=likeable.content.content;
-                }
-                if(likeable.user.id!=user.id)
-                {
+            }
+            if(likeable.user.id!=user.id)
+            {
+                    let origianlUser=await User.findById(likeable.user._id);
+                    let newNoty=await Noty.create({
+                        user:req.user._id,
+                        notyable:likeable,
+                        onModel:req.query.type,
+                        action:"liked"
+                    })
+                    if(!origianlUser.prevNotyOpen)
+                    {
+                        origianlUser.oldNotyLength=origianlUser.noties.length;
+                    }
+                    origianlUser.noties.push(newNoty);
+                    origianlUser.save();
                     let job=queue.create("likeOnPostsandCommentsandReplies",likeOnPostandCommentsandReplies).save(function(err)
                     {
                         if(err)
@@ -121,7 +117,6 @@ module.exports.toggleLike=async function(req,res)
         
                     });
                 }
-           // }
         }
         return res.json(200,{
             message:"Request successful!",

@@ -11,11 +11,13 @@
         <div class="concealed-image" style="background:<%=noty.user.info.bgColor%>;"><span><%= noty.user.name.split(" ")[0].charAt(0)%></span></div>
     <% } %>
     <b><%= noty.user.name %></b> 
-    <% if(noty.action!="commented") {%>
-        <%=noty.action%>
-    <%} else {%>
-        <%= noty.action %> on 
-    <% }%>
+    <% if(noty.action=="commented") {%>
+        <%=noty.action%> on
+    <%} else if (noty.action=="replied"){%>
+        <%= noty.action %> to
+    <% } else {%>
+        <%= noty.action %>
+    <% } %>
     your 
     <% if(noty.onModel!="CommentReply") {%>
         <%= noty.onModel%>.

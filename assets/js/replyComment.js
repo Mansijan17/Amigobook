@@ -563,7 +563,7 @@ class replyOnComment{
                                     new ToggleLike($(" .toggle-like-button", newReply));
                                     new Noty({
                                         theme:"relax",
-                                        text:"Reply published successfully!",
+                                        text:"Ahem, ahem, comments needs comments!",
                                         type:"success",
                                         layput:"topRight",
                                         timeout:1500

@@ -373,7 +373,6 @@ module.exports.createReply=async function(req,res)
         console.log("reply controller ",req.body.comment);
         let comment=await Comment.findById(req.body.comment);
         let post=await Post.findById(comment.post);
-        //console.log(comment);
         if(comment)
         {
             let newReply=await commentReply.create({
@@ -400,6 +399,19 @@ module.exports.createReply=async function(req,res)
             comment.save();
             if(comment.user.id!=req.user.id)
             {
+                let origianlUser=await User.findById(comment.user._id);
+                let newNoty=await Noty.create({
+                    user:req.user._id,
+                    notyable:comment,
+                    onModel:"Comment",
+                    action:"replied"
+                })
+                if(!origianlUser.prevNotyOpen)
+                {
+                    origianlUser.oldNotyLength=origianlUser.noties.length;
+                }
+                origianlUser.noties.push(newNoty);
+                origianlUser.save();
                 let nextReply={
                     thought:newReply,
                     parentContent:comment.content,
@@ -688,6 +700,21 @@ module.exports.replyReply2=async function(req,res)
             
             if(reply.user.id!=req.user.id)
             {
+                
+                let origianlUser=await User.findById(reply.user._id);
+                let newNoty=await Noty.create({
+                    user:req.user._id,
+                    notyable:reply,
+                    onModel:"CommentReply",
+                    action:"replied"
+                })
+                if(!origianlUser.prevNotyOpen)
+                {
+                    origianlUser.oldNotyLength=origianlUser.noties.length;
+                }
+                origianlUser.noties.push(newNoty);
+                origianlUser.save();
+
                 let nextReply={
                     thought:newReply,
                     parentContent:reply.content.content,

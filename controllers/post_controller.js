@@ -4,6 +4,7 @@ const replyComment=require('../models/commentReply');
 const Like=require('../models/like');
 const User=require('../models/userSchema');
 const Share=require('../models/share');
+const Noty=require('../models/noty');
 const postsMailer=require('../mailer/post_mailer');
 const queue=require('../config/kue');
 const postEmailWorker=require('../worker/post_email_worker');
@@ -377,8 +378,6 @@ module.exports.sharePost=async function(req,res)
         else
         {
                 let user=await User.findById(req.user.id);
-                //let postUser=post.user;
-                //console.log(post);
                 let userName=user.name;
                 let userImage=user.avatar;
                 let userBgColor;
@@ -412,13 +411,11 @@ module.exports.sharePost=async function(req,res)
                 });
             newcreatedPost.populate("user").execPopulate();
             let timestamps=new Date(newcreatedPost.createdAt).toLocaleString();
-            console.log(timestamps);
-                let newShare=await Share.create({
+            let newShare=await Share.create({
                         post:req.body.post,
                         user:req.user._id,
                         createdPost:newcreatedPost._id
-                });
-                //console.log(newShare);
+            });
                 shareID=newShare._id;
                 post.shares.push(newShare._id);
                 post.save();
@@ -430,6 +427,19 @@ module.exports.sharePost=async function(req,res)
                 }
                 if(post.user.id!=user.id)
                 {
+                    let origianlUser=await User.findById(post.user._id);
+                    let newNoty=await Noty.create({
+                        user:req.user._id,
+                        notyable:newcreatedPost,
+                        onModel:"Post",
+                        action:"shared"
+                    })
+                    if(!origianlUser.prevNotyOpen)
+                    {
+                        origianlUser.oldNotyLength=origianlUser.noties.length;
+                    }
+                    origianlUser.noties.push(newNoty);
+                    origianlUser.save();
                     let job2=queue.create("shareonposts",shareOnPost).save(function(err)
                     {
                         if(err)
@@ -462,13 +472,7 @@ module.exports.sharePost=async function(req,res)
                     error:false
                 })
         }
-        
-       
-            
-        
-        
-        // req.flash("success","Post shared successfully!");
-        // return res.redirect("back");
+
     }
     catch(err)
     {
