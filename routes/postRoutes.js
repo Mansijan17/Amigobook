@@ -3,8 +3,9 @@ const router = express.Router();
 const password=require('passport');
 
 const postController=require('../controllers/post_controller');
+const passport = require('passport');
 
-
+router.get("/",passport.checkAuthentication,postController.displayPost);
 router.post("/create-post",password.checkAuthentication,postController.createPost);
 router.get("/destroy-post/:id",password.checkAuthentication,postController.destroyPost);
 router.post("/update-post/:id",password.checkAuthentication,postController.updatePost);

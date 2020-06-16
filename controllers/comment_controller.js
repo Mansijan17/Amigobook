@@ -3,6 +3,7 @@ const User=require('../models/userSchema');
 const Post=require('../models/post');
 const Like=require('../models/like');
 const commentReply=require('../models/commentReply');
+const Noty=require('../models/noty');
 const commentsMailer=require('../mailer/comments_mailer');
 const queue=require('../config/kue');
 const commentEmailWorker=require('../worker/comment_email_worker');
@@ -52,6 +53,7 @@ module.exports.createComment=async function(req,res)
           // console.log(newcomment);
             post.comments.push(newcomment);
             post.save();
+         
             let length=post.comments.length;
             console.log("length ",length);
             //console.log(post);
@@ -87,6 +89,19 @@ module.exports.createComment=async function(req,res)
            });
            if(post.user.id!=newcomment.user.id)
            {
+                let origianlUser=await User.findById(post.user._id);
+                let newNoty=await Noty.create({
+                    user:req.user._id,
+                    notyable:post,
+                    onModel:"Post",
+                    action:"commented"
+                })
+                if(!origianlUser.prevNotyOpen)
+                {
+                    origianlUser.oldNotyLength=origianlUser.noties.length;
+                }
+                origianlUser.noties.push(newNoty);
+                origianlUser.save();
                 let job2=queue.create("commentOnPosts",commentOnPost).save(function(err)
                 {
                     if(err)
@@ -318,6 +333,7 @@ module.exports.showReply=async function(req,res)
                 },
             }
         }).populate("user");
+        console.log(comment)
         let replies=comment.replies;
         
         for(reply of replies)

@@ -1,0 +1,7 @@
+<link rel="stylesheet" href="/css/notyList.css">
+<p class="noty-heading">Your's Notifications!</p>
+<ul class="noty-list">
+    <% for(noty of noties) {%>
+        <%- include("_notyLi"); %>
+    <% }%>
+</ul>

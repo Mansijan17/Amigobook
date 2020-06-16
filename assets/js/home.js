@@ -1,3 +1,42 @@
+let notyToggle=false;
+$("main .noty button").click(function()
+{
+  if(!notyToggle)
+  {
+    let right=-135;
+    function movetoLeft()
+    {
+        if(right>=0)
+        {
+          clearInterval(id);
+          return;
+        }
+        right+=3;
+        $("main .noty").css("right",right);
+    }
+    let id=setInterval(movetoLeft,30);
+    notyToggle=true;
+  }
+  else
+  {
+    let right=0;
+    function movetoRight()
+    {
+        if(right<=-135)
+        {
+          clearInterval(id);
+          return;
+        }
+        right-=3;
+        $("main .noty").css("right",right);
+    }
+    let id=setInterval(movetoRight,30);
+    notyToggle=false;
+  }
+})
+
+
+
 var nameID=$("#name");
 var emailID=$("#email")
 var pwdID=$("#pwd");

@@ -1,0 +1,25 @@
+<% if(noty.onModel=="Post") {%>
+    <a id="noty-<%= noty._id%>" class="noty-list-item" href="/posts/?id=<%=noty.notyable._id%>">
+<% } else if(noty.onModel=="CommentReply"){%>
+    <a id="noty-<%= noty._id%>" class="noty-list-item" href="/comments/replies/<%=noty.notyable.comment%>">
+<% } else {%>
+    <a id="noty-<%= noty._id%>" class="noty-list-item" href="/comments/replies/<%=noty.notyable._id%>">
+<% } %>
+    <% if(noty.user.avatar) {%>
+        <img src="<%= noty.user.avatar %>"> 
+    <% }  else {%>
+        <div class="concealed-image" style="background:<%=noty.user.info.bgColor%>;"><span><%= noty.user.name.split(" ")[0].charAt(0)%></span></div>
+    <% } %>
+    <b><%= noty.user.name %></b> 
+    <% if(noty.action!="commented") {%>
+        <%=noty.action%>
+    <%} else {%>
+        <%= noty.action %> on 
+    <% }%>
+    your 
+    <% if(noty.onModel!="CommentReply") {%>
+        <%= noty.onModel%>.
+    <% } else { %>
+        Reply.
+    <% } %>
+</a>

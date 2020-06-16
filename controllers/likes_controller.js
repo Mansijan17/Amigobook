@@ -3,6 +3,7 @@ const Post=require("../models/post");
 const Comment=require('../models/commentSchema');
 const User=require('../models/userSchema');
 const commentReply=require('../models/commentReply');
+const Noty=require('../models/noty');
 const queue=require('../config/kue');
 const likeEmailWorker=require('../worker/like_email_worker');
 
@@ -67,6 +68,19 @@ module.exports.toggleLike=async function(req,res)
             });
             likeID=newLike._id;
             likeable.likes.push(newLike._id);
+            let origianlUser=await User.findById(likeable.user._id);
+            let newNoty=await Noty.create({
+                user:req.user._id,
+                notyable:likeable,
+                onModel:req.query.type,
+                action:"liked"
+            })
+            if(!origianlUser.prevNotyOpen)
+            {
+                origianlUser.oldNotyLength=origianlUser.noties.length;
+            }
+            origianlUser.noties.push(newNoty);
+            origianlUser.save();
             if(req.query.type=="Post")
             {
                 likeable.likesLength+=1;

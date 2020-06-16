@@ -561,6 +561,8 @@ module.exports.create = async function (req, res) {
                 console.log("new color",randomBgColor);
                 newuser.user.info={about:`Hi, I am ${req.body.name}. Nice to meet you!`,
                 bgColor:randomBgColor,personalInfo:{},socialInfo:{},contactInfo:{}}
+                newuser.user.prevNotyOpen=false,
+                newuser.user.oldNotyLength=0,
                 console.log(newuser)
                 let necoount=await newAccount.create(newuser);
                 console.log(necoount)
@@ -573,6 +575,8 @@ module.exports.create = async function (req, res) {
                 info.about=`Hi, I am ${req.body.name}. Nice to meet you!`;
                 newAccountSchema.user=req.body;
                 newAccountSchema.user.info=info;
+                newAccountSchema.user.oldNotyLength=0,
+                newAccountSchema.user.prevNotyOpen=false,
                 newAccountSchema.save();
                 console.log("exists ",newAccountSchema.user,info)
             }

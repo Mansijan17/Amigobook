@@ -47,7 +47,17 @@ const userSchema=new mongoose.Schema({
             type:mongoose.Schema.Types.ObjectId,
             ref:"Graduate"
         }
-    ]
+    ],
+    noties:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Noty"
+    }],
+    oldNotyLength:{
+        type:Number
+    },
+    prevNotyOpen:{
+        type:Boolean
+    }
  
 },{
     timestamps:true

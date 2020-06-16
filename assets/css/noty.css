@@ -1,0 +1,54 @@
+.noty {
+  position: fixed;
+  top: 15%;
+  width: 180px;
+  background: none;
+  right: -135px;
+  height: 45px;
+  border: 1px solid;
+  z-index: 700;
+  display: flex; }
+  .noty button, .noty a {
+    width: 45px;
+    height: 100%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #dc7dc8; }
+  .noty .noty-bell {
+    background: #C2185B;
+    text-decoration: none; }
+    .noty .noty-bell i {
+      font-size: 20px;
+      color: whitesmoke;
+      position: relative; }
+      .noty .noty-bell i .noty-bell-no {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        font-size: 10px;
+        z-index: 100;
+        background: #6d0f0ff7;
+        padding: 9px;
+        width: 16px;
+        border-radius: 50%;
+        height: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center; }
+  .noty .noty-bell:hover {
+    text-decoration: none; }
+  .noty button:focus {
+    outline: none; }
+  .noty button i {
+    font-size: 38px;
+    animation: glow-icon 2s ease-in-out infinite alternate; }
+
+@keyframes glow-icon {
+  0% {
+    box-shadow: 0px 0px 10px 1px transparent; }
+  50% {
+    box-shadow: 0px 0px 10px 1px white; }
+  100% {
+    box-shadow: 0px 0px 13px 2px white; } }

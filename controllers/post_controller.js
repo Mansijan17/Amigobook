@@ -8,9 +8,62 @@ const postsMailer=require('../mailer/post_mailer');
 const queue=require('../config/kue');
 const postEmailWorker=require('../worker/post_email_worker');
 
-//not necessary to create async function
-//but we are creating for the sake of practice as there is
-//only one call back error function
+module.exports.displayPost=async function(req,res)
+{
+    try{
+        let post=await Post.findById(req.query.id).populate("user").populate({
+            path:"comments",
+            options:{
+                sort:"-createdAt"
+            },
+            
+            populate:
+            ({
+                path:"likes",
+                options:{
+                    sort:"-createdAt"
+                },
+                populate:{
+                    path:"user"
+                },
+            }),  
+        }).populate({
+            path:"likes",
+            options:{
+                sort:"-createdAt"
+            },
+            populate:{
+                path:"user"
+            }
+        }).populate({
+            path:"shares",
+            options:{
+                sort:"-createdAt"
+            },
+            populate:{
+                path:"user"
+            }
+        });
+        post.update=false;
+        post.save();
+        for(comment of post.comments)
+        {
+            comment.update=false;
+            comment.save();
+        }
+        return res.render("postDisplay",{
+            i:post,
+            title:"Your Post | Skyinyou"
+        });
+
+    }
+    catch(err)
+    {
+        console.log("error in displaying a particular post ",err);
+        return;
+    }
+}
+
 module.exports.createPost= async function(req,res)
 {
     // Post.create({
