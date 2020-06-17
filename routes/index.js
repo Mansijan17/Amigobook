@@ -16,6 +16,6 @@ router.use("/comments",require("./commentRoutes"));
 router.use("/api",require("./api/apiIndex"));
 router.use("/likes",require("./likes"));
 router.use("/noty",require("./noty"));
-
+router.use("/fr",require("./fr"));
 
 module.exports=router;

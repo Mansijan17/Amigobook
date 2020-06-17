@@ -1,0 +1,8 @@
+<link rel="stylesheet" href="/css/frList.css">
+<p class="fr-heading">Your's Friend Requests!</p>
+<ul class="fr-list">
+    <% for(fr of frs) {%>
+        <%- include("_frLi"); %>
+    <% }%>
+</ul>
+<script src="/js/fr.js"></script>

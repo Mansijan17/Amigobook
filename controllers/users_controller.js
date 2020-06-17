@@ -978,7 +978,8 @@ module.exports.destroyFriendshipForms=async function(req,res)
             data:{
                from:req.query.to,
                to:req.query.from,
-               user:toUser
+               user:toUser,
+               frID:form._id
             },
             message:"Form removed successfully!"
         })
@@ -1054,7 +1055,8 @@ module.exports.makeFriendShip=async function(req,res)
                img:imgURL,
                bgColor:bgColor,
                friendName:toUser.name,
-               user:toUser
+               user:toUser,
+               frID:form._id
                
             },
             message:"Friend request accepted successfully!"

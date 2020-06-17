@@ -1,0 +1,15 @@
+<li id="fr-<%= fr._id%>" class="fr-list-item">
+    <div class="fr-fromUser">
+        <% if(fr.fromUser.avatar) {%>
+            <img src="<%= fr.fromUser.avatar %>"> 
+        <% }  else {%>
+            <div class="concealed-image" style="background:<%=fr.fromUser.info.bgColor%>;"><span><%= fr.fromUser.name.split(" ")[0].charAt(0)%></span></div>
+        <% } %>
+        <b><%= fr.fromUser.name %></b>
+    </div>
+    <span class="pending-form-present">Want to accept this friend request?</span>
+    <div class="pending-form-options">
+        <a href="/users/make-friends/?to=<%=user._id%>&from=<%=fr.fromUser._id%>" class="confirm-friend-button">Yah</a>
+        <a href="/users/friends-cancel-form/?to=<%=user._id%>&from=<%=fr.fromUser._id%>" class="no-friend-button">Nah</a>
+    </div>
+</li>

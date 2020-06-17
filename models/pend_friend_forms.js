@@ -17,6 +17,8 @@ const pendingFriendshipForm=new mongoose.Schema({
         required:true
     },
     
+},{
+    timestamps:true
 });
 
 const FriendshipForm=mongoose.model("FriendshipForm",pendingFriendshipForm);
