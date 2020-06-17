@@ -170,7 +170,7 @@
                 </div>
                 <div id="collapseFour" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <div class="card-body">
-                    <% if(!profileUser.info.personalInfo.currentCity && !profileUser.info.personalInfo.homeTown && !profileUser.info.personalInfo.bDay) {%>
+                    <% if(!profileUser.info.personalInfo || (!profileUser.info.personalInfo.currentCity && !profileUser.info.personalInfo.homeTown && !profileUser.info.personalInfo.bDay)) {%>
                        <% if(profileUser.id!=user.id)  { %>
                             <p>
                                 Come back later, maybe <%=profileUser.name.split(" ")[0]%> will update it.
@@ -222,7 +222,7 @@
                 </div>
                 <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                     <div class="card-body">
-                        <% if(!profileUser.info.contactInfo.phone && !profileUser.info.contactInfo.website) {%>
+                        <% if(!profileUser.info.contactInfo || (!profileUser.info.contactInfo.phone && !profileUser.info.contactInfo.website)) {%>
                             <% if(profileUser.id!=user.id)  { %>
                                  <p>
                                     <%=profileUser.name.split(" ")[0]%> can be approached in real life too.
@@ -268,7 +268,7 @@
                     </h2>
                 </div>
                 <div id="collapseSix" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                        <% if(!profileUser.info.socialInfo.fb && !profileUser.info.socialInfo.linkedin && !profileUser.info.socialInfo.quora && !profileUser.info.socialInfo.twitter && !profileUser.info.socialInfo.insta && !profileUser.info.socialInfo.utube) {%>
+                        <% if(!profileUser.info.socialInfo || (!profileUser.info.socialInfo.fb && !profileUser.info.socialInfo.linkedin && !profileUser.info.socialInfo.quora && !profileUser.info.socialInfo.twitter && !profileUser.info.socialInfo.insta && !profileUser.info.socialInfo.utube)) {%>
                             <div class="card-body social-link-container" style="justify-content: flex-start;">
                                 <% if(profileUser.id!=user.id)  { %>
                                     <p>

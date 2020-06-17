@@ -152,10 +152,14 @@ module.exports.profile = async function (req, res) {
                 console.log(pendingFrom,pendingTo)
             }
         }   
-        let date=new Date(user.info.personalInfo.bDay);
-        date=date.toDateString();
-        let dateArr=date.split(" ");
-        let birthday=dateArr[2]+" "+dateArr[1]+" ,"+dateArr[3];
+        let birthday;
+        if(user.info.personalInfo)
+        {
+            let date=new Date(user.info.personalInfo.bDay);
+            date=date.toDateString();
+            let dateArr=date.split(" ");
+            birthday=dateArr[2]+" "+dateArr[1]+" ,"+dateArr[3];
+        }
         return res.render('userProfile', {
             title: `${user.name} | Skyinyou`,
             profileUser: user,
