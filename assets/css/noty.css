@@ -15,21 +15,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #dc7dc8; }
-  .noty .noty-bell {
-    background: #C2185B;
+    background: #dc7dc8;
     text-decoration: none; }
-    .noty .noty-bell i {
+    .noty button i, .noty button img, .noty a i, .noty a img {
       font-size: 20px;
       color: whitesmoke;
       position: relative; }
-      .noty .noty-bell i .noty-bell-no {
+      .noty button i div, .noty button img div, .noty a i div, .noty a img div {
         position: absolute;
         top: -8px;
         right: -8px;
         font-size: 10px;
         z-index: 100;
-        background: #6d0f0ff7;
         padding: 9px;
         width: 16px;
         border-radius: 50%;
@@ -37,7 +34,38 @@
         display: flex;
         justify-content: center;
         align-items: center; }
-  .noty .noty-bell:hover {
+    .noty button img, .noty a img {
+      width: 25px;
+      height: 25px; }
+  .noty .noty-bell {
+    background: #C2185B; }
+    .noty .noty-bell .noty-bell-no {
+      background: #6d0f0ff7; }
+  .noty .fr {
+    background: #ee5344; }
+    .noty .fr > div {
+      height: 30px;
+      width: 30px;
+      position: relative; }
+      .noty .fr > div img {
+        width: 100%;
+        height: 100%; }
+      .noty .fr > div .noty-bell-no {
+        position: absolute;
+        top: -3px;
+        right: -6px;
+        padding: 10px;
+        background: #b6442f;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        color: whitesmoke;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 9.5px;
+        font-weight: bold; }
+  .noty a:hover, .noty a:focus {
     text-decoration: none; }
   .noty button:focus {
     outline: none; }

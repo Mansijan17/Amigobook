@@ -561,9 +561,11 @@ module.exports.create = async function (req, res) {
                 console.log("new color",randomBgColor);
                 newuser.user.info={about:`Hi, I am ${req.body.name}. Nice to meet you!`,
                 bgColor:randomBgColor,personalInfo:{},socialInfo:{},contactInfo:{}}
-                newuser.user.prevNotyOpen=false,
-                newuser.user.oldNotyLength=0,
-                console.log(newuser)
+                newuser.user.prevNotyOpen=false;
+                newuser.user.oldNotyLength=0;
+                newuser.user.prevPendFROpen=false;
+                newuser.user.oldPendFRLength=0;
+                console.log(newuser);
                 let necoount=await newAccount.create(newuser);
                 console.log(necoount)
             }
@@ -575,13 +577,13 @@ module.exports.create = async function (req, res) {
                 info.about=`Hi, I am ${req.body.name}. Nice to meet you!`;
                 newAccountSchema.user=req.body;
                 newAccountSchema.user.info=info;
-                newAccountSchema.user.oldNotyLength=0,
-                newAccountSchema.user.prevNotyOpen=false,
+                newAccountSchema.user.oldNotyLength=0;
+                newAccountSchema.user.prevNotyOpen=false;
+                newAccountSchema.user.prevPendFROpen=false;
+                newAccountSchema.user.oldPendFRLength=0;
                 newAccountSchema.save();
                 console.log("exists ",newAccountSchema.user,info)
             }
-            // let newaccountUser=await newAccount.create(newuser);
-            // console.log(newaccountUser);
             let job=queue.create("newAccount",newuser).save(function(err)
             {
                 if(err)
@@ -908,13 +910,19 @@ module.exports.resetPassword=async function(req,res)
 module.exports.sendFriendshipForms=async function(req,res)
 {
     try{
-         FriendshipForm.create({
+         let form=await FriendshipForm.create({
              isFormSent:true,
              fromUser:req.query.from,
              toUser:req.query.to
          });
          let fromUser=await User.findById(req.query.from);
          let toUser=await User.findById(req.query.to);
+         if(!toUser.prevPendFROpen)
+         {
+             toUser.oldPendFRLength=toUser.pendFR.length;
+         }
+         toUser.pendFR.push(form);
+         toUser.save();
          let frndreq={
              sender:{
                  id:fromUser.id,
@@ -957,10 +965,20 @@ module.exports.destroyFriendshipForms=async function(req,res)
     try{
         console.log(req.query);
         let form=await FriendshipForm.findOneAndDelete({fromUser:req.query.from,toUser:req.query.to});
+        let toUser=await User.findById(req.query.to);
+        toUser.oldPendFRLength-=1;
+        toUser.pendFR.pull(form._id);
+        toUser.save();
+        if(toUser.pendFR.length==0)
+        {
+            toUser.oldPendFRLength=0;
+            toUser.prevPendFROpen=false;
+        }
         return res.json(200,{
             data:{
                from:req.query.to,
-               to:req.query.from
+               to:req.query.from,
+               user:toUser
             },
             message:"Form removed successfully!"
         })
@@ -990,24 +1008,25 @@ module.exports.makeFriendShip=async function(req,res)
         fromUser.friendships.push(newFriendshipFrom);
         fromUser.save();
         toUser.friendships.push(newFriendshipTo);
-        toUser.save();
         let imgURL;
+        let bgColor;
         if(toUser.avatar)
         {
             imgURL=toUser.avatar;
         }
         else
         {
-            if(toUser.gender=="male")
-            {
-                imgURL="https://i.stack.imgur.com/HQwHI.jpg"
-            }
-            else
-            {
-                imgURL="/images/femaleProfile.png"
-            }
+            bgColor=toUser.info.bgColor;
         }
-        await FriendshipForm.findOneAndDelete({fromUser:req.query.from,toUser:req.query.to});
+        let form=await FriendshipForm.findOneAndDelete({fromUser:req.query.from,toUser:req.query.to});
+        toUser.oldPendFRLength-=1;
+        toUser.pendFR.pull(form._id);
+        toUser.save();
+        if(toUser.pendFR.length==0)
+        {
+            toUser.oldPendFRLength=0;
+            toUser.prevPendFROpen=false;
+        }
         let frndreq={
             sender:{
                 email:fromUser.email,
@@ -1033,7 +1052,9 @@ module.exports.makeFriendShip=async function(req,res)
                name:fromUser.name,
                length:fromUser.friendships.length,
                img:imgURL,
-               friendName:toUser.name
+               bgColor:bgColor,
+               friendName:toUser.name,
+               user:toUser
                
             },
             message:"Friend request accepted successfully!"

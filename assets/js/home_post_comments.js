@@ -68,11 +68,26 @@ class PostComments{
                     let commentsCount=parseInt($(`#post-${postId}-comment-number`).attr("data-comments"));
                     commentsCount+=1;
                     $(`#post-${postId}-comment-number`).attr("data-comments",commentsCount);
-                    
-                    
-                        $(`#post-${postId}-comment-number`).attr("data-toggle","collapse");
-                        $(`#post-${postId}-comment-number`).html(`<span>${commentsCount}</span> <i class="fas fa-comments"></i>`);
-                    
+                    $(`#post-${postId}-comment-number`).attr("data-toggle","collapse");
+                    $(`#post-${postId}-comment-number`).html(`<span>${commentsCount}</span> <i class="fas fa-comments"></i>`);
+                    // if(data.data.notyOriginalUser.noties.length!=0)
+                    // {
+                    //     if(data.data.notyOriginalUser.prevNotyOpen)
+                    //     {
+                    //         if(data.data.notyOriginalUser.noties.length-data.data.notyOriginalUser.oldNotyLength!=0)
+                    //         {
+                    //             $(`#noty-ball${data.data.notyOriginalUser._id} i`).append(`  <div class="noty-bell-no">
+                    //             ${data.data.notyOriginalUser.noties.length-data.data.notyOriginalUser.oldNotyLength}
+                    //             </div>`)
+                    //         }
+                    //     }
+                    //     else
+                    //     {
+                    //         $(`#noty-ball${data.data.notyOriginalUser._id} i`).append(`  <div class="noty-bell-no">
+                    //         ${data.data.notyOriginalUser.noties.length}
+                    //         </div>`)
+                    //     }
+                    // }
                     
                   
                     pSelf.deleteComment($(' .delete-comment-button', newComment));

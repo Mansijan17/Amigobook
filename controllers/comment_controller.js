@@ -12,36 +12,12 @@ const commentEmailWorker=require('../worker/comment_email_worker');
 
 module.exports.createComment=async function(req,res)
 {
-    // Post.findById(req.body.post,function(err,post)
-    // {
-    //     if(post)
-    //     {
-    //         Comment.create({
-    //             content:req.body.content,
-    //             post:req.body.post,
-    //             user:req.user._id
-    //         }, function(err,newComment)
-    //         {
-    //             if(err)
-    //             {
-    //                 console.log("Error in creating the comment");
-    //                 return;
-    //             }
-    //             post.comments.push(newComment);
-    //             post.save();
-    //             return res.redirect("/");
-    //         });
-    //     }
-    // });
-
     try
     {
         let post=await Post.findById(req.body.post);
         if(post)
         {
-            //console.log(post);
             await post.populate("user","name email").execPopulate();
-            //console.log("new ",post);
             let newcomment=await Comment.create({
                             content:req.body.content,
                             post:req.body.post,
@@ -50,7 +26,6 @@ module.exports.createComment=async function(req,res)
                             edited:false
                         });
            
-          // console.log(newcomment);
             post.comments.push(newcomment);
             post.save();
          
@@ -76,7 +51,6 @@ module.exports.createComment=async function(req,res)
                 nextComment.parentContent=post.content.newContent;
             }
           
-           /// CommentsMailer.newComment(newcoment);
            let job=queue.create("emails",nextComment).save(function(err)
            {
                if(err)
@@ -87,9 +61,11 @@ module.exports.createComment=async function(req,res)
                console.log("comment job enqueued " ,job.id);
 
            });
+           let origianlUser=await User.findById(post.user._id).populate({
+               path:"noties"
+           });
            if(post.user.id!=newcomment.user.id)
            {
-                let origianlUser=await User.findById(post.user._id);
                 let newNoty=await Noty.create({
                     user:req.user._id,
                     notyable:post,
@@ -115,13 +91,13 @@ module.exports.createComment=async function(req,res)
            }
             if(req.xhr)
             {
-               // console.log("xhr ",newcomment);
                 return res.status(200).json({
                     data:
                     {
                         comment:newcomment,
                         post:post,
-                        length:length
+                        length:length,
+                        notyOriginalUser:origianlUser
                     },
                     message:"Comment published!"
                 })
@@ -141,45 +117,6 @@ module.exports.createComment=async function(req,res)
 
 module.exports.destroyComment=async function(req,res)
 {
-    // Comment.findById(req.params.id,function(err,comment)
-    // {
-    //     console.log(comment);
-    //     console.log(req.user);
-    //     let postId=comment.post;
-    //     if(comment.user==req.user.id)
-    //     {
-    //         comment.remove();
-    //         Post.findByIdAndUpdate(postId,{
-    //             $pull:{comments:req.params.id}
-    //         },function(err,post)
-    //         {
-    //             return res.redirect("back");
-    //         })
-    //     }
-    //     else
-    //     {
-    //         //deleting comments from the post if the logined user is the one who posted that post
-    //         Post.findById(postId,function(err,post)
-    //         {
-    //             if(post.user==req.user.id)
-    //             {
-    //                 comment.remove();
-    //                 Post.findByIdAndUpdate(postId,{
-    //                         $pull:{comments:req.params.id}
-    //                         },function(err,post)
-    //                         {
-    //                             return res.redirect("back");
-    //                         })
-    //             }
-    //             else
-    //             {
-    //                 return res.redirect("back");
-    //             }
-    //         })
-            
-    //     }
-    // })
-
     try
     {
         let comment=await Comment.findById(req.params.id);
@@ -188,7 +125,6 @@ module.exports.destroyComment=async function(req,res)
         if(comment.user.id==req.user.id || post.user==req.user.id)
         {
            
-            console.log("comment controller delete");
             let replies=comment.replies;
             console.log(replies);
             for(let reply of replies)
@@ -237,7 +173,6 @@ module.exports.updateComment=async function(req,res)
     {
         let id=req.params.id;
         let comment=await Comment.findById(id);
-        console.log("update controller 1",comment);
         if(comment.user.id==req.user.id)
         {
             if(!comment.update)
@@ -274,10 +209,8 @@ module.exports.updateComment2=async function(req,res)
 {
     try
     {
-        console.log(req.body);
         let id=req.body.comment;
         let comment=await Comment.findById(id);
-        console.log(comment);
         if(comment.user.id==req.user.id)
         {
             if(comment.content!=req.body.content)
@@ -333,9 +266,7 @@ module.exports.showReply=async function(req,res)
                 },
             }
         }).populate("user");
-        console.log(comment)
         let replies=comment.replies;
-        
         for(reply of replies)
         {
             reply.liked=false;
@@ -370,7 +301,6 @@ module.exports.showReply=async function(req,res)
 module.exports.createReply=async function(req,res)
 {
     try{
-        console.log("reply controller ",req.body.comment);
         let comment=await Comment.findById(req.body.comment);
         let post=await Post.findById(comment.post);
         if(comment)
@@ -570,7 +500,6 @@ module.exports.updateReply2=async function(req,res)
             
             reply.update=false;
             reply.save();
-            console.log(reply);
             return res.json(200,{
                     data:
                     {
@@ -682,7 +611,6 @@ module.exports.replyReply2=async function(req,res)
                 isReply:true
             });
             newReply.populate("user","name email");
-            console.log(newReply.content)
             let authorTag="";
             if(post.user==req.user.id)
             {
@@ -804,7 +732,6 @@ module.exports.removeTag=async function(req,res)
     try{
         let id=req.params.id;
         let reply=await commentReply.findById(id);
-        console.log(reply);
         reply.content=reply.content.content;
         reply.isReply=false;
         reply.save();

@@ -89,6 +89,34 @@ let noFriendshipAnswer=function()
                 Add Friend
                 </a>`);
                 pendingFrom();
+                if(data.data.user.pendFR.length!=0)
+                {
+                    $(`#fr-${data.data.user._id}`).attr("href",`/fr/?id=${data.data.user._id}`);
+                    if(data.data.user.prevPendFROpen)
+                    {
+                        if(data.data.user.pendFR.length-data.data.user.oldPendFRLength!=0)
+                        {
+                            $(`#fr-${data.data.user._id} > div`).html(`<img src="/images/fr.png"> <div class="noty-bell-no">
+                                ${data.data.user.pendFR.length-data.data.user.oldPendFRLength}
+                            </div>`)
+                        }
+                        else{
+                            $(`#fr-${data.data.user._id} > div`).html(`<img src="/images/fr.png">`);
+                        }
+                    }
+                    else
+                    {
+                        $(`#fr-${data.data.user._id} > div`).html(`<img src="/images/fr.png"> <div class="noty-bell-no">
+                            ${data.data.user.pendFR.length}
+                        </div>`)
+                    }
+
+                }
+                else
+                {
+                    $(`#fr-${data.data.user._id}`).removeAttr("href");
+                    $(`#fr-${data.data.user._id}`).html(`<img src="/images/fr.png">`)
+                }
                  new Noty({
                     theme:"relax",
                     text:"Yes, maybe this was not the right moment!",
@@ -142,23 +170,79 @@ let confirmFriendshipAnswer=function()
                 </div>
               </div>`)
                 $(".add-chat-friend-group").prepend(newFriend);
+
                 if(data.data.length==1)
                 {
-                    $(`#collapseOne .card-body .normal-connections`).html(`${data.data.length} Connection`);
-                    $(`#friendModal .modal-title`).html(`${data.data.length} Connection`)
+                    $(`#collapseOne .card-body > div`).remove();
+                    $(`#collapseOne .card-body`).append(`<p  data-toggle="modal" data-target="#friendModal" style="cursor: pointer;" class="normal-connections">
+                       1 Connection 
+                    </p>`);
+                    $("body").append(`<div class="modal fade" id="friendModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h2 class="modal-title" id="exampleModalLabel">
+                              1 Connection 
+                            </h2>
+                            </div>
+                            <div class="modal-body">
+                                    <ul>
+                                       
+                                    </ul>
+                            </div>
+                            
+                        </div>
+                        </div>
+                    </div>`)
                 }
                 else
                 {
                     $(`#collapseOne .card-body .normal-connections`).html(`${data.data.length} Connections`);
                     $(`#friendModal .modal-title`).html(`${data.data.length} Connections`)
                 }
-                $(`#friendModal .modal-body ul`).prepend(` <li id="user-${data.data.to}" class="friend-list">
-                        <a href="/users/profile/${data.data.from}">
-                            <img src=${data.data.img}> 
-                            <span>${data.data.friendName}</span>
-                       </a>
+                let newList=$(`<li id="user-${data.data.to}" class="friend-list">
+                    <a href="/users/profile/${data.data.from}">
+                        <span>${data.data.friendName}</span>
+                    </a>
                 </li>`)
+                if(data.data.img)
+                {
+                    $(" a",newList).prepend(`<img src=${data.data.img}>`)
+                }
+                else
+                {
+                    $(" a",newList).prepend(`<div class="concealed-image" style="background:${data.data.bgColor};"><span>${data.data.friendName.split(" ")[0].charAt(0)}</span></div>`)
+                }
+                $(`#friendModal .modal-body ul`).prepend(newList);
                 destroyFriendshipAnswer($("main .remove-friend-warning .remove-friend-button"));
+                if(data.data.user.pendFR.length!=0)
+                {
+                    $(`#fr-${data.data.user._id}`).attr("href",`/fr/?id=${data.data.user._id}`);
+                    if(data.data.user.prevPendFROpen)
+                    {
+                        if(data.data.user.pendFR.length-data.data.user.oldPendFRLength!=0)
+                        {
+                            $(`#fr-${data.data.user._id} > div`).html(`<img src="/images/fr.png"> <div class="noty-bell-no">
+                                ${data.data.user.pendFR.length-data.data.user.oldPendFRLength}
+                            </div>`)
+                        }
+                        else{
+                            $(`#fr-${data.data.user._id} > div`).html(`<img src="/images/fr.png">`);
+                        }
+                    }
+                    else
+                    {
+                        $(`#fr-${data.data.user._id} > div`).html(`<img src="/images/fr.png"> <div class="noty-bell-no">
+                            ${data.data.user.pendFR.length}
+                        </div>`)
+                    }
+
+                }
+                else
+                {
+                    $(`#fr-${data.data.user._id}`).removeAttr("href");
+                    $(`#fr-${data.data.user._id}`).html(`<img src="/images/fr.png">`)
+                }
                  new Noty({
                     theme:"relax",
                     text:"Congrats, one more friendship blossomed!",

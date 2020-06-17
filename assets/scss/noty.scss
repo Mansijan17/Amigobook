@@ -16,22 +16,17 @@
         justify-content: center;
         align-items: center;
         background: #dc7dc8;
-
-    }
-    .noty-bell {
-        background:#C2185B;
         text-decoration: none;
-        i{
+        i,img{
             font-size: 20px;
             color: whitesmoke;
             position: relative;
-            .noty-bell-no{
+            div{
                 position: absolute;
                 top: -8px;
                 right: -8px;
                 font-size: 10px;
                 z-index: 100;
-                background: #6d0f0ff7;
                 padding: 9px;
                 width: 16px;
                 border-radius: 50%;
@@ -41,8 +36,48 @@
                 align-items: center;
             }
         }
+        img{
+            width: 25px;
+            height: 25px;
+        }
+
     }
-    .noty-bell:hover{
+    .noty-bell {
+        background:#C2185B;
+        .noty-bell-no{
+            background: #6d0f0ff7;
+        }     
+    }
+    .fr{
+        background: #ee5344;
+        >div{
+            height: 30px;
+            width: 30px;
+            position: relative;
+            img{
+                width: 100%;
+                height: 100%;
+            }
+            .noty-bell-no
+            {
+                position: absolute;
+                top: -3px;
+                right: -6px;
+                padding: 10px;
+                background: #b6442f;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                color: whitesmoke;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 9.5px;
+                font-weight: bold;
+            }
+        }
+    }
+    a:hover,a:focus{
         text-decoration: none;
     }
     button:focus{

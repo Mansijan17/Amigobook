@@ -57,6 +57,16 @@ const userSchema=new mongoose.Schema({
     },
     prevNotyOpen:{
         type:Boolean
+    },
+    pendFR:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"FriendshipForm"
+    }],
+    oldPendFRLength:{
+        type:Number
+    },
+    prevPendFROpen:{
+        type:Boolean
     }
  
 },{

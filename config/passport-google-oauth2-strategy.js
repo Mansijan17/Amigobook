@@ -48,7 +48,9 @@ passport.use(new googleStrategy({
                         contactInfo:{}
                     },
                     oldNotyLength:0,
-                    prevNotyOpen:false
+                    prevNotyOpen:false,
+                    oldPendFRLength:0,
+                    prevPendFROpen:false
                 },function(err,user)
                 {
                     if(err)

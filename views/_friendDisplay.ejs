@@ -1,10 +1,8 @@
 <a href="/users/profile/<%= friend._id %>">
     <% if(friend.avatar) {%>
         <img src="<%= friend.avatar %>"> 
-    <% } else if (friend.gender=="male"){%>
-        <img src="https://i.stack.imgur.com/HQwHI.jpg" width="100" height="100">
     <% }  else {%>
-        <img src="/images/femaleProfile.png" width="100" height="100">
+        <div class="concealed-image" style="background:<%=friend.info.bgColor%>;"><span><%= friend.name.split(" ")[0].charAt(0)%></span></div>
     <% } %>
 
     <span><%= friend.name %></span>

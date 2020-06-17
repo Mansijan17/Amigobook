@@ -23,4 +23,27 @@
             <i class="fas fa-bell"></i>
         </a>
     <% } %>
+    <% if(user.pendFR.length!=0) {%>
+        <a class="fr" id="fr-<%= user._id%>" href="/fr/?id=<%= user._id%>" target="_blank">
+                <div>
+                    <img src="/images/fr.png">
+                    <% if(user.prevPendFROpen) {%>
+                        <% if(user.pendFR.length-user.oldPendFRLength!=0) { %> 
+                            <div class="noty-bell-no">
+                                <%=user.pendFR.length-user.oldPendFRLength%>
+                            </div>
+                        <% } %>
+                    <% } else {%>
+                        <div class="noty-bell-no">
+                            <%=user.pendFR.length%>
+                        </div>
+                    <% } %>
+                </div>
+            </i>
+        </a>
+    <% } else {%>
+        <a class="fr" id="fr-<%= user._id%>">
+            <img src="/images/fr.png">
+        </a>
+    <% } %>
 </div>

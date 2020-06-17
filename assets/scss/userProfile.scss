@@ -543,13 +543,13 @@ body
             }
             .pending-from
             {
-                color: #88235f;
+                color: #dab3ca;
                 font-weight: 550;
             }
             .pending-form-present
             {
                 font-size: 16px;
-                color: darkslategrey;
+                color: #abcccc;
                 margin-bottom: 3px;
                 font-family: courier;
                 font-weight: 700;
@@ -683,13 +683,22 @@ body
                     justify-content: space-between;
                     align-items: center;
                     width: 90%;
-                    img{
+                    img,.concealed-image{
                         height: 50px;
                         width: 50px;
                         border-radius: 50%;
                         margin-right: 4px;
                     }
-                    img:hover
+                    .concealed-image
+                    {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-family: 'Pacifico', cursive;
+                        color: mistyrose;
+                        font-size: 17px;
+                    }
+                    img:hover,.concealed-image:hover
                     {
                         filter: contrast(1.5);
                     }
