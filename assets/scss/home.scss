@@ -1168,7 +1168,7 @@ h1:hover
 
         .display-signUp-form
         {
-            background: repeating-linear-gradient(90deg, #6BB5B3,#12627D 108px);
+            background: linear-gradient(-90deg, #6BB5B3, #12627D 00%);
             color:ghostwhite;
             border-radius: 25px;
             font-family: serif;
@@ -1256,7 +1256,7 @@ h1:hover
                     }
                     button:hover
                     {
-                        background-color: #A7C8BD;
+                        background-color: #6AA6A1;
                     }
                     button:focus
                     {

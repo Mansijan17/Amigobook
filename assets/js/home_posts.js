@@ -277,7 +277,7 @@
                             for(let post of data.data.bornPosts)
                             {
                                // console.log(post);
-                                $(`#post-${post._id}-content .post-text .copiedPost`).html(`<p class="deletedOriginalPost">The Original Post is deleled!</p>`);
+                                $(`#post-${post._id}-content .post-text .copiedPost`).html(`<p class="deletedOriginalPost">The Original Post is deleted!</p>`);
                                 $(`#post-${post._id} .post-share-box`).remove();
                              
                             }

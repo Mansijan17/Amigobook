@@ -1,7 +1,26 @@
 <div class="noty">
-    <button type="button">
-        <i class="fab fa-jedi-order"></i>
-    </button>
+    <!-- <%=user.noties.length-user.oldNotyLength!=0%> <%= user.pendFR.length!=0%> <%=user.pendFR.length-user.oldPendFRLength!=0%> -->
+    <% if(user.noties.length!=0 || user.pendFR.length!=0){ %>
+        <% if(user.prevNotyOpen || user.prevPendFROpen) {%>
+            <% if((user.noties.length-user.oldNotyLength!=0) || (user.pendFR.length-user.oldPendFRLength!=0)) {%>
+                <button type="button">
+                    <i class="fab fa-jedi-order" style="animation: glow-icon 2s ease-in-out infinite alternate;"></i>
+                </button>
+            <% } else {%>
+                <button type="button">
+                    <i class="fab fa-jedi-order"></i>
+                </button>
+            <% } %>
+        <% } else {%>
+            <button type="button">
+                <i class="fab fa-jedi-order" style="animation: glow-icon 2s ease-in-out infinite alternate;"></i>
+            </button>
+        <% } %>
+    <% } else {%>
+        <button type="button">
+            <i class="fab fa-jedi-order"></i>
+        </button>
+    <% } %>
     <% if(user.noties.length!=0) {%>
         <a class="noty-bell" id="noty-ball-<%= user._id%>" href="/noty/?id=<%= user._id%>">
             <i class="fas fa-bell">

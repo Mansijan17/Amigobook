@@ -791,7 +791,7 @@ h1:hover {
       .homepage-without-login .display-area .display-images {
         height: 320px !important; } }
     .homepage-without-login .display-area .display-signUp-form {
-      background: repeating-linear-gradient(90deg, #6BB5B3, #12627D 108px);
+      background: linear-gradient(-90deg, #6BB5B3, #12627D 0%);
       color: ghostwhite;
       border-radius: 25px;
       font-family: serif; }
@@ -854,7 +854,7 @@ h1:hover {
             width: 100%;
             font-size: 19.2px; }
           .homepage-without-login .display-area .display-signUp-form form .btn button:hover {
-            background-color: #A7C8BD; }
+            background-color: #6AA6A1; }
           .homepage-without-login .display-area .display-signUp-form form .btn button:focus {
             outline: none; }
         .homepage-without-login .display-area .display-signUp-form form #gender h4 {

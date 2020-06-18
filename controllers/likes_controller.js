@@ -47,14 +47,13 @@ module.exports.toggleLike=async function(req,res)
         {
             likeID=existingLike._id;
             likeable.likes.pull(existingLike._id);
-            likeable.save();
             existingLike.remove();
             deleted=true;
             if(req.query.type=="Post")
             {
                 likeable.likesLength-=1;
-                likeable.save();
             }
+            likeable.save();
         }
         else
         {

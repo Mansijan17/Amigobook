@@ -8,7 +8,8 @@
     z-index: 700;
     display: flex;
     button,a{
-        width: 45px;
+        padding: 0;
+        width: 47px;
         height: 100%;
         border: none;
         display: flex;
@@ -84,7 +85,7 @@
     }
     button i{
         font-size: 38px;
-        animation: glow-icon 2s ease-in-out infinite alternate;
+       // animation: glow-icon 2s ease-in-out infinite alternate;
     }
       @keyframes glow-icon{
         0% {

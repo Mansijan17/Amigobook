@@ -8,7 +8,8 @@
   z-index: 700;
   display: flex; }
   .noty button, .noty a {
-    width: 45px;
+    padding: 0;
+    width: 47px;
     height: 100%;
     border: none;
     display: flex;
@@ -69,8 +70,7 @@
   .noty button:focus {
     outline: none; }
   .noty button i {
-    font-size: 38px;
-    animation: glow-icon 2s ease-in-out infinite alternate; }
+    font-size: 38px; }
 
 @keyframes glow-icon {
   0% {
