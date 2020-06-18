@@ -216,6 +216,7 @@ h1:hover
                         color: #daa2a2;
                         font-size: 22.4px;
                         cursor: pointer;
+                      
                     }
                     .delete-post-modal:hover
                     {
@@ -236,10 +237,15 @@ h1:hover
                         .modal-dialog
                         {
                             width: 100%;
+                            .modal-content
+                            {
+                                margin-left: -10px;
+                            }
                             .modal-header
                             {
                                 background: #a22a2a;
                                 width: 100.1%;
+                                margin-top: -1px;
                                 .modal-title
                                 {
                                     color: #78bbc5 !important;
@@ -699,7 +705,9 @@ h1:hover
                                     {
                                         background:wheat;
                                         font-family: 'Cedarville Cursive', cursive;
-                                        width: 100.1%;
+                                        width: 100.229%;
+                                        margin-left: -1px;
+
                                         .modal-title
                                         {
                                             color: whitesmoke;
@@ -825,6 +833,10 @@ h1:hover
                             {
                                 width: 500px;
                                 margin: 50px auto;
+                                .modal-content
+                                {
+                                    margin-left: -10px;
+                                }
                             }
                             
                             .modal-header
@@ -1586,7 +1598,7 @@ h1:hover
     }
     .update-post-button
     {
-        left: 3% !important;
+        left: 10px !important;
     }
     .post-comments-list
     {
@@ -1603,12 +1615,25 @@ h1:hover
     {
         .modal
         {
+            padding: 0 !important;
             .modal-dialog
             {
                 width: 380px !important;
                 .comment-like-username-list,.post-share-username-list,.commentreply-like-username-list
                 {
                     width: 95% !important;
+                }
+            }
+        }
+    }
+    .post-share-box{
+        .post-share-modal
+        {
+            .modal-dialog
+            {
+                .modal-content
+                {
+                    width: 100.31% !important;
                 }
             }
         }
@@ -1643,6 +1668,30 @@ h1:hover
     }
   
 }
+
+@media (max-width:430px)
+{
+    .home-container
+    {
+        #feed-posts
+        {
+            #posts-list-container{
+                >ul{
+                    .post-list{
+
+                        .post-editedTag
+                        {
+                            font-size: 14px;
+                            left: 16% !important;
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media (max-width:425px)
 {
     h1{
@@ -1673,6 +1722,7 @@ h1:hover
             .modal-dialog
             {
                 width: 300px !important;
+                margin: 50px auto 0px !important;
             }
         }
     }
@@ -1690,6 +1740,34 @@ h1:hover
         .modal-dialog
         {
             width: 312px !important;
+        }
+    }
+    .home-container
+    {
+        #feed-posts{
+            #posts-list-container{
+                >ul{
+                    .post-list
+                    {
+                        .post-content
+                        {
+                            .post-comments
+                            {
+                                form{
+                                    flex-direction: column;
+                                    textarea{
+                                        width: 80% !important;
+                                        margin: 0px auto 20px;
+                                    }
+                                    button{
+                                        width: 105px !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -1726,7 +1804,35 @@ h1:hover
             width: 280px !important;
         }
     }
+    .post-share-box
+    {
+        .modal
+        {
+            .modal-dialog
+            {
+                width: 280px !important;
+                margin:65px auto 0px !important;
+                .modal-content
+                {
+                    .modal-header
+                    {
+                        margin-left: 0 !important;
+                        margin-top: -2px;
+                    }
+                }
+            }
+        }
+    }
 }
+
+@media (max-width:365px)
+{
+    .deletecommentmodal,.post-delete-modal,.replydeletemodal-2
+    {
+        width: 285px !important;
+    }
+}
+
 @media (max-width:340px)
 {
     .post-comments-list {
@@ -1739,6 +1845,26 @@ h1:hover
                 display: inline-block !important;
                 padding:0 !important;
                 margin-bottom: 10px !important;
+            }
+        }
+    }
+    .home-container
+    {
+        #feed-posts
+        {
+            #posts-list-container{
+                >ul{
+                    .post-list{
+
+                        .post-editedTag
+                        {
+                            font-size: 13px;
+                            left: 10px !important;
+                            top: 85px !important;
+                        }
+
+                    }
+                }
             }
         }
     }

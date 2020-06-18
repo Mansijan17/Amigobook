@@ -20,7 +20,7 @@ class SharePost{
                 data:newSharePostForm.serialize()
             }).done(function(data)
             {
-                console.log(data.data);
+                //console.log(data.data);
                 if(data.error)
                 {
                     new Noty({
@@ -176,8 +176,7 @@ class SharePost{
                 </div>
                 </li>`);
                 newSharePostForm.attr("data-shares",sharesCount);
-               
-                let newShareFromUser=$(`<li id="share-${data.data.shareID}"><a href="/users/profile/${data.data.userID}">
+                let newShareFromUser=$(`<li id="share-${data.data.shareID}"><a href="/users/profile/${data.data.newUserID}">
                     <span>${data.data.newUserName}</span>
                 </a></li>`)
                 if(!data.data.newUserImage)
@@ -188,7 +187,7 @@ class SharePost{
                 else
                 {
                     $(" .author-post-name a",newPost).prepend(`<img src=${data.data.newUserImage}>`)
-                    $(" a",newShareFromUser).prepend(`<img src=${data.data.newUserImage}`)
+                    $(" a",newShareFromUser).prepend(`<img src=${data.data.newUserImage}>`)
                      
                 }
                 if(!i.content.prevAuthImage)

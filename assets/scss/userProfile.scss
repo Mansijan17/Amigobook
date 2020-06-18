@@ -661,7 +661,6 @@ body
         }
         .modal-body
         {
-            max-height: 350px;
             
             overflow: auto;
             display: flex;
@@ -1549,6 +1548,20 @@ body
                         {
                             a{
                                 color:#706969 !important;
+                            }
+                        }
+                        .modal{
+                            .modal-dialog
+                            {
+                                .modal-header
+                                {
+                                    .modal-title
+                                    {
+                                        span{
+                                            color: mediumvioletred !important;
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

@@ -117,7 +117,6 @@
                                             align-items: center;
                                             width: 75% !important;
                                             padding-left: 0;
-                                            max-height: 300px;
                                             overflow: auto !important;
 
                                             li
@@ -217,10 +216,15 @@
                                             {
                                                 width: 100%;
                                                 text-align: center;
+                                                .modal-content
+                                                {
+                                                    margin-left: -10px;
+                                                }
                                                 .modal-header
                                                 {
                                                     background: #a22a2a !important;
                                                     width: 100.1%;
+                                                    margin-top: -1px;
                                                     .modal-title
                                                     {
                                                         color: #78bbc5 !important;

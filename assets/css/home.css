@@ -156,9 +156,12 @@ h1:hover {
             color: black; }
             .home-container #feed-posts #posts-list-container > ul .post-list .post-delete-modal .modal-dialog {
               width: 100%; }
+              .home-container #feed-posts #posts-list-container > ul .post-list .post-delete-modal .modal-dialog .modal-content {
+                margin-left: -10px; }
               .home-container #feed-posts #posts-list-container > ul .post-list .post-delete-modal .modal-dialog .modal-header {
                 background: #a22a2a;
-                width: 100.1%; }
+                width: 100.1%;
+                margin-top: -1px; }
                 .home-container #feed-posts #posts-list-container > ul .post-list .post-delete-modal .modal-dialog .modal-header .modal-title {
                   color: #78bbc5 !important;
                   font-family: 'Gill Sans' !important; }
@@ -454,7 +457,8 @@ h1:hover {
                 .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .modal .modal-dialog .modal-header {
                   background: wheat;
                   font-family: 'Cedarville Cursive', cursive;
-                  width: 100.1%; }
+                  width: 100.229%;
+                  margin-left: -1px; }
                   .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .modal .modal-dialog .modal-header .modal-title {
                     color: whitesmoke;
                     font-size: 21px;
@@ -536,6 +540,8 @@ h1:hover {
             .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .post-share-modal .modal-dialog {
               width: 500px;
               margin: 50px auto; }
+              .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .post-share-modal .modal-dialog .modal-content {
+                margin-left: -10px; }
             .home-container #feed-posts #posts-list-container > ul .post-list .post-share-box .post-share-modal .modal-header {
               background: #F57C00 !important;
               font-family: 'Special Elite', cursive !important;
@@ -1001,15 +1007,19 @@ h1:hover {
   .post-editedTag {
     left: 10% !important; }
   .update-post-button {
-    left: 3% !important; }
+    left: 10px !important; }
   .post-comments-list {
     margin-left: 8% !important; }
   .post-share-modal .modal-dialog {
     width: 380px !important; }
-  .comment-like-box .modal .modal-dialog, .post-share-box .modal .modal-dialog, .commentreply-like-box .modal .modal-dialog {
-    width: 380px !important; }
-    .comment-like-box .modal .modal-dialog .comment-like-username-list, .comment-like-box .modal .modal-dialog .post-share-username-list, .comment-like-box .modal .modal-dialog .commentreply-like-username-list, .post-share-box .modal .modal-dialog .comment-like-username-list, .post-share-box .modal .modal-dialog .post-share-username-list, .post-share-box .modal .modal-dialog .commentreply-like-username-list, .commentreply-like-box .modal .modal-dialog .comment-like-username-list, .commentreply-like-box .modal .modal-dialog .post-share-username-list, .commentreply-like-box .modal .modal-dialog .commentreply-like-username-list {
-      width: 95% !important; } }
+  .comment-like-box .modal, .post-share-box .modal, .commentreply-like-box .modal {
+    padding: 0 !important; }
+    .comment-like-box .modal .modal-dialog, .post-share-box .modal .modal-dialog, .commentreply-like-box .modal .modal-dialog {
+      width: 380px !important; }
+      .comment-like-box .modal .modal-dialog .comment-like-username-list, .comment-like-box .modal .modal-dialog .post-share-username-list, .comment-like-box .modal .modal-dialog .commentreply-like-username-list, .post-share-box .modal .modal-dialog .comment-like-username-list, .post-share-box .modal .modal-dialog .post-share-username-list, .post-share-box .modal .modal-dialog .commentreply-like-username-list, .commentreply-like-box .modal .modal-dialog .comment-like-username-list, .commentreply-like-box .modal .modal-dialog .post-share-username-list, .commentreply-like-box .modal .modal-dialog .commentreply-like-username-list {
+        width: 95% !important; }
+  .post-share-box .post-share-modal .modal-dialog .modal-content {
+    width: 100.31% !important; } }
 
 @media (max-width: 500px) {
   .post-comments textarea {
@@ -1024,6 +1034,11 @@ h1:hover {
       align-self: center !important;
       margin-bottom: 10px !important; } }
 
+@media (max-width: 430px) {
+  .home-container #feed-posts #posts-list-container > ul .post-list .post-editedTag {
+    font-size: 14px;
+    left: 16% !important; } }
+
 @media (max-width: 425px) {
   h1 {
     margin-top: 200px !important; }
@@ -1036,13 +1051,21 @@ h1:hover {
   .post-comments-list {
     margin-left: 0% !important; }
   .comment-like-box .modal .modal-dialog, .post-share-box .modal .modal-dialog, .commentreply-like-box .modal .modal-dialog {
-    width: 300px !important; } }
+    width: 300px !important;
+    margin: 50px auto 0px !important; } }
 
 @media (max-width: 400px) {
   .deletecommentmodal, .post-delete-modal, .replydeletemodal-2 {
     width: 312px !important; }
   .post-share-modal .modal-dialog {
-    width: 312px !important; } }
+    width: 312px !important; }
+  .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments form {
+    flex-direction: column; }
+    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments form textarea {
+      width: 80% !important;
+      margin: 0px auto 20px; }
+    .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments form button {
+      width: 105px !important; } }
 
 @media (max-width: 380px) {
   .post-comments-list {
@@ -1058,7 +1081,17 @@ h1:hover {
     #gender #female-gender-span {
       margin-top: 7px; }
   .post-share-modal .modal-dialog {
-    width: 280px !important; } }
+    width: 280px !important; }
+  .post-share-box .modal .modal-dialog {
+    width: 280px !important;
+    margin: 65px auto 0px !important; }
+    .post-share-box .modal .modal-dialog .modal-content .modal-header {
+      margin-left: 0 !important;
+      margin-top: -2px; } }
+
+@media (max-width: 365px) {
+  .deletecommentmodal, .post-delete-modal, .replydeletemodal-2 {
+    width: 285px !important; } }
 
 @media (max-width: 340px) {
   .post-comments-list {
@@ -1066,7 +1099,11 @@ h1:hover {
   .copiedAuthIntro a span {
     display: inline-block !important;
     padding: 0 !important;
-    margin-bottom: 10px !important; } }
+    margin-bottom: 10px !important; }
+  .home-container #feed-posts #posts-list-container > ul .post-list .post-editedTag {
+    font-size: 13px;
+    left: 10px !important;
+    top: 85px !important; } }
 
 @media (max-width: 320px) {
   #feed-posts {

@@ -64,7 +64,6 @@
     align-items: center;
     width: 75% !important;
     padding-left: 0;
-    max-height: 300px;
     overflow: auto !important; }
     .comment-like-box .comment-like-username-list li, .comment-like-box .commentreply-like-username-list li, .commentreply-like-box .comment-like-username-list li, .commentreply-like-box .commentreply-like-username-list li {
       min-height: 30px;
@@ -133,9 +132,12 @@
     .comment-deletion .deletecommentmodal .modal-dialog {
       width: 100%;
       text-align: center; }
+      .comment-deletion .deletecommentmodal .modal-dialog .modal-content {
+        margin-left: -10px; }
       .comment-deletion .deletecommentmodal .modal-dialog .modal-header {
         background: #a22a2a !important;
-        width: 100.1%; }
+        width: 100.1%;
+        margin-top: -1px; }
         .comment-deletion .deletecommentmodal .modal-dialog .modal-header .modal-title {
           color: #78bbc5 !important;
           font-family: 'Gill Sans' !important; }
