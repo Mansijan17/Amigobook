@@ -226,7 +226,6 @@ h1:hover {
             overflow-wrap: break-word; }
             .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-text > span {
               display: inline-block;
-              font-weight: bold;
               font-size: 19.2px;
               width: 80%;
               color: powderblue;

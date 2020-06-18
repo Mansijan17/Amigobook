@@ -629,7 +629,6 @@ body
 
 .modal-dialog
 {
-    max-height: 400px;
     color: black;
     min-height: 200px;
     overflow: hidden;
@@ -1529,6 +1528,7 @@ body
             ul{
                 .post-list{
                     background-image: none;
+                    background: #13b49770 !important;
                     .post-editedTag{
                         color:#567e92 !important;
                     }
@@ -1536,19 +1536,19 @@ body
                         color: #ebe5bc;
                     }
                     .delete-post-modal{
-                        color: #af9277;
+                        color:#348a37;
                     }
                     .update-post-button:hover i{
                         color:#937652;
                     }
                     .post-like-box{
                         span{
-                            color:#867d7d;
+                            color:#706969 !important;
                         }
                         .post-likes-number
                         {
                             a{
-                                color:#867d7d !important;
+                                color:#706969 !important;
                             }
                         }
                     }
@@ -1559,6 +1559,7 @@ body
                                 border:none;
                                 background: none;
                                 color: #8D6E63;
+                                font-size: 22px;
                             }
                             .post-update-form{
                                 textarea{
@@ -1570,6 +1571,17 @@ body
                                 }
                             }
                         }
+                        .post-comments
+                        {
+                            form{
+                                textarea::placeholder{
+                                    color:#754f73;
+                                }
+                                button:hover{
+                                    background: #96bd9e !important;
+                                }
+                            }
+                        }
                        
                     }
                     .post-comment-number{
@@ -1577,13 +1589,14 @@ body
                     }
                     .post-comments-list{
                         ul{
-                            li{
-                                border-color: #958a8a !important;
+                            .comment-list{
+                               border-width: 1.095px !important;
+                                
                                 .comment-reply{
-                                    color: #22b8cb !important;
+                                    color: #1e717b !important;
                                 }
                                 .comment-editedTag{
-                                    color: #429475 !important;
+                                    color: #634772 !important;
                                 }
                             }
                            
