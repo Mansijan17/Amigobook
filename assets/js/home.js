@@ -46,7 +46,7 @@ var submitsingup=$("#submit-signup");
 
 nameID.on("mouseenter",function()
 {
-    console.log("name")
+    //console.log("name")
     nameID.addClass("bckgd-dark");
     emailID.removeClass("bckgd-dark");
     pwdID.removeClass("bckgd-dark");
@@ -55,7 +55,7 @@ nameID.on("mouseenter",function()
 
 emailID.on("mouseenter",function()
 {
-    console.log("email");
+    //console.log("email");
     nameID.removeClass("bckgd-dark");
     emailID.addClass("bckgd-dark");
     pwdID.removeClass("bckgd-dark");
@@ -64,7 +64,7 @@ emailID.on("mouseenter",function()
 
 pwdID.on("click",function()
 {
-    console.log("pwd");
+    //console.log("pwd");
     nameID.removeClass("bckgd-dark");
     emailID.removeClass("bckgd-dark");
     pwdID.addClass("bckgd-dark");
@@ -114,7 +114,7 @@ function autosize1(textarea){
 
 function submitForm(x)
 {
-    console.log(x);
+   // console.log(x);
     let postID=x["name"];
     console.log(postID);
      $(`#post-${postID}-share-form`).submit();
@@ -123,7 +123,7 @@ function submitForm(x)
 function removetagVisible(x){
 
   let replyID=x["name"];
-  console.log(replyID);
+ // console.log(replyID);
   $(`#removetag-${replyID}`).css("display","block");
 }
 
@@ -178,7 +178,7 @@ function togglePassword(x)
 
 let submitSignForm=function()
 {
-   console.log($(".display-signUp-form #sign-up-form"));
+  // console.log($(".display-signUp-form #sign-up-form"));
    $(".display-signUp-form #sign-up-form").submit(function(e)
    {
       e.preventDefault();
@@ -223,7 +223,7 @@ submitSignForm();
 
 let submitForgetPassEmailForm=function()
 {
-   console.log($(".forget-email-password"));
+  // console.log($(".forget-email-password"));
    $(".forget-email-password").submit(function(e)
    {
       e.preventDefault();
@@ -233,7 +233,7 @@ let submitForgetPassEmailForm=function()
         data:$(".forget-email-password").serialize(),
         success:function(data)
         {
-            console.log(data.data);
+           // console.log(data.data);
             if(data.data.error)
             {
                   new Noty({
@@ -268,7 +268,7 @@ submitForgetPassEmailForm();
 
 let submitNewPassForm=function()
 {
-   console.log($("#new-password-form"));
+  // console.log($("#new-password-form"));
    $("#new-password-form").submit(function(e)
    {
       e.preventDefault();
@@ -278,7 +278,7 @@ let submitNewPassForm=function()
         data:$("#new-password-form").serialize(),
         success:function(data)
         {
-            console.log(data.data);
+          //  console.log(data.data);
             if(data.data.error)
             {
                   new Noty({

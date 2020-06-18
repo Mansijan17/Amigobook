@@ -937,3 +937,4 @@
 ::1 - - [18/Jun/2020:03:06:22 +0000] "POST /comments/create-comment HTTP/1.1" 200 218604 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"
 ::1 - - [18/Jun/2020:03:06:43 +0000] "GET / HTTP/1.1" 200 33588 "http://localhost:8000/users/profile/5e96a64c778a02084eec2fd3" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"
 ::1 - - [18/Jun/2020:03:06:49 +0000] "GET /likes/toggle/?id=5eead623d3f4ff6a12d7f791&type=Post HTTP/1.1" 200 252 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"
+::1 - - [18/Jun/2020:03:38:16 +0000] "GET / HTTP/1.1" 200 33978 "http://localhost:8000/users/profile/5e96a64c778a02084eec2fd3" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"
