@@ -9,6 +9,17 @@ $(".confirm-friend-button").click(function(e)
         success:function(data)
         {
           //  console.log(data.data.frID);
+            if(data.error==true)
+            {
+                new Noty({
+                    theme:"relax",
+                    text:`${data.message}`,
+                    type:"error",
+                    layput:"topRight",
+                    timeout:1500
+                }).show();   
+                return;
+            }
             $(`#fr-${data.data.frID}`).remove();
             new Noty({
                 theme:"relax",
@@ -32,6 +43,17 @@ $(".no-friend-button").click(function(e)
         success:function(data)
         {
           //  console.log(data.data.frID);
+            if(data.error==true)
+            {
+                new Noty({
+                    theme:"relax",
+                    text:`${data.message}`,
+                    type:"error",
+                    layput:"topRight",
+                    timeout:1500
+                }).show();   
+                return;
+            }
             $(`#fr-${data.data.frID}`).remove();
             new Noty({
                 theme:"relax",
