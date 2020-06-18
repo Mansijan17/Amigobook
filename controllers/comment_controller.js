@@ -9,7 +9,6 @@ const queue=require('../config/kue');
 const commentEmailWorker=require('../worker/comment_email_worker');
 
 
-
 module.exports.createComment=async function(req,res)
 {
     try
@@ -30,7 +29,7 @@ module.exports.createComment=async function(req,res)
             post.save();
          
             let length=post.comments.length;
-            console.log("length ",length);
+            //console.log("length ",length);
             //console.log(post);
             newcomment=await newcomment.populate("user","name email avatar gender info").execPopulate();
             let commentOnPost={
@@ -126,10 +125,10 @@ module.exports.destroyComment=async function(req,res)
         {
            
             let replies=comment.replies;
-            console.log(replies);
+            //console.log(replies);
             for(let reply of replies)
             {
-                console.log(reply);
+               // console.log(reply);
                 await Like.deleteMany({likeable:reply,onModel:"CommentReply"});
             }
             await commentReply.deleteMany({_id:{$in:comment.replies}});
@@ -141,7 +140,7 @@ module.exports.destroyComment=async function(req,res)
             
             if(req.xhr)
             {
-                console.log("xhr");
+               // console.log("xhr");
                 return res.status(200).json({
                     data:
                     {
@@ -412,7 +411,7 @@ module.exports.deleteReply=async function(req,res)
             comment.replies.pull(reply);
             comment.save();
             reply.remove();
-            console.log(req.xhr);
+            //console.log(req.xhr);
 
             return res.json(200,{
                 data:{
@@ -444,7 +443,7 @@ module.exports.updateReply=async function(req,res)
                 
                 reply.update=true;
                 reply.save();
-                console.log(req.xhr);
+                //console.log(req.xhr);
                 return res.json(200,{
                     data:
                     {
@@ -476,7 +475,7 @@ module.exports.updateReply2=async function(req,res)
 {
     try
     {
-        console.log(req.body);
+       // console.log(req.body);
         let id=req.body.reply;
         let reply=await commentReply.findById(id);
         if(reply.user.id==req.user.id)

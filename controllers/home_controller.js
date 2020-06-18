@@ -5,50 +5,6 @@ const User=require('../models/userSchema');
 //making function async
 module.exports.home = async function(req, res){
 
-    // Post.find({},function(err,postLists)
-    // {
-        // if(err)
-        // {
-        //     console.log("Error in fetching data from db");
-        //     return;
-        // }
-        // // console.log(req.cookies);
-        // // res.cookie('user_id', 25);
-        // return res.render('home', {
-        // title: "Home",
-        // posts:postLists});
-    // })
-    
-
-    // //populating the user of each post schema
-    // Post.find({}).populate("user").populate({
-    //     //populating the comments of the post schema
-    //     path:"comments",
-    //     populate:
-    //     {
-    //         //populating users of the comment from the comment schema
-    //         path:"user",
-    //     }
-    // }).exec(function(err,postLists)
-    // {
-    //     if(err)
-    //     {
-    //         console.log("Error in fetching data from db");
-    //         return;
-    //     }
-
-    //     User.find({},function(err,users)
-    //     {
-    //         return res.render('home', {
-    //             title: "Home",
-    //             posts:postLists,
-    //             all_users:users});
-            
-    //     })
-
-        
-    // })
-
     try
     {
         let postLists=await Post.find({}).sort("-createdAt").populate("user").populate({

@@ -15,7 +15,7 @@
                 data:newPostForm.serialize(),
                 success:function(data)
                 {
-                    console.log(data.data);
+                    //console.log(data.data);
                     let newPost=newDomPost(data.data.post);
                     if(!data.data.post.user.avatar)
                     {
@@ -36,7 +36,7 @@
                     new SharePost($(" .toggle-share-button", newPost))
                     if(data.data.len==1)
                     {
-                        console.log("1 ",$("h3"))
+                        //console.log("1 ",$("h3"))
                         $("h3").html(`The Sky In You!`)
                     }
                     new Noty({
@@ -243,7 +243,7 @@
                 url:$(deletelink).prop("href"),
                 success:function(data)
                 {
-                    console.log(data.data);
+                   // console.log(data.data);
                     $(`#post-${data.data.postID}`).remove();
                     
                     if(data.data.shareID!=undefined)
@@ -276,7 +276,7 @@
                         {
                             for(let post of data.data.bornPosts)
                             {
-                                console.log(post);
+                               // console.log(post);
                                 $(`#post-${post._id}-content .post-text .copiedPost`).html(`<p class="deletedOriginalPost">The Original Post is deleled!</p>`);
                                 $(`#post-${post._id} .post-share-box`).remove();
                              
@@ -317,16 +317,16 @@
                 url:$(updateLink).prop("href"),
                 success:function(data)
                 {
-                    console.log(data.data);
+                    //console.log(data.data);
                     //console.log($(`#posts-list-container>ul>li`));
                     $(`#posts-list-container>ul>li`).each(function()
                     {
                         let self=$(this);
                         //console.log(self);
                         let button=$(" .updateposttag",self);
-                        console.log(button);
+                        //console.log(button);
                         let i=$(" .update-post-button",button)
-                        console.log(i)
+                        //console.log(i)
                         i.css("pointer-events","none");
                         button.css("cursor","no-drop");
 
@@ -377,15 +377,15 @@
                 data:$(".post-update-form").serialize(),
                 success:function(data)
                 {
-                    console.log(data.data);
+                    //console.log(data.data);
                     $(`#posts-list-container>ul>li`).each(function()
                     {
                         let self=$(this);
                         //console.log(self);
                         let button=$(" .updateposttag",self);
-                        console.log(button);
+                        //console.log(button);
                         let i=$(" .update-post-button",button)
-                        console.log(i)
+                        //console.log(i)
                         i.css("pointer-events","auto");
                         button.css("cursor","pointer");
 
@@ -395,16 +395,16 @@
                     $(`#posts-list-container>li>.update-post-button`).each(function()
                     {
                         let self=$(this);
-                        console.log(self);
+                        //console.log(self);
                         let i=$(" i",self);
-                        console.log(i);
+                        //console.log(i);
                         i.css("pointer-events","auto");
                         self.css("cursor","poniter");
 
                     })
                     if(data.data.edited==true)
                     {
-                        console.log("yes")
+                        //console.log("yes")
                         $(`#post-${data.data.postID}`).prepend(`<small class="post-editedTag">
                         Edited
                         </small>`);
@@ -432,7 +432,7 @@
     //convert posts to ajax
     let postsToAjax=function()
     {
-        console.log("converting posts to ajax ");
+        //console.log("converting posts to ajax ");
         $("#posts-list-container>ul>li").each(function()
         {
             let self=$(this);

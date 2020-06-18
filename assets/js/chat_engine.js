@@ -16,17 +16,17 @@ class ChatEngine{
         let self=this;
         this.socket.on('connect',function()
         {
-            console.log("connection established using sockets....!");
+            // console.log("connection established using sockets....!");
         });
 
         self.socket.emit("join_room",{
             user_email:self.userEmail,
-            chatroom:"socialends",
+            chatroom:"skyinyou",
         });
 
         self.socket.on("user_joined",function(data)
         {
-            console.log("a user joined ",data);
+            //console.log("a user joined ",data);
         });
 
         $("#send-message").click(function () {
@@ -37,7 +37,7 @@ class ChatEngine{
                 self.socket.emit("send_message",{
                     message:msg,
                     user_email:self.userEmail,
-                    chatroom:"socialends",
+                    chatroom:"skyinyou",
                 });
             }
         
@@ -45,7 +45,7 @@ class ChatEngine{
 
         self.socket.on("receive_message",function(data)
         {
-            console.log("message recieved ",data.message);
+           // console.log("message recieved ",data.message);
             let messageType="other-message";
             if(data.user_email==self.userEmail)
             {

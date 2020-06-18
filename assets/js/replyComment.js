@@ -4,35 +4,35 @@ class replyOnComment{
         this.replyForm=replyCommentForm;
         let id=this.replyForm["id"].split("-")[1];
         this.commentContainer=$(`#comment-${id}-reply`)
-        console.log(this.commentContainer);
+        //console.log(this.commentContainer);
         this.reply(id);
         this.commentID=id;
         let self=this;
         $(" .update-comment-button" ,this.commentContainer).each(function()
         {
             self.updateComment($(this));
-            console.log("update comments");
+            //console.log("update comments");
         })
         $(" .delete-reply-button" ,this.commentContainer).each(function()
         {
             self.deleteReply($(this));
-            console.log("delete replies");
+           // console.log("delete replies");
 
         })
         $(" .update-reply-button" ,this.commentContainer).each(function()
         {
             self.updateReply($(this));
-            console.log("update replies");
+           // console.log("update replies");
         })
         $(" .reply-reply-button" ,this.commentContainer).each(function()
         {
             self.replyReply1($(this));
-            console.log("reply reply 1");
+           // console.log("reply reply 1");
         })
         $(" .removetag-button" ,this.commentContainer).each(function()
         {
             self.removeTag($(this));
-            console.log("reply remove");
+            //console.log("reply remove");
         })
       
     }
@@ -45,7 +45,7 @@ class replyOnComment{
         
         newReplyForm.submit(function(e)
         {
-            console.log(newReplyForm);
+            //console.log(newReplyForm);
             e.preventDefault();
             $.ajax({
                 type:"post",
@@ -53,8 +53,8 @@ class replyOnComment{
                 data:newReplyForm.serialize(),
                 success:function(data)
                 {
-                   console.log(data.data,data.data.commentID);
-                   console.log($(`#comment-${data.data.commentID}-reply-list`));
+                   //console.log(data.data,data.data.commentID);
+                   //console.log($(`#comment-${data.data.commentID}-reply-list`));
                    let newReply=$(`<li id="reply-${data.data.replyID}" onmouseup="removetagInvisible()">
                     <div class="commentreply-like-box">
                         <div class="commentreply-likes-number" id="commentreply-${data.data.replyID}-likes-number">
@@ -139,7 +139,7 @@ class replyOnComment{
                   cSelf.deleteReply($(" .delete-reply-button",newReply));
                   cSelf.updateReply($(' .update-reply-button', newReply));
                   cSelf.replyReply1($(' .reply-reply-button', newReply));
-                  console.log($(" .toggle-like-button", newReply));
+                  //console.log($(" .toggle-like-button", newReply));
                   new ToggleLike($(" .toggle-like-button", newReply));
                     new Noty({
                         theme:"relax",
@@ -162,13 +162,13 @@ class replyOnComment{
     deleteReply(deleteLink){
         $(deleteLink).click(function(e){
             e.preventDefault();
-            console.log("inside delete reply button ");
+            //console.log("inside delete reply button ");
             $.ajax({
                 type: 'get',
                 url: $(deleteLink).prop('href'),
                 success: function(data){
                 
-                    console.log("remove comment reply: ",data.data,$(`#reply-${data.data.replyID}`));
+                    //console.log("remove comment reply: ",data.data,$(`#reply-${data.data.replyID}`));
                     $('.modal-backdrop').remove();
                     $('body').removeClass( "modal-open" );
                     $(`#reply-${data.data.replyID}`).remove();
@@ -200,7 +200,7 @@ class replyOnComment{
                 url:$(updateLink).prop("href"),
                 success:function(data)
                 {
-                    console.log("h111", data.data.content);
+                    //console.log("h111", data.data.content);
                     $(`#comment-${data.data.commentID}-reply .comment-update-tag a i`).css("pointer-events","none");
                     $(`#comment-${data.data.commentID}-reply .comment-update-tag a`).css("cursor","no-drop");
                     $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form button`).css("pointer-events","none");
@@ -209,7 +209,7 @@ class replyOnComment{
                     {
                         let self=$(this);
                         let i=$(" .dropdown-toggle",self);
-                        console.log(i);
+                       // console.log(i);
                         i.css("pointer-events","none");
                         self.css("cursor","no-drop");
                         
@@ -243,10 +243,10 @@ class replyOnComment{
                     
                     let upadeReplyContent=function()
                     {
-                        console.log("h1");
+                        //console.log("h1");
                         $(".reply-update-form").submit(function(e)
                         {
-                            console.log("h2");
+                            //console.log("h2");
                             e.preventDefault();
                             $.ajax({
                                 type:"post",
@@ -254,7 +254,7 @@ class replyOnComment{
                                 data:$(".reply-update-form").serialize(),
                                 success:function(data)
                                 {
-                                    console.log(data.data);
+                                   // console.log(data.data);
                                     $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form button`).css("pointer-events","auto");
                                     $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form`).css("cursor","pointer");
                                     $(`#comment-${data.data.commentID}-reply .comment-update-tag a i`).css("pointer-events","auto");
@@ -263,7 +263,7 @@ class replyOnComment{
                                     {
                                         let self=$(this);
                                         let i=$(" .dropdown-toggle",self);
-                                        console.log(i);
+                                        //console.log(i);
                                         i.css("pointer-events","auto");
                                         self.css("cursor","pointer");
                                         
@@ -280,7 +280,7 @@ class replyOnComment{
                                     }
                                     else
                                     {
-                                        console.log("reply hai");
+                                       // console.log("reply hai");
                                         $(`#reply-${ data.data.replyID} .reply-content`).append(`<span class="replyreplycontent">${data.data.content}</span>`);
                                     }
                 
@@ -312,10 +312,10 @@ class replyOnComment{
 
     updateComment(updateLink)
     {
-        console.log("up1",$(updateLink).prop("href"));
+        //console.log("up1",$(updateLink).prop("href"));
         $(updateLink).click(function(e)
         {
-            console.log("up2");
+            //console.log("up2");
             e.preventDefault();
             $.ajax({
                 type:"get",
@@ -328,7 +328,7 @@ class replyOnComment{
                     {
                         let self=$(this);
                         let i=$(" i",self);
-                        console.log(i);
+                       // console.log(i);
                         i.css("pointer-events","none");
                         self.css("cursor","no-drop");
                         
@@ -342,10 +342,10 @@ class replyOnComment{
                     
                     let upadeCommentContent=function()
                     {
-                        console.log($(".comment-update-form"));
+                        //console.log($(".comment-update-form"));
                         $(".comment-update-form").submit(function(e)
                         {
-                            console.log("h2");
+                           // console.log("h2");
                             e.preventDefault();
                             $.ajax({
                                 type:"post",
@@ -353,14 +353,14 @@ class replyOnComment{
                                 data:$(".comment-update-form").serialize(),
                                 success:function(data)
                                 {
-                                    console.log(data.data);
+                                   // console.log(data.data);
                                     $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form button`).css("pointer-events","auto");
                                     $(`#comment-${data.data.commentID}-reply .reply-body .comment-reply-form`).css("cursor","pointer");
                                     $(`#comment-${data.data.commentID}-reply-list>li>.bars>.dropdown-toggle`).each(function()
                                     {
                                         let self=$(this);
                                         let i=$(" i",self);
-                                        console.log(i);
+                                       // console.log(i);
                                         i.css("pointer-events","auto");
                                         self.css("cursor","pointer");
                                         
@@ -421,7 +421,7 @@ class replyOnComment{
                     {
                         let self=$(this);
                         let i=$(" .dropdown-toggle",self);
-                        console.log(i);
+                       // console.log(i);
                         i.css("pointer-events","none");
                         self.css("cursor","no-drop");
                         
@@ -443,7 +443,7 @@ class replyOnComment{
                         let cSelf=comment;
                         $(".reply-reply-form").submit(function(e)
                         {
-                            console.log("yes2");
+                            //console.log("yes2");
                             e.preventDefault();
                             $.ajax({
                                 type:"post",
@@ -459,7 +459,7 @@ class replyOnComment{
                                     {
                                         let self=$(this);
                                         let i=$(" .dropdown-toggle",self);
-                                        console.log(i);
+                                       // console.log(i);
                                         i.css("pointer-events","auto");
                                         self.css("cursor","pointer");
                                         
@@ -593,13 +593,13 @@ class replyOnComment{
     {
         $(removeTagLink).click(function(e){
             e.preventDefault();
-            console.log("inside remove tag button ");
+           // console.log("inside remove tag button ");
             $.ajax({
                 type: 'get',
                 url: $(removeTagLink).prop('href'),
                 success: function(data){
                 
-                    console.log(data.data,$(`#reply-${data.data.replyID}`));
+                   // console.log(data.data,$(`#reply-${data.data.replyID}`));
                     $(`#reply-${data.data.replyID} .reply-content a`).remove();
                     $(`#reply-${data.data.replyID} .reply-content .removetag`).remove();
                     new Noty({

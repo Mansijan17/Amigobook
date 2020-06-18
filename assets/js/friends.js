@@ -9,7 +9,7 @@ let pendingFrom=function(){
             url:$(".add-friend-button").prop("href"),
             success:function(data)
             {
-                console.log(data.data);
+                //console.log(data.data);
                 $(".add-friend-button").remove();
                 $(".add-chat-friend-group").prepend(`
                 <span class="pending-from">Friend Request Pending</span>
@@ -45,7 +45,7 @@ let cancelPendingForm=function()
             url:$(".cancel-friend-button").prop("href"),
             success:function(data)
             {
-                console.log(data.data);
+               // console.log(data.data);
                 $(".cancel-friend-button").remove();
                 $(".pending-from").remove();
                 $(".add-chat-friend-group").prepend(`
@@ -81,7 +81,7 @@ let noFriendshipAnswer=function()
             url:$(".no-friend-button").prop("href"),
             success:function(data)
             {
-                console.log(data.data);
+               // console.log(data.data);
                 $(".pending-form-options").remove();
                 $(".pending-form-present").remove();
                 $(".add-chat-friend-group").prepend(`
@@ -145,7 +145,7 @@ let confirmFriendshipAnswer=function()
             url:$(".confirm-friend-button").prop("href"),
             success:function(data)
             {
-                console.log(data.data);
+                //console.log(data.data);
                 $(".pending-form-options").remove();
                 $(".pending-form-present").remove();
                 let newFriend=$(`<div data-toggle="modal" data-target="#removeFriendModal" class="remove-friend-button-1">
@@ -272,7 +272,7 @@ let destroyFriendshipAnswer=function(removeButton)
             url:$(removeButton).prop("href"),
             success:function(data)
             {
-                console.log(data.data);
+                //console.log(data.data);
                 
                 if(data.data.length>0)
                 {

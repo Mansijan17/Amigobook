@@ -67,18 +67,6 @@ module.exports.displayPost=async function(req,res)
 
 module.exports.createPost= async function(req,res)
 {
-    // Post.create({
-    //     content:req.body.content,
-    //     user:req.user._id
-    // },function(err,newPost)
-    // {
-    //     if(err)
-    //     {
-    //         console.log("error in creating a post");
-    //         return;
-    //     }
-    //     return res.redirect("back");
-    // })
     try
     {
          let post =await Post.create({
@@ -102,7 +90,7 @@ module.exports.createPost= async function(req,res)
             });
             let len=await Post.find({user:req.user._id});
             len=Object.keys(len).length;
-            console.log(typeof(len))
+            //console.log(typeof(len))
             if(req.xhr)
             {
                  // if we want to populate just the name of the user 
@@ -132,45 +120,24 @@ module.exports.createPost= async function(req,res)
 
 module.exports.destroyPost=async function(req,res)
 {
-    // Post.findById(req.params.id,function(err,post)
-    // {
-    //     //.id means converting the object id into string
-    //     if(post.user==req.user.id)
-    //     {
-    //         post.remove();
-    //         Comment.deleteMany({post:req.params.id},function(err){
-    //             return res.redirect("back");
-    //         })
-    //     }
-    //     else
-    //     {
-    //         return res.redirect("back");
-    //     }
-    // })
     try
     {
         let post=await Post.findById(req.params.id);
-       // console.log(post.id);
         if(post.user==req.user.id)
         {
-            //change::: delete the likes of the post and associated comments
-            //console.log("remove post ",post);
             let comments=post.comments;
             for(let comment of comments)
             {
-                //console.log(comment);
                 let replies=await replyComment.find({comment:comment});
-                //console.log(replies);
                 for(reply of replies)
                 {
-                    console.log(reply.id);
+                    //console.log(reply.id);
                     await Like.deleteMany({likeable:reply,onModel:"CommentReply"});
                 }
                 await Like.deleteMany({likeable:comment,onModel:"Comment"});
                 await replyComment.deleteMany({comment:comment});
             }
             await Like.deleteMany({likeable:post,onModel:"Post"});
-           // await Like.deleteMany({_id:{$in:post.comments}});
             post.remove();
             await Comment.deleteMany({post:req.params.id});
             let shareID;
@@ -179,20 +146,20 @@ module.exports.destroyPost=async function(req,res)
             {
                
                let share=await Share.findOne({createdPost:req.params.id});
-               console.log("share Id ",share);
+               //console.log("share Id ",share);
                if(share!=null)
                {
-                   console.log("yes ",post.content.prevPostId);
+                    //console.log("yes ",post.content.prevPostId);
                     shareID=share._id;
                     let originalPost=await Post.findById(post.content.prevPostId);
-                    console.log(originalPost);
+                    //console.log(originalPost);
                     originalPost.shares.pull(share);
                     originalPost.save();
                     share.remove();
                }
                else
                {
-                   console.log("the original post deleted");
+                   //console.log("the original post deleted");
                }
                
             }
@@ -208,9 +175,9 @@ module.exports.destroyPost=async function(req,res)
             }
             let len=await Post.find({user:req.user._id});
             len=Object.keys(len).length;
-            console.log(req.xhr);
+            //console.log(req.xhr);
             if(req.xhr){
-                console.log("post id ",req.params.id,shareID,post.content.prevPostId);
+               // console.log("post id ",req.params.id,shareID,post.content.prevPostId);
                 return res.json(200,{
                     data:{
                         originalPostID:post.content.prevPostId,
@@ -235,7 +202,6 @@ module.exports.destroyPost=async function(req,res)
     }
     catch(err)
     {
-        //console.log("Error: ",err);
         req.flash("error",err);
         return res.redirect("back");
     }
@@ -254,7 +220,7 @@ module.exports.updatePost=async function(req,res)
                 post.update=true;
                 post.save();
                 let postLists=await Post.find({"user":req.user.id});
-                console.log("up ",postLists);
+                //console.log("up ",postLists);
                 if(req.xhr)
                 {
                     return res.json(200,{
@@ -313,9 +279,9 @@ module.exports.updatePost2=async function(req,res)
                 
             }
             post.save();
-            console.log(post);
+            //console.log(post);
             let postLists=await Post.find({"user":req.user.id});
-            console.log("up 2",postLists);
+            //console.log("up 2",postLists);
             if(req.xhr)
             {
                 return res.json(200,{
@@ -349,8 +315,8 @@ module.exports.sharePost=async function(req,res)
 {
     try{
 
-        console.log("share controller called");
-        console.log(req.body);
+        // console.log("share controller called");
+        // console.log(req.body);
         if(req.body.content=="")
         {
             return res.json(200,{

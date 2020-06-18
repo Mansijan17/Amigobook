@@ -3,7 +3,7 @@
         <i class="fab fa-jedi-order"></i>
     </button>
     <% if(user.noties.length!=0) {%>
-        <a class="noty-bell" id="noty-ball-<%= user._id%>" href="/noty/?id=<%= user._id%>" target="_blank">
+        <a class="noty-bell" id="noty-ball-<%= user._id%>" href="/noty/?id=<%= user._id%>">
             <i class="fas fa-bell">
                 <% if(user.prevNotyOpen) {%>
                     <% if(user.noties.length-user.oldNotyLength!=0) { %> 
@@ -24,7 +24,7 @@
         </a>
     <% } %>
     <% if(user.pendFR.length!=0) {%>
-        <a class="fr" id="fr-<%= user._id%>" href="/fr/?id=<%= user._id%>" target="_blank">
+        <a class="fr" id="fr-<%= user._id%>" href="/fr/?id=<%= user._id%>">
                 <div>
                     <img src="/images/fr.png">
                     <% if(user.prevPendFROpen) {%>

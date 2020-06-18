@@ -134,7 +134,7 @@ h1:hover {
           height: auto;
           min-height: 200px;
           padding: 20px 0px;
-          background: #13b49770; }
+          background: #9e5a9f70; }
           .home-container #feed-posts #posts-list-container > ul .post-list a {
             color: #e3debf;
             text-decoration: none; }
@@ -142,7 +142,7 @@ h1:hover {
             position: absolute;
             top: 13px;
             left: 13px;
-            color: #706154;
+            color: #daa2a2;
             font-size: 22.4px;
             cursor: pointer; }
           .home-container #feed-posts #posts-list-container > ul .post-list .delete-post-modal:hover i {
@@ -350,7 +350,7 @@ h1:hover {
                 display: none; }
               .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments form button {
                 border-radius: 12px;
-                border: 2px solid #465746;
+                border: 2px solid #184318;
                 padding: 5px;
                 background: transparent;
                 font-weight: bold;
@@ -361,9 +361,9 @@ h1:hover {
                 align-self: center; }
               .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments form button:hover {
                 cursor: pointer;
-                background-color: #489494; }
+                background-color: #b983b0; }
               .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments form textarea::placeholder {
-                color: #5B3B58; }
+                color: #e5c2e3; }
               .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments form textarea:focus, .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments form button:focus {
                 outline: none; }
             .home-container #feed-posts #posts-list-container > ul .post-list .post-content .post-comments-list {

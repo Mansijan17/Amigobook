@@ -14,7 +14,7 @@ module.exports.toggleLike=async function(req,res)
         //  likes/toggle/?id=abc123&type=Post
         let likeable;
         let deleted=false;
-        console.log("like controller ",req.query);
+        //console.log("like controller ",req.query);
         if(req.query.type=="Post")
         {
             likeable=await Post.findById(req.query.id).populate("likes").populate("user","name email");

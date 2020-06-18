@@ -196,7 +196,7 @@ h1:hover
                     height: auto;
                     min-height: 200px;
                     padding:20px 0px;
-                    background: #13b49770;
+                    background: #9e5a9f70;
                     //background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,93,133,1) 0%, rgba(0,181,149,1) 90% );
 
                     a
@@ -213,7 +213,7 @@ h1:hover
                         position: absolute;
                         top: 13px;
                         left: 13px;
-                        color: #706154;
+                        color: #daa2a2;
                         font-size: 22.4px;
                         cursor: pointer;
                     }
@@ -531,7 +531,7 @@ h1:hover
                                 button
                                 {
                                     border-radius: 12px;
-                                    border: 2px solid #465746;
+                                    border: 2px solid #184318;
                                     padding: 5px;
                                     background: transparent;
                                     font-weight: bold;
@@ -544,12 +544,13 @@ h1:hover
                                 button:hover
                                 {
                                     cursor: pointer;
-                                    background-color: #489494;
+                                    background-color:#b983b0;
                                 }
                                 
                                 textarea::placeholder
                                 {
-                                    color:#5B3B58;
+                                    color:#e5c2e3;
+                                    
                                 }
                                 textarea:focus,button:focus
                                 {

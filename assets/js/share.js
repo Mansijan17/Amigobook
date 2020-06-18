@@ -12,7 +12,7 @@ class SharePost{
         let newSharePostForm=$(this.toggler);
         newSharePostForm.submit(function(e)
         {
-            console.log("share f 2");
+            //console.log("share f 2");
             e.preventDefault();
             $.ajax({
                 type:"post",
@@ -209,12 +209,12 @@ class SharePost{
                 new PostComments(data.data.newWholePost._id);
                 if(data.data.len==1)
                 {
-                    console.log("1 ",$("h3"))
+                    //console.log("1 ",$("h3"))
                     $("h3").html(`The Sky In You!`)
                 }
                 let deletePost=function(deletelink)
                 {
-                    console.log(deletelink);
+                    //console.log(deletelink);
                     $(deletelink).click(function(e)
                     {
                         e.preventDefault();
@@ -223,16 +223,16 @@ class SharePost{
                             url:$(deletelink).prop("href"),
                             success:function(data)
                             {
-                                console.log(data.data);
+                                //console.log(data.data);
                                 $(`#post-${data.data.postID}`).remove();
                                 if(data.data.shareID!=undefined)
                                 {
                                     let shareCounts=parseInt($(`#post-${data.data.originalPostID}-share-form`).attr("data-shares"));
-                                    console.log("del share post",shareCounts);
+                                    //console.log("del share post",shareCounts);
                                     shareCounts-=1;
-                                    console.log("del share 2",shareCounts)
+                                    //console.log("del share 2",shareCounts)
                                     $(`#post-${data.data.originalPostID}-share-form`).attr("data-shares",shareCounts);
-                                    console.log("del share form attr", $(`#post-${data.data.originalPostID}-share-form`).attr("data-shares"))
+                                    //console.log("del share form attr", $(`#post-${data.data.originalPostID}-share-form`).attr("data-shares"))
                                     if(shareCounts>0)
                                     {
                                         $(`#post-${data.data.originalPostID}-shares-number .post-shares-no-display`).html(`${shareCounts}`);
@@ -280,15 +280,15 @@ class SharePost{
                             url:$(updateLink).prop("href"),
                             success:function(data)
                             {
-                                console.log(data.data);
+                                //console.log(data.data);
                                 $(`#posts-list-container>ul>li`).each(function()
                                 {
                                     let self=$(this);
                                     //console.log(self);
                                     let button=$(" .updateposttag",self);
-                                    console.log(button);
+                                    //console.log(button);
                                     let i=$(" .update-post-button",button)
-                                    console.log(i)
+                                    //console.log(i)
                                     i.css("pointer-events","none");
                                     button.css("cursor","no-drop");
 
@@ -327,15 +327,15 @@ class SharePost{
                                 data:$(".post-update-form").serialize(),
                                 success:function(data)
                                 {
-                                    console.log(data.data);
+                                    //console.log(data.data);
                                     $(`#posts-list-container>ul>li`).each(function()
                                     {
                                         let self=$(this);
                                         //console.log(self);
                                         let button=$(" .updateposttag",self);
-                                        console.log(button);
+                                        //console.log(button);
                                         let i=$(" .update-post-button",button)
-                                        console.log(i)
+                                        //console.log(i)
                                         i.css("pointer-events","auto");
                                         button.css("cursor","pointer");
 

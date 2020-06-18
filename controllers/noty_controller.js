@@ -17,7 +17,7 @@ module.exports.showNotyList=async function(req,res)
         user.prevNotyOpen=true;
         user.oldNotyLength=noties.length;
         user.save();
-        console.log("noty contr ",noties.length);
+        //console.log("noty contr ",noties.length);
         return res.render("notyList",{
             title:"Your's Noty | Skyinyou",
             noties:noties

@@ -3,7 +3,7 @@ $("main .noty button").click(function()
 {
   if(!notyToggle)
   {
-    let right=-135;
+    let right=-95;
     function movetoLeft()
     {
         if(right>=0)
@@ -11,7 +11,7 @@ $("main .noty button").click(function()
           clearInterval(id);
           return;
         }
-        right+=3;
+        right+=5;
         $("main .noty").css("right",right);
     }
     let id=setInterval(movetoLeft,30);
@@ -22,12 +22,12 @@ $("main .noty button").click(function()
     let right=0;
     function movetoRight()
     {
-        if(right<=-135)
+        if(right<=-95)
         {
           clearInterval(id);
           return;
         }
-        right-=3;
+        right-=5;
         $("main .noty").css("right",right);
     }
     let id=setInterval(movetoRight,30);

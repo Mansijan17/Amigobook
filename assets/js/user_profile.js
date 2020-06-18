@@ -1,4 +1,4 @@
-console.log("change email",$(".change-email-remove-profile .change-email"))
+//console.log("change email",$(".change-email-remove-profile .change-email"))
 $(".change-email-remove-profile .change-email").click(function(e)
 {
     e.preventDefault();
@@ -27,7 +27,7 @@ $(".change-email-remove-profile .change-email").click(function(e)
 function modalFormCheckBox(modal)
 {
     let checkbox =$(" .checkbox input",modal);
-    console.log("hi",checkbox,modal)
+    //console.log("hi",checkbox,modal)
     checkbox.click(function()
     {
         
@@ -50,7 +50,7 @@ function modalFormCheckBox1(data)
 {
     let modal=$(`#${data.type}UpdateModal-${data.updatedObj._id}`)
     let checkbox =$(" .checkbox input",modal);
-    console.log("hi",checkbox,modal)
+    //console.log("hi",checkbox,modal)
     checkbox.click(function()
     {
         if(!data.updatedObj.fromMonth)
@@ -86,7 +86,7 @@ function modalFormCheckBox1(data)
 
 function successAddWorkGrad(data)
 {
-    console.log(data);
+    //console.log(data);
     if(data.error)
     {
         new Noty({
@@ -108,7 +108,7 @@ function successAddWorkGrad(data)
         {
             type="Grad"
         }
-        console.log("type self", type)
+        //console.log("type self", type)
         $(`#add${type}FormModal`).modal('hide');
         $('.modal-backdrop').remove();
         $('body').removeClass( "modal-open" );
@@ -210,9 +210,9 @@ function successAddWorkGrad(data)
             <input type="number" name="toYear" required value=${data.data.object.toYear}>`);
         }
         $("body").append(newUpdateWorkGradDOMModal)
-        console.log("new update modal",newUpdateWorkGradDOMModal);
+        //console.log("new update modal",newUpdateWorkGradDOMModal);
         let editButton=$(` .edit-${data.data.type}-calling`,newList);
-        console.log("edit button",editButton);
+        //console.log("edit button",editButton);
         updateWorkGradModal(editButton);
         let newDeleteWorkGradModalDOM;
         if(data.data.type=="work")
@@ -252,7 +252,7 @@ function successAddWorkGrad(data)
 
 let addWorkFunction=function()
 {
-    console.log($("#addWorkFormModal form"));
+    //console.log($("#addWorkFormModal form"));
     $("#addWorkFormModal form").submit(function(e)
     {
         e.preventDefault();
@@ -300,7 +300,7 @@ let newListDOM=function(work)
 
 let updateWorkGradModal=function(link)
 {
-    console.log("after form",$(link));
+    //console.log("after form",$(link));
     $(link).click(function(e)
     {
         e.preventDefault();
@@ -309,10 +309,10 @@ let updateWorkGradModal=function(link)
             url:$(link).prop("href"),
             success:function(data)
             {
-                console.log(data.data);
+                //console.log(data.data);
                 if(data.data.updatedObj.check)
                 {
-                    console.log("check",$(`#${data.data.type}UpdateModal-${data.data.updatedObj._id} .modal-dialog .modal-content .modal-body .three-g .checkbox input`))
+                    //console.log("check",$(`#${data.data.type}UpdateModal-${data.data.updatedObj._id} .modal-dialog .modal-content .modal-body .three-g .checkbox input`))
                     $(`#${data.data.type}UpdateModal-${data.data.updatedObj._id} .modal-dialog .modal-content .modal-body .three-g .checkbox input`).prop("checked",true);
                     $(`#${data.data.type}UpdateModal-${data.data.updatedObj._id} .modal-dialog .modal-content .modal-body .one-g .to-date`).html(`Present`);
                 }
@@ -394,7 +394,7 @@ let updateWorkDOMModal=function(work)
 
 let updateModalFormSubmit=function(form)
 {
-    console.log("update form",$(form));
+    //console.log("update form",$(form));
     $(form).submit(function(e)
     {
         e.preventDefault();
@@ -405,7 +405,7 @@ let updateModalFormSubmit=function(form)
             data:$(form).serialize(),
             success:function(data)
             {
-                console.log(data);
+                //console.log(data);
                 if(data.error)
                 {
                     new Noty({
@@ -446,7 +446,7 @@ let updateModalFormSubmit=function(form)
                     }
                     $(`#${data.data.type}-${data.data.object._id}`).html(newList.html())
                     let editButton=$(`#${data.data.type}-${data.data.object._id} .edit-${data.data.type}-calling`);
-                    console.log("form se button",editButton);
+                    //console.log("form se button",editButton);
                     updateWorkGradModal(editButton);
                     let deleteButton=$(`#${data.data.type}-${data.data.object._id} .delete-${data.data.type}-calling`);
                     deleteWorkGradModal(deleteButton)
@@ -470,7 +470,7 @@ let updateModalFormSubmit=function(form)
 
 let deleteWorkGradModal=function(link)
 {
-    console.log($(link));
+   // console.log($(link));
     $(link).click(function(e)
     {
         e.preventDefault();
@@ -479,7 +479,7 @@ let deleteWorkGradModal=function(link)
             url:$(link).prop("href"),
             success:function(data)
             {
-                console.log(data.data.item._id);
+                //console.log(data.data.item._id);
                 $(`#${data.data.type}DeleteModal-${data.data.item._id}`).modal('show');
                 deleteWorkGrad($(`#${data.data.type}DeleteModal-${data.data.item._id} .delete-${data.data.type}-button`));
             },
@@ -537,7 +537,7 @@ let deleteGradModalDOM=function(grad)
 
 let deleteWorkGrad=function(link)
 {
-    console.log($(link));
+   // console.log($(link));
 
     $(link).click(function(e)
     {
@@ -547,7 +547,7 @@ let deleteWorkGrad=function(link)
             url:$(link).prop("href"),
             success:function(data)
             {
-                console.log(data.data);
+                //console.log(data.data);
                 let type;
                 if(data.data.type=="work")
                 {
@@ -564,7 +564,7 @@ let deleteWorkGrad=function(link)
                 $(`#${data.data.type}-${data.data.obj._id}`).remove();
                 if(data.data.length==0)
                 {
-                    console.log("0")
+                    //console.log("0")
                     $(`body #view${type}Modal`).modal('hide');
                     $(`body #view${type}Modal`).remove();
                     $('.modal-backdrop').remove();
@@ -573,7 +573,7 @@ let deleteWorkGrad=function(link)
                     $(`body .update-${type}-modal`).remove();
                     if(type=="Work")
                     {
-                        console.log("work",$("#collapseTwo .card-body"))
+                        //console.log("work",$("#collapseTwo .card-body"))
                         $("#collapseTwo .card-body p").remove();
                         $("#collapseTwo .card-body").prepend(`<p data-toggle="modal" data-target="#addWorkFormModal" style="cursor: pointer;">Want to brag about it?</p>`)
                     }
@@ -601,7 +601,7 @@ let deleteWorkGrad=function(link)
 
 let addGradFunction=function()
 {
-    console.log($("#addGradFormModal form"));
+    //console.log($("#addGradFormModal form"));
     $("#addGradFormModal form").submit(function(e)
     {
         e.preventDefault();

@@ -16,7 +16,7 @@ module.exports.showFRList=async function(req,res)
         user.prevPendFROpen=true;
         user.oldPendFRLength=frs.length;
         user.save();
-        console.log("fr contr ",frs.length);
+        //console.log("fr contr ",frs.length);
         return res.render("frList",{
             title:"Your's Friend Requests | Skyinyou",
             frs:frs

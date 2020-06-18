@@ -21,7 +21,7 @@ exports.newAccount=(newuser)=>{
 }
 
 exports.verifyAccount=(newuser)=>{
-    console.log("inside new user ",newuser);
+  //  console.log("inside new user ",newuser);
     let htmlString=nodemailer.renderTemplate({user:newuser},"/new_account/new_account.ejs");
 
     nodemailer.transporter.sendMail({

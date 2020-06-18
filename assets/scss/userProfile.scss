@@ -633,7 +633,7 @@ body
     color: black;
     min-height: 200px;
     overflow: hidden;
-
+    padding-top: 10px;
     input[type=number]::-webkit-inner-spin-button, 
     input[type=number]::-webkit-outer-spin-button { 
         -webkit-appearance: none;
@@ -644,6 +644,7 @@ body
 
     .modal-content
     {
+        margin-left: -10px;
         height: 100%;
         .modal-header
         {

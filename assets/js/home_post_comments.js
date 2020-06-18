@@ -17,11 +17,11 @@ class PostComments{
         // call for all the existing comments
         $(' .delete-comment-button', this.postContainer).each(function(){
             self.deleteComment($(this));
-            console.log("del comments");
+           // console.log("del comments");
         });
         $(' .update-comment-button', this.postContainer).each(function(){
             self.updateComment($(this));
-            console.log("updating comments");
+           // console.log("updating comments");
         });
       
     }
@@ -37,7 +37,7 @@ class PostComments{
                 url: '/comments/create-comment',
                 data: $(self).serialize(),
                 success: function(data){
-                    console.log("creating comment ",data.data);
+                    //console.log("creating comment ",data.data);
                     let commentData=data.data.comment;
                     //console.log(data.data.comment.user._id,data.data.post.user._id);
                     if(data.data.comment.user._id==data.data.post.user._id)
@@ -205,18 +205,18 @@ class PostComments{
     deleteComment(deleteLink){
         $(deleteLink).click(function(e){
             e.preventDefault();
-            console.log("inside delte button ");
+            //console.log("inside delte button ");
             $.ajax({
                 type: 'get',
                 url: $(deleteLink).prop('href'),
                 success: function(data){
                 
-                    console.log("remove comment: ");
+                    //console.log("remove comment: ");
                     
                     $(`#comment-${data.data.comment_id}`).remove();
 
                     let commentsCount=parseInt($(`#post-${data.data.postID}-comment-number`).attr("data-comments"));
-                    console.log(commentsCount);
+                    //console.log(commentsCount);
                     commentsCount-=1;
                     $(`#post-${data.data.postID}-comment-number`).attr("data-comments",commentsCount);
                     if(commentsCount>0)
@@ -259,7 +259,7 @@ class PostComments{
                 url:$(updateLink).prop("href"),
                 success:function(data)
                 {
-                    console.log(data.data);
+                    //console.log(data.data);
                     $(`.post-comments-list>ul>li`).each(function()
                     {
                         let self=$(this);
@@ -292,7 +292,7 @@ class PostComments{
                         
                         $(".comment-update-form").submit(function(e)
                         {
-                            console.log("h2");
+                            //console.log("h2");
                             e.preventDefault();
                             $.ajax({
                                 type:"post",
@@ -300,7 +300,7 @@ class PostComments{
                                 data:$(".comment-update-form").serialize(),
                                 success:function(data)
                                 {
-                                    console.log(data.data);
+                                    //console.log(data.data);
                                     $(`.post-comments-list>ul>li`).each(function()
                                     {
                                         let self=$(this);

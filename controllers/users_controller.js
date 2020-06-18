@@ -22,13 +22,12 @@ let colors=["#e558e5","#e55886","#4952be","#285874","#6d721b","#99611b","#686561
 module.exports.profile = async function (req, res) {
     try
     {
-       // console.log(req.params.id);
         let user=await User.findById(req.params.id).populate("works").populate("grads");
         let works=user.works;
         let grads=user.grads;
         function sortLatestExp(a,b)
         {
-            console.log(a,b)
+           // console.log(a,b)
             if(a.fromYear>b.fromYear)
             {
                 return -1;
@@ -149,7 +148,7 @@ module.exports.profile = async function (req, res) {
                 {
                     pendingTo=true;
                 }
-                console.log(pendingFrom,pendingTo)
+                //console.log(pendingFrom,pendingTo)
             }
         }   
         let birthday;
@@ -194,7 +193,7 @@ module.exports.updateProfile = async function (req, res) {
                 if (err) {
                     console.log("****Multer ", err);
                 }
-                console.log("body",req.body)
+                //console.log("body",req.body)
                 user.name = req.body.name;
                 let personalInfo={
                     currentCity:req.body.currentCity,
@@ -221,7 +220,7 @@ module.exports.updateProfile = async function (req, res) {
                     bgColor:user.info.bgColor
                 } 
                // console.log(user.info,user.name,user._id);
-                console.log("file ", req.file);
+                //console.log("file ", req.file);
                 if (req.file) {
                     if (user.avatar) {
                         if (fs.existsSync(path.join(__dirname, "..", user.avatar))) {
@@ -234,7 +233,7 @@ module.exports.updateProfile = async function (req, res) {
                 }
                 user.save();  
             
-                console.log("updated user",user)
+               // console.log("updated user",user)
                 Post.find({"content.prevAuthID":req.user.id},function(err,posts)
                 {
                              
@@ -251,7 +250,7 @@ module.exports.updateProfile = async function (req, res) {
                                 prevPostShares:post.content.prevPostShares
                             };
                             post.save();
-                            console.log("after",post.content)
+                            //console.log("after",post.content)
                     }  
                 });
        
@@ -355,7 +354,7 @@ module.exports.changeEmailConfirm=async function(req,res)
                user.email=req.body.email;
                user.save();
                user1.user=user;
-               console.log(user1);
+               //console.log(user1);
                let job=queue.create("changeEmailConfirm",user1).save(function(err)
                {
                    if(err)
@@ -401,7 +400,7 @@ module.exports.removeDP=async function(req,res)
                     prevPostShares:post.content.prevPostShares
             };
             post.save();
-            console.log("after",post.content)
+            //console.log("after",post.content)
             }  
             req.flash("success","The DP has just collapsed!");
             return res.redirect("back");
@@ -455,7 +454,7 @@ module.exports.create = async function (req, res) {
             }
             if(req.body.password.length<8)
             {
-                console.log("len");
+                //console.log("len");
                 return res.json(200,{
                     data:{
                         message:"Come on, give some length to the password!",
@@ -494,7 +493,7 @@ module.exports.create = async function (req, res) {
             }
             if(!specialCharacter)
             {
-                console.log("sp");
+               // console.log("sp");
                 return res.json(200,{
                     data:{
                         message:"Oh, you missed special characters in password!",
@@ -506,7 +505,7 @@ module.exports.create = async function (req, res) {
             }
             if(!number)
             {
-                console.log("no");
+                //console.log("no");
                 return res.json(200,{
                     data:{
                         message:"A number makes your password stronger!",
@@ -518,7 +517,7 @@ module.exports.create = async function (req, res) {
             }
             if(!letter)
             {
-                console.log("letter");
+                //console.log("letter");
                 return res.json(200,{
                     data:{
                         message:"The password can't be spelled without letters!",
@@ -530,7 +529,7 @@ module.exports.create = async function (req, res) {
             }
             if(!captial)
             {
-                console.log("cap");
+               // console.log("cap");
                 return res.json(200,{
                     data:{
                         message:"At least one letter of your password needs respect!",
@@ -548,7 +547,7 @@ module.exports.create = async function (req, res) {
                 name2+=word+" ";
             }
             name2=name2.trim();
-            console.log(name2);
+            //console.log(name2);
             req.body.name=name2;
            
             let newuser={
@@ -560,18 +559,18 @@ module.exports.create = async function (req, res) {
             //console.log(newAccountSchema);
             if(!newAccountSchema)
             {
-                console.log("new account schema",newuser);
+               // console.log("new account schema",newuser);
                 let randomBgColor=colors[Math.floor(Math.random()*colors.length)];
-                console.log("new color",randomBgColor);
+                //console.log("new color",randomBgColor);
                 newuser.user.info={about:`Hi, I am ${req.body.name}. Nice to meet you!`,
                 bgColor:randomBgColor,personalInfo:{},socialInfo:{},contactInfo:{}}
                 newuser.user.prevNotyOpen=false;
                 newuser.user.oldNotyLength=0;
                 newuser.user.prevPendFROpen=false;
                 newuser.user.oldPendFRLength=0;
-                console.log(newuser);
+               // console.log(newuser);
                 let necoount=await newAccount.create(newuser);
-                console.log(necoount)
+                //console.log(necoount)
             }
             else
             {
@@ -586,7 +585,7 @@ module.exports.create = async function (req, res) {
                 newAccountSchema.user.prevPendFROpen=false;
                 newAccountSchema.user.oldPendFRLength=0;
                 newAccountSchema.save();
-                console.log("exists ",newAccountSchema.user,info)
+               // console.log("exists ",newAccountSchema.user,info)
             }
             let job=queue.create("newAccount",newuser).save(function(err)
             {
@@ -682,7 +681,7 @@ module.exports.resetPasswordEmailLink=async function(req,res)
             }
             
             resetPasswordSchema=await resetPasswordSchema.populate("user","name email").execPopulate();
-            console.log(resetPasswordSchema);
+           // console.log(resetPasswordSchema);
             let job=queue.create("password",resetPasswordSchema).save(function(err)
             {
                 if(err)
@@ -750,7 +749,7 @@ module.exports.resetPassword=async function(req,res)
                     {
                                 if(req.body.newpassword.length<8)
                                 {
-                                    console.log("len");
+                                    //console.log("len");
                                     resetPasswordSchema.isvalid=false;
                                     resetPasswordSchema.save();
                                     return res.json(200,{
@@ -791,7 +790,7 @@ module.exports.resetPassword=async function(req,res)
                                 }
                                 if(!specialCharacter)
                                 {
-                                    console.log("sp");
+                                   // console.log("sp");
                                     resetPasswordSchema.isvalid=false;
                                     resetPasswordSchema.save();
                                     return res.json(200,{
@@ -805,7 +804,7 @@ module.exports.resetPassword=async function(req,res)
                                 }
                                 if(!number)
                                 {
-                                    console.log("no");
+                                   // console.log("no");
                                     resetPasswordSchema.isvalid=false;
                                     resetPasswordSchema.save();
                                     return res.json(200,{
@@ -821,7 +820,7 @@ module.exports.resetPassword=async function(req,res)
                                 {
                                     resetPasswordSchema.isvalid=false;
                                     resetPasswordSchema.save();
-                                    console.log("letter");
+                                    //console.log("letter");
                                     return res.json(200,{
                                         data:{
                                             message:"The password can't be spelled without letters!",
@@ -833,7 +832,7 @@ module.exports.resetPassword=async function(req,res)
                                 }
                                 if(!captial)
                                 {
-                                    console.log("cap");
+                                   // console.log("cap");
                                     resetPasswordSchema.isvalid=false;
                                     resetPasswordSchema.save();
                                     return res.json(200,{
@@ -967,7 +966,7 @@ module.exports.sendFriendshipForms=async function(req,res)
 module.exports.destroyFriendshipForms=async function(req,res)
 {
     try{
-        console.log(req.query);
+        //console.log(req.query);
         let form=await FriendshipForm.findOneAndDelete({fromUser:req.query.from,toUser:req.query.to});
         let toUser=await User.findById(req.query.to);
         toUser.oldPendFRLength-=1;
@@ -1079,7 +1078,7 @@ module.exports.destroyFriendship=async function(req,res)
 {
     try
     {
-        console.log(req.query);
+        //console.log(req.query);
         let existingFriendshipFrom=await Friendship.findOne({
             fromUser:req.query.from,
             toUser:req.query.to
@@ -1090,7 +1089,7 @@ module.exports.destroyFriendship=async function(req,res)
         });
         let fromUser=await User.findById(req.query.from);
         let toUser=await User.findById(req.query.to);
-        console.log(fromUser,toUser);
+        //console.log(fromUser,toUser);
         existingFriendshipFrom.remove();
         existingFriendshipTo.remove();
         fromUser.friendships.pull(existingFriendshipFrom._id);
@@ -1099,7 +1098,7 @@ module.exports.destroyFriendship=async function(req,res)
         toUser.save();
         let length;
         let loggedUserPage=false;
-        console.log(req.params);
+        //console.log(req.params);
         if(req.params.loggedUserPage=='true')
         {
             loggedUserPage=true;
@@ -1131,7 +1130,7 @@ module.exports.destroyFriendship=async function(req,res)
 module.exports.confirmAccount=function(req,res)
 {
     var id=req.params.id;
-    console.log("confirm account");
+    //console.log("confirm account");
     return res.render("confirmAccount",{
         title:"Skyinyou | Confirm Account",
         acessToken:id
@@ -1152,7 +1151,7 @@ module.exports.verifyAccount=async function(req,res)
         if(!newuser)
         {
             account.user.notGoogle=true;
-            console.log(account.user);
+           // console.log(account.user);
             let job=queue.create("verifyAccount",account.user).save(function(err)
             {
                     if(err)
@@ -1199,7 +1198,7 @@ module.exports.addWorkGrad=async function(req,res)
         if(req.user.id)
         {
             if(req.body.check!="on")
-            {   console.log("not check")
+            {   //console.log("not check")
                 if(req.body.toYear.length!=4 || req.body.fromYear.length!=4 || req.body.toMonth.length!=2 || req.body.fromMonth.length!=2)
                 {
                     return res.json(200,{
@@ -1215,7 +1214,7 @@ module.exports.addWorkGrad=async function(req,res)
                 let toMonth=parseInt(req.body.toMonth);
                 if(fromYear>year || toYear>year || fromYear<1940 || toYear<1940 || fromMonth<0 || fromMonth>12 || toMonth<0 || fromYear>toYear)
                 {
-                    console.log("1")
+                    //console.log("1")
                     return res.json(200,{
                         message:"Wow, your exp must be out of this world!",
                         error:true,
@@ -1237,7 +1236,7 @@ module.exports.addWorkGrad=async function(req,res)
                 {
                     if(fromMonth>toMonth)
                     {
-                        console.log("f>tm")
+                        //console.log("f>tm")
                         return res.json(200,{
                             message:"Wow, your exp must be out of this world!",
                             error:true,
@@ -1342,7 +1341,7 @@ module.exports.updateWorkGradModal=async function(req,res)
 {
     try{
         let id=req.query.id;
-        console.log("update modal calling controoleer ",req.query)
+        //console.log("update modal calling controoleer ",req.query)
         let updatedObj;
         if(req.query.type=="work")
         {
@@ -1352,7 +1351,7 @@ module.exports.updateWorkGradModal=async function(req,res)
         {
             updatedObj=await Grad.findById(id);
         }
-        console.log("updatedObj ",updatedObj)
+        //console.log("updatedObj ",updatedObj)
         if(updatedObj.user==req.user.id)
         {
             return res.json(200,{
@@ -1384,14 +1383,14 @@ module.exports.updateWorkGrad=async function(req,res)
         {
             object=await Grad.findById(id);
         }
-        console.log("object found",object);
+        //console.log("object found",object);
         let date=new Date();
         let year=date.getFullYear();
         let month=date.getMonth();
         if(object.user==req.user.id)
         {
             if(req.body.check!="on")
-            {   console.log("not check")
+            {   //console.log("not check")
                 if(req.body.toYear.length!=4 || req.body.fromYear.length!=4 || req.body.toMonth.length!=2 || req.body.fromMonth.length!=2)
                 {
                     return res.json(200,{
@@ -1428,7 +1427,7 @@ module.exports.updateWorkGrad=async function(req,res)
                 {
                     if(fromMonth>toMonth)
                     {
-                        console.log("f>tm")
+                        //console.log("f>tm")
                         return res.json(200,{
                             message:"Wow, your exp must be out of this world!",
                             error:true,
@@ -1446,7 +1445,7 @@ module.exports.updateWorkGrad=async function(req,res)
             }
             else
             {
-                console.log("check")
+                //console.log("check")
                 if(req.body.fromYear.length!=4 || req.body.fromMonth.length!=2)
                 {
                     return res.json(200,{
@@ -1500,7 +1499,7 @@ module.exports.updateWorkGrad=async function(req,res)
                 object.school=req.body.company;
             }
             object.descrpt=req.body.descrpt;
-            console.log("update",object);
+            //console.log("update",object);
             object.save();   
             return res.json(200,{
                 data:{
