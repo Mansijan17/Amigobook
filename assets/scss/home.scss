@@ -1064,11 +1064,16 @@ h1:hover
         margin: auto;
         width:98%;
         height:auto;
+        min-height: 60vh;
        
         > div
         {
             width:49.8%;
-            height: 520px;
+            height:inherit;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
            
         }
 
@@ -1102,7 +1107,7 @@ h1:hover
             display: flex;
             justify-content: space-evenly;
             position: relative;
-            margin-bottom: 30px;
+            height: inherit;
 
             img
             {
@@ -1200,6 +1205,8 @@ h1:hover
                 width:65%;
                 margin:0px auto 10px;
                 height: auto;
+                min-height: 75%;
+                justify-content: space-evenly;
                 
                 >div
                 {

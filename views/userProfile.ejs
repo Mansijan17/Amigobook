@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/css/userProfile.css">
 <link rel="stylesheet"  href="/css/chat.css">
-<div style="width: 100%;background: linear-gradient(to bottom,transparent,#243A63,#1D6396, #00A5CF) !important;margin-top:70px;">
+<div style="width: 100%;background: linear-gradient(to bottom,transparent,#1D6396, #00A5CF) !important;margin-top: 70px;">
     <h1 class="heading-background">
         <div>
             <div class="cloud" id="first-cloud"></div>
@@ -668,8 +668,7 @@
       </div>
     <% } %>
     <% if(user.id==profileUser.id) { %> 
-        <div style="background: linear-gradient(to bottom,#4CB1C1,#E3C9A6, #D89A73);
-        box-shadow: 0px 0px 10px 30px #4CB1C1;">
+        <div style="background: linear-gradient(to bottom,#4CB1C1,#E3C9A6);padding-top: 70px;min-height: 50vh;">
             <form id="new-post-form" method="post" action="/posts/create-post">
                 <textarea name="content" id="new-post-content" required placeholder="Is something aching you?" onkeydown="autosize1(this)"></textarea>
                 <button type="submit">Fly It!</button>
@@ -975,8 +974,7 @@
             </div>
           </div>
     <% } else { %>
-        <div style="background: linear-gradient(to bottom,#4CB1C1,#E3C9A6, #D89A73);
-        box-shadow: 0px 0px 10px 30px #4CB1C1;padding-top: 100px;">
+        <div style="background: linear-gradient(to bottom,#4CB1C1,#E3C9A6);padding-top: 70px;min-height: 50vh;">
             <% if(posts.length!=0) { %>
                 <h3 style="text-align: center;">The Sky In <%= profileUser.name%>!</h3>
             <% } else { %>

@@ -681,10 +681,15 @@ h1:hover {
     flex-wrap: wrap;
     margin: auto;
     width: 98%;
-    height: auto; }
+    height: auto;
+    min-height: 60vh; }
     .homepage-without-login .display-area > div {
       width: 49.8%;
-      height: 520px; }
+      height: inherit;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; }
     @media screen and (max-width: 850px) {
       .homepage-without-login .display-area > div {
         width: 100%;
@@ -698,7 +703,7 @@ h1:hover {
       display: flex;
       justify-content: space-evenly;
       position: relative;
-      margin-bottom: 30px; }
+      height: inherit; }
       .homepage-without-login .display-area .display-images img {
         width: 32.4%;
         height: 100%;
@@ -816,7 +821,9 @@ h1:hover {
         align-items: center;
         width: 65%;
         margin: 0px auto 10px;
-        height: auto; }
+        height: auto;
+        min-height: 75%;
+        justify-content: space-evenly; }
         .homepage-without-login .display-area .display-signUp-form form > div {
           margin: 10px;
           width: 95%;

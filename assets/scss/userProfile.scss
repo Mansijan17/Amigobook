@@ -1,5 +1,6 @@
 body
 {
+    background: linear-gradient(to bottom, #243A63 50%, #1D6396, #00A5CF 26%, #E3C9A6 54%, #D89A73) !important;
     @function generate-random-stars ($screen-width, $color, $density){
   
         $h-shadow: random($screen-width);
