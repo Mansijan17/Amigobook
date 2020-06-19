@@ -1701,20 +1701,7 @@ h1:hover
             }
         }
     }
-    #gender
-    {
-        flex-direction: column;
-        justify-content: center;
-        span{
-            
-            margin-left: 12%;
-            margin-bottom: 5px;
-        }
-        #female-gender-span
-        {
-            margin-top: 7px;
-        }
-    }
+  
 }
 
 @media (max-width:425px)
@@ -1833,6 +1820,20 @@ h1:hover
                     }
                 }
             }
+        }
+    }
+    #gender
+    {
+        flex-direction: column;
+        justify-content: center;
+        span{
+            
+            margin-left: 12%;
+            margin-bottom: 5px;
+        }
+        #female-gender-span
+        {
+            margin-top: 7px;
         }
     }
 }

@@ -1048,15 +1048,7 @@ h1:hover {
 @media (max-width: 430px) {
   .home-container #feed-posts #posts-list-container > ul .post-list .post-editedTag {
     font-size: 14px;
-    left: 16% !important; }
-  #gender {
-    flex-direction: column;
-    justify-content: center; }
-    #gender span {
-      margin-left: 12%;
-      margin-bottom: 5px; }
-    #gender #female-gender-span {
-      margin-top: 7px; } }
+    left: 16% !important; } }
 
 @media (max-width: 425px) {
   h1 {
@@ -1098,7 +1090,15 @@ h1:hover {
     margin: 65px auto 0px !important; }
     .post-share-box .modal .modal-dialog .modal-content .modal-header {
       margin-left: 0 !important;
-      margin-top: -2px; } }
+      margin-top: -2px; }
+  #gender {
+    flex-direction: column;
+    justify-content: center; }
+    #gender span {
+      margin-left: 12%;
+      margin-bottom: 5px; }
+    #gender #female-gender-span {
+      margin-top: 7px; } }
 
 @media (max-width: 365px) {
   .deletecommentmodal, .post-delete-modal, .replydeletemodal-2 {
