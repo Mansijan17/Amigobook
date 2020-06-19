@@ -1218,7 +1218,6 @@ body
     .modal-dialog
     {
         min-height: 500px;
-        max-height: 1000px;
         .modal-content
         {
             min-height: 500px;
@@ -1391,6 +1390,7 @@ body
                         flex-direction: column;
                         align-items: flex-start;
                         padding: 0px 10px;
+                        margin-top: 30px;
                         .heading{
                             font-family: Parisienne;
                             font-size: 26px;
