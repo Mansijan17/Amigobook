@@ -1046,7 +1046,7 @@ h1:hover
         margin: 0px auto 45px;
     }
 
-    @media screen and (max-width:411px)
+    @media screen and (max-width:430px)
     {
         .headingintro{
             margin-top: 105px !important;
@@ -1690,6 +1690,20 @@ h1:hover
             }
         }
     }
+    #gender
+    {
+        flex-direction: column;
+        justify-content: center;
+        span{
+            
+            margin-left: 12%;
+            margin-bottom: 5px;
+        }
+        #female-gender-span
+        {
+            margin-top: 7px;
+        }
+    }
 }
 
 @media (max-width:425px)
@@ -1783,20 +1797,7 @@ h1:hover
             width: 70px !important;
         }
     }
-    #gender
-    {
-        flex-direction: column;
-        justify-content: center;
-        span{
-            
-            margin-left: 12%;
-            margin-bottom: 5px;
-        }
-        #female-gender-span
-        {
-            margin-top: 7px;
-        }
-    }
+  
     .post-share-modal
     {
         .modal-dialog
