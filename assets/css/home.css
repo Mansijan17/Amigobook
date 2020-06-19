@@ -669,7 +669,7 @@ h1:hover {
     font-family: 'Bellota', cursive;
     width: 90%;
     margin: 0px auto 45px; }
-  @media screen and (max-width: 411px) {
+  @media screen and (max-width: 430px) {
     .homepage-without-login .headingintro {
       margin-top: 105px !important; } }
   .homepage-without-login .display-area {
@@ -1037,7 +1037,15 @@ h1:hover {
 @media (max-width: 430px) {
   .home-container #feed-posts #posts-list-container > ul .post-list .post-editedTag {
     font-size: 14px;
-    left: 16% !important; } }
+    left: 16% !important; }
+  #gender {
+    flex-direction: column;
+    justify-content: center; }
+    #gender span {
+      margin-left: 12%;
+      margin-bottom: 5px; }
+    #gender #female-gender-span {
+      margin-top: 7px; } }
 
 @media (max-width: 425px) {
   h1 {
@@ -1072,14 +1080,6 @@ h1:hover {
     margin-left: 0px !important; }
   .post-comments button {
     width: 70px !important; }
-  #gender {
-    flex-direction: column;
-    justify-content: center; }
-    #gender span {
-      margin-left: 12%;
-      margin-bottom: 5px; }
-    #gender #female-gender-span {
-      margin-top: 7px; }
   .post-share-modal .modal-dialog {
     width: 280px !important; }
   .post-share-box .modal .modal-dialog {
