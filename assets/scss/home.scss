@@ -1037,13 +1037,17 @@ h1:hover
     margin-top: 60px;
     margin-bottom: 0px;
     height: auto;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     p
     {
         font-size: 25.6px;
         text-align: center;
-        font-family: 'Bellota', cursive; 
+        font-family: 'Bellota', cursive;
         width: 90%;
-        margin: 0px auto 45px;
+        margin: 20px auto 45px;
     }
 
     @media screen and (max-width:430px)
