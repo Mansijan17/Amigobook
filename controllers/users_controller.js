@@ -293,7 +293,7 @@ module.exports.changeEmailMessage=async function(req,res)
                 console.log("change email 1 job enqueued ",job.id);
             });
             return res.json(200,{
-                message:"Your @ awaits!"
+                message:"Your email awaits!"
             })
         }
     }
@@ -343,7 +343,7 @@ module.exports.changeEmailConfirm=async function(req,res)
             let emailUser=await User.findOne({"email":req.body.email});
             if(emailUser)
             {
-                req.flash("error","This @ is already in skies!");
+                req.flash("error","This email is already in skies!");
                 return res.redirect("back");
             }
             if(id==req.user.id)
@@ -365,7 +365,7 @@ module.exports.changeEmailConfirm=async function(req,res)
                    console.log("change email 1 job enqueued ",job.id);
                });
                
-               req.flash("success","Your new @ is live!");
+               req.flash("success","Your new email is live!");
             } 
         }        
         return res.redirect("/");
@@ -598,7 +598,7 @@ module.exports.create = async function (req, res) {
             });
             return res.json(200,{
                 data:{
-                    message:"Your @ chariot awaits!",
+                    message:"Your email chariot awaits!",
                     error:false
                 }
             })
@@ -608,7 +608,7 @@ module.exports.create = async function (req, res) {
         else {
             return res.json(200,{
                 data:{
-                    message:"This @ is already among the skies!",
+                    message:"This email is already among the skies!",
                     error:true
                 }
             })
@@ -655,7 +655,7 @@ module.exports.resetPasswordEmailLink=async function(req,res)
         if (!userFound) {
             return res.json(200,{
                 data:{
-                    message:"This @ is still on earth!",
+                    message:"This email is still on earth!",
                     error:true
                 }
             })
@@ -693,7 +693,7 @@ module.exports.resetPasswordEmailLink=async function(req,res)
             });
             return res.json(200,{
                 data:{
-                    message:"Your @ has a new tweet!",
+                    message:"Your email has a new tweet!",
                     error:false
                 }
             })
