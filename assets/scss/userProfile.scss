@@ -1571,10 +1571,21 @@ body
                             { 
                                 a
                                 {
+                                    span{
+                                        font-variant: small-caps !important;
+                                        align-self: center !important;
+                                        color: #88a1a7 !important;
+                                        text-align: left !important;
+                                    }
                                     .concealed-image
                                     { 
                                         > span {
                                         color: mistyrose !important;
+                                        }
+                                        >span:hover{
+                                            color: mistyrose !important;
+                                            font-weight: normal !important;
+                                            filter: none !important;
                                         }
                                     }
                                 } 
