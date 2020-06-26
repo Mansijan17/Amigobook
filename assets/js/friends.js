@@ -13,7 +13,7 @@ let pendingFrom=function(){
                 $(".add-friend-button").remove();
                 $(".add-chat-friend-group").prepend(`
                 <span class="pending-from">Friend Request Pending</span>
-                        <a href="/users/friends-cancel-form/?to=${data.data.to}" class="cancel-friend-button">
+                        <a href="/users/friends-cancel-form-from/?to=${data.data.to}" class="cancel-friend-button">
                             Want to cancel it?
                  </a>`);
                  cancelPendingForm();
