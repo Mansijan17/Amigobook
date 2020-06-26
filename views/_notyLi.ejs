@@ -12,7 +12,7 @@
     <% if(noty.user.avatar) {%>
         <img src="<%= noty.user.avatar %>"> 
     <% }  else {%>
-        <div class="concealed-image" style="background:<%=noty.user.info.bgColor%>;"><span><%= noty.user.name.split(" ")[0].charAt(0)..toUpperCase()%></span></div>
+        <div class="concealed-image" style="background:<%=noty.user.info.bgColor%>;"><span><%= noty.user.name.split(" ")[0].charAt(0).toUpperCase()%></span></div>
     <% } %>
     <b><%= noty.user.name %></b> 
     <% if(noty.action=="commented") {%>
