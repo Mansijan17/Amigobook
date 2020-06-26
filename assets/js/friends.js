@@ -71,7 +71,6 @@ let cancelPendingForm=function()
 cancelPendingForm();
 let noFriendshipAnswer=function()
 {
-
     $(".no-friend-button").click(function(e)
     {
 
@@ -81,7 +80,7 @@ let noFriendshipAnswer=function()
             url:$(".no-friend-button").prop("href"),
             success:function(data)
             {
-                console.log(data.data);
+                //console.log(data.data);
                 $(".pending-form-options").remove();
                 $(".pending-form-present").remove();
                 $(".add-chat-friend-group").prepend(`

@@ -1014,6 +1014,7 @@ module.exports.destroyFriendshipFormsTo=async function(req,res)
             toUser.oldPendFRLength=0;
             toUser.prevPendFROpen=false;
         }
+        console.log(toUser)
         return res.json(200,{
             data:{
                from:req.query.from,
