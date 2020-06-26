@@ -122,7 +122,7 @@
                     justify-content: center;
                     align-items: center;
                     font-family: 'Pacifico', cursive;
-                    color: mistyrose;
+                    color: mistyrose !important;
                     >span
                     {
                         color: mistyrose !important;
@@ -134,14 +134,14 @@
                 }
                 span{
                     
-                    font-variant: small-caps;
-                    align-self: center;
-                    color:#88a1a7;
-                    text-align:left;
+                    font-variant: small-caps !important;
+                    align-self: center !important;
+                    color:#88a1a7 !important;
+                    text-align:left !important;
                 }
                 span:hover
                 {
-                    font-weight: bold;
+                    font-weight: bold !important;
                     color:#88a1a7 !important;
                 }
                 img:hover,.concealed-image:hover
