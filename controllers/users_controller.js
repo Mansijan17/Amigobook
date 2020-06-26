@@ -1038,7 +1038,7 @@ module.exports.destroyFriendshipFormsTo=async function(req,res)
 module.exports.makeFriendShip=async function(req,res)
 {
     try{
-        console.log(req.query);
+        //console.log(req.query);
         let form=await FriendshipForm.findOneAndDelete({fromUser:req.query.from,toUser:req.user._id});
         if(!form)
         {
@@ -1058,7 +1058,7 @@ module.exports.makeFriendShip=async function(req,res)
         });
         let newFriendshipTo=await Friendship.create({
             fromUser:req.user._id,
-            toUser:req.query.req.query.from
+            toUser:req.query.from
         });
         fromUser.friendships.push(newFriendshipFrom);
         fromUser.save();
