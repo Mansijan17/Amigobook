@@ -34,7 +34,8 @@ router.get("/resetting-password/:id",usersController.newPassword);
 router.post("/resetting-password/:id",usersController.resetPassword);
 
 router.get("/friends-pending-form",passport.checkAuthentication,usersController.sendFriendshipForms);
-router.get("/friends-cancel-form",passport.checkAuthentication,usersController.destroyFriendshipForms);
+router.get("/friends-cancel-form-from",passport.checkAuthentication,usersController.destroyFriendshipFormsFrom);
+router.get("/friends-cancel-form-to",passport.checkAuthentication,usersController.destroyFriendshipFormsTo);
 router.get("/make-friends",passport.checkAuthentication,usersController.makeFriendShip);
 router.get("/destroy-friends/:loggedUserPage",passport.checkAuthentication,usersController.destroyFriendship);
 

@@ -966,11 +966,35 @@ module.exports.sendFriendshipForms=async function(req,res)
     }
 }
 
-module.exports.destroyFriendshipForms=async function(req,res)
+module.exports.destroyFriendshipFormsFrom=async function(req,res)
 {
     try{
         //console.log(req.query);
-        let form=await FriendshipForm.findOneAndDelete({fromUser:req.user.id,toUser:req.query.to});
+        await FriendshipForm.findOneAndDelete({fromUser:req.user._id,toUser:req.query.to});
+        return res.json(200,{
+            data:{
+               from:req.user._id,
+               to:req.query.to,
+            },
+            message:"Form removed successfully!",
+            error:false
+        })
+        req.flash("success","Friend Request Cancelled!")
+        return res.redirect("back");
+    }
+    catch(err)
+    {
+        console.log("error in sending friendship form ",err);
+        return;
+    }
+}
+
+module.exports.destroyFriendshipFormsTo=async function(req,res)
+{
+    try{
+        //console.log(req.query);
+        let form=await FriendshipForm.findOneAndDelete({fromUser:req.query.from,toUser:req.user._id});
+        let toUser=await User.findById(req.user._id);
         if(!form)
         {
            // console.log("form nhi hai");
@@ -981,7 +1005,6 @@ module.exports.destroyFriendshipForms=async function(req,res)
             req.flash("error","Uh-Oh, The request is taken back!");
             return res.redirect("/")
         }
-        let toUser=await User.findById(req.query.to);
         toUser.oldPendFRLength-=1;
         toUser.pendFR.pull(form._id);
         toUser.save();
@@ -992,8 +1015,8 @@ module.exports.destroyFriendshipForms=async function(req,res)
         }
         return res.json(200,{
             data:{
-               from:req.user.id,
-               to:req.query.from,
+               from:req.query.from,
+               to:req.user._id,
                user:toUser,
                frID:form._id
             },
@@ -1013,7 +1036,7 @@ module.exports.destroyFriendshipForms=async function(req,res)
 module.exports.makeFriendShip=async function(req,res)
 {
     try{
-        let form=await FriendshipForm.findOneAndDelete({fromUser:req.query.from,toUser:req.query.to});
+        let form=await FriendshipForm.findOneAndDelete({fromUser:req.query.from,toUser:req.user._id});
         if(!form)
         {
             //console.log("form nhi hai");
@@ -1024,15 +1047,15 @@ module.exports.makeFriendShip=async function(req,res)
             req.flash("error","Uh-Oh, The request is taken back!");
             return res.redirect("/")
         }
-        let fromUser=await User.findById(req.user.id);
-        let toUser=await User.findById(req.query.to);
+        let toUser=await User.findById(req.user._id);
+        let fromUser=await User.findById(req.query.from);
         let newFriendshipFrom=await Friendship.create({
-            fromUser:req.user._id,
-            toUser:req.query.to
+            fromUser:req.query.from,
+            toUser:req.user._id
         });
         let newFriendshipTo=await Friendship.create({
-            fromUser:req.query.to,
-            toUser:req.query.req.user._id
+            fromUser:req.user._id,
+            toUser:req.query.req.query.from
         });
         fromUser.friendships.push(newFriendshipFrom);
         fromUser.save();
@@ -1047,7 +1070,6 @@ module.exports.makeFriendShip=async function(req,res)
         {
             bgColor=toUser.info.bgColor;
         }
-        await FriendshipForm.findOneAndDelete({fromUser:req.user._id,toUser:req.query.to});
         toUser.oldPendFRLength-=1;
         toUser.pendFR.pull(form._id);
         toUser.save();
@@ -1076,8 +1098,8 @@ module.exports.makeFriendShip=async function(req,res)
         });
         return res.json(200,{
             data:{
-               from:req.user._id,
-               to:req.query.to,
+               from:fromUser._id,
+               to:toUser._id,
                name:fromUser.name,
                length:fromUser.friendships.length,
                img:imgURL,

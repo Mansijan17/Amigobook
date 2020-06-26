@@ -49,7 +49,7 @@ let cancelPendingForm=function()
                 $(".cancel-friend-button").remove();
                 $(".pending-from").remove();
                 $(".add-chat-friend-group").prepend(`
-                <a href="/users/friends-pending-form/?to=${data.data.from}" class="add-friend-button">
+                <a href="/users/friends-pending-form/?to=${data.data.to}" class="add-friend-button">
                 Add Friend
                 </a>`);
                 pendingFrom();
@@ -85,38 +85,10 @@ let noFriendshipAnswer=function()
                 $(".pending-form-options").remove();
                 $(".pending-form-present").remove();
                 $(".add-chat-friend-group").prepend(`
-                <a href="/users/friends-pending-form/?to=${data.data.to}" class="add-friend-button">
+                <a href="/users/friends-pending-form/?to=${data.data.from}" class="add-friend-button">
                 Add Friend
                 </a>`);
                 pendingFrom();
-                if(data.data.user.pendFR.length!=0)
-                {
-                    $(`#fr-${data.data.user._id}`).attr("href",`/fr/?id=${data.data.user._id}`);
-                    if(data.data.user.prevPendFROpen)
-                    {
-                        if(data.data.user.pendFR.length-data.data.user.oldPendFRLength!=0)
-                        {
-                            $(`#fr-${data.data.user._id} > div`).html(`<img src="/images/fr.png"> <div class="noty-bell-no">
-                                ${data.data.user.pendFR.length-data.data.user.oldPendFRLength}
-                            </div>`)
-                        }
-                        else{
-                            $(`#fr-${data.data.user._id} > div`).html(`<img src="/images/fr.png">`);
-                        }
-                    }
-                    else
-                    {
-                        $(`#fr-${data.data.user._id} > div`).html(`<img src="/images/fr.png"> <div class="noty-bell-no">
-                            ${data.data.user.pendFR.length}
-                        </div>`)
-                    }
-
-                }
-                else
-                {
-                    $(`#fr-${data.data.user._id}`).removeAttr("href");
-                    $(`#fr-${data.data.user._id}`).html(`<img src="/images/fr.png">`)
-                }
                  new Noty({
                     theme:"relax",
                     text:"Yes, maybe this was not the right moment!",
@@ -201,7 +173,7 @@ let confirmFriendshipAnswer=function()
                     $(`#friendModal .modal-title`).html(`${data.data.length} Connections`)
                 }
                 let newList=$(`<li id="user-${data.data.to}" class="friend-list">
-                    <a href="/users/profile/${data.data.from}">
+                    <a href="/users/profile/${data.data.to}">
                         <span>${data.data.friendName}</span>
                     </a>
                 </li>`)
@@ -215,34 +187,6 @@ let confirmFriendshipAnswer=function()
                 }
                 $(`#friendModal .modal-body ul`).prepend(newList);
                 destroyFriendshipAnswer($("main .remove-friend-warning .remove-friend-button"));
-                if(data.data.user.pendFR.length!=0)
-                {
-                    $(`#fr-${data.data.user._id}`).attr("href",`/fr/?id=${data.data.user._id}`);
-                    if(data.data.user.prevPendFROpen)
-                    {
-                        if(data.data.user.pendFR.length-data.data.user.oldPendFRLength!=0)
-                        {
-                            $(`#fr-${data.data.user._id} > div`).html(`<img src="/images/fr.png"> <div class="noty-bell-no">
-                                ${data.data.user.pendFR.length-data.data.user.oldPendFRLength}
-                            </div>`)
-                        }
-                        else{
-                            $(`#fr-${data.data.user._id} > div`).html(`<img src="/images/fr.png">`);
-                        }
-                    }
-                    else
-                    {
-                        $(`#fr-${data.data.user._id} > div`).html(`<img src="/images/fr.png"> <div class="noty-bell-no">
-                            ${data.data.user.pendFR.length}
-                        </div>`)
-                    }
-
-                }
-                else
-                {
-                    $(`#fr-${data.data.user._id}`).removeAttr("href");
-                    $(`#fr-${data.data.user._id}`).html(`<img src="/images/fr.png">`)
-                }
                  new Noty({
                     theme:"relax",
                     text:"Congrats, one more friendship blossomed!",
