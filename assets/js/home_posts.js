@@ -19,8 +19,8 @@
                     let newPost=newDomPost(data.data.post);
                     if(!data.data.post.user.avatar)
                     {
-                        $(" .author-post-name a",newPost).prepend(`<span class="concealed-image" style="background:${data.data.post.user.info.bgColor}"><span>${data.data.post.user.name.split(" ")[0].charAt(0)}</span></span>`)
-                        $(" .shared-post-form p a",newPost).prepend(`<span class="concealed-image" style="background:${data.data.post.user.info.bgColor}"><span>${data.data.post.user.name.split(" ")[0].charAt(0)}</span></span>`)
+                        $(" .author-post-name a",newPost).prepend(`<span class="concealed-image" style="background:${data.data.post.user.info.bgColor}"><span>${data.data.post.user.name.split(" ")[0].charAt(0).toUpperCase()}</span></span>`)
+                        $(" .shared-post-form p a",newPost).prepend(`<span class="concealed-image" style="background:${data.data.post.user.info.bgColor}"><span>${data.data.post.user.name.split(" ")[0].charAt(0).toUpperCase()}</span></span>`)
                     }
                     else
                     {

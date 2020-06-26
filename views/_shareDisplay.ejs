@@ -2,7 +2,7 @@
     <% if(share.user.avatar) {%>
         <img src="<%= share.user.avatar %>"> 
     <% }  else {%>
-        <div class="concealed-image" style="background:<%=share.user.info.bgColor%>;"><span><%= share.user.name.split(" ")[0].charAt(0)%></span></div>
+        <div class="concealed-image" style="background:<%=share.user.info.bgColor%>;"><span><%= share.user.name.split(" ")[0].charAt(0).toUpperCase()%></span></div>
     <% } %>
 
     <span><%= share.user.name %></span>

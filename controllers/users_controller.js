@@ -913,46 +913,49 @@ module.exports.resetPassword=async function(req,res)
 module.exports.sendFriendshipForms=async function(req,res)
 {
     try{
-         let form=await FriendshipForm.create({
-             isFormSent:true,
-             fromUser:req.query.from,
-             toUser:req.query.to
-         });
-         let fromUser=await User.findById(req.query.from);
-         let toUser=await User.findById(req.query.to);
-         if(!toUser.prevPendFROpen)
-         {
-             toUser.oldPendFRLength=toUser.pendFR.length;
-         }
-         toUser.pendFR.push(form);
-         toUser.save();
-         let frndreq={
-             sender:{
-                 id:fromUser.id,
-                 name:fromUser.name,
-             },
-             reciever:{
-                 id:toUser.id,
-                 name:toUser.name,
-                 email:toUser.email
-             }
-         }
-         let job=queue.create("friendrequestrecieved",frndreq).save(function(err)
-         {
-             if(err)
-             {
-                 console.log("error in creating a queue ",err);
-                 return;
-             }
-             console.log("friend req job enqueued ",job.id);
-         });
-         return res.json(200,{
-             data:{
-                from:req.query.from,
-                to:req.query.to
-             },
-             message:"Form put successfully!"
-         })
+        if(req.user.id!=req.query.to)
+        {
+            let form=await FriendshipForm.create({
+                isFormSent:true,
+                fromUser:req.user._id,
+                toUser:req.query.to
+            });
+            let fromUser=await User.findById(req.user._id);
+            let toUser=await User.findById(req.query.to);
+            if(!toUser.prevPendFROpen)
+            {
+                toUser.oldPendFRLength=toUser.pendFR.length;
+            }
+            toUser.pendFR.push(form);
+            toUser.save();
+            let frndreq={
+                sender:{
+                    id:fromUser.id,
+                    name:fromUser.name,
+                },
+                reciever:{
+                    id:toUser.id,
+                    name:toUser.name,
+                    email:toUser.email
+                }
+            }
+            let job=queue.create("friendrequestrecieved",frndreq).save(function(err)
+            {
+                if(err)
+                {
+                    console.log("error in creating a queue ",err);
+                    return;
+                }
+                console.log("friend req job enqueued ",job.id);
+            });
+            return res.json(200,{
+                data:{
+                   from:req.user._id,
+                   to:req.query.to
+                },
+                message:"Form put successfully!"
+            })
+        }
         //  req.flash("success","Friend Request Sent Successfully!");
         //  return res.redirect("back");
     }
@@ -967,7 +970,7 @@ module.exports.destroyFriendshipForms=async function(req,res)
 {
     try{
         //console.log(req.query);
-        let form=await FriendshipForm.findOneAndDelete({fromUser:req.query.from,toUser:req.query.to});
+        let form=await FriendshipForm.findOneAndDelete({fromUser:req.user.id,toUser:req.query.to});
         if(!form)
         {
            // console.log("form nhi hai");
@@ -989,7 +992,7 @@ module.exports.destroyFriendshipForms=async function(req,res)
         }
         return res.json(200,{
             data:{
-               from:req.query.to,
+               from:req.user.id,
                to:req.query.from,
                user:toUser,
                frID:form._id
@@ -1021,15 +1024,15 @@ module.exports.makeFriendShip=async function(req,res)
             req.flash("error","Uh-Oh, The request is taken back!");
             return res.redirect("/")
         }
-        let fromUser=await User.findById(req.query.from);
+        let fromUser=await User.findById(req.user.id);
         let toUser=await User.findById(req.query.to);
         let newFriendshipFrom=await Friendship.create({
-            fromUser:req.query.from,
+            fromUser:req.user._id,
             toUser:req.query.to
         });
         let newFriendshipTo=await Friendship.create({
             fromUser:req.query.to,
-            toUser:req.query.from
+            toUser:req.query.req.user._id
         });
         fromUser.friendships.push(newFriendshipFrom);
         fromUser.save();
@@ -1044,7 +1047,7 @@ module.exports.makeFriendShip=async function(req,res)
         {
             bgColor=toUser.info.bgColor;
         }
-        await FriendshipForm.findOneAndDelete({fromUser:req.query.from,toUser:req.query.to});
+        await FriendshipForm.findOneAndDelete({fromUser:req.user._id,toUser:req.query.to});
         toUser.oldPendFRLength-=1;
         toUser.pendFR.pull(form._id);
         toUser.save();
@@ -1073,7 +1076,7 @@ module.exports.makeFriendShip=async function(req,res)
         });
         return res.json(200,{
             data:{
-               from:req.query.from,
+               from:req.user._id,
                to:req.query.to,
                name:fromUser.name,
                length:fromUser.friendships.length,
@@ -1103,14 +1106,14 @@ module.exports.destroyFriendship=async function(req,res)
     {
         //console.log(req.query);
         let existingFriendshipFrom=await Friendship.findOne({
-            fromUser:req.query.from,
+            fromUser:req.user._id,
             toUser:req.query.to
         });
         let existingFriendshipTo=await Friendship.findOne({
             fromUser:req.query.to,
-            toUser:req.query.from
+            toUser:req.user._id
         });
-        let fromUser=await User.findById(req.query.from);
+        let fromUser=await User.findById(req.user._id);
         let toUser=await User.findById(req.query.to);
         //console.log(fromUser,toUser);
         existingFriendshipFrom.remove();
@@ -1133,7 +1136,7 @@ module.exports.destroyFriendship=async function(req,res)
         }
         return res.json(200,{
             data:{
-               from:req.query.from,
+               from:req.user._id,
                to:req.query.to,
                length:length,
                loggedUserPage:loggedUserPage,

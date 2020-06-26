@@ -128,19 +128,19 @@
             <div class="add-chat-friend-group">
                 <% if(!friended) {%>
                     <% if(!pendingFrom && !pendingTo) {%>
-                        <a href="/users/friends-pending-form/?from=<%=user._id%>&to=<%=profileUser._id%>" class="add-friend-button">
+                        <a href="/users/friends-pending-form/?to=<%=profileUser._id%>" class="add-friend-button">
                                 Add Friend
                         </a>
                     <% } else if(pendingFrom) {%>
                         <span class="pending-from">Friend Request Pending</span>
-                        <a href="/users/friends-cancel-form/?from=<%=user._id%>&to=<%=profileUser._id%>" class="cancel-friend-button">
+                        <a href="/users/friends-cancel-form/?to=<%=profileUser._id%>" class="cancel-friend-button">
                             Want to cancel it?
                         </a>
                     <% } else { %>
                         <span class="pending-form-present">Want to accept this friend request?</span>
                         <div class="pending-form-options">
-                            <a href="/users/make-friends/?to=<%=user._id%>&from=<%=profileUser._id%>" class="confirm-friend-button">Confirm</a>
-                            <a href="/users/friends-cancel-form/?to=<%=user._id%>&from=<%=profileUser._id%>" class="no-friend-button">Not Yet</a>
+                            <a href="/users/make-friends/?to=<%=user._id%>" class="confirm-friend-button">Confirm</a>
+                            <a href="/users/friends-cancel-form/?to=<%=user._id%>" class="no-friend-button">Not Yet</a>
                         </div>
                     <% } %>
                 <% } else {%>
@@ -387,7 +387,7 @@
                         <p>Are you sure you want to remove <b><%= friend.name%></b> from your sky? </p>
                         </div>
                         <div class="modal-footer">
-                            <a href="/users/destroy-friends/true/?from=<%=user._id%>&to=<%=friend._id%>" class="remove-friend-button">
+                            <a href="/users/destroy-friends/true/?to=<%=friend._id%>" class="remove-friend-button">
                                 <i class="fas fa-handshake-slash"></i>
                         </a>
                         <a data-dismiss="modal" class="discard-friend">Discard</a>

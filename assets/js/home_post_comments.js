@@ -58,7 +58,7 @@ class PostComments{
                     let newComment = pSelf.newCommentDom(commentData);
                     if(!data.data.comment.user.avatar)
                     {
-                        $(" .author-comment-name a",newComment).prepend(`<div class="concealed-image" style="background:${data.data.comment.user.info.bgColor}"><span>${data.data.comment.user.name.split(" ")[0].charAt(0)}</span></div>`)
+                        $(" .author-comment-name a",newComment).prepend(`<div class="concealed-image" style="background:${data.data.comment.user.info.bgColor}"><span>${data.data.comment.user.name.split(" ")[0].charAt(0).toUpperCase()}</span></div>`)
                     }
                     else
                     {

@@ -105,7 +105,7 @@
                     <% if(comment.user.avatar) {%>
                         <img src="<%= comment.user.avatar %>"> 
                 <% } else {%>
-                    <div class="concealed-image" style="background:<%=comment.user.info.bgColor%>;"><span><%= comment.user.name.split(" ")[0].charAt(0)%></span></div>
+                    <div class="concealed-image" style="background:<%=comment.user.info.bgColor%>;"><span><%= comment.user.name.split(" ")[0].charAt(0).toUpperCase()%></span></div>
                 <% } %>
                     <% if(comment.user.id==i.user.id) { %>
                         <%= comment.user["name"] %><span class="author-tag" style="width: 45px;"> Author</span>

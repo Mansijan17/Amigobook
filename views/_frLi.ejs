@@ -3,7 +3,7 @@
         <% if(fr.fromUser.avatar) {%>
             <img src="<%= fr.fromUser.avatar %>"> 
         <% }  else {%>
-            <div class="concealed-image" style="background:<%=fr.fromUser.info.bgColor%>;"><span><%= fr.fromUser.name.split(" ")[0].charAt(0)%></span></div>
+            <div class="concealed-image" style="background:<%=fr.fromUser.info.bgColor%>;"><span><%= fr.fromUser.name.split(" ")[0].charAt(0).toUpperCase()%></span></div>
         <% } %>
         <b><%= fr.fromUser.name %></b>
     </div>

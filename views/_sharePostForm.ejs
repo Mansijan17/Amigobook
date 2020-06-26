@@ -9,7 +9,7 @@
                     <% if(i.user.avatar) {%>
                         <img src="<%= i.user.avatar %>"> 
                     <% }  else {%>
-                        <span class="concealed-image" style="background:<%=i.user.info.bgColor%>;"><span><%= i.user.name.split(" ")[0].charAt(0)%></span></span>
+                        <span class="concealed-image" style="background:<%=i.user.info.bgColor%>;"><span><%= i.user.name.split(" ")[0].charAt(0).toUpperCase()%></span></span>
                     <% } %>
                         <span style="align-self: center;" class="author-name"><%= i.user.name %></span>
                 </a>

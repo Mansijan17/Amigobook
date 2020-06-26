@@ -181,8 +181,8 @@ class SharePost{
                 </a></li>`)
                 if(!data.data.newUserImage)
                 {
-                    $(" .author-post-name a",newPost).prepend(`<span class="concealed-image" style="background:${data.data.newUserBgColor}"><span>${data.data.newUserName.split(" ")[0].charAt(0)}</span></span>`)
-                    $(" a",newShareFromUser).prepend(` <div class="concealed-image" style="background:${data.data.newUserBgColor};"><span>${ data.data.newUserName.split(" ")[0].charAt(0)}</span></div>`)
+                    $(" .author-post-name a",newPost).prepend(`<span class="concealed-image" style="background:${data.data.newUserBgColor}"><span>${data.data.newUserName.split(" ")[0].charAt(0).toUpperCase()}</span></span>`)
+                    $(" a",newShareFromUser).prepend(` <div class="concealed-image" style="background:${data.data.newUserBgColor};"><span>${ data.data.newUserName.split(" ")[0].charAt(0).toUpperCase()}</span></div>`)
                 }
                 else
                 {
@@ -192,7 +192,7 @@ class SharePost{
                 }
                 if(!i.content.prevAuthImage)
                 {
-                    $(" .copiedPost a",newPost).append(`<div class="concealed-image" style="background:${i.content.prevAuthBgColor}"><span>${i.content.prevAuthName.split(" ")[0].charAt(0)}</span></div>`);
+                    $(" .copiedPost a",newPost).append(`<div class="concealed-image" style="background:${i.content.prevAuthBgColor}"><span>${i.content.prevAuthName.split(" ")[0].charAt(0).toUpperCase()}</span></div>`);
 
                 }
                 else

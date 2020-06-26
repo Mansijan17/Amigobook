@@ -337,7 +337,7 @@ let searchFunction= function()
               }
               else
               {
-                newList.prepend(`<div class="concealed-image" style="background:${user.bgColor}">${user.name.split(" ")[0].charAt(0)}</div>`)
+                newList.prepend(`<div class="concealed-image" style="background:${user.bgColor}">${user.name.split(" ")[0].charAt(0).toUpperCase()}</div>`)
               }
               ul.append(newList);
           }

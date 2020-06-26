@@ -2,7 +2,7 @@
     <% if(friend.avatar) {%>
         <img src="<%= friend.avatar %>"> 
     <% }  else {%>
-        <div class="concealed-image" style="background:<%=friend.info.bgColor%>;"><span><%= friend.name.split(" ")[0].charAt(0)%></span></div>
+        <div class="concealed-image" style="background:<%=friend.info.bgColor%>;"><span><%= friend.name.split(" ")[0].charAt(0).toUpperCase()%></span></div>
     <% } %>
 
     <span><%= friend.name %></span>

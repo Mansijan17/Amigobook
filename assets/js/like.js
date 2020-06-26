@@ -42,7 +42,7 @@ class ToggleLike{
                     }
                     else
                     {
-                        $(" a",newList).prepend(`<div class="concealed-image" style="background:${data.data.userBgColor}"><span>${ data.data.name.split(" ")[0].charAt(0)}</span></div>`)
+                        $(" a",newList).prepend(`<div class="concealed-image" style="background:${data.data.userBgColor}"><span>${ data.data.name.split(" ")[0].charAt(0).toUpperCase()}</span></div>`)
                     }
                     $(`#${data.data.type}-${ data.data.id }-likes-list`).prepend(newList);
                     if(data.data.type=="commentreply")

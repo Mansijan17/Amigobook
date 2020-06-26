@@ -132,7 +132,7 @@ class replyOnComment{
                   }
                   else
                   {
-                    $(" .reply-author-tag a",newReply).prepend(`<div class="concealed-image" style="background:${data.data.replyUserBgColor};"><span>${ data.data.replyUserName.split(" ")[0].charAt(0)}</span></div>`);
+                    $(" .reply-author-tag a",newReply).prepend(`<div class="concealed-image" style="background:${data.data.replyUserBgColor};"><span>${ data.data.replyUserName.split(" ")[0].charAt(0).toUpperCase()}</span></div>`);
                   }
                    $(`#comment-${data.data.commentID}-reply-list`).prepend(newReply);
 
@@ -553,7 +553,7 @@ class replyOnComment{
                                     }
                                     else
                                     {
-                                        $(" .reply-author-tag a",newReply).prepend(`<div class="concealed-image" style="background:${data.data.replyUserBgColor};"><span>${data.data.replyUserName.split(" ")[0].charAt(0)}</span></div>`)
+                                        $(" .reply-author-tag a",newReply).prepend(`<div class="concealed-image" style="background:${data.data.replyUserBgColor};"><span>${data.data.replyUserName.split(" ")[0].charAt(0).toUpperCase()}</span></div>`)
                                     }
                                     $(`#comment-${data.data.commentID}-reply-list`).prepend(newReply);
                                     cSelf.deleteReply($(" .delete-reply-button",newReply));

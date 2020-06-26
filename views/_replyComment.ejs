@@ -97,7 +97,7 @@
             <% if(reply.user.avatar) {%>
                     <img src="<%= reply.user.avatar %>"> 
             <% }  else {%>
-              <div class="concealed-image" style="background:<%=reply.user.info.bgColor%>;"><span><%= reply.user.name.split(" ")[0].charAt(0)%></span></div>
+              <div class="concealed-image" style="background:<%=reply.user.info.bgColor%>;"><span><%= reply.user.name.split(" ")[0].charAt(0).toUpperCase()%></span></div>
             <% } %>
   
             <% if(reply.user.id==i.user) { %>

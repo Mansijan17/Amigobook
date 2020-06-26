@@ -13,7 +13,7 @@ let pendingFrom=function(){
                 $(".add-friend-button").remove();
                 $(".add-chat-friend-group").prepend(`
                 <span class="pending-from">Friend Request Pending</span>
-                        <a href="/users/friends-cancel-form/?from=${data.data.from}&to=${data.data.to}" class="cancel-friend-button">
+                        <a href="/users/friends-cancel-form/?to=${data.data.to}" class="cancel-friend-button">
                             Want to cancel it?
                  </a>`);
                  cancelPendingForm();
@@ -49,7 +49,7 @@ let cancelPendingForm=function()
                 $(".cancel-friend-button").remove();
                 $(".pending-from").remove();
                 $(".add-chat-friend-group").prepend(`
-                <a href="/users/friends-pending-form/?from=${data.data.to}&to=${data.data.from}" class="add-friend-button">
+                <a href="/users/friends-pending-form/?to=${data.data.from}" class="add-friend-button">
                 Add Friend
                 </a>`);
                 pendingFrom();
@@ -85,7 +85,7 @@ let noFriendshipAnswer=function()
                 $(".pending-form-options").remove();
                 $(".pending-form-present").remove();
                 $(".add-chat-friend-group").prepend(`
-                <a href="/users/friends-pending-form/?from=${data.data.from}&to=${data.data.to}" class="add-friend-button">
+                <a href="/users/friends-pending-form/?to=${data.data.to}" class="add-friend-button">
                 Add Friend
                 </a>`);
                 pendingFrom();
@@ -161,7 +161,7 @@ let confirmFriendshipAnswer=function()
                         <p>Are you sure you want to remove <b>${data.data.name}</b> from your sky? </p>
                     </div>
                     <div class="modal-footer">
-                        <a href="/users/destroy-friends/false/?from=${data.data.to}&to=${data.data.from}" class="btn btn-primary remove-friend-button">
+                        <a href="/users/destroy-friends/false/?to=${data.data.from}" class="btn btn-primary remove-friend-button">
                                 Remove Friend
                         </a>
                         <button type="button" class="btn discard-friend" data-dismiss="modal">Discard</button>
@@ -211,7 +211,7 @@ let confirmFriendshipAnswer=function()
                 }
                 else
                 {
-                    $(" a",newList).prepend(`<div class="concealed-image" style="background:${data.data.bgColor};"><span>${data.data.friendName.split(" ")[0].charAt(0)}</span></div>`)
+                    $(" a",newList).prepend(`<div class="concealed-image" style="background:${data.data.bgColor};"><span>${data.data.friendName.split(" ")[0].charAt(0).toUpperCase()}</span></div>`)
                 }
                 $(`#friendModal .modal-body ul`).prepend(newList);
                 destroyFriendshipAnswer($("main .remove-friend-warning .remove-friend-button"));
@@ -317,7 +317,7 @@ let destroyFriendshipAnswer=function(removeButton)
                     $(`main .remove-friend-warning`).modal('hide');
                     $("main .remove-friend-warning").remove();
                     $(".add-chat-friend-group").prepend(`
-                    <a href="/users/friends-pending-form/?from=${data.data.from}&to=${data.data.to}" class="add-friend-button">
+                    <a href="/users/friends-pending-form/?to=${data.data.to}" class="add-friend-button">
                     Add Friend
                     </a>`);
                     pendingFrom();

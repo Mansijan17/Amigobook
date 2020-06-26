@@ -26,13 +26,13 @@ const customMWare=require('./config/middleware');
 // console.log("chat server is listening on port 5000");
 
 const path=require('path');
-app.use(SassMiddleware({
-        src:path.join(__dirname,env.asset_path,"/scss"),
-        dest:path.join(__dirname,env.asset_path,"/css"),
-        debug:true,
-        outputStyle:"extended",
-        prefix:"/css"
- }));    
+// app.use(SassMiddleware({
+//         src:path.join(__dirname,env.asset_path,"/scss"),
+//         dest:path.join(__dirname,env.asset_path,"/css"),
+//         debug:true,
+//         outputStyle:"extended",
+//         prefix:"/css"
+//  }));    
 
 
 app.use(express.urlencoded());

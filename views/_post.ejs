@@ -94,7 +94,7 @@
             <% if(i.user.avatar) {%>
                 <img src="<%= i.user.avatar %>"> 
             <% }  else {%>
-                <span class="concealed-image" style="background:<%=i.user.info.bgColor%>;"><span><%= i.user.name.split(" ")[0].charAt(0)%></span></span>
+                <span class="concealed-image" style="background:<%=i.user.info.bgColor%>;"><span><%= i.user.name.split(" ")[0].charAt(0).toUpperCase()%></span></span>
             <% } %>
             <span><%= i.user.name %></span>
         </a>
@@ -114,7 +114,7 @@
                                     <% if(i.content.prevAuthImage) {%>
                                         <img src="<%= i.content.prevAuthImage %>"> 
                                     <% }  else {%>
-                                        <div class="concealed-image" style="background:<%=i.content.prevAuthBgColor%>;"><span><%= i.content.prevAuthName.split(" ")[0].charAt(0)%></span></div>
+                                        <div class="concealed-image" style="background:<%=i.content.prevAuthBgColor%>;"><span><%= i.content.prevAuthName.split(" ")[0].charAt(0).toUpperCase()%></span></div>
                                     <% } %>
                                     
                                 </a>
