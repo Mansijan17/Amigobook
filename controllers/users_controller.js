@@ -970,8 +970,8 @@ module.exports.destroyFriendshipFormsFrom=async function(req,res)
 {
     try{
         //console.log(req.query);
-        await FriendshipForm.findOneAndDelete({fromUser:req.user._id,toUser:req.query.to});
-        return res.json(200,{
+         await FriendshipForm.findOneAndDelete({fromUser:req.user._id,toUser:req.query.to});
+         return res.json(200,{
             data:{
                from:req.user._id,
                to:req.query.to,
@@ -992,8 +992,9 @@ module.exports.destroyFriendshipFormsFrom=async function(req,res)
 module.exports.destroyFriendshipFormsTo=async function(req,res)
 {
     try{
-        //console.log(req.query);
+        console.log(req.query);
         let form=await FriendshipForm.findOneAndDelete({fromUser:req.query.from,toUser:req.user._id});
+        console.log("form ",form)
         let toUser=await User.findById(req.user._id);
         if(!form)
         {
