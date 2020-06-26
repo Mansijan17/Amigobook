@@ -71,16 +71,17 @@ let cancelPendingForm=function()
 cancelPendingForm();
 let noFriendshipAnswer=function()
 {
+    console.log("no")
     $(".no-friend-button").click(function(e)
     {
-
+        console.log("no hi");
         e.preventDefault();
         $.ajax({
             type:"get",
             url:$(".no-friend-button").prop("href"),
             success:function(data)
             {
-                //console.log(data.data);
+                console.log("no hi 2");
                 $(".pending-form-options").remove();
                 $(".pending-form-present").remove();
                 $(".add-chat-friend-group").prepend(`

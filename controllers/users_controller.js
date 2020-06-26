@@ -992,9 +992,9 @@ module.exports.destroyFriendshipFormsFrom=async function(req,res)
 module.exports.destroyFriendshipFormsTo=async function(req,res)
 {
     try{
-        console.log(req.query);
+        //console.log(req.query);
         let form=await FriendshipForm.findOneAndDelete({fromUser:req.query.from,toUser:req.user._id});
-        console.log("form ",form)
+        //console.log("form ",form)
         let toUser=await User.findById(req.user._id);
         if(!form)
         {
@@ -1014,7 +1014,7 @@ module.exports.destroyFriendshipFormsTo=async function(req,res)
             toUser.oldPendFRLength=0;
             toUser.prevPendFROpen=false;
         }
-        console.log(toUser)
+       // console.log(toUser)
         return res.json(200,{
             data:{
                from:req.query.from,
