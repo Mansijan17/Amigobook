@@ -731,15 +731,18 @@ module.exports.removeTag=async function(req,res)
     try{
         let id=req.params.id;
         let reply=await commentReply.findById(id);
-        reply.content=reply.content.content;
-        reply.isReply=false;
-        reply.save();
-        return res.json(200,{
-            data:{
-                replyID:reply.id,
-            },
-            message:"Removetag Successfully!"
-        })
+        if(reply.user==req.user.id)
+        {
+            reply.content=reply.content.content;
+            reply.isReply=false;
+            reply.save();
+            return res.json(200,{
+                data:{
+                    replyID:reply.id,
+                },
+                message:"Removetag Successfully!"
+            })
+        }
     }
     catch(err)
     {
