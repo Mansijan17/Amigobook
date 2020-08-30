@@ -19,7 +19,7 @@ module.exports.showNotyList=async function(req,res)
         user.save();
         //console.log("noty contr ",noties.length);
         return res.render("notyList",{
-            title:"Your's Noty | Skyinyou",
+            title:"Your's Noty | AMIGOBOOK",
             noties:noties
         })
     }

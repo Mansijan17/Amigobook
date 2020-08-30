@@ -18,7 +18,7 @@ module.exports.showFRList=async function(req,res)
         user.save();
         //console.log("fr contr ",frs.length);
         return res.render("frList",{
-            title:"Your's Friend Requests | Skyinyou",
+            title:"Your's Friend Requests | AMIGOBOOK",
             frs:frs
         })
     }

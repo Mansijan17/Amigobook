@@ -54,7 +54,7 @@ module.exports.displayPost=async function(req,res)
         }
         return res.render("postDisplay",{
             i:post,
-            title:"Your Post | Skyinyou"
+            title:"Your Post | AMIGOBOOK"
         });
 
     }

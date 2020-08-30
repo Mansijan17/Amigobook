@@ -66,7 +66,7 @@ module.exports.home = async function(req, res){
         let users=await User.find({});
        // console.log(users);
         return res.render('home', {
-                        title: "Skyinyou",
+                        title: "AMIGOBOOK",
                         posts:postLists,
                         all_users:users});
 

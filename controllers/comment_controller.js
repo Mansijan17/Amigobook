@@ -284,7 +284,7 @@ module.exports.showReply=async function(req,res)
         let post=await Post.findById(comment.post);
         post.populate("user");
         return res.render("replyCommentContent",{
-            title:"Skyinyou | Comment Replies",
+            title:"AMIGOBOOK | Comment Replies",
             comment:comment,
             i:post,
         });

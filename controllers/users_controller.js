@@ -160,7 +160,7 @@ module.exports.profile = async function (req, res) {
             birthday=dateArr[2]+" "+dateArr[1]+" ,"+dateArr[3];
         }
         return res.render('userProfile', {
-            title: `${user.name} | Skyinyou`,
+            title: `${user.name} | AMIGOBOOK`,
             profileUser: user,
             posts:postLists,
             friends:friends,
@@ -314,7 +314,7 @@ module.exports.changeEmailPage=async function(req,res)
             {
                let user=await User.findById(id);
                return res.render("forgetPassword",{
-                   title:"Skyinyou | Change Email",
+                   title:"AMIGOBOOK | Change Email",
                    user:user
                });
             }
@@ -421,7 +421,7 @@ module.exports.signUp = function (req, res) {
     }
    // req.flash("error", "Invalid details!");
     return res.render('userSignUp', {
-        title: "Skyinyou | Sign Up"
+        title: "AMIGOBOOK | Sign Up"
     })
 }
 
@@ -432,7 +432,7 @@ module.exports.signIn = function (req, res) {
         return res.redirect("/");
     }
     return res.render('userSignIn', {
-        title: "Skyinyou | Sign In"
+        title: "AMIGOBOOK | Sign In"
     })
 }
 
@@ -643,7 +643,7 @@ module.exports.forgetPassword=function(req,res)
         return res.redirect("back");
     }
     return res.render("forgetPassword",{
-        title:"Skyinyou | Forget Password"
+        title:"AMIGOBOOK | Forget Password"
     });
 }
 
@@ -712,7 +712,7 @@ module.exports.newPassword=function(req,res)
     var id=req.params.id;
     //console.log(id);
     return res.render("new_confirm_password",{
-        title:"Skyinyou | New Password",
+        title:"AMIGOBOOK | New Password",
         acessToken:id
     });
 }
@@ -1183,7 +1183,7 @@ module.exports.confirmAccount=function(req,res)
     var id=req.params.id;
     //console.log("confirm account");
     return res.render("confirmAccount",{
-        title:"Skyinyou | Confirm Account",
+        title:"AMIGOBOOK | Confirm Account",
         acessToken:id
     });
 }
