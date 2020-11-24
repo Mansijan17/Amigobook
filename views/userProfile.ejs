@@ -384,7 +384,7 @@
                         <h2 class="modal-title"><i class="fas fa-trash-alt"></i> Buddy?</h2>
                         </div>
                         <div class="modal-body">
-                        <p>Are you sure you want to remove <b><%= friend.name%></b> from your sky? </p>
+                        <p>Are you sure you want to remove <b><%= friend.name%></b> from your world? </p>
                         </div>
                         <div class="modal-footer">
                             <a href="/users/destroy-friends/true/?to=<%=friend._id%>" class="remove-friend-button">
@@ -655,7 +655,7 @@
               <h5 class="modal-title" id="removeFriendModalLabel"><i class="fas fa-trash-alt"></i> Buddy?</h5>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to remove <b><%= profileUser.name%></b> from your sky? </p>
+                <p>Are you sure you want to remove <b><%= profileUser.name%></b> from your world? </p>
             </div>
             <div class="modal-footer">
                 <a href="/users/destroy-friends/false/?to=<%= profileUser._id %>" class="btn btn-primary remove-friend-button">
@@ -676,7 +676,7 @@
             <br><br>
         
             <% if(posts.length!=0) { %>
-                <h3 style="text-align: center;">The Sky In You!</h3>
+                <h3 style="text-align: center;">The Amigo In You!</h3>
             <% } else { %>
                 <h3 style="text-align: center;">You have yet to ascent!</h3>
             <% } %>
@@ -976,7 +976,7 @@
     <% } else { %>
         <div style="background: linear-gradient(to bottom,#4CB1C1,#E3C9A6);padding-top: 70px;min-height: 50vh;">
             <% if(posts.length!=0) { %>
-                <h3 style="text-align: center;">The Sky In <%= profileUser.name%>!</h3>
+                <h3 style="text-align: center;">The Amigo In <%= profileUser.name%>!</h3>
             <% } else { %>
                 <h3 style="text-align: center;">This amazing person has yet to ascent!</h3>
             <% } %>
